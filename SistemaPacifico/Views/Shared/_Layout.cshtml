@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Pacifico Seguros</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/bootstrap")
+
+</head>
+<body style="padding-top:0px">
+    <div class="container">
+        <div class="page-header">
+            <table width="100%">
+                <tr>
+                    <td><h1><strong> Pacifico Seguros</strong></h1></td>
+                    <td align="right">
+                        <div>
+                            @Html.Partial("_LoginPartial")
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div>
+        <div class="container">
+            <ul class="nav nav-pills">
+                <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                <li>@Html.ActionLink("PropuestaSolucion", "Index", "PropuestaSolucion")</li>
+            </ul>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>Pacifico Seguros &copy; Company @DateTime.Now.Year</p>
+        </footer>
+    </div>
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

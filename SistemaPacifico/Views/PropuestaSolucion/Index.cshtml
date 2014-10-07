@@ -1,0 +1,54 @@
+﻿@model IEnumerable<SistemaPacifico.Models.PropuestaSolucionViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Codigo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DNIProspecto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreProspecto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaRegistro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MontoAsegurado)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DNIProspecto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreProspecto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaRegistro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MontoAsegurado)
+            </td>
+            <td>
+                @Html.ActionLink("Ver", "EditarPropuesta", new { id = item.Codigo })
+            </td>
+        </tr>
+    }
+
+</table>
+<p>
+    @Html.ActionLink("Nuevo", "CrearPropuesta")
+</p>
