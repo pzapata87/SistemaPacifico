@@ -12,15 +12,9 @@ namespace Pacifico.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class PlanProducto
+    public partial class Comision
     {
-        public int Co_PlanProducto { get; set; }
-        public string No_PlanProducto { get; set; }
-        public decimal Ss_PrimaMinima { get; set; }
-        public int Ss_SumaMinimaAsegurada { get; set; }
-        public int Ss_SumaMaximaAsegurada { get; set; }
-        public int Co_Producto { get; set; }
-    
-        public virtual Producto Producto { get; set; }
+        public int Co_Comision { get; set; }
+        public string No_Comision { get; set; }
     }
 }
