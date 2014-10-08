@@ -42,6 +42,11 @@ namespace Pacifico.Bussines
             return query.ToList();
         }
 
+        public IList<Producto> ListarProductoxCodigo(int codigo)
+        {
+            return _db.Producto.Where(x=>x.Co_Producto == codigo).ToList();
+        }
+
         public IList<Producto> ListarProducto()
         {
             return _db.Producto.ToList();
@@ -82,20 +87,51 @@ namespace Pacifico.Bussines
             return _db.Prospecto.SingleOrDefault(x => x.Nu_DNI == numeroDNI);
         }
 
-        public List<DetallePropuestaSolucion> GenerarDetallePropuesta(double montoPrima, double montoAsegurado, int edad)
+        public List<DetallePropuestaSolucion> GenerarDetallePropuesta(double montoAsegurado, int edad)
         {
-            List<DetallePropuestaSolucion> lst = new List<DetallePropuestaSolucion>();
+            var primaAnual = Convert.ToDouble(montoAsegurado) * 0.009;
+            var primaMensual = primaAnual / 12;
+            var montoAhorro = Convert.ToDouble(primaAnual) * 0.05;
+            var valorRescate = montoAhorro;
+            var montoCalcAsegurado =  Convert.ToDouble(montoAsegurado + (montoAsegurado * 0.0005));
 
-            for (int i = 0; i < 30; i++)
+            
+            List<DetallePropuestaSolucion> lst = new List<DetallePropuestaSolucion>();
+            lst.Add(new DetallePropuestaSolucion
             {
-                lst.Add(new DetallePropuestaSolucion 
-                { 
-                    Nu_Anio = i, 
-                    Nu_Edad = edad + 1,
-                    Ss_MontoPrima = Convert.ToDecimal(montoPrima), 
-                    Ss_MontoAhorro = Convert.ToDecimal(montoPrima * 0.05),
-                    Ss_ValorRescate = 50,
-                    Ss_MontoAsegurado = Convert.ToDecimal(montoAsegurado)
+                Nu_Anio = 1,
+                Nu_Edad = edad,
+                Ss_MontoPrima = Convert.ToDecimal(primaAnual),
+                Ss_MontoAhorro = Convert.ToDecimal(montoAhorro),
+                Ss_ValorRescate = Convert.ToDecimal(montoAhorro),
+                Ss_MontoAsegurado = Convert.ToDecimal(montoCalcAsegurado)
+            });
+
+            for (int i = 0; i < edad; i++)
+            {
+                var edadCalc = lst[i].Nu_Edad + 1;
+                var anio = lst[i].Nu_Anio + 1;
+                var montoPrima = Convert.ToDecimal(Math.Round(lst[i].Ss_MontoPrima,2) + Convert.ToDecimal(Math.Round(primaAnual,2)) + 1);
+                var montoAhorroDet = Convert.ToDouble(Math.Round(montoPrima,2)) * 0.05;
+                decimal valorRescateDet = 0;
+                if (i == 1)
+                {
+                    valorRescateDet = Convert.ToDecimal(Convert.ToDouble(Math.Round(lst[i].Ss_ValorRescate, 2)) + Convert.ToDouble(Math.Round(montoAhorroDet, 2)) * 4);
+                }
+                else
+                {
+                    valorRescateDet = Convert.ToDecimal(Convert.ToDouble(Math.Round(lst[i].Ss_ValorRescate, 2)) + Convert.ToDouble(Math.Round(montoAhorroDet, 2)) * 1.035);
+                }
+                var montoAseguradoCalc = Convert.ToDouble(lst[i].Ss_MontoAsegurado) + (Convert.ToDouble(lst[i].Ss_MontoAsegurado)*0.0005);
+
+
+                lst.Add(new DetallePropuestaSolucion {
+                    Nu_Edad = edadCalc,
+                    Nu_Anio = anio,
+                    Ss_MontoPrima = montoPrima,
+                    Ss_MontoAhorro = Convert.ToDecimal(montoAhorroDet),
+                    Ss_ValorRescate = Math.Round(valorRescateDet,2),
+                    Ss_MontoAsegurado = Convert.ToDecimal(Math.Round(montoAseguradoCalc,2))
                 });
             }
 

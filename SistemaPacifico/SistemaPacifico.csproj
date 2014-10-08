@@ -180,7 +180,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\img\calendar.gif" />
+    <Content Include="Content\img\icon_alert.png" />
     <Content Include="Content\jquery-ui.min.css" />
+    <Content Include="Content\vanadium.css" />
     <Content Include="Content\jquery.multiselect.css" />
     <Content Include="Content\jquery.multiselect.filter.css" />
     <Content Include="favicon.ico" />
@@ -207,6 +209,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\ui.datepicker-es.js" />
+    <Content Include="Scripts\vanadium.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
