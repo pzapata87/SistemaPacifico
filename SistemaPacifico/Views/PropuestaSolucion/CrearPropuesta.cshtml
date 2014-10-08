@@ -215,13 +215,15 @@
         }
 
         function GenerarPropuesta() {
-            var montoPrima = $("#MontoPrima").val();
+            var fechaNac = $("#FechaNacimiento").val();
             var montoAsegurado = $("#MontoAsegurado").val();
+            var date = @DateTime.Today;
+            var edad = fechaNac;
 
             var request = $.ajax({
                 url: "/PacificoService/ObtenerDetalle",
                 type: "GET",
-                data: { montoPrima: montoPrima},
+                data: { montoAsegurado: montoAsegurado,edad:30 },
                 dataType: "json",
                 contentType: "text/plain"
             });
@@ -234,13 +236,12 @@
                 }
             });
             request.fail(function (jqXHR, textStatus) {
-                debugger;
                 alert("Request failed: " + textStatus);
             });
         }
 
         function Grabar() {
-            
+
             var codigoProspecto = $("#CodigoProspecto").val();
             var fechaNacimiento = $("#FechaNacimiento").val();
             var codigoProducto = $("#CodigoProducto").val();
