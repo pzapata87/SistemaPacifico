@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/08/2014 12:00:53
+-- Date Created: 10/08/2014 13:27:27
 -- Generated from EDMX file: D:\Proyectos\Academico - Servicio Web\SistemaPacifico\Pacifico.DataAccess\Pacifico.edmx
 -- --------------------------------------------------
 
@@ -32,6 +32,15 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ComisionCanalVenta]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Comision] DROP CONSTRAINT [FK_ComisionCanalVenta];
 GO
+IF OBJECT_ID(N'[dbo].[FK_CampaniaComision]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Comision] DROP CONSTRAINT [FK_CampaniaComision];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EmpleadoComision]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Comision] DROP CONSTRAINT [FK_EmpleadoComision];
+GO
+IF OBJECT_ID(N'[dbo].[FK_CargoEmpleado]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Empleado] DROP CONSTRAINT [FK_CargoEmpleado];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -57,6 +66,15 @@ IF OBJECT_ID(N'[dbo].[Comision]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[CanalVenta]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CanalVenta];
+GO
+IF OBJECT_ID(N'[dbo].[Campania]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Campania];
+GO
+IF OBJECT_ID(N'[dbo].[Empleado]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Empleado];
+GO
+IF OBJECT_ID(N'[dbo].[Cargo]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Cargo];
 GO
 
 -- --------------------------------------------------
@@ -129,9 +147,9 @@ CREATE TABLE [dbo].[Comision] (
     [Co_Comision] int IDENTITY(1,1) NOT NULL,
     [No_Comision] nvarchar(50)  NOT NULL,
     [Fe_Registro] datetime  NOT NULL,
-    [CanalVenta_Co_CanalVenta] int  NOT NULL,
-    [Campania_Co_Campania] int  NOT NULL,
-    [Empleado_Co_Empleado] int  NULL
+    [Co_Campania] int  NOT NULL,
+    [Co_CanalVenta] int  NOT NULL,
+    [Co_Empleado] int  NULL
 );
 GO
 
@@ -161,7 +179,7 @@ CREATE TABLE [dbo].[Empleado] (
     [No_ApePaterno] nvarchar(50)  NOT NULL,
     [No_ApeMaterno] nvarchar(max)  NOT NULL,
     [Fl_Sexo] bit  NOT NULL,
-    [Cargo_Co_Cargo] int  NOT NULL
+    [Co_Cargo] int  NOT NULL
 );
 GO
 
@@ -300,25 +318,10 @@ ON [dbo].[PropuestaSolucion]
     ([Co_Prospecto]);
 GO
 
--- Creating foreign key on [CanalVenta_Co_CanalVenta] in table 'Comision'
-ALTER TABLE [dbo].[Comision]
-ADD CONSTRAINT [FK_ComisionCanalVenta]
-    FOREIGN KEY ([CanalVenta_Co_CanalVenta])
-    REFERENCES [dbo].[CanalVenta]
-        ([Co_CanalVenta])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_ComisionCanalVenta'
-CREATE INDEX [IX_FK_ComisionCanalVenta]
-ON [dbo].[Comision]
-    ([CanalVenta_Co_CanalVenta]);
-GO
-
--- Creating foreign key on [Campania_Co_Campania] in table 'Comision'
+-- Creating foreign key on [Co_Campania] in table 'Comision'
 ALTER TABLE [dbo].[Comision]
 ADD CONSTRAINT [FK_CampaniaComision]
-    FOREIGN KEY ([Campania_Co_Campania])
+    FOREIGN KEY ([Co_Campania])
     REFERENCES [dbo].[Campania]
         ([Co_Campania])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -327,13 +330,28 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_CampaniaComision'
 CREATE INDEX [IX_FK_CampaniaComision]
 ON [dbo].[Comision]
-    ([Campania_Co_Campania]);
+    ([Co_Campania]);
 GO
 
--- Creating foreign key on [Empleado_Co_Empleado] in table 'Comision'
+-- Creating foreign key on [Co_CanalVenta] in table 'Comision'
+ALTER TABLE [dbo].[Comision]
+ADD CONSTRAINT [FK_CanalVentaComision]
+    FOREIGN KEY ([Co_CanalVenta])
+    REFERENCES [dbo].[CanalVenta]
+        ([Co_CanalVenta])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CanalVentaComision'
+CREATE INDEX [IX_FK_CanalVentaComision]
+ON [dbo].[Comision]
+    ([Co_CanalVenta]);
+GO
+
+-- Creating foreign key on [Co_Empleado] in table 'Comision'
 ALTER TABLE [dbo].[Comision]
 ADD CONSTRAINT [FK_EmpleadoComision]
-    FOREIGN KEY ([Empleado_Co_Empleado])
+    FOREIGN KEY ([Co_Empleado])
     REFERENCES [dbo].[Empleado]
         ([Co_Empleado])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -342,13 +360,13 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_EmpleadoComision'
 CREATE INDEX [IX_FK_EmpleadoComision]
 ON [dbo].[Comision]
-    ([Empleado_Co_Empleado]);
+    ([Co_Empleado]);
 GO
 
--- Creating foreign key on [Cargo_Co_Cargo] in table 'Empleado'
+-- Creating foreign key on [Co_Cargo] in table 'Empleado'
 ALTER TABLE [dbo].[Empleado]
 ADD CONSTRAINT [FK_CargoEmpleado]
-    FOREIGN KEY ([Cargo_Co_Cargo])
+    FOREIGN KEY ([Co_Cargo])
     REFERENCES [dbo].[Cargo]
         ([Co_Cargo])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -357,7 +375,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_CargoEmpleado'
 CREATE INDEX [IX_FK_CargoEmpleado]
 ON [dbo].[Empleado]
-    ([Cargo_Co_Cargo]);
+    ([Co_Cargo]);
 GO
 
 -- --------------------------------------------------

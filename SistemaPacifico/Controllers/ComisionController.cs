@@ -56,7 +56,10 @@ namespace SistemaPacifico.Controllers
                 var comision = new Comision
                 {
                     No_Comision = model.NombreComision,
-                    //Campania = model
+                    Co_Campania = model.CampaniaId,
+                    Co_CanalVenta = model.CanalVentaId,
+                    //Co_Empleado = model.
+                    Fe_Registro = Convert.ToDateTime(model.FechaRegistro)
                 };
 
                 _comisionBL.Add(comision);
