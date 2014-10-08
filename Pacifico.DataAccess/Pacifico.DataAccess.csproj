@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CanalVenta.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Comision.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
     <Compile Include="DetallePropuestaSolucion.cs">
       <DependentUpon>Pacifico.tt</DependentUpon>
     </Compile>

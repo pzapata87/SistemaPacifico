@@ -4,140 +4,174 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="BDPacificoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="DetallePropuestaSolucion">
-          <Key>
-            <PropertyRef Name="Co_DetallePropuestaSolucion" />
-          </Key>
-          <Property Name="Co_DetallePropuestaSolucion" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Co_PropuestaSolucion" Type="int" Nullable="false" />
-          <Property Name="Nu_Anio" Type="int" Nullable="false" />
-          <Property Name="Nu_Edad" Type="int" Nullable="false" />
-          <Property Name="Ss_MontoPrima" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Ss_MontoAhorro" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Ss_ValorRescate" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Ss_MontoAsegurado" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PlanProducto">
-          <Key>
-            <PropertyRef Name="Co_PlanProducto" />
-          </Key>
-          <Property Name="Co_PlanProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="No_PlanProducto" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Ss_PrimaMinima" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Ss_SumaMinimaAsegurada" Type="int" Nullable="false" />
-          <Property Name="Ss_SumaMaximaAsegurada" Type="int" Nullable="false" />
-          <Property Name="Co_Producto" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Producto">
-          <Key>
-            <PropertyRef Name="Co_Producto" />
-          </Key>
-          <Property Name="Co_Producto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="No_Producto" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Fe_Creacion" Type="datetime" Nullable="false" />
-          <Property Name="FI_Flag" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PropuestaSolucion">
-          <Key>
-            <PropertyRef Name="Co_PropuestaSolucion" />
-          </Key>
-          <Property Name="Co_PropuestaSolucion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Ss_MontoPrima" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Fe_Nacimiento" Type="datetime" Nullable="false" />
-          <Property Name="Ss_MontoRetorno" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Ss_MontoAsegurado" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Co_Prospecto" Type="int" Nullable="false" />
-          <Property Name="Co_Producto" Type="int" Nullable="false" />
-          <Property Name="Co_Plan" Type="int" Nullable="false" />
-          <Property Name="Fe_Creacion" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Prospecto">
-          <Key>
-            <PropertyRef Name="Co_Prospecto" />
-          </Key>
-          <Property Name="Co_Prospecto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="No_Prospecto" Type="varchar" MaxLength="50" />
-          <Property Name="Nu_DNI" Type="varchar" MaxLength="50" />
-          <Property Name="Tx_ApePaterno" Type="varchar" MaxLength="50" />
-          <Property Name="Tx_ApeMaterno" Type="varchar" MaxLength="50" />
-          <Property Name="Tx_Direccion" Type="varchar" MaxLength="50" />
-          <Property Name="Tx_Telefono" Type="varchar" MaxLength="50" />
-          <Property Name="Tx_Movil" Type="varchar" MaxLength="50" />
-          <Property Name="Tx_Correo" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <Association Name="FK_DetallePropuestaSolucion_PropuestaSolucion">
-          <End Role="PropuestaSolucion" Type="Self.PropuestaSolucion" Multiplicity="1" />
-          <End Role="DetallePropuestaSolucion" Type="Self.DetallePropuestaSolucion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PropuestaSolucion">
-              <PropertyRef Name="Co_PropuestaSolucion" />
-            </Principal>
-            <Dependent Role="DetallePropuestaSolucion">
-              <PropertyRef Name="Co_PropuestaSolucion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PlanProducto_Producto">
-          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
-          <End Role="PlanProducto" Type="Self.PlanProducto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Producto">
-              <PropertyRef Name="Co_Producto" />
-            </Principal>
-            <Dependent Role="PlanProducto">
-              <PropertyRef Name="Co_Producto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PropuestaSolucion_Producto">
-          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
-          <End Role="PropuestaSolucion" Type="Self.PropuestaSolucion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Producto">
-              <PropertyRef Name="Co_Producto" />
-            </Principal>
-            <Dependent Role="PropuestaSolucion">
-              <PropertyRef Name="Co_Producto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PropuestaSolucion_Prospecto">
-          <End Role="Prospecto" Type="Self.Prospecto" Multiplicity="1" />
-          <End Role="PropuestaSolucion" Type="Self.PropuestaSolucion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Prospecto">
-              <PropertyRef Name="Co_Prospecto" />
-            </Principal>
-            <Dependent Role="PropuestaSolucion">
-              <PropertyRef Name="Co_Prospecto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="BDPacificoModelStoreContainer">
-          <EntitySet Name="DetallePropuestaSolucion" EntityType="Self.DetallePropuestaSolucion" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PlanProducto" EntityType="Self.PlanProducto" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PropuestaSolucion" EntityType="Self.PropuestaSolucion" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Prospecto" EntityType="Self.Prospecto" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_DetallePropuestaSolucion_PropuestaSolucion" Association="Self.FK_DetallePropuestaSolucion_PropuestaSolucion">
-            <End Role="PropuestaSolucion" EntitySet="PropuestaSolucion" />
-            <End Role="DetallePropuestaSolucion" EntitySet="DetallePropuestaSolucion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PlanProducto_Producto" Association="Self.FK_PlanProducto_Producto">
-            <End Role="Producto" EntitySet="Producto" />
-            <End Role="PlanProducto" EntitySet="PlanProducto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PropuestaSolucion_Producto" Association="Self.FK_PropuestaSolucion_Producto">
-            <End Role="Producto" EntitySet="Producto" />
-            <End Role="PropuestaSolucion" EntitySet="PropuestaSolucion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PropuestaSolucion_Prospecto" Association="Self.FK_PropuestaSolucion_Prospecto">
-            <End Role="Prospecto" EntitySet="Prospecto" />
-            <End Role="PropuestaSolucion" EntitySet="PropuestaSolucion" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
+    <Schema Namespace="BDPacificoModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="BDPacificoModelStoreContainer">
+    <EntitySet Name="PlanProducto" EntityType="BDPacificoModel.Store.PlanProducto" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Prospecto" EntityType="BDPacificoModel.Store.Prospecto" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Producto" EntityType="BDPacificoModel.Store.Producto" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DetallePropuestaSolucion" EntityType="BDPacificoModel.Store.DetallePropuestaSolucion" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PropuestaSolucion" EntityType="BDPacificoModel.Store.PropuestaSolucion" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Comision" EntityType="BDPacificoModel.Store.Comision" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CanalVenta" EntityType="BDPacificoModel.Store.CanalVenta" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_PlanProducto_Producto" Association="BDPacificoModel.Store.FK_PlanProducto_Producto">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="PlanProducto" EntitySet="PlanProducto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetallePropuestaSolucion_PropuestaSolucion" Association="BDPacificoModel.Store.FK_DetallePropuestaSolucion_PropuestaSolucion">
+      <End Role="PropuestaSolucion" EntitySet="PropuestaSolucion" />
+      <End Role="DetallePropuestaSolucion" EntitySet="DetallePropuestaSolucion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PropuestaSolucion_Producto" Association="BDPacificoModel.Store.FK_PropuestaSolucion_Producto">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="PropuestaSolucion" EntitySet="PropuestaSolucion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PropuestaSolucion_Prospecto" Association="BDPacificoModel.Store.FK_PropuestaSolucion_Prospecto">
+      <End Role="Prospecto" EntitySet="Prospecto" />
+      <End Role="PropuestaSolucion" EntitySet="PropuestaSolucion" />
+    </AssociationSet>
+    <AssociationSet Name="ComisionCanalVenta" Association="BDPacificoModel.Store.ComisionCanalVenta">
+      <End Role="Comision" EntitySet="Comision" />
+      <End Role="CanalVenta" EntitySet="CanalVenta" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="PlanProducto">
+    <Key>
+      <PropertyRef Name="Co_PlanProducto" />
+    </Key>
+    <Property Name="Co_PlanProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="No_PlanProducto" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Ss_PrimaMinima" Type="decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Ss_SumaMinimaAsegurada" Type="int" Nullable="false" />
+    <Property Name="Ss_SumaMaximaAsegurada" Type="int" Nullable="false" />
+    <Property Name="Co_Producto" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Prospecto">
+    <Key>
+      <PropertyRef Name="Co_Prospecto" />
+    </Key>
+    <Property Name="Co_Prospecto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="No_Prospecto" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Tx_ApePaterno" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Tx_ApeMaterno" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Tx_Direccion" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Tx_Telefono" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Tx_Movil" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Tx_Correo" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Nu_DNI" Type="varchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="Co_Producto" />
+    </Key>
+    <Property Name="Co_Producto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="No_Producto" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Fe_Creacion" Type="datetime" Nullable="false" />
+    <Property Name="FI_Flag" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DetallePropuestaSolucion">
+    <Key>
+      <PropertyRef Name="Co_DetallePropuestaSolucion" />
+    </Key>
+    <Property Name="Co_DetallePropuestaSolucion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Co_PropuestaSolucion" Type="int" Nullable="false" />
+    <Property Name="Nu_Anio" Type="int" Nullable="false" />
+    <Property Name="Nu_Edad" Type="int" Nullable="false" />
+    <Property Name="Ss_MontoPrima" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Ss_MontoAhorro" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Ss_ValorRescate" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Ss_MontoAsegurado" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="PropuestaSolucion">
+    <Key>
+      <PropertyRef Name="Co_PropuestaSolucion" />
+    </Key>
+    <Property Name="Co_PropuestaSolucion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ss_MontoPrima" Type="decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Fe_Nacimiento" Type="datetime" Nullable="false" />
+    <Property Name="Ss_MontoRetorno" Type="decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Ss_MontoAsegurado" Type="decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Co_Prospecto" Type="int" Nullable="false" />
+    <Property Name="Co_Producto" Type="int" Nullable="false" />
+    <Property Name="Co_Plan" Type="int" Nullable="false" />
+    <Property Name="Fe_Creacion" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comision">
+    <Key>
+      <PropertyRef Name="Co_Comision" />
+    </Key>
+    <Property Name="Co_Comision" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="No_Comision" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="CanalVenta_Co_CanalVenta" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CanalVenta">
+    <Key>
+      <PropertyRef Name="Co_CanalVenta" />
+    </Key>
+    <Property Name="Co_CanalVenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="No_CanalVenta" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Tx_Tipo" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_PlanProducto_Producto">
+    <End Role="Producto" Type="BDPacificoModel.Store.Producto" Multiplicity="1" />
+    <End Role="PlanProducto" Type="BDPacificoModel.Store.PlanProducto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="Co_Producto" />
+      </Principal>
+      <Dependent Role="PlanProducto">
+        <PropertyRef Name="Co_Producto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetallePropuestaSolucion_PropuestaSolucion">
+    <End Role="PropuestaSolucion" Type="BDPacificoModel.Store.PropuestaSolucion" Multiplicity="1" />
+    <End Role="DetallePropuestaSolucion" Type="BDPacificoModel.Store.DetallePropuestaSolucion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PropuestaSolucion">
+        <PropertyRef Name="Co_PropuestaSolucion" />
+      </Principal>
+      <Dependent Role="DetallePropuestaSolucion">
+        <PropertyRef Name="Co_PropuestaSolucion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PropuestaSolucion_Producto">
+    <End Role="Producto" Type="BDPacificoModel.Store.Producto" Multiplicity="1" />
+    <End Role="PropuestaSolucion" Type="BDPacificoModel.Store.PropuestaSolucion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="Co_Producto" />
+      </Principal>
+      <Dependent Role="PropuestaSolucion">
+        <PropertyRef Name="Co_Producto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PropuestaSolucion_Prospecto">
+    <End Role="Prospecto" Type="BDPacificoModel.Store.Prospecto" Multiplicity="1" />
+    <End Role="PropuestaSolucion" Type="BDPacificoModel.Store.PropuestaSolucion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prospecto">
+        <PropertyRef Name="Co_Prospecto" />
+      </Principal>
+      <Dependent Role="PropuestaSolucion">
+        <PropertyRef Name="Co_Prospecto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ComisionCanalVenta">
+    <End Role="Comision" Type="BDPacificoModel.Store.Comision" Multiplicity="*" />
+    <End Role="CanalVenta" Type="BDPacificoModel.Store.CanalVenta" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="CanalVenta">
+        <PropertyRef Name="Co_CanalVenta" />
+      </Principal>
+      <Dependent Role="Comision">
+        <PropertyRef Name="CanalVenta_Co_CanalVenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BDPacificoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -191,6 +225,11 @@
             <End Role="PropuestaSolucion" EntitySet="PropuestaSolucion" />
           </AssociationSet>
           <EntitySet Name="Comision" EntityType="BDPacificoModel.Comision" />
+          <EntitySet Name="CanalVenta" EntityType="BDPacificoModel.CanalVenta" />
+          <AssociationSet Name="ComisionCanalVenta" Association="BDPacificoModel.ComisionCanalVenta">
+            <End Role="Comision" EntitySet="Comision" />
+            <End Role="CanalVenta" EntitySet="CanalVenta" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Producto">
           <Key>
@@ -288,7 +327,21 @@
           </Key>
           <Property Name="Co_Comision" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="No_Comision" Type="String" Nullable="false" MaxLength="50" FixedLength="false" />
+          <NavigationProperty Name="CanalVenta" Relationship="BDPacificoModel.ComisionCanalVenta" FromRole="Comision" ToRole="CanalVenta" />
         </EntityType>
+        <EntityType Name="CanalVenta">
+          <Key>
+            <PropertyRef Name="Co_CanalVenta" />
+          </Key>
+          <Property Name="Co_CanalVenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="No_CanalVenta" Type="String" Nullable="false" FixedLength="false" MaxLength="50" />
+          <NavigationProperty Name="Comision" Relationship="BDPacificoModel.ComisionCanalVenta" FromRole="CanalVenta" ToRole="Comision" />
+          <Property Name="Tx_Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" />
+        </EntityType>
+        <Association Name="ComisionCanalVenta">
+          <End Type="BDPacificoModel.Comision" Role="Comision" Multiplicity="*" />
+          <End Type="BDPacificoModel.CanalVenta" Role="CanalVenta" Multiplicity="1" />
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -346,21 +399,46 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-          <EntitySetMapping Name="PropuestaSolucion">
-            <EntityTypeMapping TypeName="BDPacificoModel.PropuestaSolucion">
-              <MappingFragment StoreEntitySet="PropuestaSolucion">
-                <ScalarProperty Name="Fe_Creacion" ColumnName="Fe_Creacion" />
-                <ScalarProperty Name="Co_Plan" ColumnName="Co_Plan" />
-                <ScalarProperty Name="Co_Producto" ColumnName="Co_Producto" />
-                <ScalarProperty Name="Co_Prospecto" ColumnName="Co_Prospecto" />
-                <ScalarProperty Name="Ss_MontoAsegurado" ColumnName="Ss_MontoAsegurado" />
-                <ScalarProperty Name="Ss_MontoRetorno" ColumnName="Ss_MontoRetorno" />
-                <ScalarProperty Name="Fe_Nacimiento" ColumnName="Fe_Nacimiento" />
-                <ScalarProperty Name="Ss_MontoPrima" ColumnName="Ss_MontoPrima" />
-                <ScalarProperty Name="Co_PropuestaSolucion" ColumnName="Co_PropuestaSolucion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+    <EntitySetMapping Name="PropuestaSolucion">
+      <EntityTypeMapping TypeName="IsTypeOf(BDPacificoModel.PropuestaSolucion)">
+        <MappingFragment StoreEntitySet="PropuestaSolucion">
+          <ScalarProperty Name="Co_PropuestaSolucion" ColumnName="Co_PropuestaSolucion" />
+          <ScalarProperty Name="Ss_MontoPrima" ColumnName="Ss_MontoPrima" />
+          <ScalarProperty Name="Fe_Nacimiento" ColumnName="Fe_Nacimiento" />
+          <ScalarProperty Name="Ss_MontoRetorno" ColumnName="Ss_MontoRetorno" />
+          <ScalarProperty Name="Ss_MontoAsegurado" ColumnName="Ss_MontoAsegurado" />
+          <ScalarProperty Name="Co_Prospecto" ColumnName="Co_Prospecto" />
+          <ScalarProperty Name="Co_Producto" ColumnName="Co_Producto" />
+          <ScalarProperty Name="Co_Plan" ColumnName="Co_Plan" />
+          <ScalarProperty Name="Fe_Creacion" ColumnName="Fe_Creacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comision">
+      <EntityTypeMapping TypeName="IsTypeOf(BDPacificoModel.Comision)">
+        <MappingFragment StoreEntitySet="Comision">
+          <ScalarProperty Name="Co_Comision" ColumnName="Co_Comision" />
+          <ScalarProperty Name="No_Comision" ColumnName="No_Comision" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CanalVenta">
+      <EntityTypeMapping TypeName="IsTypeOf(BDPacificoModel.CanalVenta)">
+        <MappingFragment StoreEntitySet="CanalVenta">
+          <ScalarProperty Name="Co_CanalVenta" ColumnName="Co_CanalVenta" />
+          <ScalarProperty Name="No_CanalVenta" ColumnName="No_CanalVenta" />
+          <ScalarProperty Name="Tx_Tipo" ColumnName="Tx_Tipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ComisionCanalVenta" TypeName="BDPacificoModel.ComisionCanalVenta" StoreEntitySet="Comision">
+      <EndProperty Name="CanalVenta">
+        <ScalarProperty Name="Co_CanalVenta" ColumnName="CanalVenta_Co_CanalVenta" />
+      </EndProperty>
+      <EndProperty Name="Comision">
+        <ScalarProperty Name="Co_Comision" ColumnName="Co_Comision" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

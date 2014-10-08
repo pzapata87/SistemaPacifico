@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="af2d7cc02499450a82618b46742da35f" Name="Diagram1" ZoomLevel="114">
-        <EntityTypeShape EntityType="BDPacificoModel.PlanProducto" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+      <Diagram DiagramId="af2d7cc02499450a82618b46742da35f" Name="Diagram1" ZoomLevel="94">
+        <EntityTypeShape EntityType="BDPacificoModel.PlanProducto" Width="1.5" PointX="3.375" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="BDPacificoModel.Prospecto" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BDPacificoModel.Producto" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
         <AssociationConnector Association="BDPacificoModel.FK_PlanProducto_Producto" />
@@ -14,7 +14,9 @@
         <AssociationConnector Association="BDPacificoModel.FK_DetallePropuestaSolucion_PropuestaSolucion" />
         <AssociationConnector Association="BDPacificoModel.FK_PropuestaSolucion_Producto" />
         <AssociationConnector Association="BDPacificoModel.FK_PropuestaSolucion_Prospecto" />
-        <EntityTypeShape EntityType="BDPacificoModel.Comision" Width="1.5" PointX="1.125" PointY="0.875" />
+        <EntityTypeShape EntityType="BDPacificoModel.Comision" Width="1.5" PointX="1.625" PointY="2.875" />
+        <EntityTypeShape EntityType="BDPacificoModel.CanalVenta" Width="1.5" PointX="0.5" PointY="0.5" />
+        <AssociationConnector Association="BDPacificoModel.ComisionCanalVenta" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

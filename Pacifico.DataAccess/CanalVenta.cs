@@ -12,11 +12,17 @@ namespace Pacifico.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class Comision
+    public partial class CanalVenta
     {
-        public int Co_Comision { get; set; }
-        public string No_Comision { get; set; }
+        public CanalVenta()
+        {
+            this.Comision = new HashSet<Comision>();
+        }
     
-        public virtual CanalVenta CanalVenta { get; set; }
+        public int Co_CanalVenta { get; set; }
+        public string No_CanalVenta { get; set; }
+        public string Tx_Tipo { get; set; }
+    
+        public virtual ICollection<Comision> Comision { get; set; }
     }
 }
