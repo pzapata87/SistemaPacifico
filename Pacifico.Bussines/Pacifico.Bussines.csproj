@@ -47,6 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComisionBusiness.cs" />
+    <Compile Include="CargoBusiness.cs" />
+    <Compile Include="CanalVentaBusiness.cs" />
+    <Compile Include="CampaniaBusiness.cs" />
+    <Compile Include="RequisitoBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropuestaSolucionBusiness.cs" />
   </ItemGroup>

@@ -14,19 +14,10 @@ namespace Pacifico.DataAccess
     
     public partial class Empleado
     {
-        public Empleado()
-        {
-            this.Comision = new HashSet<Comision>();
-        }
-    
         public int Co_Empleado { get; set; }
         public string No_Empleado { get; set; }
         public string No_ApePaterno { get; set; }
         public string No_ApeMaterno { get; set; }
         public bool Fl_Sexo { get; set; }
-        public int Co_Cargo { get; set; }
-    
-        public virtual ICollection<Comision> Comision { get; set; }
-        public virtual Cargo Cargo { get; set; }
     }
 }

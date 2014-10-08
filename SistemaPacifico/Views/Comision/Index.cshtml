@@ -28,26 +28,7 @@
             <th>&nbsp;</th>
             <th>&nbsp;</th>
         </tr>
-        <tr>
-            <td>2014-01</td>
-            <td>Comision 1</td>
-            <td>04/09/2014</td>
-            <td>Navidad</td>
-            <td>Presencial</td>
-            <td>Asesor</td>
-            <td><a href="#" title="Ver"><i class="icon-edit"></i></a></td>
-            <td><a href="#" title="Editar" target="_blank"><i class="icon-file"></i></a></td>
-        </tr>
-        <tr>
-            <td>2014-02</td>
-            <td>Comision 2</td>
-            <td>04/09/2014</td>
-            <td>Navidad</td>
-            <td>Presencial</td>
-            <td>Asesor</td>
-            <td><a href="#" title="Ver"><i class="icon-edit"></i></a></td>
-            <td><a href="#" title="Editar" target="_blank"><i class="icon-file"></i></a></td>
-        </tr>
+        
         @foreach (var item in Model)
         {
             <tr>
@@ -67,7 +48,7 @@
                     @Html.DisplayFor(modelItem => item.CanalVentaNombre)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CargoComisionista)
+                    @Html.DisplayFor(modelItem => item.CargoNombre)
                 </td>
                 <td><a href="#" title="Ver"><i class="icon-edit"></i></a></td>
                 <td><a href="#" title="Editar" target="_blank"><i class="icon-file"></i></a></td>
@@ -77,7 +58,7 @@
     <table width="100%">
         <tr>
             <td>
-                @using (Html.BeginForm("CrearComision", "Comision", FormMethod.Post, new {@class = "form-search"}))
+                @using (Html.BeginForm("CrearComision", "Comision", FormMethod.Get, new {@class = "form-search"}))
                 {
                     <button type="submit" class="btn btn-large">Nuevo</button>
                 }

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/08/2014 13:27:27
+-- Date Created: 10/08/2014 18:48:46
 -- Generated from EDMX file: D:\Proyectos\Academico - Servicio Web\SistemaPacifico\Pacifico.DataAccess\Pacifico.edmx
 -- --------------------------------------------------
 
@@ -29,17 +29,23 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_PropuestaSolucion_Prospecto]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PropuestaSolucion] DROP CONSTRAINT [FK_PropuestaSolucion_Prospecto];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ComisionCanalVenta]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Comision] DROP CONSTRAINT [FK_ComisionCanalVenta];
-GO
 IF OBJECT_ID(N'[dbo].[FK_CampaniaComision]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Comision] DROP CONSTRAINT [FK_CampaniaComision];
 GO
-IF OBJECT_ID(N'[dbo].[FK_EmpleadoComision]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Comision] DROP CONSTRAINT [FK_EmpleadoComision];
+IF OBJECT_ID(N'[dbo].[FK_CanalVentaComision]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Comision] DROP CONSTRAINT [FK_CanalVentaComision];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CargoEmpleado]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Empleado] DROP CONSTRAINT [FK_CargoEmpleado];
+IF OBJECT_ID(N'[dbo].[FK_CargoComision]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Comision] DROP CONSTRAINT [FK_CargoComision];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ComisionRango]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Rango] DROP CONSTRAINT [FK_ComisionRango];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RequisitoComision_Requisito]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RequisitoComision] DROP CONSTRAINT [FK_RequisitoComision_Requisito];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RequisitoComision_Comision]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RequisitoComision] DROP CONSTRAINT [FK_RequisitoComision_Comision];
 GO
 
 -- --------------------------------------------------
@@ -75,6 +81,15 @@ IF OBJECT_ID(N'[dbo].[Empleado]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Cargo]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Cargo];
+GO
+IF OBJECT_ID(N'[dbo].[Requisito]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Requisito];
+GO
+IF OBJECT_ID(N'[dbo].[Rango]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Rango];
+GO
+IF OBJECT_ID(N'[dbo].[RequisitoComision]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[RequisitoComision];
 GO
 
 -- --------------------------------------------------
@@ -149,7 +164,7 @@ CREATE TABLE [dbo].[Comision] (
     [Fe_Registro] datetime  NOT NULL,
     [Co_Campania] int  NOT NULL,
     [Co_CanalVenta] int  NOT NULL,
-    [Co_Empleado] int  NULL
+    [Co_Cargo] int  NOT NULL
 );
 GO
 
@@ -178,8 +193,7 @@ CREATE TABLE [dbo].[Empleado] (
     [No_Empleado] nvarchar(50)  NOT NULL,
     [No_ApePaterno] nvarchar(50)  NOT NULL,
     [No_ApeMaterno] nvarchar(max)  NOT NULL,
-    [Fl_Sexo] bit  NOT NULL,
-    [Co_Cargo] int  NOT NULL
+    [Fl_Sexo] bit  NOT NULL
 );
 GO
 
@@ -187,6 +201,30 @@ GO
 CREATE TABLE [dbo].[Cargo] (
     [Co_Cargo] int IDENTITY(1,1) NOT NULL,
     [No_Cargo] nvarchar(50)  NOT NULL
+);
+GO
+
+-- Creating table 'Requisito'
+CREATE TABLE [dbo].[Requisito] (
+    [Co_Requisito] int IDENTITY(1,1) NOT NULL,
+    [No_Requisito] nvarchar(50)  NOT NULL
+);
+GO
+
+-- Creating table 'Rango'
+CREATE TABLE [dbo].[Rango] (
+    [Co_Rango] int IDENTITY(1,1) NOT NULL,
+    [Ss_Minimo] float  NOT NULL,
+    [Ss_Maximo] float  NOT NULL,
+    [Qt_Cantidad] int  NOT NULL,
+    [Co_Comision] int  NOT NULL
+);
+GO
+
+-- Creating table 'RequisitoComision'
+CREATE TABLE [dbo].[RequisitoComision] (
+    [Requisito_Co_Requisito] int  NOT NULL,
+    [Comision_Co_Comision] int  NOT NULL
 );
 GO
 
@@ -252,6 +290,24 @@ GO
 ALTER TABLE [dbo].[Cargo]
 ADD CONSTRAINT [PK_Cargo]
     PRIMARY KEY CLUSTERED ([Co_Cargo] ASC);
+GO
+
+-- Creating primary key on [Co_Requisito] in table 'Requisito'
+ALTER TABLE [dbo].[Requisito]
+ADD CONSTRAINT [PK_Requisito]
+    PRIMARY KEY CLUSTERED ([Co_Requisito] ASC);
+GO
+
+-- Creating primary key on [Co_Rango] in table 'Rango'
+ALTER TABLE [dbo].[Rango]
+ADD CONSTRAINT [PK_Rango]
+    PRIMARY KEY CLUSTERED ([Co_Rango] ASC);
+GO
+
+-- Creating primary key on [Requisito_Co_Requisito], [Comision_Co_Comision] in table 'RequisitoComision'
+ALTER TABLE [dbo].[RequisitoComision]
+ADD CONSTRAINT [PK_RequisitoComision]
+    PRIMARY KEY CLUSTERED ([Requisito_Co_Requisito], [Comision_Co_Comision] ASC);
 GO
 
 -- --------------------------------------------------
@@ -348,34 +404,58 @@ ON [dbo].[Comision]
     ([Co_CanalVenta]);
 GO
 
--- Creating foreign key on [Co_Empleado] in table 'Comision'
+-- Creating foreign key on [Co_Cargo] in table 'Comision'
 ALTER TABLE [dbo].[Comision]
-ADD CONSTRAINT [FK_EmpleadoComision]
-    FOREIGN KEY ([Co_Empleado])
-    REFERENCES [dbo].[Empleado]
-        ([Co_Empleado])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_EmpleadoComision'
-CREATE INDEX [IX_FK_EmpleadoComision]
-ON [dbo].[Comision]
-    ([Co_Empleado]);
-GO
-
--- Creating foreign key on [Co_Cargo] in table 'Empleado'
-ALTER TABLE [dbo].[Empleado]
-ADD CONSTRAINT [FK_CargoEmpleado]
+ADD CONSTRAINT [FK_CargoComision]
     FOREIGN KEY ([Co_Cargo])
     REFERENCES [dbo].[Cargo]
         ([Co_Cargo])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_CargoEmpleado'
-CREATE INDEX [IX_FK_CargoEmpleado]
-ON [dbo].[Empleado]
+-- Creating non-clustered index for FOREIGN KEY 'FK_CargoComision'
+CREATE INDEX [IX_FK_CargoComision]
+ON [dbo].[Comision]
     ([Co_Cargo]);
+GO
+
+-- Creating foreign key on [Co_Comision] in table 'Rango'
+ALTER TABLE [dbo].[Rango]
+ADD CONSTRAINT [FK_ComisionRango]
+    FOREIGN KEY ([Co_Comision])
+    REFERENCES [dbo].[Comision]
+        ([Co_Comision])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ComisionRango'
+CREATE INDEX [IX_FK_ComisionRango]
+ON [dbo].[Rango]
+    ([Co_Comision]);
+GO
+
+-- Creating foreign key on [Requisito_Co_Requisito] in table 'RequisitoComision'
+ALTER TABLE [dbo].[RequisitoComision]
+ADD CONSTRAINT [FK_RequisitoComision_Requisito]
+    FOREIGN KEY ([Requisito_Co_Requisito])
+    REFERENCES [dbo].[Requisito]
+        ([Co_Requisito])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Comision_Co_Comision] in table 'RequisitoComision'
+ALTER TABLE [dbo].[RequisitoComision]
+ADD CONSTRAINT [FK_RequisitoComision_Comision]
+    FOREIGN KEY ([Comision_Co_Comision])
+    REFERENCES [dbo].[Comision]
+        ([Co_Comision])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_RequisitoComision_Comision'
+CREATE INDEX [IX_FK_RequisitoComision_Comision]
+ON [dbo].[RequisitoComision]
+    ([Comision_Co_Comision]);
 GO
 
 -- --------------------------------------------------

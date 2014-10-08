@@ -35,5 +35,7 @@ namespace Pacifico.DataAccess
         public virtual DbSet<Campania> Campania { get; set; }
         public virtual DbSet<Empleado> Empleado { get; set; }
         public virtual DbSet<Cargo> Cargo { get; set; }
+        public virtual DbSet<Requisito> Requisito { get; set; }
+        public virtual DbSet<Rango> Rango { get; set; }
     }
 }

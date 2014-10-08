@@ -12,15 +12,15 @@ namespace Pacifico.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class Cargo
+    public partial class Requisito
     {
-        public Cargo()
+        public Requisito()
         {
             this.Comision = new HashSet<Comision>();
         }
     
-        public int Co_Cargo { get; set; }
-        public string No_Cargo { get; set; }
+        public int Co_Requisito { get; set; }
+        public string No_Requisito { get; set; }
     
         public virtual ICollection<Comision> Comision { get; set; }
     }

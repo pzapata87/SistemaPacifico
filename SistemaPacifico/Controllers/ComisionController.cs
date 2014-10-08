@@ -13,6 +13,10 @@ namespace SistemaPacifico.Controllers
         #region Variables
 
         private readonly ComisionBusiness _comisionBL;
+        private readonly CargoBusiness _cargoBL;
+        private readonly CanalVentaBusiness _canalVentaBL;
+        private readonly CampaniaBusiness _campaniaBL;
+        private readonly RequisitoBusiness _requisitoBL;
 
         #endregion
 
@@ -21,6 +25,10 @@ namespace SistemaPacifico.Controllers
         public ComisionController()
         {
             _comisionBL = new ComisionBusiness();
+            _cargoBL = new CargoBusiness();
+            _canalVentaBL = new CanalVentaBusiness();
+            _campaniaBL = new CampaniaBusiness();
+            _requisitoBL = new RequisitoBusiness();
         }
 
         #endregion
@@ -34,7 +42,7 @@ namespace SistemaPacifico.Controllers
                 CodigoComision = p.Co_Comision,
                 NombreComision = p.No_Comision,
                 FechaRegistro = p.Fe_Registro.GetDate(),
-                CargoComisionista = p.Empleado != null ? p.Empleado.Cargo.No_Cargo : string.Empty,
+                CargoNombre = p.Cargo.No_Cargo,
                 CampaniaNombre = p.Campania.No_Campania,
                 CanalVentaNombre = p.CanalVenta.No_CanalVenta
             });
@@ -44,7 +52,34 @@ namespace SistemaPacifico.Controllers
 
         public ActionResult CrearComision()
         {
-            var model = new ComisionModel();
+            var model = new ComisionModel
+            {
+                CargoList = _cargoBL.FindAll().ToList().ConvertAll(p => new Comun
+                {
+                   Nombre = p.No_Cargo,
+                   Valor = p.Co_Cargo
+                }),
+                CampaniaList = _campaniaBL.FindAll().ToList().ConvertAll(p => new Comun
+                {
+                    Nombre = p.No_Campania,
+                    Valor = p.Co_Campania
+                }),
+                CanalVentList = _canalVentaBL.FindAll().ToList().ConvertAll(p => new Comun
+                {
+                    Nombre = p.No_CanalVenta,
+                    Valor = p.Co_CanalVenta
+                }),
+                RequisitoList = _requisitoBL.FindAll().ToList().ConvertAll(p => new Comun
+                {
+                    Nombre = p.No_Requisito,
+                    Valor = p.Co_Requisito
+                })
+            };
+
+            model.CargoList.Insert(0, new Comun{Nombre = "Seleccionar", Valor = 0});
+            model.CampaniaList.Insert(0, new Comun { Nombre = "Seleccionar", Valor = 0 });
+            model.CanalVentList.Insert(0, new Comun { Nombre = "Seleccionar", Valor = 0 });
+
             return View("Edit", model);
         }
 
@@ -58,9 +93,33 @@ namespace SistemaPacifico.Controllers
                     No_Comision = model.NombreComision,
                     Co_Campania = model.CampaniaId,
                     Co_CanalVenta = model.CanalVentaId,
-                    //Co_Empleado = model.
-                    Fe_Registro = Convert.ToDateTime(model.FechaRegistro)
+                    Co_Cargo = model.CargoId,
+                    Fe_Registro = DateTime.Now
                 };
+
+                if (model.RequisitoListSelected != null)
+                {
+                    foreach (var item in model.RequisitoListSelected)
+                    {
+                        comision.Requisito.Add(new Requisito
+                        {
+                            Co_Requisito = item
+                        });
+                    }
+                }
+
+                if (model.RangoList != null)
+                {
+                    foreach (var item in model.RangoList)
+                    {
+                        comision.Rango.Add(new Rango
+                        {
+                            Ss_Maximo = item.Maximo,
+                            Ss_Minimo = item.Minimo,
+                            Qt_Cantidad = item.Cantidad
+                        });
+                    }
+                }
 
                 _comisionBL.Add(comision);
             }
