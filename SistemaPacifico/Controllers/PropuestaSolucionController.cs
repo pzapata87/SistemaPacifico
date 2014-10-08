@@ -75,7 +75,7 @@ namespace SistemaPacifico.Controllers
                 NombreProspecto = propuesta.Prospecto.No_Prospecto,
                 ApellidoProspecto = propuesta.Prospecto.Tx_ApePaterno + " " + propuesta.Prospecto.Tx_ApeMaterno,
                 FechaNacimiento = propuesta.Fe_Nacimiento.GetDate(),
-                Productos = ObtenerProductos(),
+                Productos = BuscarProducto(propuesta.Co_Producto),
                 PlanProductos = ObtenerPlanProducto(propuesta.Co_Plan),
                 MontoAsegurado = propuesta.Ss_MontoAsegurado,
                 MontoRetorno = propuesta.Ss_MontoRetorno,
@@ -117,6 +117,20 @@ namespace SistemaPacifico.Controllers
         {
             var dbProductos = new PropuestaSolucionBusiness().ListarProducto();
             dbProductos.Add(new Producto { Co_Producto = 0 , No_Producto = "[SELECCIONAR]"});
+            var productos = dbProductos
+                        .Select(x =>
+                                new SelectListItem
+                                {
+                                    Value = x.Co_Producto.ToString(),
+                                    Text = x.No_Producto
+                                });
+
+            return new SelectList(productos, "Value", "Text");
+        }
+
+        private SelectList BuscarProducto(int codigo)
+        {
+            var dbProductos = new PropuestaSolucionBusiness().ListarProductoxCodigo(codigo);
             var productos = dbProductos
                         .Select(x =>
                                 new SelectListItem

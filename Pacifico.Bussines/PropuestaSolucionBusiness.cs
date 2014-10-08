@@ -42,6 +42,11 @@ namespace Pacifico.Bussines
             return query.ToList();
         }
 
+        public IList<Producto> ListarProductoxCodigo(int codigo)
+        {
+            return _db.Producto.Where(x=>x.Co_Producto == codigo).ToList();
+        }
+
         public IList<Producto> ListarProducto()
         {
             return _db.Producto.ToList();

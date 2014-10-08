@@ -7,7 +7,12 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-
+   
+    <div id="labelError" class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Error:</strong> Por favor valide los datos ingresados
+    </div>
+    
     <div>
 
         <hr />
@@ -120,7 +125,7 @@
                 { headerText: "Valor Rescate", rowText: "Ss_ValorRescate" },
                 { headerText: "Monto Asegurado", rowText: "Ss_MontoAsegurado" }
             ],
-            pageSize: 100
+            pageSize: 10
         });
     };
 
@@ -128,17 +133,13 @@
     ko.applyBindings(modeloGrilla);
 </script>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#CodigoPlan").prop("disabled", true);
+
         $('#btnGenerarPropuesta').click(function () {
             GenerarPropuesta();
         });
@@ -148,8 +149,24 @@
         });
 
         $('#FechaNacimiento').datepicker();
+        $("#CodigoPlan").prop("disabled", true);
+        $('#labelError').hide();
     });
 
+    function _calculateAge(birthday) { // birthday is a date
+        var ageDifMs = Date.now() - birthday.getTime();
+        var ageDate = new Date(ageDifMs); // miliseconds from epoch
+        return Math.abs(ageDate.getUTCFullYear() - 1970);
+    }
+
+    function ValidarEdad()
+    {
+        var edad = _calculateAge(new Date(fechaNac));
+        if(edad<18 || edad>65)
+        {
+            $('#labelError').show();
+        }
+    }
     $("#CodigoProducto").change(function () { obtenerPlan(); });
     $("#FechaNacimiento").change(function () { ValidarEdad(); });
 
@@ -217,13 +234,14 @@
         function GenerarPropuesta() {
             var fechaNac = $("#FechaNacimiento").val();
             var montoAsegurado = $("#MontoAsegurado").val();
-            var date = @DateTime.Today;
-            var edad = fechaNac;
 
+            $("#MontoPrima").val(Math.round((montoAsegurado*0.009)/12),2);
+            var edad = _calculateAge(new Date(fechaNac));
+           
             var request = $.ajax({
                 url: "/PacificoService/ObtenerDetalle",
                 type: "GET",
-                data: { montoAsegurado: montoAsegurado,edad:30 },
+                data: { montoAsegurado: montoAsegurado, edad: edad },
                 dataType: "json",
                 contentType: "text/plain"
             });
@@ -232,7 +250,10 @@
                 for (var i in data) {
                     var detalle = data[i];
 
-                    modeloGrilla.addItem(detalle.Nu_Anio, detalle.Nu_Edad, detalle.Ss_MontoPrima, detalle.Ss_MontoAhorro,detalle.Ss_ValorRescate,detalle.Ss_MontoAsegurado);
+                    modeloGrilla.addItem(detalle.Nu_Anio, detalle.Nu_Edad, detalle.Ss_MontoPrima, detalle.Ss_MontoAhorro, detalle.Ss_ValorRescate, detalle.Ss_MontoAsegurado);
+                    if (i == edad) {
+                        $("#MontoRetorno").val(detalle.Ss_ValorRescate);
+                    }
                 }
             });
             request.fail(function (jqXHR, textStatus) {
