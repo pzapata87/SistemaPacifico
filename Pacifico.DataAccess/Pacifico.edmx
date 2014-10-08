@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="Co_DetallePropuestaSolucion" />
           </Key>
-          <Property Name="Co_DetallePropuestaSolucion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Co_DetallePropuestaSolucion" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Co_PropuestaSolucion" Type="int" Nullable="false" />
           <Property Name="Nu_Anio" Type="int" Nullable="false" />
           <Property Name="Nu_Edad" Type="int" Nullable="false" />
@@ -44,7 +44,7 @@
           </Key>
           <Property Name="Co_PropuestaSolucion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Ss_MontoPrima" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Fe_Nacimiento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fe_Nacimiento" Type="datetime" Nullable="false" />
           <Property Name="Ss_MontoRetorno" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Ss_MontoAsegurado" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Co_Prospecto" Type="int" Nullable="false" />
@@ -190,7 +190,7 @@
             <End Role="Prospecto" EntitySet="Prospecto" />
             <End Role="PropuestaSolucion" EntitySet="PropuestaSolucion" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Producto">
           <Key>
             <PropertyRef Name="Co_Producto" />
@@ -234,7 +234,7 @@
           </Key>
           <Property Name="Co_PropuestaSolucion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Ss_MontoPrima" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Fe_Nacimiento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fe_Nacimiento" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Ss_MontoRetorno" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="Ss_MontoAsegurado" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="Co_Prospecto" Type="Int32" Nullable="false" />
@@ -281,7 +281,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
