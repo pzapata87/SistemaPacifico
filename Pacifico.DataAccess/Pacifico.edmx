@@ -44,7 +44,7 @@
           </Key>
           <Property Name="Co_PropuestaSolucion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Ss_MontoPrima" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Fe_Nacimiento" Type="datetime" Nullable="false" />
+          <Property Name="Fe_Nacimiento" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Ss_MontoRetorno" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Ss_MontoAsegurado" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Co_Prospecto" Type="int" Nullable="false" />
@@ -176,7 +176,12 @@
             <End Role="Producto" EntitySet="Producto" />
             <End Role="PlanProducto" EntitySet="PlanProducto" />
           </AssociationSet>
+          <EntitySet Name="DetallePropuestaSolucion" EntityType="BDPacificoModel.DetallePropuestaSolucion" />
           <EntitySet Name="PropuestaSolucion" EntityType="BDPacificoModel.PropuestaSolucion" />
+          <AssociationSet Name="FK_DetallePropuestaSolucion_PropuestaSolucion" Association="BDPacificoModel.FK_DetallePropuestaSolucion_PropuestaSolucion">
+            <End Role="PropuestaSolucion" EntitySet="PropuestaSolucion" />
+            <End Role="DetallePropuestaSolucion" EntitySet="DetallePropuestaSolucion" />
+          </AssociationSet>
           <AssociationSet Name="FK_PropuestaSolucion_Producto" Association="BDPacificoModel.FK_PropuestaSolucion_Producto">
             <End Role="Producto" EntitySet="Producto" />
             <End Role="PropuestaSolucion" EntitySet="PropuestaSolucion" />
@@ -184,11 +189,6 @@
           <AssociationSet Name="FK_PropuestaSolucion_Prospecto" Association="BDPacificoModel.FK_PropuestaSolucion_Prospecto">
             <End Role="Prospecto" EntitySet="Prospecto" />
             <End Role="PropuestaSolucion" EntitySet="PropuestaSolucion" />
-          </AssociationSet>
-          <EntitySet Name="DetallePropuestaSolucion" EntityType="BDPacificoModel.DetallePropuestaSolucion" />
-          <AssociationSet Name="FK_DetallePropuestaSolucion_PropuestaSolucion" Association="BDPacificoModel.FK_DetallePropuestaSolucion_PropuestaSolucion">
-            <End Role="PropuestaSolucion" EntitySet="PropuestaSolucion" />
-            <End Role="DetallePropuestaSolucion" EntitySet="DetallePropuestaSolucion" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Producto">
@@ -214,23 +214,49 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DetallePropuestaSolucion">
+          <Key>
+            <PropertyRef Name="Co_DetallePropuestaSolucion" />
+          </Key>
+          <Property Name="Co_DetallePropuestaSolucion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Co_PropuestaSolucion" Type="Int32" Nullable="false" />
+          <Property Name="Nu_Anio" Type="Int32" Nullable="false" />
+          <Property Name="Nu_Edad" Type="Int32" Nullable="false" />
+          <Property Name="Ss_MontoPrima" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Ss_MontoAhorro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Ss_ValorRescate" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Ss_MontoAsegurado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="PropuestaSolucion" Relationship="BDPacificoModel.FK_DetallePropuestaSolucion_PropuestaSolucion" FromRole="DetallePropuestaSolucion" ToRole="PropuestaSolucion" />
+        </EntityType>
         <EntityType Name="PropuestaSolucion">
           <Key>
             <PropertyRef Name="Co_PropuestaSolucion" />
           </Key>
           <Property Name="Co_PropuestaSolucion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Ss_MontoPrima" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Fe_Nacimiento" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fe_Nacimiento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Ss_MontoRetorno" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="Ss_MontoAsegurado" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="Co_Prospecto" Type="Int32" Nullable="false" />
           <Property Name="Co_Producto" Type="Int32" Nullable="false" />
           <Property Name="Co_Plan" Type="Int32" Nullable="false" />
           <Property Name="Fe_Creacion" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DetallePropuestaSolucion" Relationship="BDPacificoModel.FK_DetallePropuestaSolucion_PropuestaSolucion" FromRole="PropuestaSolucion" ToRole="DetallePropuestaSolucion" />
           <NavigationProperty Name="Producto" Relationship="BDPacificoModel.FK_PropuestaSolucion_Producto" FromRole="PropuestaSolucion" ToRole="Producto" />
           <NavigationProperty Name="Prospecto" Relationship="BDPacificoModel.FK_PropuestaSolucion_Prospecto" FromRole="PropuestaSolucion" ToRole="Prospecto" />
-          <NavigationProperty Name="DetallePropuestaSolucion" Relationship="BDPacificoModel.FK_DetallePropuestaSolucion_PropuestaSolucion" FromRole="PropuestaSolucion" ToRole="DetallePropuestaSolucion" />
         </EntityType>
+        <Association Name="FK_DetallePropuestaSolucion_PropuestaSolucion">
+          <End Type="BDPacificoModel.PropuestaSolucion" Role="PropuestaSolucion" Multiplicity="1" />
+          <End Type="BDPacificoModel.DetallePropuestaSolucion" Role="DetallePropuestaSolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropuestaSolucion">
+              <PropertyRef Name="Co_PropuestaSolucion" />
+            </Principal>
+            <Dependent Role="DetallePropuestaSolucion">
+              <PropertyRef Name="Co_PropuestaSolucion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PropuestaSolucion_Producto">
           <End Type="BDPacificoModel.Producto" Role="Producto" Multiplicity="1" />
           <End Type="BDPacificoModel.PropuestaSolucion" Role="PropuestaSolucion" Multiplicity="*" />
@@ -252,32 +278,6 @@
             </Principal>
             <Dependent Role="PropuestaSolucion">
               <PropertyRef Name="Co_Prospecto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="DetallePropuestaSolucion">
-          <Key>
-            <PropertyRef Name="Co_DetallePropuestaSolucion" />
-          </Key>
-          <Property Name="Co_DetallePropuestaSolucion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Co_PropuestaSolucion" Type="Int32" Nullable="false" />
-          <Property Name="Nu_Anio" Type="Int32" Nullable="false" />
-          <Property Name="Nu_Edad" Type="Int32" Nullable="false" />
-          <Property Name="Ss_MontoPrima" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Ss_MontoAhorro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Ss_ValorRescate" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Ss_MontoAsegurado" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <NavigationProperty Name="PropuestaSolucion" Relationship="BDPacificoModel.FK_DetallePropuestaSolucion_PropuestaSolucion" FromRole="DetallePropuestaSolucion" ToRole="PropuestaSolucion" />
-        </EntityType>
-        <Association Name="FK_DetallePropuestaSolucion_PropuestaSolucion">
-          <End Type="BDPacificoModel.PropuestaSolucion" Role="PropuestaSolucion" Multiplicity="1" />
-          <End Type="BDPacificoModel.DetallePropuestaSolucion" Role="DetallePropuestaSolucion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PropuestaSolucion">
-              <PropertyRef Name="Co_PropuestaSolucion" />
-            </Principal>
-            <Dependent Role="DetallePropuestaSolucion">
-              <PropertyRef Name="Co_PropuestaSolucion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -324,6 +324,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DetallePropuestaSolucion">
+            <EntityTypeMapping TypeName="BDPacificoModel.DetallePropuestaSolucion">
+              <MappingFragment StoreEntitySet="DetallePropuestaSolucion">
+                <ScalarProperty Name="Ss_MontoAsegurado" ColumnName="Ss_MontoAsegurado" />
+                <ScalarProperty Name="Ss_ValorRescate" ColumnName="Ss_ValorRescate" />
+                <ScalarProperty Name="Ss_MontoAhorro" ColumnName="Ss_MontoAhorro" />
+                <ScalarProperty Name="Ss_MontoPrima" ColumnName="Ss_MontoPrima" />
+                <ScalarProperty Name="Nu_Edad" ColumnName="Nu_Edad" />
+                <ScalarProperty Name="Nu_Anio" ColumnName="Nu_Anio" />
+                <ScalarProperty Name="Co_PropuestaSolucion" ColumnName="Co_PropuestaSolucion" />
+                <ScalarProperty Name="Co_DetallePropuestaSolucion" ColumnName="Co_DetallePropuestaSolucion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PropuestaSolucion">
             <EntityTypeMapping TypeName="BDPacificoModel.PropuestaSolucion">
               <MappingFragment StoreEntitySet="PropuestaSolucion">
@@ -336,20 +350,6 @@
                 <ScalarProperty Name="Fe_Nacimiento" ColumnName="Fe_Nacimiento" />
                 <ScalarProperty Name="Ss_MontoPrima" ColumnName="Ss_MontoPrima" />
                 <ScalarProperty Name="Co_PropuestaSolucion" ColumnName="Co_PropuestaSolucion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DetallePropuestaSolucion">
-            <EntityTypeMapping TypeName="BDPacificoModel.DetallePropuestaSolucion">
-              <MappingFragment StoreEntitySet="DetallePropuestaSolucion">
-                <ScalarProperty Name="Ss_MontoAsegurado" ColumnName="Ss_MontoAsegurado" />
-                <ScalarProperty Name="Ss_ValorRescate" ColumnName="Ss_ValorRescate" />
-                <ScalarProperty Name="Ss_MontoAhorro" ColumnName="Ss_MontoAhorro" />
-                <ScalarProperty Name="Ss_MontoPrima" ColumnName="Ss_MontoPrima" />
-                <ScalarProperty Name="Nu_Edad" ColumnName="Nu_Edad" />
-                <ScalarProperty Name="Nu_Anio" ColumnName="Nu_Anio" />
-                <ScalarProperty Name="Co_PropuestaSolucion" ColumnName="Co_PropuestaSolucion" />
-                <ScalarProperty Name="Co_DetallePropuestaSolucion" ColumnName="Co_DetallePropuestaSolucion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

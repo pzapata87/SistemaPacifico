@@ -4,7 +4,7 @@
     ViewBag.Title = "EditarPropuesta";
 }
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
@@ -17,7 +17,7 @@
                 <td>
                     @Html.LabelFor(model => model.DNIProspecto, htmlAttributes: new { @class = "control-label col-md-4" })
                     @Html.TextBoxFor(model => model.CodigoProspecto, new { @class = "hidden" })
-                    @Html.TextBoxFor(model => model.DNIProspecto, new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.DNIProspecto, new { @class = "form-control", disabled = "true" })
                 </td>
                 <td>
                     <input id="btnBuscar" type="button" value="Buscar" class="btn btn-default" />
@@ -26,43 +26,43 @@
             <tr>
                 <td>
                     @Html.LabelFor(model => model.NombreProspecto, htmlAttributes: new { @class = "control-label col-md-4" })
-                    <label id="lblNombre"></label>
+                    @Html.TextBoxFor(model => model.NombreProspecto, new { @class = "form-control", disabled = "true" })
                 </td>
                 <td>
                     @Html.LabelFor(model => model.ApellidoProspecto, htmlAttributes: new { @class = "control-label col-md-3" })
-                    <label id="lblApellido"></label>
+                    @Html.TextBoxFor(model => model.ApellidoProspecto, new { @class = "form-control", disabled = "true" })
                 </td>
             </tr>
             <tr>
                 <td>
                     @Html.LabelFor(model => model.FechaNacimiento, htmlAttributes: new { @class = "control-label col-md-4" })
-                    @Html.TextBoxFor(model => model.FechaNacimiento, htmlAttributes: new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.FechaNacimiento, htmlAttributes: new { @class = "form-control", disabled = "true" })
                 </td>
             </tr>
             <tr>
                 <td>
                     @Html.LabelFor(model => model.CodigoProducto, htmlAttributes: new { @class = "control-label col-md-4" })
-                    @Html.DropDownListFor(model => model.CodigoProducto, Model.Productos, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.CodigoProducto, Model.Productos, htmlAttributes: new { @class = "form-control", disabled = "true" })
                 </td>
                 <td>
                     @Html.LabelFor(model => model.CodigoPlan, htmlAttributes: new { @class = "control-label col-md-3" })
-                    @Html.DropDownListFor(model => model.CodigoPlan, Model.PlanProductos, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.CodigoPlan, Model.PlanProductos, htmlAttributes: new { @class = "form-control", disabled = "true" })
                 </td>
             </tr>
             <tr>
                 <td>
                     @Html.LabelFor(model => model.MontoAsegurado, htmlAttributes: new { @class = "control-label col-md-4" })
-                    @Html.TextBoxFor(model => model.MontoAsegurado, htmlAttributes: new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.MontoAsegurado, htmlAttributes: new { @class = "form-control", disabled = "true" })
                 </td>
                 <td>
                     @Html.LabelFor(model => model.MontoPrima, htmlAttributes: new { @class = "control-label col-md-3" })
-                    @Html.TextBoxFor(model => model.MontoPrima, htmlAttributes: new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.MontoPrima, htmlAttributes: new { @class = "form-control", disabled = "true" })
                 </td>
             </tr>
             <tr>
                 <td>
                     @Html.LabelFor(model => model.MontoRetorno, htmlAttributes: new { @class = "control-label col-md-4" })
-                    @Html.TextBoxFor(model => model.MontoRetorno, htmlAttributes: new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.MontoRetorno, htmlAttributes: new { @class = "form-control", disabled = "true" })
                 </td>
                 <td>
                     <input id="btnGenerarPropuesta" type="button" value="Generar Propuesta" class="btn btn-default" />
@@ -120,7 +120,7 @@
                 { headerText: "Valor Rescate", rowText: "Ss_ValorRescate" },
                 { headerText: "Monto Asegurado", rowText: "Ss_MontoAsegurado" }
             ],
-            pageSize: 100
+            pageSize: 10
         });
     };
 
@@ -138,134 +138,34 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#btnGenerarPropuesta').click(function () {
-            GenerarPropuesta();
-        });
-
-        $('#btnGrabar').click(function () {
-            Grabar();
-        });
-
-        $('#FechaNacimiento').datepicker({ showOn: "button", buttonImage: "../../Content/img/calendar.gif", buttonImageOnly: true });
+        CargarPropuestaDetalle();
     });
 
-    $("#CodigoProducto").change(function () { obtenerPlan(); });
+    function CargarPropuestaDetalle() {
+        debugger;
+        var codigo = @(Model.Codigo);
 
-    $("#btnBuscar").click(function () { obtenerProspecto(); });
-        function obtenerProspecto()
-        {
-            var dni = $("#DNIProspecto").val();
+        var request = $.ajax({
+            url: "/PropuestaSolucion/ObtenerPropuesta",
+            type: "POST",
+            data: JSON.stringify({ id: codigo }),
+            contentType: 'application/json',
+            dataType: 'json'
+        });
+        request.done(function (detalles) {
+            debugger;
+            modeloGrilla.clearData();
 
-            var request = $.ajax({
-                url: "/PacificoService/ObtenerProspecto",
-                type: "GET",
-                data: { numeroDNI: dni },
-                dataType: "json",
-                contentType: "text/plain"
-            });
-            request.done(function (msg) {
-                debugger
-                if (msg.Co_Prospecto != "") {
-                    $("#CodigoProspecto").val(msg.Co_Prospecto);
-                    $("#lblNombre").html(msg.No_Prospecto);
-                    $("#lblApellido").html(msg.Tx_ApePaterno + " " + msg.Tx_ApeMaterno);
-                }
-                else
-                {
-                    $("#CodigoProspecto").html("");
-                    $("#lblNombre").html("");
-                    $("#lblApellido").html("");
-                    alert("Ingrese un DNI Valido");
-                }
-            });
-            request.fail(function (jqXHR, textStatus) {
-                alert("Request failed: " + textStatus);
-            });
-        }
+            for (var i in detalles) {
+                var detalle = detalles[i];
 
-        function obtenerPlan() {
-            var codProducto = $("#CodigoProducto").val();
+                modeloGrilla.addItem(detalle.Nu_Anio, detalle.Nu_Edad, detalle.Ss_MontoPrima, detalle.Ss_MontoAhorro, detalle.Ss_ValorRescate, detalle.Ss_MontoAsegurado);
+            }
+        });
+        request.fail(function (jqXHR, textStatus) {
+            debugger;
+            alert("Request failed: " + textStatus);
+        });
+    }
 
-            var request = $.ajax({
-                url: "/PacificoService/ObtenerPlanProducto",
-                type: "GET",
-                data: { codigoProducto: codProducto },
-                dataType: "json",
-                contentType: "text/plain"
-            });
-            request.done(function (data) {
-                var item = "";
-                $("#CodigoPlan").html("");
-                $.each(data, function (key, value) {
-                    item = item + "<option value=" + value.Codigo + ">" + value.Value + "</option>";
-                });
-                $("#CodigoPlan").html(item);
-            });
-            request.fail(function (jqXHR, textStatus) {
-                debugger;
-                alert("Request failed: " + textStatus);
-            });
-        }
-
-        function GenerarPropuesta() {
-            var montoPrima = $("#MontoPrima").val();
-            var montoAsegurado = $("#MontoAsegurado").val();
-
-            var request = $.ajax({
-                url: "/PacificoService/ObtenerDetalle",
-                type: "GET",
-                data: { montoPrima: montoPrima, montoAsegurado: montoAsegurado, edad: 30 },
-                dataType: "json",
-                contentType: "text/plain"
-            });
-            request.done(function (data) {
-                modeloGrilla.clearData();
-                for (var i in data) {
-                    var detalle = data[i];
-
-                    modeloGrilla.addItem(detalle.Nu_Anio, detalle.Nu_Edad, detalle.Ss_MontoPrima, detalle.Ss_MontoAhorro,detalle.Ss_ValorRescate,detalle.Ss_MontoAsegurado);
-                }
-            });
-            request.fail(function (jqXHR, textStatus) {
-                debugger;
-                alert("Request failed: " + textStatus);
-            });
-        }
-
-        function Grabar() {
-            
-            var codigoProspecto = $("#CodigoProspecto").val();
-            var fechaNacimiento = $("#FechaNacimiento").val();
-            var codigoProducto = $("#CodigoProducto").val();
-            var codigoPlan = $("#CodigoPlan").val();
-            var montoAsegurado = $("#MontoAsegurado").val();
-            var montoPrima = $("#MontoPrima").val();
-            var montoRetorno = $("#MontoRetorno").val();
-
-            var propuesta = {};
-            propuesta.CodigoProspecto = codigoProspecto;
-            propuesta.FechaNacimiento = fechaNacimiento;
-            propuesta.CodigoProducto = codigoProducto;
-            propuesta.CodigoPlan = codigoPlan;
-            propuesta.MontoAsegurado = montoAsegurado;
-            propuesta.MontoPrima = montoPrima;
-            propuesta.MontoRetorno = montoRetorno;
-            propuesta.Detalle = modeloGrilla.items();
-
-            var request = $.ajax({
-                url: "/PropuestaSolucion/CrearPropuesta",
-                data: JSON.stringify(propuesta),
-                contentType: 'application/json',
-                dataType: 'json',
-                type: 'post'
-            });
-            request.done(function (data) {
-                debugger
-                window.location.href = data;
-            });
-            request.fail(function (jqXHR, textStatus) {
-                debugger;
-                alert("Request failed: " + textStatus);
-            });
-        }
 </script>

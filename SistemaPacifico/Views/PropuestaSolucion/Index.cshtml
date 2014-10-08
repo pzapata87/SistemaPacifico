@@ -4,51 +4,72 @@
     ViewBag.Title = "Index";
 }
 
-<table class="table table-striped">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Codigo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DNIProspecto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NombreProspecto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaRegistro)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MontoAsegurado)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+@using (Html.BeginForm("Index", "PropuestaSolucion", FormMethod.Post))
+{
+    <table width="85%" class="fondo" align="center">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Codigo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DNIProspecto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreProspecto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaRegistro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MontoAsegurado)
-            </td>
-            <td>
-                @Html.ActionLink("Ver", "EditarPropuesta", new { id = item.Codigo })
-            </td>
+            <td>Nro Propuesta</td>
+            <td><input type="text" class="form-control" name="numeroPropuesta" value="@ViewBag.ParamCodigo" /></td>
+            <td>Fecha registro</td>
+            <td><input type="text" class="form-control" name="fecha" value="@ViewBag.ParamFecha" /></td>
         </tr>
-    }
+        <tr>
+            <td>DNI Prospecto</td>
+            <td><input type="text" class="form-control" name="dni" value="@ViewBag.ParamDni" /></td>
+            <td>Nombre Prospecto</td>
+            <td><input type="text" class="form-control" name="nombre" value="@ViewBag.ParamNombre" /></td>
+        </tr>
+        <tr>
+            <td colspan="4"><button type="submit" class="btn btn-primary">Buscar</button></td>
+        </tr>
+    </table>
 
-</table>
-<p>
-    @Html.ActionLink("Nuevo", "CrearPropuesta")
-</p>
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Codigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DNIProspecto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreProspecto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaRegistro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MontoAsegurado)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Codigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DNIProspecto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreProspecto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaRegistro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MontoAsegurado)
+                </td>
+                <td>
+                    @Html.ActionLink("Ver", "EditarPropuesta", new { id = item.Codigo })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <p>
+        @Html.ActionLink("Nuevo", "CrearPropuesta")
+    </p>
+}

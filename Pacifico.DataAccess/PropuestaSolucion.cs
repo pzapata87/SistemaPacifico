@@ -21,7 +21,7 @@ namespace Pacifico.DataAccess
     
         public int Co_PropuestaSolucion { get; set; }
         public decimal Ss_MontoPrima { get; set; }
-        public System.DateTime Fe_Nacimiento { get; set; }
+        public string Fe_Nacimiento { get; set; }
         public decimal Ss_MontoRetorno { get; set; }
         public decimal Ss_MontoAsegurado { get; set; }
         public int Co_Prospecto { get; set; }
@@ -29,8 +29,8 @@ namespace Pacifico.DataAccess
         public int Co_Plan { get; set; }
         public System.DateTime Fe_Creacion { get; set; }
     
+        public virtual ICollection<DetallePropuestaSolucion> DetallePropuestaSolucion { get; set; }
         public virtual Producto Producto { get; set; }
         public virtual Prospecto Prospecto { get; set; }
-        public virtual ICollection<DetallePropuestaSolucion> DetallePropuestaSolucion { get; set; }
     }
 }

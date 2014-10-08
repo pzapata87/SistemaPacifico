@@ -26,12 +26,11 @@
             <tr>
                 <td>
                     @Html.LabelFor(model => model.NombreProspecto, htmlAttributes: new { @class = "control-label col-md-4" })
-                    @Html.Label("")
-                    <label id="lblNombre"></label>
+                    @Html.TextBoxFor(model => model.NombreProspecto, new { @class = "form-control", disabled = "true" })
                 </td>
                 <td>
                     @Html.LabelFor(model => model.ApellidoProspecto, htmlAttributes: new { @class = "control-label col-md-3" })
-                    <label id="lblApellido"></label>
+                    @Html.TextBoxFor(model => model.ApellidoProspecto, new { @class = "form-control", disabled = "true"})
                 </td>
             </tr>
             <tr>
@@ -147,10 +146,11 @@
             Grabar();
         });
 
-        $('#FechaNacimiento').datepicker({ showOn: "button", buttonImage:"../../Content/img/calendar.gif", buttonImageOnly:true});
+        $('#FechaNacimiento').datepicker();
     });
 
     $("#CodigoProducto").change(function () { obtenerPlan(); });
+    $("#FechaNacimiento").change(function () { ValidarEdad(); });
 
     $("#btnBuscar").click(function () { obtenerProspecto(); });
         function obtenerProspecto()
@@ -168,20 +168,31 @@
                 debugger
                 if (msg.Co_Prospecto != "") {
                     $("#CodigoProspecto").val(msg.Co_Prospecto);
-                    $("#lblNombre").html(msg.No_Prospecto);
-                    $("#lblApellido").html(msg.Tx_ApePaterno + " " + msg.Tx_ApeMaterno);
+                    $("#NombreProspecto").val(msg.No_Prospecto);
+                    $("#ApellidoProspecto").val(msg.Tx_ApePaterno + " " + msg.Tx_ApeMaterno);
                 }
                 else
                 {
-                    $("#CodigoProspecto").html("");
-                    $("#lblNombre").html("");
-                    $("#lblApellido").html("");
-                    alert("Ingrese un DNI Valido");
+                    $("#CodigoProspecto").val("");
+                    $("#NombreProspecto").val("");
+                    $("#ApellidoProspecto").val("");
+                    alert("DNI Inválido");
                 }
             });
             request.fail(function (jqXHR, textStatus) {
                 alert("Request failed: " + textStatus);
             });
+        }
+
+        function ValidarEdad()
+        {
+            //var start = $("#FechaNacimiento").val();
+            //var end = new Date();
+            //var diff = new Date(end - start);
+            //var days = diff / 1000 / 60 / 60 / 24;
+            //if (diff < 18) {
+            //    alert("Fecha de Nacimiento fuera de rango");
+            //}
         }
 
         function obtenerPlan() {

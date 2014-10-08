@@ -26,6 +26,29 @@ namespace SistemaPacifico.Controllers
             return View(propuestaVm);
         }
 
+        [HttpPost]
+        public ActionResult Index(int? numeroPropuesta, string fecha, string dni, string nombre)
+        {
+            var propuestaSolucion = new PropuestaSolucionBusiness().ListarPropuestaSolucion(
+                numeroPropuesta, fecha, dni, nombre).ToList();
+
+            ViewBag.ParamCodigo = numeroPropuesta;
+            ViewBag.ParamFecha = fecha;
+            ViewBag.ParamDni = dni;
+            ViewBag.ParamNombre = nombre;
+
+            var propuestaVm = propuestaSolucion.ConvertAll(p => new PropuestaSolucionViewModel
+            {
+                Codigo = p.Co_PropuestaSolucion,
+                DNIProspecto = p.Prospecto.Nu_DNI,
+                NombreProspecto = p.Prospecto.No_Prospecto,
+                FechaRegistro = p.Fe_Creacion,
+                MontoAsegurado = p.Ss_MontoAsegurado,
+            });
+
+            return View("Index", propuestaVm);
+        }
+
         public ActionResult CrearPropuesta()
         {
             var model = new PropuestaSolucionViewModel
@@ -42,8 +65,10 @@ namespace SistemaPacifico.Controllers
 
             var model = new PropuestaSolucionViewModel
             {
+                Codigo = id,
                 DNIProspecto = propuesta.Prospecto.Nu_DNI,
                 NombreProspecto = propuesta.Prospecto.No_Prospecto,
+                ApellidoProspecto = propuesta.Prospecto.Tx_ApePaterno + " " + propuesta.Prospecto.Tx_ApeMaterno,
                 FechaNacimiento = propuesta.Fe_Nacimiento,
                 Productos = ObtenerProductos(),
                 PlanProductos = ObtenerPlanProducto(propuesta.Co_Plan),
@@ -56,12 +81,22 @@ namespace SistemaPacifico.Controllers
         }
 
         [HttpPost]
+        public ActionResult ObtenerPropuesta(int id)
+        {
+            var propuesta = new PropuestaSolucionBusiness().ObtenerPropuestaSolucion(id);
+            
+            propuesta.DetallePropuestaSolucion.ToList().ForEach(d => { d.PropuestaSolucion = null; });
+
+            return Json(propuesta.DetallePropuestaSolucion);
+        }
+
+        [HttpPost]
         public ActionResult CrearPropuesta(PropuestaSolucionViewModel model)
         {
             var propuesta = new PropuestaSolucion
             {
                 Co_Prospecto = model.CodigoProspecto,
-                Fe_Nacimiento = model.FechaNacimiento.GetValueOrDefault(),
+                Fe_Nacimiento = model.FechaNacimiento,
                 Co_Producto = model.CodigoProducto,
                 Co_Plan = model.CodigoPlan,
                 Ss_MontoAsegurado = model.MontoAsegurado.GetValueOrDefault(),

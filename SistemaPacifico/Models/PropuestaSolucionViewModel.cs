@@ -29,7 +29,7 @@ namespace SistemaPacifico.Models
         public IEnumerable<SelectListItem> PlanProductos { get; set; }
         [Required]
         [Display(Name = "Fecha Nacimiento: ")]
-        public DateTime? FechaNacimiento { get; set; }
+        public string FechaNacimiento { get; set; }
         [Required]
         [Display(Name = "Monto Asegurado")]
         public decimal? MontoAsegurado { get; set; }

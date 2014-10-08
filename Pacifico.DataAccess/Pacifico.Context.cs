@@ -28,7 +28,7 @@ namespace Pacifico.DataAccess
         public virtual DbSet<PlanProducto> PlanProducto { get; set; }
         public virtual DbSet<Prospecto> Prospecto { get; set; }
         public virtual DbSet<Producto> Producto { get; set; }
-        public virtual DbSet<PropuestaSolucion> PropuestaSolucion { get; set; }
         public virtual DbSet<DetallePropuestaSolucion> DetallePropuestaSolucion { get; set; }
+        public virtual DbSet<PropuestaSolucion> PropuestaSolucion { get; set; }
     }
 }
