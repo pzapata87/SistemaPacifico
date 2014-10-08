@@ -69,7 +69,7 @@ namespace SistemaPacifico.Controllers
                 DNIProspecto = propuesta.Prospecto.Nu_DNI,
                 NombreProspecto = propuesta.Prospecto.No_Prospecto,
                 ApellidoProspecto = propuesta.Prospecto.Tx_ApePaterno + " " + propuesta.Prospecto.Tx_ApeMaterno,
-                FechaNacimiento = propuesta.Fe_Nacimiento,
+                FechaNacimiento = propuesta.Fe_Nacimiento.ToString("dd/MM/yyyy"),
                 Productos = ObtenerProductos(),
                 PlanProductos = ObtenerPlanProducto(propuesta.Co_Plan),
                 MontoAsegurado = propuesta.Ss_MontoAsegurado,
@@ -96,7 +96,7 @@ namespace SistemaPacifico.Controllers
             var propuesta = new PropuestaSolucion
             {
                 Co_Prospecto = model.CodigoProspecto,
-                Fe_Nacimiento = model.FechaNacimiento,
+                Fe_Nacimiento = Convert.ToDateTime(model.FechaNacimiento),
                 Co_Producto = model.CodigoProducto,
                 Co_Plan = model.CodigoPlan,
                 Ss_MontoAsegurado = model.MontoAsegurado.GetValueOrDefault(),

@@ -7,13 +7,14 @@
       <Diagram DiagramId="af2d7cc02499450a82618b46742da35f" Name="Diagram1" ZoomLevel="114">
         <EntityTypeShape EntityType="BDPacificoModel.PlanProducto" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="BDPacificoModel.Prospecto" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Producto" Width="1.5" PointX="0.75" PointY="5.375" />
+        <EntityTypeShape EntityType="BDPacificoModel.Producto" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
         <AssociationConnector Association="BDPacificoModel.FK_PlanProducto_Producto" />
         <EntityTypeShape EntityType="BDPacificoModel.DetallePropuestaSolucion" Width="1.5" PointX="8.25" PointY="2.75" />
         <EntityTypeShape EntityType="BDPacificoModel.PropuestaSolucion" Width="1.5" PointX="6" PointY="2.5" />
         <AssociationConnector Association="BDPacificoModel.FK_DetallePropuestaSolucion_PropuestaSolucion" />
         <AssociationConnector Association="BDPacificoModel.FK_PropuestaSolucion_Producto" />
         <AssociationConnector Association="BDPacificoModel.FK_PropuestaSolucion_Prospecto" />
+        <EntityTypeShape EntityType="BDPacificoModel.Comision" Width="1.5" PointX="1.125" PointY="0.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
