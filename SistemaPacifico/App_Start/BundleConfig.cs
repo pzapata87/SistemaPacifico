@@ -1,7 +1,6 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
-namespace SistemaPacifico
+namespace SistemaPacifico.App_Start
 {
     public class BundleConfig
     {
@@ -20,7 +19,7 @@ namespace SistemaPacifico
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/bootstrap.min.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
@@ -28,7 +27,7 @@ namespace SistemaPacifico
                      "~/Scripts/knockout.simpleGrid.3.0.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap.min.css",
                       "~/Content/site.css",
                       "~/Content/jquery-ui.min.css"));
         }
