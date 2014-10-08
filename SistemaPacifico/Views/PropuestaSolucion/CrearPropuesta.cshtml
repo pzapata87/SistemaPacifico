@@ -65,7 +65,7 @@
                     @Html.TextBoxFor(model => model.MontoRetorno, htmlAttributes: new { @class = "form-control" })
                 </td>
                 <td>
-                    <input id="btnGenerarPropuesta" type="button" value="Generar Propuesta" class="btn btn-default" />
+                    <input id="btnGenerarPropuesta" type="button" value="Generar Propuesta" class="btn btn-default" disabled="disabled" />
                 </td>
             </tr>
             <tr>
@@ -166,17 +166,18 @@
                 contentType: "text/plain"
             });
             request.done(function (msg) {
-                debugger
                 if (msg.Co_Prospecto != "") {
                     $("#CodigoProspecto").val(msg.Co_Prospecto);
                     $("#NombreProspecto").val(msg.No_Prospecto);
                     $("#ApellidoProspecto").val(msg.Tx_ApePaterno + " " + msg.Tx_ApeMaterno);
+                    $("#btnGenerarPropuesta").prop("disabled", false);
                 }
                 else
                 {
                     $("#CodigoProspecto").val("");
                     $("#NombreProspecto").val("");
                     $("#ApellidoProspecto").val("");
+                    $("#btnGenerarPropuesta").prop("disabled", true);
                     alert("DNI Inválido");
                 }
             });
@@ -277,7 +278,7 @@
                 type: 'post'
             });
             request.done(function (data) {
-                debugger
+                $("#labelSuccess").show();
                 window.location.href = data;
             });
             request.fail(function (jqXHR, textStatus) {

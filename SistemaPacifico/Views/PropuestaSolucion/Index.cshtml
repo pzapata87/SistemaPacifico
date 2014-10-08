@@ -6,6 +6,10 @@
 
 @using (Html.BeginForm("Index", "PropuestaSolucion", FormMethod.Post))
 {
+    <div id="labelSuccess" class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Aviso:</strong> Propuesta de solución registrada.
+    </div>
     <table width="85%" class="fondo" align="center">
         <tr>
             <td>N° Propuesta: </td>
@@ -94,3 +98,8 @@
         @Html.ActionLink("Nuevo", "CrearPropuesta")
     </p>
 }
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#labelSuccess").hide();
+    });
+</script>
