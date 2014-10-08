@@ -82,7 +82,7 @@ namespace Pacifico.Bussines
             return _db.Prospecto.SingleOrDefault(x => x.Nu_DNI == numeroDNI);
         }
 
-        public List<DetallePropuestaSolucion> GenerarDetallePropuesta(double montoPrima, double montoAsegurado, int edad)
+        public List<DetallePropuestaSolucion> GenerarDetallePropuesta(double montoPrima)
         {
             List<DetallePropuestaSolucion> lst = new List<DetallePropuestaSolucion>();
 

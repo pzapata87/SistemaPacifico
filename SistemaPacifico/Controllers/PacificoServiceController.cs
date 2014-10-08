@@ -30,9 +30,9 @@ namespace SistemaPacifico.Controllers
             return Json(dbPlanProductos, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult ObtenerDetalle(double montoPrima, double montoAsegurado, int edad)
+        public JsonResult ObtenerDetalle(double montoPrima)
         {
-            var detalle = new PropuestaSolucionBusiness().GenerarDetallePropuesta(montoPrima, montoAsegurado, edad).ToList();
+            var detalle = new PropuestaSolucionBusiness().GenerarDetallePropuesta(montoPrima).ToList();
             return Json(detalle, JsonRequestBehavior.AllowGet);
         }
     }

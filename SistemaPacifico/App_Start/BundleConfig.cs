@@ -30,6 +30,13 @@ namespace SistemaPacifico.App_Start
                       "~/Content/bootstrap.min.css",
                       "~/Content/site.css",
                       "~/Content/jquery-ui.min.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/vanadium").Include(
+                      "~/Scripts/vanadium.js"));
+
+
+            bundles.Add(new StyleBundle("~/Content/vanadium").Include(
+                      "~/Content/vanadium.css"));
         }
     }
 }
