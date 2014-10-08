@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/08/2014 02:19:31
--- Generated from EDMX file: D:\Proyectos\Academico - Servicio Web\SistemaPacifico\Pacifico.DataAccess\Pacifico.edmx
+-- Date Created: 10/08/2014 02:43:55
+-- Generated from EDMX file: D:\Proyectos\Desarrollo - Aplicacion Academica\Desarrollo\SistemaPacifico\Pacifico.DataAccess\Pacifico.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,11 +17,11 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_DetallePropuestaSolucion_PropuestaSolucion]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[DetallePropuestaSolucion] DROP CONSTRAINT [FK_DetallePropuestaSolucion_PropuestaSolucion];
-GO
 IF OBJECT_ID(N'[dbo].[FK_PlanProducto_Producto]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PlanProducto] DROP CONSTRAINT [FK_PlanProducto_Producto];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DetallePropuestaSolucion_PropuestaSolucion]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DetallePropuestaSolucion] DROP CONSTRAINT [FK_DetallePropuestaSolucion_PropuestaSolucion];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PropuestaSolucion_Producto]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PropuestaSolucion] DROP CONSTRAINT [FK_PropuestaSolucion_Producto];
@@ -29,25 +29,34 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_PropuestaSolucion_Prospecto]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PropuestaSolucion] DROP CONSTRAINT [FK_PropuestaSolucion_Prospecto];
 GO
+IF OBJECT_ID(N'[dbo].[FK_ComisionCanalVenta]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Comision] DROP CONSTRAINT [FK_ComisionCanalVenta];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[DetallePropuestaSolucion]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[DetallePropuestaSolucion];
-GO
 IF OBJECT_ID(N'[dbo].[PlanProducto]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PlanProducto];
+GO
+IF OBJECT_ID(N'[dbo].[Prospecto]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Prospecto];
 GO
 IF OBJECT_ID(N'[dbo].[Producto]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Producto];
 GO
+IF OBJECT_ID(N'[dbo].[DetallePropuestaSolucion]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DetallePropuestaSolucion];
+GO
 IF OBJECT_ID(N'[dbo].[PropuestaSolucion]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PropuestaSolucion];
 GO
-IF OBJECT_ID(N'[dbo].[Prospecto]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Prospecto];
+IF OBJECT_ID(N'[dbo].[Comision]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Comision];
+GO
+IF OBJECT_ID(N'[dbo].[CanalVenta]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[CanalVenta];
 GO
 
 -- --------------------------------------------------

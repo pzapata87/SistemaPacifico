@@ -159,6 +159,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ComisionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PacificoServiceController.cs" />
     <Compile Include="Controllers\PropuestaSolucionController.cs" />
@@ -226,6 +227,7 @@
     <Content Include="Views\PropuestaSolucion\Index.cshtml" />
     <Content Include="Views\PropuestaSolucion\CrearPropuesta.cshtml" />
     <Content Include="Views\PropuestaSolucion\EditarPropuesta.cshtml" />
+    <Content Include="Views\Comision\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

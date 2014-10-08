@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using Pacifico.Bussines;
 using System.Web.Mvc;
 using SistemaPacifico.Models;
 using Pacifico.DataAccess;
-using System.Collections;
 
 namespace SistemaPacifico.Controllers
 {
