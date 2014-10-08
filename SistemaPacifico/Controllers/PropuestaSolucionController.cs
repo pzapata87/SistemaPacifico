@@ -18,8 +18,11 @@ namespace SistemaPacifico.Controllers
                 Codigo = p.Co_PropuestaSolucion,
                 DNIProspecto = p.Prospecto.Nu_DNI,
                 NombreProspecto = p.Prospecto.No_Prospecto,
-                FechaRegistro = p.Fe_Creacion,
+                FechaNacimiento = p.Fe_Nacimiento.ToShortDateString(),
+                FechaRegistro = p.Fe_Creacion.ToShortDateString(),
                 MontoAsegurado = p.Ss_MontoAsegurado,
+                MontoPrima = p.Ss_MontoPrima,
+                MontoRetorno = p.Ss_MontoRetorno
             });
             return View(propuestaVm);
         }
@@ -40,8 +43,11 @@ namespace SistemaPacifico.Controllers
                 Codigo = p.Co_PropuestaSolucion,
                 DNIProspecto = p.Prospecto.Nu_DNI,
                 NombreProspecto = p.Prospecto.No_Prospecto,
-                FechaRegistro = p.Fe_Creacion,
+                FechaNacimiento = p.Fe_Nacimiento.ToShortDateString(),
+                FechaRegistro = p.Fe_Creacion.ToShortDateString(),
                 MontoAsegurado = p.Ss_MontoAsegurado,
+                MontoPrima = p.Ss_MontoPrima,
+                MontoRetorno = p.Ss_MontoRetorno
             });
 
             return View("Index", propuestaVm);
@@ -51,7 +57,7 @@ namespace SistemaPacifico.Controllers
         {
             var model = new PropuestaSolucionViewModel
             {
-                Productos = ObtenerProductos(),
+                Productos = ObtenerProductos().OrderBy(x=>x.Value),
                 PlanProductos = ObtenerPlanProducto(0),
             };
             return View(model);
@@ -109,6 +115,7 @@ namespace SistemaPacifico.Controllers
         private SelectList ObtenerProductos()
         {
             var dbProductos = new PropuestaSolucionBusiness().ListarProducto();
+            dbProductos.Add(new Producto { Co_Producto = 0 , No_Producto = "[SELECCIONAR]"});
             var productos = dbProductos
                         .Select(x =>
                                 new SelectListItem
@@ -123,18 +130,14 @@ namespace SistemaPacifico.Controllers
         private SelectList ObtenerPlanProducto(int codigoProducto)
         {
             var dbPlanProductos = new PropuestaSolucionBusiness().ListarPlanProducto(codigoProducto);
-            if (dbPlanProductos.Count > 0)
-            {
-                var plan = dbPlanProductos
-                            .Select(x =>
-                                    new SelectListItem
-                                    {
-                                        Value = x.Co_PlanProducto.ToString(),
-                                        Text = x.No_PlanProducto
-                                    });
-                return new SelectList(plan, "Value", "Text");
-            }
-            return new SelectList(new List<SelectListItem>() { new SelectListItem { Text = "SELECCIONAR", Value = "0" } }, "Value", "Text");
+            var plan = dbPlanProductos
+                        .Select(x =>
+                                new SelectListItem
+                                {
+                                    Value = x.Co_PlanProducto.ToString(),
+                                    Text = x.No_PlanProducto
+                                });
+            return new SelectList(plan, "Value", "Text");
         }
 	}
 }

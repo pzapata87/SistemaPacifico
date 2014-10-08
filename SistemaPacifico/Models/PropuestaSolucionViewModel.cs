@@ -40,7 +40,7 @@ namespace SistemaPacifico.Models
         [Display(Name = "Monto Prima: ")]
         public decimal? MontoPrima { get; set; }
         [Display(Name = "Fecha de Registro")]
-        public DateTime FechaRegistro { get; set; }
+        public string FechaRegistro { get; set; }
         public List<DetallePropuestaSolucion> Detalle { get; set; }
     }
 }
