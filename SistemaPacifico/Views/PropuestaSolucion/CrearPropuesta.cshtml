@@ -138,6 +138,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        $("#CodigoPlan").prop("disabled", true);
         $('#btnGenerarPropuesta').click(function () {
             GenerarPropuesta();
         });
@@ -212,6 +213,10 @@
                     item = item + "<option value=" + value.Codigo + ">" + value.Value + "</option>";
                 });
                 $("#CodigoPlan").html(item);
+                if (data.length == 0)
+                    $( "#CodigoPlan" ).prop( "disabled", true );
+                else
+                    $("#CodigoPlan").prop("disabled", false);
             });
             request.fail(function (jqXHR, textStatus) {
                 debugger;

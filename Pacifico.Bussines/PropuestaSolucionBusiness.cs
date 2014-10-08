@@ -49,7 +49,7 @@ namespace Pacifico.Bussines
 
         public IList<PlanProducto> ListarPlanProducto(int codigoProducto)
         {
-            return _db.PlanProducto.Where(x => x.Co_PlanProducto == codigoProducto).ToList();
+            return _db.PlanProducto.Where(x => x.Co_Producto == codigoProducto).ToList();
         }
 
         public PropuestaSolucion RegistrarPropuestaSolucion(PropuestaSolucion propuesta, List<DetallePropuestaSolucion> detalle)

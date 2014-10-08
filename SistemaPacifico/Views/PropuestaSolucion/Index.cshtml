@@ -8,38 +8,50 @@
 {
     <table width="85%" class="fondo" align="center">
         <tr>
-            <td>Nro Propuesta</td>
+            <td>N° Propuesta: </td>
             <td><input type="text" class="form-control" name="numeroPropuesta" value="@ViewBag.ParamCodigo" /></td>
-            <td>Fecha registro</td>
+            <td></td>
+            <td>Fecha registro: </td>
             <td><input type="text" class="form-control" name="fecha" value="@ViewBag.ParamFecha" /></td>
         </tr>
         <tr>
-            <td>DNI Prospecto</td>
+            <td>DNI Prospecto: </td>
             <td><input type="text" class="form-control" name="dni" value="@ViewBag.ParamDni" /></td>
-            <td>Nombre Prospecto</td>
+            <td></td>
+            <td>Nombre Prospecto: </td>
             <td><input type="text" class="form-control" name="nombre" value="@ViewBag.ParamNombre" /></td>
+            <td colspan="3" align="right"><button type="submit" class="btn btn-primary">Buscar</button></td>
         </tr>
         <tr>
-            <td colspan="4"><button type="submit" class="btn btn-primary">Buscar</button></td>
+            <td>  </td>
         </tr>
     </table>
 
     <table class="table table-striped">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Codigo)
+                N° Propuesta
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DNIProspecto)
+                DNI
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NombreProspecto)
+                Nombre
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FechaRegistro)
+                Fec. Nacimiento
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MontoAsegurado)
+                Fec. Registro
+            </th>
+            <th>
+                Mnt. Asegurado
+            </th>
+            <th>
+                Mnt. Prima
+            </th>
+            <th>
+                Mnt. Retorno
             </th>
             <th></th>
         </tr>
@@ -57,13 +69,22 @@
                     @Html.DisplayFor(modelItem => item.NombreProspecto)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.FechaNacimiento)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.FechaRegistro)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.MontoAsegurado)
                 </td>
                 <td>
-                    @Html.ActionLink("Ver", "EditarPropuesta", new { id = item.Codigo })
+                    @Html.DisplayFor(modelItem => item.MontoPrima)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MontoRetorno)
+                </td>
+                <td>
+                    @Html.ActionLink("Ver Propuesta", "EditarPropuesta", new { id = item.Codigo })
                 </td>
             </tr>
         }
