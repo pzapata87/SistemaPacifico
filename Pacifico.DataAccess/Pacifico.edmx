@@ -13,6 +13,9 @@
     <EntitySet Name="PropuestaSolucion" EntityType="BDPacificoModel.Store.PropuestaSolucion" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Comision" EntityType="BDPacificoModel.Store.Comision" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CanalVenta" EntityType="BDPacificoModel.Store.CanalVenta" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Campania" EntityType="BDPacificoModel.Store.Campania" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Empleado" EntityType="BDPacificoModel.Store.Empleado" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Cargo" EntityType="BDPacificoModel.Store.Cargo" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_PlanProducto_Producto" Association="BDPacificoModel.Store.FK_PlanProducto_Producto">
       <End Role="Producto" EntitySet="Producto" />
       <End Role="PlanProducto" EntitySet="PlanProducto" />
@@ -32,6 +35,18 @@
     <AssociationSet Name="ComisionCanalVenta" Association="BDPacificoModel.Store.ComisionCanalVenta">
       <End Role="Comision" EntitySet="Comision" />
       <End Role="CanalVenta" EntitySet="CanalVenta" />
+    </AssociationSet>
+    <AssociationSet Name="CampaniaComision" Association="BDPacificoModel.Store.CampaniaComision">
+      <End Role="Campania" EntitySet="Campania" />
+      <End Role="Comision" EntitySet="Comision" />
+    </AssociationSet>
+    <AssociationSet Name="EmpleadoComision" Association="BDPacificoModel.Store.EmpleadoComision">
+      <End Role="Empleado" EntitySet="Empleado" />
+      <End Role="Comision" EntitySet="Comision" />
+    </AssociationSet>
+    <AssociationSet Name="CargoEmpleado" Association="BDPacificoModel.Store.CargoEmpleado">
+      <End Role="Cargo" EntitySet="Cargo" />
+      <End Role="Empleado" EntitySet="Empleado" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="PlanProducto">
@@ -101,7 +116,10 @@
     </Key>
     <Property Name="Co_Comision" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="No_Comision" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Fe_Registro" Type="datetime" Nullable="false" />
     <Property Name="CanalVenta_Co_CanalVenta" Type="int" Nullable="false" />
+    <Property Name="Campania_Co_Campania" Type="int" Nullable="false" />
+    <Property Name="Empleado_Co_Empleado" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="CanalVenta">
     <Key>
@@ -110,6 +128,35 @@
     <Property Name="Co_CanalVenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="No_CanalVenta" Type="nvarchar" Nullable="false" MaxLength="50" />
     <Property Name="Tx_Tipo" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Campania">
+    <Key>
+      <PropertyRef Name="Co_Campania" />
+    </Key>
+    <Property Name="Co_Campania" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="No_Campania" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Fe_Inicio" Type="datetime" Nullable="false" />
+    <Property Name="Fe_Fin" Type="datetime" Nullable="false" />
+    <Property Name="Qt_Meta" Type="int" Nullable="false" />
+    <Property Name="Fl_Flag" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Empleado">
+    <Key>
+      <PropertyRef Name="Co_Empleado" />
+    </Key>
+    <Property Name="Co_Empleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="No_Empleado" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="No_ApePaterno" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="No_ApeMaterno" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Fl_Sexo" Type="bit" Nullable="false" />
+    <Property Name="Cargo_Co_Cargo" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cargo">
+    <Key>
+      <PropertyRef Name="Co_Cargo" />
+    </Key>
+    <Property Name="Co_Cargo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="No_Cargo" Type="nvarchar" Nullable="false" MaxLength="50" />
   </EntityType>
   <Association Name="FK_PlanProducto_Producto">
     <End Role="Producto" Type="BDPacificoModel.Store.Producto" Multiplicity="1" />
@@ -171,6 +218,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="CampaniaComision">
+    <End Role="Campania" Type="BDPacificoModel.Store.Campania" Multiplicity="1" />
+    <End Role="Comision" Type="BDPacificoModel.Store.Comision" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Campania">
+        <PropertyRef Name="Co_Campania" />
+      </Principal>
+      <Dependent Role="Comision">
+        <PropertyRef Name="Campania_Co_Campania" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EmpleadoComision">
+    <End Role="Empleado" Type="BDPacificoModel.Store.Empleado" Multiplicity="0..1" />
+    <End Role="Comision" Type="BDPacificoModel.Store.Comision" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="Co_Empleado" />
+      </Principal>
+      <Dependent Role="Comision">
+        <PropertyRef Name="Empleado_Co_Empleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CargoEmpleado">
+    <End Role="Cargo" Type="BDPacificoModel.Store.Cargo" Multiplicity="1" />
+    <End Role="Empleado" Type="BDPacificoModel.Store.Empleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cargo">
+        <PropertyRef Name="Co_Cargo" />
+      </Principal>
+      <Dependent Role="Empleado">
+        <PropertyRef Name="Cargo_Co_Cargo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -226,9 +309,24 @@
           </AssociationSet>
           <EntitySet Name="Comision" EntityType="BDPacificoModel.Comision" />
           <EntitySet Name="CanalVenta" EntityType="BDPacificoModel.CanalVenta" />
-          <AssociationSet Name="ComisionCanalVenta" Association="BDPacificoModel.ComisionCanalVenta">
+          <EntitySet Name="Campania" EntityType="BDPacificoModel.Campania" />
+          <EntitySet Name="Empleado" EntityType="BDPacificoModel.Empleado" />
+          <EntitySet Name="Cargo" EntityType="BDPacificoModel.Cargo" />
+          <AssociationSet Name="CampaniaComision" Association="BDPacificoModel.CampaniaComision">
+            <End Role="Campania" EntitySet="Campania" />
             <End Role="Comision" EntitySet="Comision" />
+          </AssociationSet>
+          <AssociationSet Name="CanalVentaComision" Association="BDPacificoModel.CanalVentaComision">
             <End Role="CanalVenta" EntitySet="CanalVenta" />
+            <End Role="Comision" EntitySet="Comision" />
+          </AssociationSet>
+          <AssociationSet Name="EmpleadoComision" Association="BDPacificoModel.EmpleadoComision">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Comision" EntitySet="Comision" />
+          </AssociationSet>
+          <AssociationSet Name="CargoEmpleado" Association="BDPacificoModel.CargoEmpleado">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="Empleado" EntitySet="Empleado" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Producto">
@@ -327,7 +425,13 @@
           </Key>
           <Property Name="Co_Comision" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="No_Comision" Type="String" Nullable="false" MaxLength="50" FixedLength="false" />
-          <NavigationProperty Name="CanalVenta" Relationship="BDPacificoModel.ComisionCanalVenta" FromRole="Comision" ToRole="CanalVenta" />
+          <Property Name="Fe_Registro" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Campania" Relationship="BDPacificoModel.CampaniaComision" FromRole="Comision" ToRole="Campania" />
+          <Property Name="Co_Campania" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CanalVenta" Relationship="BDPacificoModel.CanalVentaComision" FromRole="Comision" ToRole="CanalVenta" />
+          <Property Name="Co_CanalVenta" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Empleado" Relationship="BDPacificoModel.EmpleadoComision" FromRole="Comision" ToRole="Empleado" />
+          <Property Name="Co_Empleado" Type="Int32" Nullable="true" />
         </EntityType>
         <EntityType Name="CanalVenta">
           <Key>
@@ -335,12 +439,89 @@
           </Key>
           <Property Name="Co_CanalVenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="No_CanalVenta" Type="String" Nullable="false" FixedLength="false" MaxLength="50" />
-          <NavigationProperty Name="Comision" Relationship="BDPacificoModel.ComisionCanalVenta" FromRole="CanalVenta" ToRole="Comision" />
           <Property Name="Tx_Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" />
+          <NavigationProperty Name="Comision" Relationship="BDPacificoModel.CanalVentaComision" FromRole="CanalVenta" ToRole="Comision" />
         </EntityType>
-        <Association Name="ComisionCanalVenta">
+        <EntityType Name="Campania">
+          <Key>
+            <PropertyRef Name="Co_Campania" />
+          </Key>
+          <Property Name="Co_Campania" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="No_Campania" Type="String" Nullable="false" FixedLength="false" MaxLength="50" />
+          <Property Name="Fe_Inicio" Type="DateTime" Nullable="false" />
+          <Property Name="Fe_Fin" Type="DateTime" Nullable="false" />
+          <Property Name="Qt_Meta" Type="Int32" Nullable="false" />
+          <Property Name="Fl_Flag" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Comision" Relationship="BDPacificoModel.CampaniaComision" FromRole="Campania" ToRole="Comision" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="Co_Empleado" />
+          </Key>
+          <Property Name="Co_Empleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="No_Empleado" Type="String" Nullable="false" FixedLength="false" MaxLength="50" />
+          <Property Name="No_ApePaterno" Type="String" Nullable="false" FixedLength="false" MaxLength="50" />
+          <Property Name="No_ApeMaterno" Type="String" Nullable="false" />
+          <Property Name="Fl_Sexo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Comision" Relationship="BDPacificoModel.EmpleadoComision" FromRole="Empleado" ToRole="Comision" />
+          <NavigationProperty Name="Cargo" Relationship="BDPacificoModel.CargoEmpleado" FromRole="Empleado" ToRole="Cargo" />
+          <Property Name="Co_Cargo" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cargo">
+          <Key>
+            <PropertyRef Name="Co_Cargo" />
+          </Key>
+          <Property Name="Co_Cargo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="No_Cargo" Type="String" Nullable="false" FixedLength="false" MaxLength="50" />
+          <NavigationProperty Name="Empleado" Relationship="BDPacificoModel.CargoEmpleado" FromRole="Cargo" ToRole="Empleado" />
+        </EntityType>
+        <Association Name="CampaniaComision">
+          <End Type="BDPacificoModel.Campania" Role="Campania" Multiplicity="1" />
           <End Type="BDPacificoModel.Comision" Role="Comision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campania">
+              <PropertyRef Name="Co_Campania" />
+            </Principal>
+            <Dependent Role="Comision">
+              <PropertyRef Name="Co_Campania" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CanalVentaComision">
           <End Type="BDPacificoModel.CanalVenta" Role="CanalVenta" Multiplicity="1" />
+          <End Type="BDPacificoModel.Comision" Role="Comision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CanalVenta">
+              <PropertyRef Name="Co_CanalVenta" />
+            </Principal>
+            <Dependent Role="Comision">
+              <PropertyRef Name="Co_CanalVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EmpleadoComision">
+          <End Type="BDPacificoModel.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="BDPacificoModel.Comision" Role="Comision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Co_Empleado" />
+            </Principal>
+            <Dependent Role="Comision">
+              <PropertyRef Name="Co_Empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CargoEmpleado">
+          <End Type="BDPacificoModel.Cargo" Role="Cargo" Multiplicity="1" />
+          <End Type="BDPacificoModel.Empleado" Role="Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="Co_Cargo" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="Co_Cargo" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -419,6 +600,7 @@
         <MappingFragment StoreEntitySet="Comision">
           <ScalarProperty Name="Co_Comision" ColumnName="Co_Comision" />
           <ScalarProperty Name="No_Comision" ColumnName="No_Comision" />
+          <ScalarProperty Name="Fe_Registro" ColumnName="Fe_Registro" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -431,14 +613,37 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="ComisionCanalVenta" TypeName="BDPacificoModel.ComisionCanalVenta" StoreEntitySet="Comision">
-      <EndProperty Name="CanalVenta">
-        <ScalarProperty Name="Co_CanalVenta" ColumnName="CanalVenta_Co_CanalVenta" />
-      </EndProperty>
-      <EndProperty Name="Comision">
-        <ScalarProperty Name="Co_Comision" ColumnName="Co_Comision" />
-      </EndProperty>
-    </AssociationSetMapping>
+    <EntitySetMapping Name="Campania">
+      <EntityTypeMapping TypeName="IsTypeOf(BDPacificoModel.Campania)">
+        <MappingFragment StoreEntitySet="Campania">
+          <ScalarProperty Name="Co_Campania" ColumnName="Co_Campania" />
+          <ScalarProperty Name="No_Campania" ColumnName="No_Campania" />
+          <ScalarProperty Name="Fe_Inicio" ColumnName="Fe_Inicio" />
+          <ScalarProperty Name="Fe_Fin" ColumnName="Fe_Fin" />
+          <ScalarProperty Name="Qt_Meta" ColumnName="Qt_Meta" />
+          <ScalarProperty Name="Fl_Flag" ColumnName="Fl_Flag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empleado">
+      <EntityTypeMapping TypeName="IsTypeOf(BDPacificoModel.Empleado)">
+        <MappingFragment StoreEntitySet="Empleado">
+          <ScalarProperty Name="Co_Empleado" ColumnName="Co_Empleado" />
+          <ScalarProperty Name="No_Empleado" ColumnName="No_Empleado" />
+          <ScalarProperty Name="No_ApePaterno" ColumnName="No_ApePaterno" />
+          <ScalarProperty Name="No_ApeMaterno" ColumnName="No_ApeMaterno" />
+          <ScalarProperty Name="Fl_Sexo" ColumnName="Fl_Sexo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cargo">
+      <EntityTypeMapping TypeName="IsTypeOf(BDPacificoModel.Cargo)">
+        <MappingFragment StoreEntitySet="Cargo">
+          <ScalarProperty Name="Co_Cargo" ColumnName="Co_Cargo" />
+          <ScalarProperty Name="No_Cargo" ColumnName="No_Cargo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

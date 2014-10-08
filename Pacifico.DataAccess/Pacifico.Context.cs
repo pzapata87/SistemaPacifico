@@ -32,5 +32,8 @@ namespace Pacifico.DataAccess
         public virtual DbSet<PropuestaSolucion> PropuestaSolucion { get; set; }
         public virtual DbSet<Comision> Comision { get; set; }
         public virtual DbSet<CanalVenta> CanalVenta { get; set; }
+        public virtual DbSet<Campania> Campania { get; set; }
+        public virtual DbSet<Empleado> Empleado { get; set; }
+        public virtual DbSet<Cargo> Cargo { get; set; }
     }
 }

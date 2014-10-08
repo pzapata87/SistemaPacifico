@@ -12,17 +12,20 @@ namespace Pacifico.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class Comision
+    public partial class Campania
     {
-        public int Co_Comision { get; set; }
-        public string No_Comision { get; set; }
-        public System.DateTime Fe_Registro { get; set; }
-        public int Co_Campania { get; set; }
-        public int Co_CanalVenta { get; set; }
-        public Nullable<int> Co_Empleado { get; set; }
+        public Campania()
+        {
+            this.Comision = new HashSet<Comision>();
+        }
     
-        public virtual Campania Campania { get; set; }
-        public virtual CanalVenta CanalVenta { get; set; }
-        public virtual Empleado Empleado { get; set; }
+        public int Co_Campania { get; set; }
+        public string No_Campania { get; set; }
+        public System.DateTime Fe_Inicio { get; set; }
+        public System.DateTime Fe_Fin { get; set; }
+        public int Qt_Meta { get; set; }
+        public bool Fl_Flag { get; set; }
+    
+        public virtual ICollection<Comision> Comision { get; set; }
     }
 }

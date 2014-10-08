@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/08/2014 02:43:55
--- Generated from EDMX file: D:\Proyectos\Desarrollo - Aplicacion Academica\Desarrollo\SistemaPacifico\Pacifico.DataAccess\Pacifico.edmx
+-- Date Created: 10/08/2014 12:00:53
+-- Generated from EDMX file: D:\Proyectos\Academico - Servicio Web\SistemaPacifico\Pacifico.DataAccess\Pacifico.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -128,7 +128,10 @@ GO
 CREATE TABLE [dbo].[Comision] (
     [Co_Comision] int IDENTITY(1,1) NOT NULL,
     [No_Comision] nvarchar(50)  NOT NULL,
-    [CanalVenta_Co_CanalVenta] int  NOT NULL
+    [Fe_Registro] datetime  NOT NULL,
+    [CanalVenta_Co_CanalVenta] int  NOT NULL,
+    [Campania_Co_Campania] int  NOT NULL,
+    [Empleado_Co_Empleado] int  NULL
 );
 GO
 
@@ -137,6 +140,35 @@ CREATE TABLE [dbo].[CanalVenta] (
     [Co_CanalVenta] int IDENTITY(1,1) NOT NULL,
     [No_CanalVenta] nvarchar(50)  NOT NULL,
     [Tx_Tipo] nvarchar(50)  NOT NULL
+);
+GO
+
+-- Creating table 'Campania'
+CREATE TABLE [dbo].[Campania] (
+    [Co_Campania] int IDENTITY(1,1) NOT NULL,
+    [No_Campania] nvarchar(50)  NOT NULL,
+    [Fe_Inicio] datetime  NOT NULL,
+    [Fe_Fin] datetime  NOT NULL,
+    [Qt_Meta] int  NOT NULL,
+    [Fl_Flag] bit  NOT NULL
+);
+GO
+
+-- Creating table 'Empleado'
+CREATE TABLE [dbo].[Empleado] (
+    [Co_Empleado] int IDENTITY(1,1) NOT NULL,
+    [No_Empleado] nvarchar(50)  NOT NULL,
+    [No_ApePaterno] nvarchar(50)  NOT NULL,
+    [No_ApeMaterno] nvarchar(max)  NOT NULL,
+    [Fl_Sexo] bit  NOT NULL,
+    [Cargo_Co_Cargo] int  NOT NULL
+);
+GO
+
+-- Creating table 'Cargo'
+CREATE TABLE [dbo].[Cargo] (
+    [Co_Cargo] int IDENTITY(1,1) NOT NULL,
+    [No_Cargo] nvarchar(50)  NOT NULL
 );
 GO
 
@@ -184,6 +216,24 @@ GO
 ALTER TABLE [dbo].[CanalVenta]
 ADD CONSTRAINT [PK_CanalVenta]
     PRIMARY KEY CLUSTERED ([Co_CanalVenta] ASC);
+GO
+
+-- Creating primary key on [Co_Campania] in table 'Campania'
+ALTER TABLE [dbo].[Campania]
+ADD CONSTRAINT [PK_Campania]
+    PRIMARY KEY CLUSTERED ([Co_Campania] ASC);
+GO
+
+-- Creating primary key on [Co_Empleado] in table 'Empleado'
+ALTER TABLE [dbo].[Empleado]
+ADD CONSTRAINT [PK_Empleado]
+    PRIMARY KEY CLUSTERED ([Co_Empleado] ASC);
+GO
+
+-- Creating primary key on [Co_Cargo] in table 'Cargo'
+ALTER TABLE [dbo].[Cargo]
+ADD CONSTRAINT [PK_Cargo]
+    PRIMARY KEY CLUSTERED ([Co_Cargo] ASC);
 GO
 
 -- --------------------------------------------------
@@ -263,6 +313,51 @@ GO
 CREATE INDEX [IX_FK_ComisionCanalVenta]
 ON [dbo].[Comision]
     ([CanalVenta_Co_CanalVenta]);
+GO
+
+-- Creating foreign key on [Campania_Co_Campania] in table 'Comision'
+ALTER TABLE [dbo].[Comision]
+ADD CONSTRAINT [FK_CampaniaComision]
+    FOREIGN KEY ([Campania_Co_Campania])
+    REFERENCES [dbo].[Campania]
+        ([Co_Campania])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CampaniaComision'
+CREATE INDEX [IX_FK_CampaniaComision]
+ON [dbo].[Comision]
+    ([Campania_Co_Campania]);
+GO
+
+-- Creating foreign key on [Empleado_Co_Empleado] in table 'Comision'
+ALTER TABLE [dbo].[Comision]
+ADD CONSTRAINT [FK_EmpleadoComision]
+    FOREIGN KEY ([Empleado_Co_Empleado])
+    REFERENCES [dbo].[Empleado]
+        ([Co_Empleado])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_EmpleadoComision'
+CREATE INDEX [IX_FK_EmpleadoComision]
+ON [dbo].[Comision]
+    ([Empleado_Co_Empleado]);
+GO
+
+-- Creating foreign key on [Cargo_Co_Cargo] in table 'Empleado'
+ALTER TABLE [dbo].[Empleado]
+ADD CONSTRAINT [FK_CargoEmpleado]
+    FOREIGN KEY ([Cargo_Co_Cargo])
+    REFERENCES [dbo].[Cargo]
+        ([Co_Cargo])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CargoEmpleado'
+CREATE INDEX [IX_FK_CargoEmpleado]
+ON [dbo].[Empleado]
+    ([Cargo_Co_Cargo]);
 GO
 
 -- --------------------------------------------------

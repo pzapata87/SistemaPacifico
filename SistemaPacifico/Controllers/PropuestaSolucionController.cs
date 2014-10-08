@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Pacifico.Bussines;
 using System.Web.Mvc;
+using SistemaPacifico.Core;
 using SistemaPacifico.Models;
 using Pacifico.DataAccess;
 
@@ -67,7 +68,7 @@ namespace SistemaPacifico.Controllers
                 DNIProspecto = propuesta.Prospecto.Nu_DNI,
                 NombreProspecto = propuesta.Prospecto.No_Prospecto,
                 ApellidoProspecto = propuesta.Prospecto.Tx_ApePaterno + " " + propuesta.Prospecto.Tx_ApeMaterno,
-                FechaNacimiento = propuesta.Fe_Nacimiento.ToString("dd/MM/yyyy"),
+                FechaNacimiento = propuesta.Fe_Nacimiento.GetDate(),
                 Productos = ObtenerProductos(),
                 PlanProductos = ObtenerPlanProducto(propuesta.Co_Plan),
                 MontoAsegurado = propuesta.Ss_MontoAsegurado,

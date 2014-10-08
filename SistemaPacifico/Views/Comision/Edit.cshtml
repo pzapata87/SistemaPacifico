@@ -1,0 +1,147 @@
+﻿@model SistemaPacifico.Models.ComisionModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="container">
+    @using (Html.BeginForm("Index", "PropuestaSolucion", FormMethod.Post))
+{
+    <form class="form-actions" action="prestadoras.html">
+        <table width="100%">
+            <tr>
+                <td>&nbsp;</td>
+                <td><label>C&oacute;digo</label></td>
+                <td><label>:</label></td>
+                <td><input type="text" value="000001" disabled="disabled" class="input-mini"></td>
+                <td>&nbsp;</td>
+                <td><label>Fecha Afiliaci&oacute;n</label></td>
+                <td><label>:</label></td>
+                <td>
+                    <input type="text" name="date1" id="date1" value="04/09/2014" size="10" class="input-small" readonly >
+                    <input type="hidden" name="Fe_Registro" id="Fe_Registro" value="2014-09-04" >
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><label>Raz&oacute;n Social</label></td>
+                <td><label>:</label></td>
+                <td><input type="text" placeholder="Nombre Prestadora" class=":required :alpha" ></td>
+                <td>&nbsp;</td>
+                <td><label>RUC</label></td>
+                <td><label>:</label></td>
+                <td><input type="text" placeholder="RUC" class=":required :digits" ></td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><label>Pa&iacute;s</label></td>
+                <td><label>:</label></td>
+                <td>
+                    <select class=":required">
+                        <option>[ Seleccione ]</option>
+                        <option>Per&uacute;</option>
+                    </select>
+                </td>
+                <td>&nbsp;</td>
+                <td><label>Departamento</label></td>
+                <td><label>:</label></td>
+                <td>
+                    <select class=":required">
+                        <option>[ Seleccione ]</option>
+                        <option>Arequipa</option>
+                        <option>Cusco</option>
+                        <option>La Libertad</option>
+                        <option>Lima</option>
+                        <option>Tacna</option>
+                    </select>
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><label>Provincia</label></td>
+                <td><label>:</label></td>
+                <td>
+                    <select class=":required">
+                        <option>[ Seleccione ]</option>
+                        <option>Lima</option>
+                    </select>
+                </td>
+                <td>&nbsp;</td>
+                <td><label>Distrito</label></td>
+                <td><label>:</label></td>
+                <td>
+                    <select class=":required">
+                        <option>[ Seleccione ]</option>
+                        <option>San Borja</option>
+                        <option>San Luis</option>
+                        <option>Surco</option>
+                        <option>Miraflores</option>
+                    </select>
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><label>Domicilio Fiscal</label></td>
+                <td><label>:</label></td>
+                <td><input type="text" placeholder="Direcci&oacute;n" class=":required :alphanum" ></td>
+                <td>&nbsp;</td>
+                <td><label>Telefono</label></td>
+                <td><label>:</label></td>
+                <td><input type="text" placeholder="Telefono" class=":required :digits" ></td>      
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><label>Contacto</label></td>
+                <td><label>:</label></td>
+                <td><input type="text" placeholder="Contacto" class=":alpha" ></td>
+                <td>&nbsp;</td>
+                <td><label>Correo</label></td>
+                <td><label>:</label></td>
+                <td><input type="text" placeholder="Correo" class=":required :email" ></td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td><label>Estado</label></td>
+                <td><label>:</label></td>
+                <td>
+                    <select class=":required">
+                        <option>[ Seleccione ]</option>
+                        <option>Afiliada</option>
+                        <option>No Afiliada</option>
+                        <option>En Evaluaci&oacute;n</option>
+                    </select>
+                </td>
+                <td>&nbsp;</td>
+                <td><label>P&aacute;gina Web</label></td>
+                <td><label>:</label></td>
+                <td><input type="text" placeholder="Pagina Web" class=":required" ></td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td colspan="7" align="center">
+                    <button type="submit" class="btn">Grabar</button>
+                    <button type="reset" class="btn" onclick="javascript:window.history.back();">Cancelar</button>
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+    </form>
+</div>
