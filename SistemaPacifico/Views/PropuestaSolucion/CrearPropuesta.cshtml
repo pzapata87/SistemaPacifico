@@ -56,13 +56,13 @@
                 </td>
                 <td>
                     @Html.LabelFor(model => model.MontoPrima, htmlAttributes: new { @class = "control-label col-md-3" })
-                    @Html.TextBoxFor(model => model.MontoPrima, htmlAttributes: new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.MontoPrima, htmlAttributes: new { @class = "form-control", disabled = "true" })
                 </td>
             </tr>
             <tr>
                 <td>
                     @Html.LabelFor(model => model.MontoRetorno, htmlAttributes: new { @class = "control-label col-md-4" })
-                    @Html.TextBoxFor(model => model.MontoRetorno, htmlAttributes: new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.MontoRetorno, htmlAttributes: new { @class = "form-control", disabled = "true" })
                 </td>
                 <td>
                     <input id="btnGenerarPropuesta" type="button" value="Generar Propuesta" class="btn btn-default" disabled="disabled" />
@@ -186,17 +186,6 @@
             });
         }
 
-        function ValidarEdad()
-        {
-            //var start = $("#FechaNacimiento").val();
-            //var end = new Date();
-            //var diff = new Date(end - start);
-            //var days = diff / 1000 / 60 / 60 / 24;
-            //if (diff < 18) {
-            //    alert("Fecha de Nacimiento fuera de rango");
-            //}
-        }
-
         function obtenerPlan() {
             var codProducto = $("#CodigoProducto").val();
 
@@ -282,7 +271,6 @@
                 window.location.href = data;
             });
             request.fail(function (jqXHR, textStatus) {
-                debugger;
                 alert("Request failed: " + textStatus);
             });
         }
