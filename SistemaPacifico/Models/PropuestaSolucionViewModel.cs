@@ -12,11 +12,11 @@ namespace SistemaPacifico.Models
     {
         [Display(Name = "Número de Propuesta")]
         public int Codigo { get; set; }
-        [Display(Name = "DNI Prospecto")]
+        [Display(Name = "DNI:")]
         public string DNIProspecto { get; set; }
         [Required]
         public int CodigoProspecto { get; set; }
-        [Display(Name = "Nombre Prospecto")]
+        [Display(Name = "Nombres:")]
         public string NombreProspecto { get; set; }
         [Display(Name = "Apellidos")]
         public string ApellidoProspecto { get; set; }
