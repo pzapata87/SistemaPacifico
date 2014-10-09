@@ -62,15 +62,15 @@
                 <td>:</td>
                 <td>
                     <br />
-                    <input id="txtMinimo" maxlength="3" class="form-control" style="width: 80%" placeholder="Monto Mínimo" />
+                    <input id="txtMinimo" maxlength="4" class="form-control" style="width: 80%" placeholder="Monto Mínimo" />
                 </td>
                 <td>
                     <br />
-                    <input id="txtMaximo" maxlength="3" class="form-control" style="width: 80%" placeholder="Monto Máximo"/>
+                    <input id="txtMaximo" maxlength="4" class="form-control" style="width: 80%" placeholder="Monto Máximo"/>
                 </td>
                 <td>
                     <br />
-                    <input id="txtComision" maxlength="3" class="form-control" style="width: 80%" placeholder="Monto Comisión"/>
+                    <input id="txtComision" maxlength="3" class="form-control" style="width: 80%" placeholder="Porcentaje Comisión"/>
                 </td>
                 <td colspan="3"><button id="btnAgregar" type="button" class="btn">+</button></td>
             </tr>
@@ -85,7 +85,7 @@
             <tr>
                 <td>&nbsp;</td>
                 <td colspan="7" align="center">
-                    <button id="btnGrabar" type="button" class="btn">Grabar</button>
+                    <button id="btnGrabar" type="submit" class="btn">Grabar</button>
                     <button type="reset" class="btn" onclick=" javascript:window.history.back(); ">Cancelar</button>
                 </td>
                 <td>&nbsp;</td>
@@ -123,7 +123,7 @@
             columns: [
                 { headerText: "Monto Mínimo", rowText: "Minimo" },
                 { headerText: "Monto Máximo", rowText: "Maximo" },
-                { headerText: "Monto Comisión", rowText: "Cantidad" }
+                { headerText: "Porcentaje Comisión", rowText: "Cantidad" }
             ],
             pageSize: 100
         });
@@ -141,14 +141,15 @@
             height: 200
         });
 
-        $('#btnGrabar').click(function() {
+        $('#btnGrabar').click(function(e) {
             Grabar();
+            e.preventDefault();
         });
 
         $('#btnAgregar').click(function() {
-            var minimo = $("#txtMinimo").val();
-            var maximo = $("#txtMaximo").val();
-            var comision = $("#txtComision").val();
+            var minimo = $("#txtMinimo").val() * 1;
+            var maximo = $("#txtMaximo").val() * 1;
+            var comision = $("#txtComision").val() * 1;
 
             if (minimo != '' && maximo != '' && comision != '') {
                 if (minimo > maximo) {

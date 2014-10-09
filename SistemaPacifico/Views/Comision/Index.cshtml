@@ -9,7 +9,7 @@
     <div class="container">
         <div class="page-header">
         </div>
-        <table width="85%" class="fondo" align="center">
+        <table style="width: 85%" class="fondo" align="center">
             <tr>
                 <td>Nombre Comisión: </td>
                 <td><input id="txtNombreComision" type="text" class="form-control" name="nombreComision" /></td>
@@ -38,44 +38,56 @@
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
             </tr>
-        
-            @foreach (var item in Model)
+            @if (Model.Any())
+            {
+                foreach (var item in Model)
+                 {
+                     <tr>
+                         <td>
+                             @Html.DisplayFor(modelItem => item.CodigoComision)
+                         </td>
+                         <td>
+                             @Html.DisplayFor(modelItem => item.NombreComision)
+                         </td>
+                         <td>
+                             @Html.DisplayFor(modelItem => item.FechaRegistro)
+                         </td>
+                         <td>
+                             @Html.DisplayFor(modelItem => item.CampaniaNombre)
+                         </td>
+                         <td>
+                             @Html.DisplayFor(modelItem => item.CanalVentaNombre)
+                         </td>
+                         <td>
+                             @Html.DisplayFor(modelItem => item.CargoNombre)
+                         </td>
+                         <td>
+                             @Html.ActionLink("Ver", "VerComision", new {id = item.CodigoComision})
+                         </td>
+                         <td>
+                             @Html.ActionLink("Editar", "EditarComision", new {id = item.CodigoComision})
+                         </td>
+                     </tr>
+                 }
+            }
+            else
             {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CodigoComision)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NombreComision)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FechaRegistro)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CampaniaNombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CanalVentaNombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CargoNombre)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Ver", "VerComision", new { id = item.CodigoComision })
-                    </td>
-                    <td>
-                        @Html.ActionLink("Editar", "EditarComision", new { id = item.CodigoComision })
+                    <td colspan="8">
+                        <div id="labelError" class="alert alert-danger">
+                            No se encontraron registros en la base de datos
+                        </div>
                     </td>
                 </tr>
             }
         </table>
-        <table width="100%">
+        <table style="width: 100%">
             <tr>
                 <td>
-                    @*@using (Html.BeginForm("CrearComision", "Comision", FormMethod.Get, new {@class = "form-search"}))
-                {
-                    <button type="submit" class="btn btn-large">Nuevo</button>
-                }*@
+                    @*@using (Html.BeginForm("CrearComision", "Comision", FormMethod.Post, new {@class = "form-search"}))
+                    {
+                        <button type="submit" class="btn btn-large">Nuevo</button>
+                    }*@
                     <p>
                         @Html.ActionLink("Nuevo", "CrearComision")
                     </p>
