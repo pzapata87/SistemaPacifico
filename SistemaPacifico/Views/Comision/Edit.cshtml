@@ -157,7 +157,7 @@
                 } else {
                     $('#labelError').hide();
                     $('#lblMensaje').text('');
-                    
+
                     modeloGrilla.addItem(minimo, maximo, comision);
                     $("#txtMinimo").val('');
                     $("#txtMaximo").val('');
@@ -166,6 +166,9 @@
             } else {
                 $('#labelError').show();
                 $('#lblMensaje').text('Por favor ingrese Monto Mínimo/Monto Máximo/Monto Comisión');
+                setTimeout(function() {
+                    $("#labelError").slideUp(400);
+                }, 5000);
             }
         });
 
@@ -181,43 +184,52 @@
 
     function Grabar() {
         if ($("#frmModel").validate().form()) {
-            var comision = {};
-            comision.NombreComision = $("#NombreComision").val();
-            comision.CampaniaId = $("#CampaniaId").val();
-            comision.CanalVentaId = $("#CanalVentaId").val();
-            comision.CargoId = $("#CargoId").val();
-            comision.RequisitoListSelected = [];
-            comision.RangoList = [];
-            comision.CodigoComision = '@Model.CodigoComision';
 
-            var list = $("#RequisitoListSelected").multiselect("widget").find("input:checked");
-            for (var i = 0; i < list.length; i++) {
-                comision.RequisitoListSelected.push(list[i].value);
-            }
+            if (initialData.length == 0) {
+                $('#labelError').show();
+                $('#lblMensaje').text('Por favor ingrese Rangos de Comisión a la grilla');
+                setTimeout(function() {
+                    $("#labelError").slideUp(400);
+                }, 5000);
+            } else {
+                var comision = {};
+                comision.NombreComision = $("#NombreComision").val();
+                comision.CampaniaId = $("#CampaniaId").val();
+                comision.CanalVentaId = $("#CanalVentaId").val();
+                comision.CargoId = $("#CargoId").val();
+                comision.RequisitoListSelected = [];
+                comision.RangoList = [];
+                comision.CodigoComision = '@Model.CodigoComision';
 
-            for (i = 0; i < initialData.length; i++) {
-                comision.RangoList.push({
-                    Minimo: initialData[i].Minimo,
-                    Maximo: initialData[i].Maximo,
-                    Cantidad: initialData[i].Cantidad
+                var list = $("#RequisitoListSelected").multiselect("widget").find("input:checked");
+                for (var i = 0; i < list.length; i++) {
+                    comision.RequisitoListSelected.push(list[i].value);
+                }
+
+                for (i = 0; i < initialData.length; i++) {
+                    comision.RangoList.push({
+                        Minimo: initialData[i].Minimo,
+                        Maximo: initialData[i].Maximo,
+                        Cantidad: initialData[i].Cantidad
+                    });
+                }
+
+                var request = $.ajax({
+                    url: '@Url.Action(Model.Accion, "Comision")',
+                    data: JSON.stringify(comision),
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    type: 'post'
+                });
+
+                request.done(function(data) {
+                    //$("#labelSuccess").show();
+                    window.location.href = data;
+                });
+                request.fail(function(jqXHR, textStatus) {
+                    alert("Request failed: " + textStatus);
                 });
             }
-
-            var request = $.ajax({
-                url: '@Url.Action(Model.Accion, "Comision")',
-                data: JSON.stringify(comision),
-                contentType: 'application/json',
-                dataType: 'json',
-                type: 'post'
-            });
-
-            request.done(function(data) {
-                //$("#labelSuccess").show();
-                window.location.href = data;
-            });
-            request.fail(function(jqXHR, textStatus) {
-                alert("Request failed: " + textStatus);
-            });
         }
     }
 </script>

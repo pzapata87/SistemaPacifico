@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Pacifico.Bussines;
@@ -73,6 +74,7 @@ namespace SistemaPacifico.Controllers
             var model = new ComisionModel();
             DatosIniciales(model);
             model.Accion = "CrearComision";
+            model.RangoList = new List<RangoModel>();
 
             model.CargoList.Insert(0, new Comun{Nombre = "[SELECCIONAR]", Valor = string.Empty});
             model.CampaniaList.Insert(0, new Comun { Nombre = "[SELECCIONAR]", Valor = string.Empty });
