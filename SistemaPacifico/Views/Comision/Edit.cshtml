@@ -184,6 +184,17 @@
 
     function Grabar() {
         if ($("#frmModel").validate().form()) {
+            
+            var list = $("#RequisitoListSelected").multiselect("widget").find("input:checked");
+
+            if (list.length == 0) {
+                $('#labelError').show();
+                $('#lblMensaje').text('Por seleccione al menos un Requisito');
+                setTimeout(function () {
+                    $("#labelError").slideUp(400);
+                }, 5000);
+                return false;
+            }
 
             if (initialData.length == 0) {
                 $('#labelError').show();
@@ -191,45 +202,45 @@
                 setTimeout(function() {
                     $("#labelError").slideUp(400);
                 }, 5000);
-            } else {
-                var comision = {};
-                comision.NombreComision = $("#NombreComision").val();
-                comision.CampaniaId = $("#CampaniaId").val();
-                comision.CanalVentaId = $("#CanalVentaId").val();
-                comision.CargoId = $("#CargoId").val();
-                comision.RequisitoListSelected = [];
-                comision.RangoList = [];
-                comision.CodigoComision = '@Model.CodigoComision';
+                return false;
+            }
+            
+            var comision = {};
+            comision.NombreComision = $("#NombreComision").val();
+            comision.CampaniaId = $("#CampaniaId").val();
+            comision.CanalVentaId = $("#CanalVentaId").val();
+            comision.CargoId = $("#CargoId").val();
+            comision.RequisitoListSelected = [];
+            comision.RangoList = [];
+            comision.CodigoComision = '@Model.CodigoComision';
+            
+            for (var i = 0; i < list.length; i++) {
+                comision.RequisitoListSelected.push(list[i].value);
+            }
 
-                var list = $("#RequisitoListSelected").multiselect("widget").find("input:checked");
-                for (var i = 0; i < list.length; i++) {
-                    comision.RequisitoListSelected.push(list[i].value);
-                }
-
-                for (i = 0; i < initialData.length; i++) {
-                    comision.RangoList.push({
-                        Minimo: initialData[i].Minimo,
-                        Maximo: initialData[i].Maximo,
-                        Cantidad: initialData[i].Cantidad
-                    });
-                }
-
-                var request = $.ajax({
-                    url: '@Url.Action(Model.Accion, "Comision")',
-                    data: JSON.stringify(comision),
-                    contentType: 'application/json',
-                    dataType: 'json',
-                    type: 'post'
-                });
-
-                request.done(function(data) {
-                    //$("#labelSuccess").show();
-                    window.location.href = data;
-                });
-                request.fail(function(jqXHR, textStatus) {
-                    alert("Request failed: " + textStatus);
+            for (i = 0; i < initialData.length; i++) {
+                comision.RangoList.push({
+                    Minimo: initialData[i].Minimo,
+                    Maximo: initialData[i].Maximo,
+                    Cantidad: initialData[i].Cantidad
                 });
             }
+
+            var request = $.ajax({
+                url: '@Url.Action(Model.Accion, "Comision")',
+                data: JSON.stringify(comision),
+                contentType: 'application/json',
+                dataType: 'json',
+                type: 'post'
+            });
+
+            request.done(function(data) {
+                //$("#labelSuccess").show();
+                window.location.href = data;
+            });
+            request.fail(function(jqXHR, textStatus) {
+                alert("Request failed: " + textStatus);
+            });
         }
     }
 </script>
