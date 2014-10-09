@@ -4,80 +4,84 @@
     ViewBag.Title = "Listar";
 }
 
-<div class="container">
-    <div class="page-header">
-    </div>
-    <table width="100%">
-        <tr>
-            <td align="right">
-                <form class="form-search">
-                    <input type="text" class="input-large search-query" placeholder="Codigo, Nombre">
-                    <button type="submit" class="btn">Buscar</button>
-                </form>
-            </td>
-        </tr>
-    </table>
-    <table class="table table-striped">
-        <tr>
-            <th>Código Comisión</th>
-            <th>Nombre Comisión</th>
-            <th>Fecha Registro</th>
-            <th>Campaña</th>
-            <th>Canal Venta</th>
-            <th>Cargo Comisionista</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-        </tr>
+@using (Html.BeginForm("Index", "Comision", FormMethod.Post))
+{
+    <div class="container">
+        <div class="page-header">
+        </div>
+        <table width="85%" class="fondo" align="center">
+            <tr>
+                <td>Nombre Comisión: </td>
+                <td><input id="txtNombreComision" type="text" class="form-control" name="nombreComision" /></td>
+                <td></td>
+                <td>Canal Venta: </td>
+                <td><input id="txtCanalVenta" type="text" class="form-control" name="canalVenta"/></td>
+            </tr>
+            <tr>
+                <td>Campaña: </td>
+                <td><input id="txtCampania" type="text" class="form-control" name="campania"/></td>
+                <td colspan="2"></td>
+                <td align="right"><button type="submit" class="btn btn-primary">Buscar</button></td>
+            </tr>
+            <tr>
+                <td>  </td>
+            </tr>
+        </table>
+        <table class="table table-striped">
+            <tr>
+                <th>Código Comisión</th>
+                <th>Nombre Comisión</th>
+                <th>Fecha Registro</th>
+                <th>Campaña</th>
+                <th>Canal Venta</th>
+                <th>Cargo Comisionista</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+            </tr>
         
-        @foreach (var item in Model)
-        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CodigoComision)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreComision)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaRegistro)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CampaniaNombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CanalVentaNombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CargoNombre)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Ver", "VerComision", new { id = item.CodigoComision })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "EditarComision", new { id = item.CodigoComision })
+                    </td>
+                </tr>
+            }
+        </table>
+        <table width="100%">
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CodigoComision)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NombreComision)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FechaRegistro)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CampaniaNombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CanalVentaNombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CargoNombre)
-                </td>
-                <td><a href="#" title="Ver"><i class="icon-edit"></i></a></td>
-                <td><a href="#" title="Editar" target="_blank"><i class="icon-file"></i></a></td>
-            </tr>
-        }
-    </table>
-    <table width="100%">
-        <tr>
-            <td>
-                @using (Html.BeginForm("CrearComision", "Comision", FormMethod.Get, new {@class = "form-search"}))
+                    @*@using (Html.BeginForm("CrearComision", "Comision", FormMethod.Get, new {@class = "form-search"}))
                 {
                     <button type="submit" class="btn btn-large">Nuevo</button>
-                }
-            </td>
-            <td align="center"><p>P&aacute;g. 1/5, de 40 registros encontrados.</p></td>
-            <td>
-                <div class="pagination pagination-right">
-                    <ul>
-                        <li class="disabled"><a href="#">Prev</a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">Next</a></li>
-                    </ul>
-                </div>
-            </td>
-        </tr>
-    </table>
-</div>
+                }*@
+                    <p>
+                        @Html.ActionLink("Nuevo", "CrearComision")
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </div>
+}
 

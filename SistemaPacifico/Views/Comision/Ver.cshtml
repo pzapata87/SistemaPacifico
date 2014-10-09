@@ -1,0 +1,118 @@
+﻿@model SistemaPacifico.Models.ComisionModel
+
+@{
+    ViewBag.Title = "Ver";
+}
+
+<div class="container">
+    <div class="page-header">
+    </div>
+    @Html.AntiForgeryToken()
+    <table width="100%">
+        <tr>
+            <td>&nbsp;</td>
+            <td>Nombre Comisión</td>
+            <td>:</td>
+            <td>
+                @Html.TextBoxFor(model => model.NombreComision, new {@maxlength = 50, @class = "form-control"}) 
+            </td>
+            <td>&nbsp;</td>
+            <td>Canal Venta</td>
+            <td>:</td>
+            <td>
+                @Html.TextBoxFor(model => model.CanalVentaNombre, new {@maxlength = 50, @class = "form-control"})
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>Campaña</td>
+            <td>:</td>
+            <td>
+                @Html.TextBoxFor(model => model.CampaniaNombre, new {@maxlength = 50, @class = "form-control"})
+            </td>
+            <td>&nbsp;</td>
+            <td>Cargo Comisionista</td>
+            <td>:</td>
+            <td>
+                @Html.TextBoxFor(model => model.CargoNombre, new {@maxlength = 50, @class = "form-control"})
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>Requisitos</td>
+            <td>:</td>
+            <td colspan="6">
+                @Html.ListBox("ddlRequisito", new SelectList(Model.RequisitoList, "Valor", "Nombre"), new {@class = "btn btn-default", @style = "width: 200px"})
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td style="vertical-align: top">Rangos de Comisión</td>
+            <td>:</td>
+            <td colspan="3">
+                <br />
+                <div data-bind='simpleGrid: gridViewModel'> </div>
+            </td>
+            <td colspan="3"></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td colspan="7" align="right">
+                <button type="reset" class="btn" onclick=" javascript:window.history.back(); ">Atrás</button>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+</div>
+
+<script type="text/javascript">
+    var initialData = [];
+
+    var PagedGridModel = function (items) {
+        this.items = ko.observableArray(items);
+
+        this.addItem = function (montoMinimo, montoMaximo, montoComision) {
+            this.items.push({ Minimo: montoMinimo, Maximo: montoMaximo, Cantidad: montoComision });
+        };
+
+        this.clearData = function () {
+            this.items.removeAll();
+        };
+
+        this.sortByName = function () {
+            this.items.sort(function (a, b) {
+                return a.name < b.name ? -1 : 1;
+            });
+        };
+
+        this.jumpToFirstPage = function () {
+            this.gridViewModel.currentPageIndex(0);
+        };
+
+        this.gridViewModel = new ko.simpleGrid.viewModel({
+            data: this.items,
+            columns: [
+                { headerText: "Monto Mínimo", rowText: "Minimo" },
+                { headerText: "Monto Máximo", rowText: "Maximo" },
+                { headerText: "Monto Comisión", rowText: "Cantidad" }
+            ],
+            pageSize: 100
+        });
+    };
+
+    var modeloGrilla = new PagedGridModel(initialData);
+    ko.applyBindings(modeloGrilla);
+
+    $(document).ready(function () {
+        CargarDatosGrilla();
+    });
+    
+    function CargarDatosGrilla() {
+        var seleccionados = JSON.parse('@Html.Raw(Json.Encode(@Model.RangoList))');
+        $.each(seleccionados, function (index, item) {
+            modeloGrilla.addItem(item.Minimo, item.Maximo, item.Cantidad);
+        });
+    }
+</script>
