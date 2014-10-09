@@ -25,13 +25,17 @@ namespace Pacifico.Bussines
         public IList<PropuestaSolucion> ListarPropuestaSolucion(
             int? numero, string fechaRegistro, string dni, string nombre)
         {
+            
             var query = _db.PropuestaSolucion.AsQueryable();
 
             if (numero.HasValue)
                 query = query.Where(x => x.Co_PropuestaSolucion == numero.Value);
 
             if (!string.IsNullOrWhiteSpace(fechaRegistro))
-                query = query.Where(x => x.Fe_Creacion.ToShortDateString().Contains(fechaRegistro));
+            {
+                DateTime fec = Convert.ToDateTime(fechaRegistro);
+                query = query.Where(x => x.Fe_Creacion == fec);
+            }
 
             if (!string.IsNullOrWhiteSpace(dni))
                 query = query.Where(x => x.Prospecto.Nu_DNI == dni);
