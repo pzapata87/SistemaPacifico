@@ -17,7 +17,7 @@ namespace Pacifico.DataAccess
         public Comision()
         {
             this.Rango = new HashSet<Rango>();
-            this.Requisito = new HashSet<Requisito>();
+            this.ComisionRequisito = new HashSet<ComisionRequisito>();
         }
     
         public int Co_Comision { get; set; }
@@ -31,6 +31,6 @@ namespace Pacifico.DataAccess
         public virtual CanalVenta CanalVenta { get; set; }
         public virtual Cargo Cargo { get; set; }
         public virtual ICollection<Rango> Rango { get; set; }
-        public virtual ICollection<Requisito> Requisito { get; set; }
+        public virtual ICollection<ComisionRequisito> ComisionRequisito { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/08/2014 18:48:46
+-- Date Created: 10/08/2014 19:23:14
 -- Generated from EDMX file: D:\Proyectos\Academico - Servicio Web\SistemaPacifico\Pacifico.DataAccess\Pacifico.edmx
 -- --------------------------------------------------
 
@@ -41,11 +41,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ComisionRango]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Rango] DROP CONSTRAINT [FK_ComisionRango];
 GO
-IF OBJECT_ID(N'[dbo].[FK_RequisitoComision_Requisito]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[RequisitoComision] DROP CONSTRAINT [FK_RequisitoComision_Requisito];
+IF OBJECT_ID(N'[dbo].[FK_ComisionComisionRequisito]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ComisionRequisito] DROP CONSTRAINT [FK_ComisionComisionRequisito];
 GO
-IF OBJECT_ID(N'[dbo].[FK_RequisitoComision_Comision]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[RequisitoComision] DROP CONSTRAINT [FK_RequisitoComision_Comision];
+IF OBJECT_ID(N'[dbo].[FK_RequisitoComisionRequisito]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ComisionRequisito] DROP CONSTRAINT [FK_RequisitoComisionRequisito];
 GO
 
 -- --------------------------------------------------
@@ -88,8 +88,8 @@ GO
 IF OBJECT_ID(N'[dbo].[Rango]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Rango];
 GO
-IF OBJECT_ID(N'[dbo].[RequisitoComision]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[RequisitoComision];
+IF OBJECT_ID(N'[dbo].[ComisionRequisito]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ComisionRequisito];
 GO
 
 -- --------------------------------------------------
@@ -221,10 +221,10 @@ CREATE TABLE [dbo].[Rango] (
 );
 GO
 
--- Creating table 'RequisitoComision'
-CREATE TABLE [dbo].[RequisitoComision] (
-    [Requisito_Co_Requisito] int  NOT NULL,
-    [Comision_Co_Comision] int  NOT NULL
+-- Creating table 'ComisionRequisito'
+CREATE TABLE [dbo].[ComisionRequisito] (
+    [Co_Comision] int  NOT NULL,
+    [Co_Requisito] int  NOT NULL
 );
 GO
 
@@ -304,10 +304,10 @@ ADD CONSTRAINT [PK_Rango]
     PRIMARY KEY CLUSTERED ([Co_Rango] ASC);
 GO
 
--- Creating primary key on [Requisito_Co_Requisito], [Comision_Co_Comision] in table 'RequisitoComision'
-ALTER TABLE [dbo].[RequisitoComision]
-ADD CONSTRAINT [PK_RequisitoComision]
-    PRIMARY KEY CLUSTERED ([Requisito_Co_Requisito], [Comision_Co_Comision] ASC);
+-- Creating primary key on [Co_Requisito], [Co_Comision] in table 'ComisionRequisito'
+ALTER TABLE [dbo].[ComisionRequisito]
+ADD CONSTRAINT [PK_ComisionRequisito]
+    PRIMARY KEY CLUSTERED ([Co_Requisito], [Co_Comision] ASC);
 GO
 
 -- --------------------------------------------------
@@ -434,28 +434,28 @@ ON [dbo].[Rango]
     ([Co_Comision]);
 GO
 
--- Creating foreign key on [Requisito_Co_Requisito] in table 'RequisitoComision'
-ALTER TABLE [dbo].[RequisitoComision]
-ADD CONSTRAINT [FK_RequisitoComision_Requisito]
-    FOREIGN KEY ([Requisito_Co_Requisito])
-    REFERENCES [dbo].[Requisito]
-        ([Co_Requisito])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [Comision_Co_Comision] in table 'RequisitoComision'
-ALTER TABLE [dbo].[RequisitoComision]
-ADD CONSTRAINT [FK_RequisitoComision_Comision]
-    FOREIGN KEY ([Comision_Co_Comision])
+-- Creating foreign key on [Co_Comision] in table 'ComisionRequisito'
+ALTER TABLE [dbo].[ComisionRequisito]
+ADD CONSTRAINT [FK_ComisionComisionRequisito]
+    FOREIGN KEY ([Co_Comision])
     REFERENCES [dbo].[Comision]
         ([Co_Comision])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_RequisitoComision_Comision'
-CREATE INDEX [IX_FK_RequisitoComision_Comision]
-ON [dbo].[RequisitoComision]
-    ([Comision_Co_Comision]);
+-- Creating non-clustered index for FOREIGN KEY 'FK_ComisionComisionRequisito'
+CREATE INDEX [IX_FK_ComisionComisionRequisito]
+ON [dbo].[ComisionRequisito]
+    ([Co_Comision]);
+GO
+
+-- Creating foreign key on [Co_Requisito] in table 'ComisionRequisito'
+ALTER TABLE [dbo].[ComisionRequisito]
+ADD CONSTRAINT [FK_RequisitoComisionRequisito]
+    FOREIGN KEY ([Co_Requisito])
+    REFERENCES [dbo].[Requisito]
+        ([Co_Requisito])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- --------------------------------------------------

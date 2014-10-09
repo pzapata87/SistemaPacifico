@@ -37,5 +37,6 @@ namespace Pacifico.DataAccess
         public virtual DbSet<Cargo> Cargo { get; set; }
         public virtual DbSet<Requisito> Requisito { get; set; }
         public virtual DbSet<Rango> Rango { get; set; }
+        public virtual DbSet<ComisionRequisito> ComisionRequisito { get; set; }
     }
 }

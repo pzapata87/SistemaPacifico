@@ -60,6 +60,9 @@
     <Compile Include="Comision.cs">
       <DependentUpon>Pacifico.tt</DependentUpon>
     </Compile>
+    <Compile Include="ComisionRequisito.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
     <Compile Include="DetallePropuestaSolucion.cs">
       <DependentUpon>Pacifico.tt</DependentUpon>
     </Compile>

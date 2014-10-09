@@ -101,7 +101,7 @@ namespace SistemaPacifico.Controllers
                 {
                     foreach (var item in model.RequisitoListSelected)
                     {
-                        comision.Requisito.Add(new Requisito
+                        comision.ComisionRequisito.Add(new ComisionRequisito
                         {
                             Co_Requisito = item
                         });

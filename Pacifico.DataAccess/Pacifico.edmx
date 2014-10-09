@@ -18,7 +18,7 @@
     <EntitySet Name="Cargo" EntityType="BDPacificoModel.Store.Cargo" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Requisito" EntityType="BDPacificoModel.Store.Requisito" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Rango" EntityType="BDPacificoModel.Store.Rango" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="RequisitoComision" EntityType="BDPacificoModel.Store.RequisitoComision" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ComisionRequisito" EntityType="BDPacificoModel.Store.ComisionRequisito" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_PlanProducto_Producto" Association="BDPacificoModel.Store.FK_PlanProducto_Producto">
       <End Role="Producto" EntitySet="Producto" />
       <End Role="PlanProducto" EntitySet="PlanProducto" />
@@ -51,13 +51,13 @@
       <End Role="Comision" EntitySet="Comision" />
       <End Role="Rango" EntitySet="Rango" />
     </AssociationSet>
-    <AssociationSet Name="FK_RequisitoComision_Requisito" Association="BDPacificoModel.Store.FK_RequisitoComision_Requisito">
-      <End Role="Requisito" EntitySet="Requisito" />
-      <End Role="RequisitoComision" EntitySet="RequisitoComision" />
-    </AssociationSet>
-    <AssociationSet Name="FK_RequisitoComision_Comision" Association="BDPacificoModel.Store.FK_RequisitoComision_Comision">
+    <AssociationSet Name="ComisionComisionRequisito" Association="BDPacificoModel.Store.ComisionComisionRequisito">
       <End Role="Comision" EntitySet="Comision" />
-      <End Role="RequisitoComision" EntitySet="RequisitoComision" />
+      <End Role="ComisionRequisito" EntitySet="ComisionRequisito" />
+    </AssociationSet>
+    <AssociationSet Name="RequisitoComisionRequisito" Association="BDPacificoModel.Store.RequisitoComisionRequisito">
+      <End Role="Requisito" EntitySet="Requisito" />
+      <End Role="ComisionRequisito" EntitySet="ComisionRequisito" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="PlanProducto">
@@ -185,13 +185,13 @@
     <Property Name="Qt_Cantidad" Type="int" Nullable="false" />
     <Property Name="Co_Comision" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="RequisitoComision">
+  <EntityType Name="ComisionRequisito">
     <Key>
-      <PropertyRef Name="Requisito_Co_Requisito" />
-      <PropertyRef Name="Comision_Co_Comision" />
+      <PropertyRef Name="Co_Requisito" />
+      <PropertyRef Name="Co_Comision" />
     </Key>
-    <Property Name="Requisito_Co_Requisito" Type="int" Nullable="false" />
-    <Property Name="Comision_Co_Comision" Type="int" Nullable="false" />
+    <Property Name="Co_Comision" Type="int" Nullable="false" />
+    <Property Name="Co_Requisito" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_PlanProducto_Producto">
     <End Role="Producto" Type="BDPacificoModel.Store.Producto" Multiplicity="1" />
@@ -289,27 +289,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_RequisitoComision_Requisito">
-    <End Role="Requisito" Type="BDPacificoModel.Store.Requisito" Multiplicity="1" />
-    <End Role="RequisitoComision" Type="BDPacificoModel.Store.RequisitoComision" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Requisito">
-        <PropertyRef Name="Co_Requisito" />
-      </Principal>
-      <Dependent Role="RequisitoComision">
-        <PropertyRef Name="Requisito_Co_Requisito" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_RequisitoComision_Comision">
-    <End Role="RequisitoComision" Type="BDPacificoModel.Store.RequisitoComision" Multiplicity="*" />
+  <Association Name="ComisionComisionRequisito">
     <End Role="Comision" Type="BDPacificoModel.Store.Comision" Multiplicity="1" />
+    <End Role="ComisionRequisito" Type="BDPacificoModel.Store.ComisionRequisito" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Comision">
         <PropertyRef Name="Co_Comision" />
       </Principal>
-      <Dependent Role="RequisitoComision">
-        <PropertyRef Name="Comision_Co_Comision" />
+      <Dependent Role="ComisionRequisito">
+        <PropertyRef Name="Co_Comision" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RequisitoComisionRequisito">
+    <End Role="Requisito" Type="BDPacificoModel.Store.Requisito" Multiplicity="1" />
+    <End Role="ComisionRequisito" Type="BDPacificoModel.Store.ComisionRequisito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Requisito">
+        <PropertyRef Name="Co_Requisito" />
+      </Principal>
+      <Dependent Role="ComisionRequisito">
+        <PropertyRef Name="Co_Requisito" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -389,9 +389,14 @@
             <End Role="Comision" EntitySet="Comision" />
             <End Role="Rango" EntitySet="Rango" />
           </AssociationSet>
-          <AssociationSet Name="RequisitoComision" Association="BDPacificoModel.RequisitoComision">
-            <End Role="Requisito" EntitySet="Requisito" />
+          <EntitySet Name="ComisionRequisito" EntityType="BDPacificoModel.ComisionRequisito" />
+          <AssociationSet Name="ComisionComisionRequisito" Association="BDPacificoModel.ComisionComisionRequisito">
             <End Role="Comision" EntitySet="Comision" />
+            <End Role="ComisionRequisito" EntitySet="ComisionRequisito" />
+          </AssociationSet>
+          <AssociationSet Name="RequisitoComisionRequisito" Association="BDPacificoModel.RequisitoComisionRequisito">
+            <End Role="Requisito" EntitySet="Requisito" />
+            <End Role="ComisionRequisito" EntitySet="ComisionRequisito" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Producto">
@@ -498,7 +503,7 @@
           <NavigationProperty Name="Cargo" Relationship="BDPacificoModel.CargoComision" FromRole="Comision" ToRole="Cargo" />
           <Property Name="Co_Cargo" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Rango" Relationship="BDPacificoModel.ComisionRango" FromRole="Comision" ToRole="Rango" />
-          <NavigationProperty Name="Requisito" Relationship="BDPacificoModel.RequisitoComision" FromRole="Comision" ToRole="Requisito" />
+          <NavigationProperty Name="ComisionRequisito" Relationship="BDPacificoModel.ComisionComisionRequisito" FromRole="Comision" ToRole="ComisionRequisito" />
         </EntityType>
         <EntityType Name="CanalVenta">
           <Key>
@@ -581,7 +586,7 @@
           </Key>
           <Property Name="Co_Requisito" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="No_Requisito" Type="String" Nullable="false" FixedLength="false" MaxLength="50" />
-          <NavigationProperty Name="Comision" Relationship="BDPacificoModel.RequisitoComision" FromRole="Requisito" ToRole="Comision" />
+          <NavigationProperty Name="ComisionRequisito" Relationship="BDPacificoModel.RequisitoComisionRequisito" FromRole="Requisito" ToRole="ComisionRequisito" />
         </EntityType>
         <EntityType Name="Rango">
           <Key>
@@ -606,9 +611,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="RequisitoComision">
-          <End Type="BDPacificoModel.Requisito" Role="Requisito" Multiplicity="*" />
-          <End Type="BDPacificoModel.Comision" Role="Comision" Multiplicity="*" />
+        <EntityType Name="ComisionRequisito" >
+          <Key>
+            <PropertyRef Name="Co_Requisito" />
+            <PropertyRef Name="Co_Comision" />
+          </Key>
+          <NavigationProperty Name="Comision" Relationship="BDPacificoModel.ComisionComisionRequisito" FromRole="ComisionRequisito" ToRole="Comision" />
+          <Property Name="Co_Comision" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Requisito" Relationship="BDPacificoModel.RequisitoComisionRequisito" FromRole="ComisionRequisito" ToRole="Requisito" />
+          <Property Name="Co_Requisito" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="ComisionComisionRequisito">
+          <End Type="BDPacificoModel.Comision" Role="Comision" Multiplicity="1" />
+          <End Type="BDPacificoModel.ComisionRequisito" Role="ComisionRequisito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comision">
+              <PropertyRef Name="Co_Comision" />
+            </Principal>
+            <Dependent Role="ComisionRequisito">
+              <PropertyRef Name="Co_Comision" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RequisitoComisionRequisito">
+          <End Type="BDPacificoModel.Requisito" Role="Requisito" Multiplicity="1" />
+          <End Type="BDPacificoModel.ComisionRequisito" Role="ComisionRequisito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Requisito">
+              <PropertyRef Name="Co_Requisito" />
+            </Principal>
+            <Dependent Role="ComisionRequisito">
+              <PropertyRef Name="Co_Requisito" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -753,14 +788,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="RequisitoComision" TypeName="BDPacificoModel.RequisitoComision" StoreEntitySet="RequisitoComision">
-      <EndProperty Name="Requisito">
-        <ScalarProperty Name="Co_Requisito" ColumnName="Requisito_Co_Requisito" />
-      </EndProperty>
-      <EndProperty Name="Comision">
-        <ScalarProperty Name="Co_Comision" ColumnName="Comision_Co_Comision" />
-      </EndProperty>
-    </AssociationSetMapping>
+    <EntitySetMapping Name="ComisionRequisito">
+      <EntityTypeMapping TypeName="IsTypeOf(BDPacificoModel.ComisionRequisito)">
+        <MappingFragment StoreEntitySet="ComisionRequisito">
+          <ScalarProperty Name="Co_Requisito" ColumnName="Co_Requisito" />
+          <ScalarProperty Name="Co_Comision" ColumnName="Co_Comision" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

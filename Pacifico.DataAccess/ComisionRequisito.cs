@@ -12,16 +12,12 @@ namespace Pacifico.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class Requisito
+    public partial class ComisionRequisito
     {
-        public Requisito()
-        {
-            this.ComisionRequisito = new HashSet<ComisionRequisito>();
-        }
-    
+        public int Co_Comision { get; set; }
         public int Co_Requisito { get; set; }
-        public string No_Requisito { get; set; }
     
-        public virtual ICollection<ComisionRequisito> ComisionRequisito { get; set; }
+        public virtual Comision Comision { get; set; }
+        public virtual Requisito Requisito { get; set; }
     }
 }
