@@ -4,11 +4,12 @@
     ViewBag.Title = "CrearPropuesta";
 }
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm(new { id = "frmModel" })) 
 {
     @Html.AntiForgeryToken()
-   
-    <div id="labelError" class="alert alert-danger">
+    @Html.ValidationSummary(true)
+
+    <div id="labelError" class="alert alert-danger" style="display:none">
         <button type="button" class="close" data-dismiss="alert">×</button>
         <strong>Error:</strong> Por favor valide los datos ingresados
     </div>
@@ -47,11 +48,11 @@
             <tr>
                 <td>
                     @Html.LabelFor(model => model.CodigoProducto, htmlAttributes: new { @class = "control-label col-md-4" })
-                    @Html.DropDownListFor(model => model.CodigoProducto, Model.Productos, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.CodigoProducto, Model.Productos, htmlAttributes: new { @class = "form-control :required" })
                 </td>
                 <td>
                     @Html.LabelFor(model => model.CodigoPlan, htmlAttributes: new { @class = "control-label col-md-3" })
-                    @Html.DropDownListFor(model => model.CodigoPlan, Model.PlanProductos, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.CodigoPlan, Model.PlanProductos, htmlAttributes: new { @class = "form-control :required" })
                 </td>
             </tr>
             <tr>
@@ -146,29 +147,39 @@
 
         $('#btnGrabar').click(function() {
             Grabar();
+            e.preventDefault();
         });
 
-        $('#FechaNacimiento').datepicker();
+        $('#FechaNacimiento').datepicker({
+            changeMonth: true,
+            changeYear: true
+        });;
         $("#CodigoPlan").prop("disabled", true);
-        $('#labelError').hide();
     });
 
-    function _calculateAge(birthday) { // birthday is a date
+    function _calculateAge(birthday) { 
         var ageDifMs = Date.now() - birthday.getTime();
-        var ageDate = new Date(ageDifMs); // miliseconds from epoch
+        var ageDate = new Date(ageDifMs); 
         return Math.abs(ageDate.getUTCFullYear() - 1970);
     }
 
     function ValidarEdad() {
-        var edad = _calculateAge(new Date(fechaNac));
-        if (edad < 18 || edad > 65) {
+        var fechaNac = $('#FechaNacimiento').val();
+        if (fechaNac != "") {
+            var edad = _calculateAge(new Date(fechaNac));
+            if (edad < 18 || edad > 65) {
+                $('#labelError').show();
+                return false;
+            }
+        }
+        else
+        {
             $('#labelError').show();
+            return false;
         }
     }
 
     $("#CodigoProducto").change(function() { obtenerPlan(); });
-    $("#FechaNacimiento").change(function() { ValidarEdad(); });
-
     $("#btnBuscar").click(function() { obtenerProspecto(); });
 
     function obtenerProspecto() {
@@ -223,16 +234,17 @@
                 $("#CodigoPlan").prop("disabled", false);
         });
         request.fail(function(jqXHR, textStatus) {
-            debugger;
             alert("Request failed: " + textStatus);
         });
     }
 
     function GenerarPropuesta() {
+        ValidarEdad();
+        ValidarMontoAsegurado();
         var fechaNac = $("#FechaNacimiento").val();
         var montoAsegurado = $("#MontoAsegurado").val();
 
-        $("#MontoPrima").val(Math.round((montoAsegurado * 0.009) / 12), 2);
+        $("#MontoPrima").val(Math.round(((montoAsegurado * 0.009) / 12), 2));
         var edad = _calculateAge(new Date(fechaNac));
 
         var request = $.ajax({
@@ -242,7 +254,7 @@
             dataType: "json",
             contentType: "text/plain"
         });
-        request.done(function(data) {
+        request.done(function (data) {
             modeloGrilla.clearData();
             for (var i in data) {
                 var detalle = data[i];
@@ -253,13 +265,22 @@
                 }
             }
         });
-        request.fail(function(jqXHR, textStatus) {
+        request.fail(function (jqXHR, textStatus) {
             alert("Request failed: " + textStatus);
         });
     }
 
+    function ValidarMontoAsegurado() {
+        var montoAsegurado = $("MontoAsegurado").val();
+        if(montoAsegurado = 0 || montoAsegurado == "")
+        {
+            $("labelError").show();
+            return false;
+        }
+    }
+
     function Grabar() {
-        if ($("form").validate().form()) {
+        if ($("frmModel").validate().form()) {
             var codigoProspecto = $("#CodigoProspecto").val();
             var fechaNacimiento = $("#FechaNacimiento").val();
             var codigoProducto = $("#CodigoProducto").val();
@@ -286,7 +307,6 @@
                 type: 'post'
             });
             request.done(function(data) {
-                $("#labelSuccess").show();
                 window.location.href = data;
             });
             request.fail(function(jqXHR, textStatus) {

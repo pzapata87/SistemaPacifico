@@ -93,13 +93,12 @@ namespace Pacifico.Bussines
 
         public List<DetallePropuestaSolucion> GenerarDetallePropuesta(double montoAsegurado, int edad)
         {
-            var primaAnual = Convert.ToDouble(montoAsegurado) * 0.009;
-            var primaMensual = primaAnual / 12;
-            var montoAhorro = Convert.ToDouble(primaAnual) * 0.05;
+            var primaAnual = montoAsegurado * 0.009;
+            var montoAhorro = primaAnual * 0.05;
             var valorRescate = montoAhorro;
-            var montoCalcAsegurado =  Convert.ToDouble(montoAsegurado + (montoAsegurado * 0.0005));
+            var montoCalcAsegurado = montoAsegurado + (montoAsegurado * 0.0005);
 
-            
+
             List<DetallePropuestaSolucion> lst = new List<DetallePropuestaSolucion>();
             lst.Add(new DetallePropuestaSolucion
             {
@@ -107,35 +106,22 @@ namespace Pacifico.Bussines
                 Nu_Edad = edad,
                 Ss_MontoPrima = Convert.ToDecimal(primaAnual),
                 Ss_MontoAhorro = Convert.ToDecimal(montoAhorro),
-                Ss_ValorRescate = Convert.ToDecimal(montoAhorro),
+                Ss_ValorRescate = Convert.ToDecimal(valorRescate),
                 Ss_MontoAsegurado = Convert.ToDecimal(montoCalcAsegurado)
             });
 
             for (int i = 0; i < edad; i++)
             {
-                var edadCalc = lst[i].Nu_Edad + 1;
-                var anio = lst[i].Nu_Anio + 1;
-                var montoPrima = Convert.ToDecimal(Math.Round(lst[i].Ss_MontoPrima,2) + Convert.ToDecimal(Math.Round(primaAnual,2)) + 1);
-                var montoAhorroDet = Convert.ToDouble(Math.Round(montoPrima,2)) * 0.05;
-                decimal valorRescateDet = 0;
-                if (i == 1)
-                {
-                    valorRescateDet = Convert.ToDecimal(Convert.ToDouble(Math.Round(lst[i].Ss_ValorRescate, 2)) + Convert.ToDouble(Math.Round(montoAhorroDet, 2)) * 4);
-                }
-                else
-                {
-                    valorRescateDet = Convert.ToDecimal(Convert.ToDouble(Math.Round(lst[i].Ss_ValorRescate, 2)) + Convert.ToDouble(Math.Round(montoAhorroDet, 2)) * 1.035);
-                }
-                var montoAseguradoCalc = Convert.ToDouble(lst[i].Ss_MontoAsegurado) + (Convert.ToDouble(lst[i].Ss_MontoAsegurado)*0.0005);
+                var valor = (i == 1 ? 4 : 1.035);
 
-
-                lst.Add(new DetallePropuestaSolucion {
-                    Nu_Edad = edadCalc,
-                    Nu_Anio = anio,
-                    Ss_MontoPrima = montoPrima,
-                    Ss_MontoAhorro = Convert.ToDecimal(montoAhorroDet),
-                    Ss_ValorRescate = Math.Round(valorRescateDet,2),
-                    Ss_MontoAsegurado = Convert.ToDecimal(Math.Round(montoAseguradoCalc,2))
+                lst.Add(new DetallePropuestaSolucion
+                {
+                    Nu_Edad = lst[i].Nu_Edad + 1,
+                    Nu_Anio = lst[i].Nu_Anio + 1,
+                    Ss_MontoPrima = Convert.ToDecimal(Convert.ToDouble(lst[i].Ss_MontoPrima) + primaAnual + 1),
+                    Ss_MontoAhorro = Convert.ToDecimal((Convert.ToDouble(lst[i].Ss_MontoPrima) + primaAnual + 1) * 0.05),
+                    Ss_ValorRescate = Math.Round(Convert.ToDecimal((Convert.ToDouble(lst[i].Ss_ValorRescate) + ((Convert.ToDouble(lst[i].Ss_MontoPrima) + primaAnual + 1)* 0.05)) * valor),2),
+                    Ss_MontoAsegurado = Math.Round(Convert.ToDecimal(Convert.ToDouble(lst[i].Ss_MontoAsegurado) + (Convert.ToDouble(lst[i].Ss_MontoAsegurado) * 0.0005)),2)
                 });
             }
 
