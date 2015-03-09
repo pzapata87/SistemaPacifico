@@ -1,0 +1,173 @@
+﻿@model SistemaPacifico.Models.PropuestaSolucionViewModel
+
+@{
+    ViewBag.Title = "EditarPropuesta";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+
+        <hr />
+        @Html.ValidationSummary(true)
+        <table width="85%" class="fondo" align="center">
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.DNIProspecto, htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.TextBoxFor(model => model.CodigoProspecto, new { @class = "hidden" })
+                    @Html.TextBoxFor(model => model.DNIProspecto, new { @class = "form-control", disabled = "true" })
+                </td>
+                <td>
+                    <input id="btnBuscar" type="button" value="Buscar" class="btn btn-default" disabled="disabled" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.NombreProspecto, htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.TextBoxFor(model => model.NombreProspecto, new { @class = "form-control", disabled = "true" })
+                </td>
+                <td>
+                    @Html.LabelFor(model => model.ApellidoProspecto, htmlAttributes: new { @class = "control-label col-md-3" })
+                    @Html.TextBoxFor(model => model.ApellidoProspecto, new { @class = "form-control", disabled = "true" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.FechaNacimiento, htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.TextBoxFor(model => model.FechaNacimiento, htmlAttributes: new { @class = "form-control", disabled = "true" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.CodigoProducto, htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.DropDownListFor(model => model.CodigoProducto, Model.Productos, htmlAttributes: new { @class = "form-control", disabled = "true" })
+                </td>
+                <td>
+                    @Html.LabelFor(model => model.CodigoPlan, htmlAttributes: new { @class = "control-label col-md-3" })
+                    @Html.DropDownListFor(model => model.CodigoPlan, Model.PlanProductos, htmlAttributes: new { @class = "form-control", disabled = "true" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.MontoAsegurado, htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.TextBoxFor(model => model.MontoAsegurado, htmlAttributes: new { @class = "form-control", disabled = "true" })
+                </td>
+                <td>
+                    @Html.LabelFor(model => model.MontoPrima, htmlAttributes: new { @class = "control-label col-md-3" })
+                    @Html.TextBoxFor(model => model.MontoPrima, htmlAttributes: new { @class = "form-control", disabled = "true" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.MontoRetorno, htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.TextBoxFor(model => model.MontoRetorno, htmlAttributes: new { @class = "form-control", disabled = "true" })
+                </td>
+                <td>
+                    <input id="btnGenerarPropuesta" type="button" value="Generar Propuesta" class="btn btn-default" disabled="disabled" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <br />
+                    <div data-bind='simpleGrid: gridViewModel'> </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" align="center">
+                    <input id="btnGrabar" type="button" value="Grabar" class="btn btn-default" style="display:none;" />
+                    <input id="btnCancelar" type="button" value="Regresar" class="btn btn-default" />
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+}
+
+
+<script type="text/javascript">
+    var initialData = [];
+
+    var PagedGridModel = function (items) {
+        this.items = ko.observableArray(items);
+
+        this.addItem = function (anio, edad, montoPrima, montoAhorro, valorRescate, montoAsegurado) {
+            this.items.push({ Nu_Anio: anio, Nu_Edad: edad, Ss_MontoPrima: montoPrima, Ss_MontoAhorro: montoAhorro, Ss_ValorRescate: valorRescate, Ss_MontoAsegurado: montoAsegurado });
+        };
+
+        this.clearData = function () {
+            this.items.removeAll();
+        };
+
+        this.sortByName = function () {
+            this.items.sort(function (a, b) {
+                return a.name < b.name ? -1 : 1;
+            });
+        };
+
+        this.jumpToFirstPage = function () {
+            this.gridViewModel.currentPageIndex(0);
+        };
+
+        this.gridViewModel = new ko.simpleGrid.viewModel({
+            data: this.items,
+            columns: [
+                { headerText: "Año", rowText: "Nu_Anio" },
+                { headerText: "Edad", rowText: "Nu_Edad" },
+                { headerText: "Monto prima", rowText: "Ss_MontoPrima" },
+                { headerText: "Monto Ahorro", rowText: "Ss_MontoAhorro" },
+                { headerText: "Valor Rescate", rowText: "Ss_ValorRescate" },
+                { headerText: "Monto Asegurado", rowText: "Ss_MontoAsegurado" }
+            ],
+            pageSize: 10
+        });
+    };
+
+    var modeloGrilla = new PagedGridModel(initialData);
+    ko.applyBindings(modeloGrilla);
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        CargarPropuestaDetalle();
+
+        $('#btnCancelar').click(function () {
+            vURL = '@Url.Action("Index", "PropuestaSolucion")';
+            window.location = vURL;
+        });
+
+    });
+
+    function CargarPropuestaDetalle() {
+        debugger;
+        var codigo = @(Model.Codigo);
+
+        var request = $.ajax({
+            url: "/PropuestaSolucion/ObtenerPropuesta",
+            type: "POST",
+            data: JSON.stringify({ id: codigo }),
+            contentType: 'application/json',
+            dataType: 'json'
+        });
+        request.done(function (detalles) {
+            debugger;
+            modeloGrilla.clearData();
+
+            for (var i in detalles) {
+                var detalle = detalles[i];
+
+                modeloGrilla.addItem(detalle.Nu_Anio, detalle.Nu_Edad, detalle.Ss_MontoPrima, detalle.Ss_MontoAhorro, detalle.Ss_ValorRescate, detalle.Ss_MontoAsegurado);
+            }
+        });
+        request.fail(function (jqXHR, textStatus) {
+            debugger;
+            alert("Request failed: " + textStatus);
+        });
+    }
+
+</script>
