@@ -14,12 +14,12 @@ namespace Pacifico.DataAccess
     
     public partial class PlanProducto
     {
-        public int Co_PlanProducto { get; set; }
-        public string No_PlanProducto { get; set; }
-        public decimal Ss_PrimaMinima { get; set; }
-        public int Ss_SumaMinimaAsegurada { get; set; }
-        public int Ss_SumaMaximaAsegurada { get; set; }
-        public int Co_Producto { get; set; }
+        public int Cod_Plan_Prod { get; set; }
+        public string Nro_Plan_Prod { get; set; }
+        public decimal Ss_Prim_Min { get; set; }
+        public int Ss_Sum_Min_Aseg { get; set; }
+        public int Ss_Sum_Max_Aseg { get; set; }
+        public int Cod_Prod { get; set; }
     
         public virtual Producto Producto { get; set; }
     }

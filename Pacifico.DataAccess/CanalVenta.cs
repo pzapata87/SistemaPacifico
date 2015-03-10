@@ -19,9 +19,9 @@ namespace Pacifico.DataAccess
             this.Comision = new HashSet<Comision>();
         }
     
-        public int Co_CanalVenta { get; set; }
-        public string No_CanalVenta { get; set; }
-        public string Tx_Tipo { get; set; }
+        public int Cod_Cnl_Vta { get; set; }
+        public string Nro_Cnl_Vta { get; set; }
+        public string Txt_Tipo { get; set; }
     
         public virtual ICollection<Comision> Comision { get; set; }
     }

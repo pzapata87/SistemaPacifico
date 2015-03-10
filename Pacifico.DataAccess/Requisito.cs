@@ -16,12 +16,12 @@ namespace Pacifico.DataAccess
     {
         public Requisito()
         {
-            this.ComisionRequisito = new HashSet<ComisionRequisito>();
+            this.Comision = new HashSet<Comision>();
         }
     
-        public int Co_Requisito { get; set; }
-        public string No_Requisito { get; set; }
+        public int Cod_Req { get; set; }
+        public string Nro_Req { get; set; }
     
-        public virtual ICollection<ComisionRequisito> ComisionRequisito { get; set; }
+        public virtual ICollection<Comision> Comision { get; set; }
     }
 }

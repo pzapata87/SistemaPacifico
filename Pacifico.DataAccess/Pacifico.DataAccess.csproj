@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Pacifico.DataAccess</RootNamespace>
     <AssemblyName>Pacifico.DataAccess</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,6 +40,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -48,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Area.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Campania.cs">
       <DependentUpon>Pacifico.tt</DependentUpon>
     </Compile>
@@ -57,16 +62,34 @@
     <Compile Include="Cargo.cs">
       <DependentUpon>Pacifico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Cliente.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Comision.cs">
       <DependentUpon>Pacifico.tt</DependentUpon>
     </Compile>
-    <Compile Include="ComisionRequisito.cs">
+    <Compile Include="Departamento.cs">
       <DependentUpon>Pacifico.tt</DependentUpon>
     </Compile>
     <Compile Include="DetallePropuestaSolucion.cs">
       <DependentUpon>Pacifico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Distrito.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Empleado.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Estado_Solicitud.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FormatoPlanTrabajo.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Invitacion.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Materia.cs">
       <DependentUpon>Pacifico.tt</DependentUpon>
     </Compile>
     <Compile Include="Pacifico.Context.cs">
@@ -84,7 +107,28 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Pacifico.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Periodo.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
     <Compile Include="PlanProducto.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PlanTrabajo.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Poliza.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Prestadora.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Procedimiento.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProcedimientoAuditoria.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProcedimientoSeguimiento.cs">
       <DependentUpon>Pacifico.tt</DependentUpon>
     </Compile>
     <Compile Include="Producto.cs">
@@ -97,10 +141,37 @@
     <Compile Include="Prospecto.cs">
       <DependentUpon>Pacifico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Provincia.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Rango.cs">
       <DependentUpon>Pacifico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Reclamante.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Reclamo.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Reclamo_Motivo.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Reclamo_Poliza.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Requisito.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Solicitud_Afiliacion.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Solicitud_Autorizacion.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sugerencia.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tema.cs">
       <DependentUpon>Pacifico.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -127,9 +198,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Pacifico.edmx.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

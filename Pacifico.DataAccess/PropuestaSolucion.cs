@@ -19,15 +19,15 @@ namespace Pacifico.DataAccess
             this.DetallePropuestaSolucion = new HashSet<DetallePropuestaSolucion>();
         }
     
-        public int Co_PropuestaSolucion { get; set; }
-        public decimal Ss_MontoPrima { get; set; }
-        public System.DateTime Fe_Nacimiento { get; set; }
-        public decimal Ss_MontoRetorno { get; set; }
-        public decimal Ss_MontoAsegurado { get; set; }
-        public int Co_Prospecto { get; set; }
-        public int Co_Producto { get; set; }
-        public int Co_Plan { get; set; }
-        public System.DateTime Fe_Creacion { get; set; }
+        public int Cod_Prop_Sol { get; set; }
+        public decimal Ss_Mon_Prim { get; set; }
+        public System.DateTime Fec_Nac { get; set; }
+        public decimal Ss_Mon_Ret { get; set; }
+        public decimal Ss_Mon_Aseg { get; set; }
+        public int Cod_Pros { get; set; }
+        public int Cod_Prod { get; set; }
+        public int Cod_Plan { get; set; }
+        public System.DateTime Fec_Crea { get; set; }
     
         public virtual ICollection<DetallePropuestaSolucion> DetallePropuestaSolucion { get; set; }
         public virtual Producto Producto { get; set; }

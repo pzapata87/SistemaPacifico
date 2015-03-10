@@ -14,14 +14,14 @@ namespace Pacifico.DataAccess
     
     public partial class DetallePropuestaSolucion
     {
-        public int Co_DetallePropuestaSolucion { get; set; }
-        public int Co_PropuestaSolucion { get; set; }
-        public int Nu_Anio { get; set; }
-        public int Nu_Edad { get; set; }
-        public decimal Ss_MontoPrima { get; set; }
-        public decimal Ss_MontoAhorro { get; set; }
-        public decimal Ss_ValorRescate { get; set; }
-        public decimal Ss_MontoAsegurado { get; set; }
+        public int Cod_Det_Prop_Sol { get; set; }
+        public int Cod_Prop_Sol { get; set; }
+        public int Num_Anio { get; set; }
+        public int Num_Edad { get; set; }
+        public decimal Ss_Mon_Prim { get; set; }
+        public decimal Ss_Mon_Ahr { get; set; }
+        public decimal Ss_Val_Resc { get; set; }
+        public decimal Ss_Mon_Aseg { get; set; }
     
         public virtual PropuestaSolucion PropuestaSolucion { get; set; }
     }

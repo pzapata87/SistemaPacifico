@@ -20,10 +20,11 @@ namespace Pacifico.DataAccess
             this.PropuestaSolucion = new HashSet<PropuestaSolucion>();
         }
     
-        public int Co_Producto { get; set; }
-        public string No_Producto { get; set; }
-        public System.DateTime Fe_Creacion { get; set; }
-        public bool FI_Flag { get; set; }
+        public int Cod_Prod { get; set; }
+        public string Nro_Prod { get; set; }
+        public System.DateTime Fec_Crea { get; set; }
+        public string FI_Estado { get; set; }
+        public bool Flg_Flag { get; set; }
     
         public virtual ICollection<PlanProducto> PlanProducto { get; set; }
         public virtual ICollection<PropuestaSolucion> PropuestaSolucion { get; set; }

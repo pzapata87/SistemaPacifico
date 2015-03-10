@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Pacifico.Bussines;
 using System.Web.Mvc;
@@ -9,21 +8,21 @@ using Pacifico.DataAccess;
 
 namespace SistemaPacifico.Controllers
 {
-    public class PropuestaSolucionController : Controller
+    public class PropuestaSolucionController : ReportBaseController
     {
         public ActionResult Index()
         {
             var propuestaSolucion = new PropuestaSolucionBusiness().ListarPropuestaSolucion().ToList();
             var propuestaVm = propuestaSolucion.ConvertAll(p => new PropuestaSolucionViewModel
             {
-                Codigo = p.Co_PropuestaSolucion,
-                DNIProspecto = p.Prospecto.Nu_DNI,
-                NombreProspecto = p.Prospecto.No_Prospecto,
-                FechaNacimiento = p.Fe_Nacimiento.ToShortDateString(),
-                FechaRegistro = p.Fe_Creacion.ToShortDateString(),
-                MontoAsegurado = p.Ss_MontoAsegurado,
-                MontoPrima = p.Ss_MontoPrima,
-                MontoRetorno = p.Ss_MontoRetorno
+                Codigo = p.Cod_Prop_Sol,
+                DNIProspecto = p.Prospecto.Num_DNI,
+                NombreProspecto = p.Prospecto.Txt_Pros,
+                FechaNacimiento = p.Fec_Nac.ToShortDateString(),
+                FechaRegistro = p.Fec_Crea.ToShortDateString(),
+                MontoAsegurado = p.Ss_Mon_Aseg,
+                MontoPrima = p.Ss_Mon_Prim,
+                MontoRetorno = p.Ss_Mon_Ret
             });
             return View(propuestaVm);
         }
@@ -31,6 +30,8 @@ namespace SistemaPacifico.Controllers
         [HttpPost]
         public ActionResult Index(int? numeroPropuesta, string fecha, string dni, string nombre)
         {
+            //string vFecha = "2015/02/03";
+
             var propuestaSolucion = new PropuestaSolucionBusiness().ListarPropuestaSolucion(
                 numeroPropuesta, fecha, dni, nombre).ToList();
 
@@ -41,14 +42,14 @@ namespace SistemaPacifico.Controllers
 
             var propuestaVm = propuestaSolucion.ConvertAll(p => new PropuestaSolucionViewModel
             {
-                Codigo = p.Co_PropuestaSolucion,
-                DNIProspecto = p.Prospecto.Nu_DNI,
-                NombreProspecto = p.Prospecto.No_Prospecto,
-                FechaNacimiento = p.Fe_Nacimiento.ToShortDateString(),
-                FechaRegistro = p.Fe_Creacion.ToShortDateString(),
-                MontoAsegurado = p.Ss_MontoAsegurado,
-                MontoPrima = p.Ss_MontoPrima,
-                MontoRetorno = p.Ss_MontoRetorno
+                Codigo = p.Cod_Prop_Sol,
+                DNIProspecto = p.Prospecto.Num_DNI,
+                NombreProspecto = p.Prospecto.Txt_Pros,
+                FechaNacimiento = p.Fec_Nac.ToShortDateString(),
+                FechaRegistro = p.Fec_Crea.ToShortDateString(),
+                MontoAsegurado = p.Ss_Mon_Aseg,
+                MontoPrima = p.Ss_Mon_Prim,
+                MontoRetorno = p.Ss_Mon_Ret
             });
 
             return View("Index", propuestaVm);
@@ -71,15 +72,15 @@ namespace SistemaPacifico.Controllers
             var model = new PropuestaSolucionViewModel
             {
                 Codigo = id,
-                DNIProspecto = propuesta.Prospecto.Nu_DNI,
-                NombreProspecto = propuesta.Prospecto.No_Prospecto,
-                ApellidoProspecto = propuesta.Prospecto.Tx_ApePaterno + " " + propuesta.Prospecto.Tx_ApeMaterno,
-                FechaNacimiento = propuesta.Fe_Nacimiento.GetDate(),
-                Productos = BuscarProducto(propuesta.Co_Producto),
-                PlanProductos = ObtenerPlanProducto(propuesta.Co_Plan),
-                MontoAsegurado = propuesta.Ss_MontoAsegurado,
-                MontoRetorno = propuesta.Ss_MontoRetorno,
-                MontoPrima = propuesta.Ss_MontoPrima,
+                DNIProspecto = propuesta.Prospecto.Num_DNI,
+                NombreProspecto = propuesta.Prospecto.Txt_Pros,
+                ApellidoProspecto = propuesta.Prospecto.Txt_Ape_Pat + " " + propuesta.Prospecto.Txt_Ape_Mat,
+                FechaNacimiento = propuesta.Fec_Nac.GetDate(),
+                Productos = BuscarProducto(propuesta.Cod_Prod),
+                PlanProductos = ObtenerPlanProducto(propuesta.Cod_Plan),
+                MontoAsegurado = propuesta.Ss_Mon_Aseg,
+                MontoRetorno = propuesta.Ss_Mon_Ret,
+                MontoPrima = propuesta.Ss_Mon_Prim,
                 Detalle = propuesta.DetallePropuestaSolucion.ToList()
             };
             return View(model);
@@ -100,14 +101,14 @@ namespace SistemaPacifico.Controllers
         {
             var propuesta = new PropuestaSolucion
             {
-                Co_Prospecto = model.CodigoProspecto,
-                Fe_Nacimiento = Convert.ToDateTime(model.FechaNacimiento),
-                Co_Producto = model.CodigoProducto,
-                Co_Plan = model.CodigoPlan,
-                Ss_MontoAsegurado = model.MontoAsegurado.GetValueOrDefault(),
-                Ss_MontoRetorno = model.MontoRetorno.GetValueOrDefault(),
-                Ss_MontoPrima = model.MontoPrima.GetValueOrDefault(),
-                Fe_Creacion = DateTime.Now
+                Cod_Pros = model.CodigoProspecto,
+                Fec_Nac = Convert.ToDateTime(model.FechaNacimiento),
+                Cod_Prod = model.CodigoProducto,
+                Cod_Plan = model.CodigoPlan,
+                Ss_Mon_Aseg = model.MontoAsegurado.GetValueOrDefault(),
+                Ss_Mon_Ret = model.MontoRetorno.GetValueOrDefault(),
+                Ss_Mon_Prim = model.MontoPrima.GetValueOrDefault(),
+                Fec_Crea = DateTime.Now
             };
             new PropuestaSolucionBusiness().RegistrarPropuestaSolucion(propuesta,model.Detalle);
             return Json(Url.Action("Index", "PropuestaSolucion"));
@@ -116,13 +117,13 @@ namespace SistemaPacifico.Controllers
         private SelectList ObtenerProductos()
         {
             var dbProductos = new PropuestaSolucionBusiness().ListarProducto();
-            dbProductos.Add(new Producto { Co_Producto = 0 , No_Producto = "[SELECCIONAR]"});
+            dbProductos.Add(new Producto { Cod_Prod = 0 , Nro_Prod = "[SELECCIONAR]"});
             var productos = dbProductos
                         .Select(x =>
                                 new SelectListItem
                                 {
-                                    Value = x.Co_Producto.ToString(),
-                                    Text = x.No_Producto
+                                    Value = x.Cod_Prod.ToString(),
+                                    Text = x.Nro_Prod
                                 });
 
             return new SelectList(productos, "Value", "Text");
@@ -135,8 +136,8 @@ namespace SistemaPacifico.Controllers
                         .Select(x =>
                                 new SelectListItem
                                 {
-                                    Value = x.Co_Producto.ToString(),
-                                    Text = x.No_Producto
+                                    Value = x.Cod_Prod.ToString(),
+                                    Text = x.Nro_Prod
                                 });
 
             return new SelectList(productos, "Value", "Text");
@@ -149,10 +150,15 @@ namespace SistemaPacifico.Controllers
                         .Select(x =>
                                 new SelectListItem
                                 {
-                                    Value = x.Co_PlanProducto.ToString(),
-                                    Text = x.No_PlanProducto
+                                    Value = x.Cod_Plan_Prod.ToString(),
+                                    Text = x.Nro_Plan_Prod
                                 });
             return new SelectList(plan, "Value", "Text");
+        }
+
+        public override ActionResult GerReportSnapshot()
+        {
+            throw new NotImplementedException();
         }
 	}
 }

@@ -76,8 +76,8 @@
             </tr>
             <tr>
                 <td colspan="6" align="center">
-                    <input id="btnGrabar" type="button" value="Grabar" class="btn btn-default" />
-                    <input type="submit" value="Cancelar" class="btn btn-default" />
+                    <input id="btnGrabar" type="button" value="Grabar" class="btn btn-default" style="display:none;" />
+                    <input id="btnCancelar" type="button" value="Regresar" class="btn btn-default" />
                 </td>
                 <td></td>
             </tr>
@@ -89,36 +89,43 @@
 <script type="text/javascript">
     var initialData = [];
 
-    var PagedGridModel = function (items) {
+    var PagedGridModel = function(items) {
         this.items = ko.observableArray(items);
 
-        this.addItem = function (anio, edad, montoPrima, montoAhorro, valorRescate, montoAsegurado) {
-            this.items.push({ Nu_Anio: anio, Nu_Edad: edad, Ss_MontoPrima: montoPrima, Ss_MontoAhorro: montoAhorro, Ss_ValorRescate: valorRescate, Ss_MontoAsegurado: montoAsegurado });
+        this.addItem = function(anio, edad, montoPrima, montoAhorro, valorRescate, montoAsegurado) {
+            this.items.push({
+                Num_Anio: anio,
+                Num_Edad: edad,
+                Ss_Mon_Prim: montoPrima,
+                Ss_Mon_Ahr: montoAhorro,
+                Ss_Val_Resc: valorRescate,
+                Ss_Mon_Aseg: montoAsegurado
+            });
         };
 
-        this.clearData = function () {
+        this.clearData = function() {
             this.items.removeAll();
         };
 
-        this.sortByName = function () {
-            this.items.sort(function (a, b) {
+        this.sortByName = function() {
+            this.items.sort(function(a, b) {
                 return a.name < b.name ? -1 : 1;
             });
         };
 
-        this.jumpToFirstPage = function () {
+        this.jumpToFirstPage = function() {
             this.gridViewModel.currentPageIndex(0);
         };
 
         this.gridViewModel = new ko.simpleGrid.viewModel({
             data: this.items,
             columns: [
-                { headerText: "Año", rowText: "Nu_Anio" },
-                { headerText: "Edad", rowText: "Nu_Edad" },
-                { headerText: "Monto prima", rowText: "Ss_MontoPrima" },
-                { headerText: "Monto Ahorro", rowText: "Ss_MontoAhorro" },
-                { headerText: "Valor Rescate", rowText: "Ss_ValorRescate" },
-                { headerText: "Monto Asegurado", rowText: "Ss_MontoAsegurado" }
+                { headerText: "Año", rowText: "Num_Anio" },
+                { headerText: "Edad", rowText: "Num_Edad" },
+                { headerText: "Monto prima", rowText: "Ss_Mon_Prim" },
+                { headerText: "Monto Ahorro", rowText: "Ss_Mon_Ahr" },
+                { headerText: "Valor Rescate", rowText: "Ss_Val_Resc" },
+                { headerText: "Monto Asegurado", rowText: "Ss_Mon_Aseg" }
             ],
             pageSize: 10
         });
@@ -135,6 +142,12 @@
 <script type="text/javascript">
     $(document).ready(function () {
         CargarPropuestaDetalle();
+
+        $('#btnCancelar').click(function () {
+            vURL = '@Url.Action("Index", "PropuestaSolucion")';
+            window.location = vURL;
+        });
+
     });
 
     function CargarPropuestaDetalle() {
@@ -155,7 +168,13 @@
             for (var i in detalles) {
                 var detalle = detalles[i];
 
-                modeloGrilla.addItem(detalle.Nu_Anio, detalle.Nu_Edad, detalle.Ss_MontoPrima, detalle.Ss_MontoAhorro, detalle.Ss_ValorRescate, detalle.Ss_MontoAsegurado);
+                modeloGrilla.addItem(
+                    detalle.Num_Anio,
+                    detalle.Num_Edad,
+                    detalle.Ss_Mon_Prim,
+                    detalle.Ss_Mon_Ahr,
+                    detalle.Ss_Val_Resc,
+                    detalle.Ss_Mon_Aseg);
             }
         });
         request.fail(function (jqXHR, textStatus) {

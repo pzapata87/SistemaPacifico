@@ -5,11 +5,11 @@ namespace Pacifico.Bussines
 {
     public class RequisitoBusiness
     {
-         private readonly BDPacificoEntities1 _db;
+         private readonly BDPacificoEntities _db;
 
          public RequisitoBusiness()
         {
-            _db = new BDPacificoEntities1();
+            _db = new BDPacificoEntities();
         }
 
          public IDbSet<Requisito> FindAll()

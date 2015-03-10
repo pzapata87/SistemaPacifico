@@ -5,11 +5,11 @@ namespace Pacifico.Bussines
 {
     public class CargoBusiness
     {
-         private readonly BDPacificoEntities1 _db;
+         private readonly BDPacificoEntities _db;
 
          public CargoBusiness()
         {
-            _db = new BDPacificoEntities1();
+            _db = new BDPacificoEntities();
         }
 
          public IDbSet<Cargo> FindAll()

@@ -17,20 +17,20 @@ namespace Pacifico.DataAccess
         public Comision()
         {
             this.Rango = new HashSet<Rango>();
-            this.ComisionRequisito = new HashSet<ComisionRequisito>();
+            this.Requisito = new HashSet<Requisito>();
         }
     
-        public int Co_Comision { get; set; }
-        public string No_Comision { get; set; }
-        public System.DateTime Fe_Registro { get; set; }
-        public int Co_Campania { get; set; }
-        public int Co_CanalVenta { get; set; }
-        public int Co_Cargo { get; set; }
+        public int Cod_Com { get; set; }
+        public string Nro_Com { get; set; }
+        public System.DateTime Fec_Reg { get; set; }
+        public int Cod_Camp { get; set; }
+        public int Cod_Cnl_Vta { get; set; }
+        public int Cod_Car { get; set; }
     
         public virtual Campania Campania { get; set; }
         public virtual CanalVenta CanalVenta { get; set; }
         public virtual Cargo Cargo { get; set; }
         public virtual ICollection<Rango> Rango { get; set; }
-        public virtual ICollection<ComisionRequisito> ComisionRequisito { get; set; }
+        public virtual ICollection<Requisito> Requisito { get; set; }
     }
 }

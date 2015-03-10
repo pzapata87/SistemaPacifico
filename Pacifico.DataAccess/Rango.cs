@@ -14,11 +14,11 @@ namespace Pacifico.DataAccess
     
     public partial class Rango
     {
-        public int Co_Rango { get; set; }
-        public double Ss_Minimo { get; set; }
-        public double Ss_Maximo { get; set; }
-        public int Qt_Cantidad { get; set; }
-        public int Co_Comision { get; set; }
+        public int Cod_Rang { get; set; }
+        public double Ss_Min { get; set; }
+        public double Ss_Max { get; set; }
+        public int Qtd_Cant { get; set; }
+        public int Cod_Com { get; set; }
     
         public virtual Comision Comision { get; set; }
     }

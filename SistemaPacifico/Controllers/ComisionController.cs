@@ -40,12 +40,12 @@ namespace SistemaPacifico.Controllers
         {
             var list = _comisionBL.FindAll().ToList().ConvertAll(p => new ComisionModel
             {
-                CodigoComision = p.Co_Comision,
-                NombreComision = p.No_Comision,
-                FechaRegistro = p.Fe_Registro.GetDate(),
-                CargoNombre = p.Cargo.No_Cargo,
-                CampaniaNombre = p.Campania.No_Campania,
-                CanalVentaNombre = p.CanalVenta.No_CanalVenta
+                CodigoComision = p.Cod_Com,
+                NombreComision = p.Nro_Com,
+                FechaRegistro = p.Fec_Reg.GetDate(),
+                CargoNombre = p.Cargo.Nro_Car,
+                CampaniaNombre = p.Campania.Nro_Camp,
+                CanalVentaNombre = p.CanalVenta.Nro_Cnl_Vta
             });
 
             return View(list);
@@ -58,12 +58,12 @@ namespace SistemaPacifico.Controllers
             var list =
                 _comisionBL.FindAll(nombreComision, canalVenta, campania).ToList().ConvertAll(p => new ComisionModel
                 {
-                    CodigoComision = p.Co_Comision,
-                    NombreComision = p.No_Comision,
-                    FechaRegistro = p.Fe_Registro.GetDate(),
-                    CargoNombre = p.Cargo.No_Cargo,
-                    CampaniaNombre = p.Campania.No_Campania,
-                    CanalVentaNombre = p.CanalVenta.No_CanalVenta
+                    CodigoComision = p.Cod_Com,
+                    NombreComision = p.Nro_Com,
+                    FechaRegistro = p.Fec_Reg.GetDate(),
+                    CargoNombre = p.Cargo.Nro_Car,
+                    CampaniaNombre = p.Campania.Nro_Camp,
+                    CanalVentaNombre = p.CanalVenta.Nro_Cnl_Vta
                 });
 
             return View(list);
@@ -88,17 +88,17 @@ namespace SistemaPacifico.Controllers
             var comision = _comisionBL.Get(id);
             var model = new ComisionModel
             {
-                CodigoComision = comision.Co_Comision,
-                NombreComision = comision.No_Comision,
-                CargoId = comision.Co_Cargo,
-                CanalVentaId = comision.Co_CanalVenta,
-                CampaniaId = comision.Co_Campania,
-                RequisitoListSelected = comision.ComisionRequisito.Select(p => p.Co_Requisito).ToList(),
+                CodigoComision = comision.Cod_Com,
+                NombreComision = comision.Nro_Com,
+                CargoId = comision.Cod_Car,
+                CanalVentaId = comision.Cod_Cnl_Vta,
+                CampaniaId = comision.Cod_Camp,
+                RequisitoListSelected = comision.Requisito.Select(p => p.Cod_Req).ToList(),
                 RangoList = comision.Rango.Select(p => new RangoModel
                 {
-                    Minimo = p.Ss_Minimo,
-                    Maximo = p.Ss_Maximo,
-                    Cantidad = p.Qt_Cantidad
+                    Minimo = p.Ss_Min,
+                    Maximo = p.Ss_Max,
+                    Cantidad = p.Qtd_Cant
                 }).ToList(),
                 Accion = "EditarComision"
             };
@@ -118,20 +118,20 @@ namespace SistemaPacifico.Controllers
 
             var model = new ComisionModel
             {
-                NombreComision = comision.No_Comision,
-                CampaniaNombre = comision.Campania.No_Campania,
-                CargoNombre = comision.Cargo.No_Cargo,
-                CanalVentaNombre = comision.CanalVenta.No_CanalVenta,
-                RequisitoList = comision.ComisionRequisito.Select(p => new Comun
+                NombreComision = comision.Nro_Com,
+                CampaniaNombre = comision.Campania.Nro_Camp,
+                CargoNombre = comision.Cargo.Nro_Car,
+                CanalVentaNombre = comision.CanalVenta.Nro_Cnl_Vta,
+                RequisitoList = comision.Requisito.Select(p => new Comun
                 {
-                    Valor = Convert.ToString(p.Requisito.Co_Requisito),
-                    Nombre = p.Requisito.No_Requisito
+                    Valor = Convert.ToString(p.Cod_Req),
+                    Nombre = p.Nro_Req
                 }).ToList(),
                 RangoList = comision.Rango.Select(p => new RangoModel
                 {
-                    Minimo = p.Ss_Minimo,
-                    Maximo = p.Ss_Maximo,
-                    Cantidad = p.Qt_Cantidad
+                    Minimo = p.Ss_Min,
+                    Maximo = p.Ss_Max,
+                    Cantidad = p.Qtd_Cant
                 }).ToList()
             };
 
@@ -144,18 +144,18 @@ namespace SistemaPacifico.Controllers
             try
             {
                 var comision = _comisionBL.Get(model.CodigoComision);
-                comision.No_Comision = model.NombreComision;
-                comision.Co_Campania = model.CampaniaId;
-                comision.Co_CanalVenta = model.CanalVentaId;
-                comision.Co_Cargo = model.CargoId;
+                comision.Nro_Com = model.NombreComision;
+                comision.Cod_Camp = model.CampaniaId;
+                comision.Cod_Cnl_Vta = model.CanalVentaId;
+                comision.Cod_Car = model.CargoId;
 
                 if (model.RequisitoListSelected != null)
                 {
                     foreach (var item in model.RequisitoListSelected)
                     {
-                        comision.ComisionRequisito.Add(new ComisionRequisito
+                        comision.Requisito.Add(new Requisito
                         {
-                            Co_Requisito = item
+                            Cod_Req = item
                         });
                     }
                 }
@@ -166,9 +166,9 @@ namespace SistemaPacifico.Controllers
                     {
                         comision.Rango.Add(new Rango
                         {
-                            Ss_Maximo = item.Maximo,
-                            Ss_Minimo = item.Minimo,
-                            Qt_Cantidad = item.Cantidad
+                            Ss_Max = item.Maximo,
+                            Ss_Min = item.Minimo,
+                            Qtd_Cant = item.Cantidad
                         });
                     }
                 }
@@ -190,20 +190,20 @@ namespace SistemaPacifico.Controllers
             {
                 var comision = new Comision
                 {
-                    No_Comision = model.NombreComision,
-                    Co_Campania = model.CampaniaId,
-                    Co_CanalVenta = model.CanalVentaId,
-                    Co_Cargo = model.CargoId,
-                    Fe_Registro = DateTime.Now
+                    Nro_Com = model.NombreComision,
+                    Cod_Camp = model.CampaniaId,
+                    Cod_Cnl_Vta = model.CanalVentaId,
+                    Cod_Car = model.CargoId,
+                    Fec_Reg = DateTime.Now
                 };
 
                 if (model.RequisitoListSelected != null)
                 {
                     foreach (var item in model.RequisitoListSelected)
                     {
-                        comision.ComisionRequisito.Add(new ComisionRequisito
+                        comision.Requisito.Add(new Requisito
                         {
-                            Co_Requisito = item
+                            Cod_Req = item
                         });
                     }
                 }
@@ -214,9 +214,9 @@ namespace SistemaPacifico.Controllers
                     {
                         comision.Rango.Add(new Rango
                         {
-                            Ss_Maximo = item.Maximo,
-                            Ss_Minimo = item.Minimo,
-                            Qt_Cantidad = item.Cantidad
+                            Ss_Max = item.Maximo,
+                            Ss_Min = item.Minimo,
+                            Qtd_Cant = item.Cantidad
                         });
                     }
                 }
@@ -239,23 +239,23 @@ namespace SistemaPacifico.Controllers
         {
             model.CargoList = _cargoBL.FindAll().ToList().ConvertAll(p => new Comun
             {
-                Nombre = p.No_Cargo,
-                Valor = Convert.ToString(p.Co_Cargo)
+                Nombre = p.Nro_Car,
+                Valor = Convert.ToString(p.Cod_Car)
             });
             model.CampaniaList = _campaniaBL.FindAll().ToList().ConvertAll(p => new Comun
             {
-                Nombre = p.No_Campania,
-                Valor = Convert.ToString(p.Co_Campania)
+                Nombre = p.Nro_Camp,
+                Valor = Convert.ToString(p.Cod_Camp)
             });
             model.CanalVentList = _canalVentaBL.FindAll().ToList().ConvertAll(p => new Comun
             {
-                Nombre = p.No_CanalVenta,
-                Valor = Convert.ToString(p.Co_CanalVenta)
+                Nombre = p.Nro_Cnl_Vta,
+                Valor = Convert.ToString(p.Cod_Cnl_Vta)
             });
             model.RequisitoList = _requisitoBL.FindAll().ToList().ConvertAll(p => new Comun
             {
-                Nombre = p.No_Requisito,
-                Valor = Convert.ToString(p.Co_Requisito)
+                Nombre = p.Nro_Req,
+                Valor = Convert.ToString(p.Cod_Req)
             });
         }
 

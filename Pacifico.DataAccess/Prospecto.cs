@@ -19,15 +19,15 @@ namespace Pacifico.DataAccess
             this.PropuestaSolucion = new HashSet<PropuestaSolucion>();
         }
     
-        public int Co_Prospecto { get; set; }
-        public string No_Prospecto { get; set; }
-        public string Tx_ApePaterno { get; set; }
-        public string Tx_ApeMaterno { get; set; }
-        public string Tx_Direccion { get; set; }
-        public string Tx_Telefono { get; set; }
-        public string Tx_Movil { get; set; }
-        public string Tx_Correo { get; set; }
-        public string Nu_DNI { get; set; }
+        public int Cod_Pros { get; set; }
+        public string Txt_Pros { get; set; }
+        public string Txt_Ape_Pat { get; set; }
+        public string Txt_Ape_Mat { get; set; }
+        public string Txt_Dir { get; set; }
+        public string Txt_Tel { get; set; }
+        public string Txt_Mov { get; set; }
+        public string Txt_Crr { get; set; }
+        public string Num_DNI { get; set; }
     
         public virtual ICollection<PropuestaSolucion> PropuestaSolucion { get; set; }
     }

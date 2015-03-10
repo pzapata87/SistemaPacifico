@@ -1,9 +1,7 @@
 ﻿using Pacifico.Bussines;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using SistemaPacifico.Core;
 
 namespace SistemaPacifico.Controllers
 {
@@ -18,22 +16,42 @@ namespace SistemaPacifico.Controllers
         public JsonResult ObtenerProspecto(string numeroDNI)
         {
             var dbProspecto = _business.ObtenerProspecto(numeroDNI);
-            if(dbProspecto!=null)
-                return Json(new { Co_Prospecto=dbProspecto.Co_Prospecto, No_Prospecto = dbProspecto.No_Prospecto, Tx_ApePaterno = dbProspecto.Tx_ApePaterno, Tx_ApeMaterno = dbProspecto.Tx_ApeMaterno }, JsonRequestBehavior.AllowGet);
+            if (dbProspecto != null)
+                return
+                    Json(
+                        new
+                        {
+                            Co_Prospecto = dbProspecto.Cod_Pros,
+                            No_Prospecto = dbProspecto.Txt_Pros,
+                            Tx_ApePaterno = dbProspecto.Txt_Ape_Pat,
+                            Tx_ApeMaterno = dbProspecto.Txt_Ape_Mat
+                        }, JsonRequestBehavior.AllowGet);
             else
-                return Json(new { Co_Prospecto = "" }, JsonRequestBehavior.AllowGet);
+                return Json(new {Co_Prospecto = ""}, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult ObtenerPlanProducto(int codigoProducto)
         {
-            var dbPlanProductos = new PropuestaSolucionBusiness().ListarPlanProducto(codigoProducto).Select(x=> new { Codigo = x.Co_PlanProducto, Value = x.No_PlanProducto});
+            var dbPlanProductos =
+                new PropuestaSolucionBusiness().ListarPlanProducto(codigoProducto)
+                    .Select(x => new {Codigo = x.Cod_Plan_Prod, Value = x.Nro_Plan_Prod});
             return Json(dbPlanProductos, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult ObtenerDetalle(double montoAsegurado, int edad)
+        public JsonResult ObtenerDetalle(double montoAsegurado, int edad, int codPlanProducto)
         {
-            var detalle = new PropuestaSolucionBusiness().GenerarDetallePropuesta(montoAsegurado, edad).ToList();
-            return Json(detalle, JsonRequestBehavior.AllowGet);
+            var jsonResponse = new JsonResponse {Success = false};
+            var planProducto = new PropuestaSolucionBusiness().ObtenerPlanProducto(codPlanProducto);
+
+            if (montoAsegurado >= planProducto.Ss_Sum_Min_Aseg && montoAsegurado <= planProducto.Ss_Sum_Max_Aseg)
+            {
+                jsonResponse.Data =
+                    new PropuestaSolucionBusiness().GenerarDetallePropuesta(montoAsegurado, edad).ToList();
+                jsonResponse.Success = true;
+            }
+
+
+            return Json(jsonResponse, JsonRequestBehavior.AllowGet);
         }
     }
 }

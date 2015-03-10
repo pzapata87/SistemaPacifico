@@ -17,11 +17,13 @@ namespace Pacifico.DataAccess
         public Cargo()
         {
             this.Comision = new HashSet<Comision>();
+            this.Empleado = new HashSet<Empleado>();
         }
     
-        public int Co_Cargo { get; set; }
-        public string No_Cargo { get; set; }
+        public int Cod_Car { get; set; }
+        public string Nro_Car { get; set; }
     
         public virtual ICollection<Comision> Comision { get; set; }
+        public virtual ICollection<Empleado> Empleado { get; set; }
     }
 }

@@ -9,11 +9,11 @@ namespace Pacifico.Bussines
 {
     public class ComisionBusiness
     {
-         private readonly BDPacificoEntities1 _db;
+         private readonly BDPacificoEntities _db;
 
          public ComisionBusiness()
         {
-            _db = new BDPacificoEntities1();
+            _db = new BDPacificoEntities();
         }
 
          public IDbSet<Comision> FindAll()
@@ -26,13 +26,13 @@ namespace Pacifico.Bussines
              var query = _db.Comision.AsQueryable();
 
              if (!string.IsNullOrWhiteSpace(nombreComision))
-                 query = query.Where(p => p.No_Comision.Contains(nombreComision));
+                 query = query.Where(p => p.Nro_Com.Contains(nombreComision));
 
              if (!string.IsNullOrWhiteSpace(canalVenta))
-                 query = query.Where(p => p.CanalVenta.No_CanalVenta.Contains(canalVenta));
+                 query = query.Where(p => p.CanalVenta.Nro_Cnl_Vta.Contains(canalVenta));
 
              if (!string.IsNullOrWhiteSpace(campania))
-                 query = query.Where(p => p.Campania.No_Campania.Contains(campania));
+                 query = query.Where(p => p.Campania.Nro_Camp.Contains(campania));
 
              return query.ToList();
          }

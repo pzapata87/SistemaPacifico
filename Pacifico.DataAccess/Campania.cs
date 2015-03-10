@@ -19,12 +19,12 @@ namespace Pacifico.DataAccess
             this.Comision = new HashSet<Comision>();
         }
     
-        public int Co_Campania { get; set; }
-        public string No_Campania { get; set; }
-        public System.DateTime Fe_Inicio { get; set; }
-        public System.DateTime Fe_Fin { get; set; }
-        public int Qt_Meta { get; set; }
-        public bool Fl_Flag { get; set; }
+        public int Cod_Camp { get; set; }
+        public string Nro_Camp { get; set; }
+        public System.DateTime Fec_Ini { get; set; }
+        public System.DateTime Fec_Fin { get; set; }
+        public int Qtd_Meta { get; set; }
+        public bool Flg_Flag { get; set; }
     
         public virtual ICollection<Comision> Comision { get; set; }
     }
