@@ -12,16 +12,18 @@ namespace Pacifico.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class Requisito
+    public partial class Provincia
     {
-        public Requisito()
+        public Provincia()
         {
-            this.Comision = new HashSet<Comision>();
+            this.Distrito = new HashSet<Distrito>();
         }
     
-        public int Cod_Req { get; set; }
-        public string Nro_Req { get; set; }
+        public int Co_Provincia { get; set; }
+        public string No_Provincia { get; set; }
+        public int Co_Departamento { get; set; }
     
-        public virtual ICollection<Comision> Comision { get; set; }
+        public virtual Departamento Departamento { get; set; }
+        public virtual ICollection<Distrito> Distrito { get; set; }
     }
 }

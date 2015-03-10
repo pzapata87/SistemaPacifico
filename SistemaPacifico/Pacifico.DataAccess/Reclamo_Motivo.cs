@@ -12,9 +12,16 @@ namespace Pacifico.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class Procedimiento
+    public partial class Reclamo_Motivo
     {
-        public int Co_Procedimiento { get; set; }
-        public string No_Procedimiento { get; set; }
+        public Reclamo_Motivo()
+        {
+            this.Reclamo = new HashSet<Reclamo>();
+        }
+    
+        public int Co_MotivoReclamo { get; set; }
+        public string Tx_Descripcion { get; set; }
+    
+        public virtual ICollection<Reclamo> Reclamo { get; set; }
     }
 }
