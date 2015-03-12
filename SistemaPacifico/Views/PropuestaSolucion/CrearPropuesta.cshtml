@@ -1,0 +1,384 @@
+﻿@model SistemaPacifico.Models.PropuestaSolucionViewModel
+
+@{
+    ViewBag.Title = "CrearPropuesta";
+}
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div id="divMsg" class="alert alert-success" style="display: none">
+        <label id="lblMsg" style="font-weight: normal">Propuesta de solución registrada</label>
+    </div>
+
+    <div id="labelError" class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Error:</strong> Por favor valide los datos ingresados
+    </div>
+    
+    <div id="labelErrorFecha" class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Error:</strong> El Prospecto debe tener entre 18 y 65 años.
+    </div>
+    
+    <div>
+
+        <hr />
+        @Html.ValidationSummary(true)
+        <table width="85%" class="fondo" align="center">
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.DNIProspecto, htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.TextBoxFor(model => model.CodigoProspecto, new { @class = "hidden" })
+                    @Html.TextBoxFor(model => model.DNIProspecto, new { @class = "form-control :required :digits", @style="display: inline-block", maxlength = 8 })
+                </td>
+                <td>
+                    <input id="btnBuscar" type="button" value="Buscar" class="btn btn-default" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.NombreProspecto, htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.TextBoxFor(model => model.NombreProspecto, new { @class = "form-control", disabled = "true" })
+                </td>
+                <td>
+                    @Html.LabelFor(model => model.ApellidoProspecto, htmlAttributes: new { @class = "control-label col-md-3" })
+                    @Html.TextBoxFor(model => model.ApellidoProspecto, new { @class = "form-control", disabled = "true"})
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.FechaNacimiento, htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.TextBoxFor(model => model.FechaNacimiento, htmlAttributes: new { @class = "form-control", @style="display: inline-block" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.CodigoProducto, htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.DropDownListFor(model => model.CodigoProducto, Model.Productos, htmlAttributes: new { @class = "form-control" })
+                </td>
+                <td>
+                    @Html.LabelFor(model => model.CodigoPlan, htmlAttributes: new { @class = "control-label col-md-3" })
+                    @Html.DropDownListFor(model => model.CodigoPlan, Model.PlanProductos, htmlAttributes: new { @class = "form-control" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.MontoAsegurado, htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.TextBoxFor(model => model.MontoAsegurado, htmlAttributes: new { @type = "number", @class = "form-control :required", @style = "display: inline-block" })
+                </td>
+                <td>
+                    @Html.LabelFor(model => model.MontoPrima, htmlAttributes: new { @class = "control-label col-md-3" })
+                    @Html.TextBoxFor(model => model.MontoPrima, htmlAttributes: new { @type = "number", @class = "form-control", disabled = "true" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.MontoRetorno, htmlAttributes: new { @class = "control-label col-md-4" })
+                    @Html.TextBoxFor(model => model.MontoRetorno, htmlAttributes: new { @type = "number", @class = "form-control", disabled = "true" })
+                </td>
+                <td>
+                    <input id="btnGenerarPropuesta" type="button" value="Generar Propuesta" class="btn btn-default" disabled="disabled" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <br />
+                    <div data-bind='simpleGrid: gridViewModel'> </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" align="center">
+                    <input id="btnGrabar" type="button" value="Grabar" class="btn btn-default" />
+                    <input id="btnCancelar" type="button" value="Cancelar" class="btn btn-default" />
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+}
+
+
+<script type="text/javascript">
+    var initialData = [];
+
+    var PagedGridModel = function (items) {
+        this.items = ko.observableArray(items);
+
+        this.addItem = function (anio, edad, montoPrima, montoAhorro, valorRescate, montoAsegurado) {
+            this.items.push({
+                Num_Anio: anio,
+                Num_Edad: edad,
+                Ss_Mon_Prim: round2Fixed(montoPrima),
+                Ss_Mon_Ahr: round2Fixed(montoAhorro),
+                Ss_Val_Resc: round2Fixed(valorRescate),
+                Ss_Mon_Aseg: round2Fixed(montoAsegurado)
+            });
+        };
+
+        this.clearData = function () {
+            this.items.removeAll();
+        };
+        
+        this.sortByName = function () {
+            this.items.sort(function (a, b) {
+                return a.name < b.name ? -1 : 1;
+            });
+        };
+
+        this.jumpToFirstPage = function () {
+            this.gridViewModel.currentPageIndex(0);
+        };
+        
+        this.gridViewModel = new ko.simpleGrid.viewModel({
+            data: this.items,
+            columns: [
+                { headerText: "Año", rowText: "Num_Anio" },
+                { headerText: "Edad", rowText: "Num_Edad" },
+                { headerText: "Monto prima", rowText: "Ss_Mon_Prim" },
+                { headerText: "Monto Ahorro", rowText: "Ss_Mon_Ahr" },
+                { headerText: "Valor Rescate", rowText: "Ss_Val_Resc" },
+                { headerText: "Monto Asegurado", rowText: "Ss_Mon_Aseg" }
+            ],
+            pageSize: 10
+        });
+    };
+
+    var modeloGrilla = new PagedGridModel(initialData);
+    ko.applyBindings(modeloGrilla);
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="@Url.Content("~/Scripts/datepicker-es.js")" type="text/javascript"></script>
+}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#btnGenerarPropuesta').click(function() {
+            GenerarPropuesta();
+        });
+
+        $('#btnGrabar').click(function() {
+            Grabar();
+        });
+
+        $('#btnCancelar').click(function () {
+            vURL = '@Url.Action("Index", "PropuestaSolucion")';
+            window.location = vURL;
+        });
+        
+        $('#FechaNacimiento').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            option: $.datepicker.regional['es'],
+            yearRange: "1930:+0"
+        });
+        $("#CodigoPlan").prop("disabled", true);
+        $('#labelError').hide();
+        $('#labelErrorFecha').hide();
+        
+
+        $('#MontoAsegurado').change(function () {
+            vNumero = $('#MontoAsegurado').val();
+            $('#MontoAsegurado').val(round2Fixed(vNumero));
+        });
+
+        $('#MontoPrima').change(function () {
+            vNumero = $('#MontoPrima').val();
+            $('#MontoPrima').val(round2Fixed(vNumero));
+        });
+
+        $('#MontoRetorno').change(function () {
+            vNumero = $('#MontoRetorno').val();
+            $('#MontoRetorno').val(round2Fixed(vNumero));
+        });
+    });
+
+
+    function round2Fixed(value) {
+        value = +value;
+
+        if (isNaN(value))
+            return NaN;
+
+        // Shift
+        value = value.toString().split('e');
+        value = Math.round(+(value[0] + 'e' + (value[1] ? (+value[1] + 2) : 2)));
+
+        // Shift back
+        value = value.toString().split('e');
+        return (+(value[0] + 'e' + (value[1] ? (+value[1] - 2) : -2))).toFixed(2);
+    }
+
+
+    function _calculateAge(birthday) { // birthday is a date
+        var ageDifMs = Date.now() - birthday.getTime();
+        var ageDate = new Date(ageDifMs); // miliseconds from epoch
+        return Math.abs(ageDate.getUTCFullYear() - 1970);
+    }
+
+
+    function fnCalculaEdad(birthday) { // birthday is a date
+        dob = new Date(birthday);
+        var today = new Date();
+        var age = Math.floor((today - dob) / (365.25 * 24 * 60 * 60 * 1000));
+        //alert(age + ' years old');
+        return age;
+    }
+
+
+    function ValidarEdad() {
+        $('#labelErrorFecha').hide();
+        var fechaNac = $("#FechaNacimiento").val();
+        var edad = fnCalculaEdad(new Date(fechaNac));
+        if (edad < 18 || edad > 65) {
+            $('#labelErrorFecha').show();
+        }
+    }
+
+
+    $("#CodigoProducto").change(function() { obtenerPlan(); });
+    $("#FechaNacimiento").change(function() { ValidarEdad(); });
+
+    $("#btnBuscar").click(function() { obtenerProspecto(); });
+
+    function obtenerProspecto() {
+        var dni = $("#DNIProspecto").val();
+
+        var request = $.ajax({
+            url: "/PacificoService/ObtenerProspecto",
+            type: "GET",
+            data: { numeroDNI: dni },
+            dataType: "json",
+            contentType: "text/plain"
+        });
+        request.done(function(msg) {
+            if (msg.Co_Prospecto != "") {
+                $("#CodigoProspecto").val(msg.Co_Prospecto);
+                $("#NombreProspecto").val(msg.No_Prospecto);
+                $("#ApellidoProspecto").val(msg.Tx_ApePaterno + " " + msg.Tx_ApeMaterno);
+                $("#btnGenerarPropuesta").prop("disabled", false);
+            } else {
+                $("#CodigoProspecto").val("");
+                $("#NombreProspecto").val("");
+                $("#ApellidoProspecto").val("");
+                $("#btnGenerarPropuesta").prop("disabled", true);
+                alert("El DNI ingresado no se encuentra registrado como prospecto");
+            }
+        });
+        request.fail(function(jqXHR, textStatus) {
+            alert("Request failed: " + textStatus);
+        });
+    }
+
+    function obtenerPlan() {
+        var codProducto = $("#CodigoProducto").val();
+
+        var request = $.ajax({
+            url: "/PacificoService/ObtenerPlanProducto",
+            type: "GET",
+            data: { codigoProducto: codProducto },
+            dataType: "json",
+            contentType: "text/plain"
+        });
+        request.done(function(data) {
+            var item = "";
+            $("#CodigoPlan").html("");
+            $.each(data, function(key, value) {
+                item = item + "<option value=" + value.Codigo + ">" + value.Value + "</option>";
+            });
+            $("#CodigoPlan").html(item);
+            if (data.length == 0)
+                $("#CodigoPlan").prop("disabled", true);
+            else
+                $("#CodigoPlan").prop("disabled", false);
+        });
+        request.fail(function(jqXHR, textStatus) {
+            alert("Request failed: " + textStatus);
+        });
+    }
+
+    function GenerarPropuesta() {
+        var montoAsegurado = $("#MontoAsegurado").val();
+        
+        var edad = _calculateAge($("#FechaNacimiento").datepicker('getDate'));
+
+        var request = $.ajax({
+            url: "/PacificoService/ObtenerDetalle",
+            type: "GET",
+            data: {
+                montoAsegurado: montoAsegurado,
+                edad: edad,
+                codPlanProducto: $("#CodigoPlan").val()
+            },
+            dataType: "json",
+            contentType: "text/plain"
+        });
+        request.done(function(data) {
+            if (data.Success == true) {
+                modeloGrilla.clearData();
+                var montoRetorno = 0;
+                
+                for (var i in data.Data) {
+                    var detalle = data.Data[i];
+
+                    modeloGrilla.addItem(
+                        detalle.Num_Anio,
+                        detalle.Num_Edad,
+                        detalle.Ss_Mon_Prim,
+                        detalle.Ss_Mon_Ahr,
+                        detalle.Ss_Val_Resc,
+                        detalle.Ss_Mon_Aseg);
+                    
+                    montoRetorno = montoRetorno + detalle.Ss_Val_Resc;
+                    //if (i == edad) {
+                    //    $("#MontoRetorno").val(detalle.Ss_Val_Resc);
+                    //}
+                }
+
+                $("#MontoRetorno").val(round2Fixed(montoRetorno));
+                $("#MontoPrima").val(round2Fixed(montoAsegurado * 0.09));
+            } else {
+                alert('El monto asegurado no tiene relación con el plan seleccionado');
+            }
+        });
+        request.fail(function (jqXHR, textStatus) {
+            alert("Request failed: " + textStatus);
+        });
+
+    }
+
+    function Grabar() {
+        if ($("form").validate().form()) {
+            var propuesta = {};
+            propuesta.CodigoProspecto = $("#CodigoProspecto").val();
+            propuesta.FechaNacimiento = $("#FechaNacimiento").val();
+            propuesta.CodigoProducto = $("#CodigoProducto").val();
+            propuesta.CodigoPlan = $("#CodigoPlan").val();
+            propuesta.MontoAsegurado = $("#MontoAsegurado").val();
+            propuesta.MontoPrima = $("#MontoPrima").val();
+            propuesta.MontoRetorno = $("#MontoRetorno").val();
+            propuesta.Detalle = modeloGrilla.items();
+
+            var request = $.ajax({
+                url: "/PropuestaSolucion/CrearPropuesta",
+                data: JSON.stringify(propuesta),
+                contentType: 'application/json',
+                dataType: 'json',
+                type: 'post'
+            });
+            request.done(function (data) {
+                $("#divMsg").show();
+                setTimeout(function () {
+                    window.location.href = data;
+                }, 3000);
+            });
+            request.fail(function(jqXHR, textStatus) {
+                alert("Request failed: " + textStatus);
+            });
+
+        }
+    }
+</script>

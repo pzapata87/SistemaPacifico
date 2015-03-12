@@ -52,7 +52,6 @@ _ReSharper*/
 
 #NuGet
 packages/
-VIPAC 1.0/packages
 
 #ncrunch
 *ncrunch*
@@ -60,3 +59,4 @@ VIPAC 1.0/packages
 
 # visual studio database projects
 *.dbmdl
+

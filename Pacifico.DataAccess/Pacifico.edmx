@@ -1,0 +1,3116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BDPacificoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="Co_Area" />
+          </Key>
+          <Property Name="Co_Area" Type="int" Nullable="false" />
+          <Property Name="No_Area" Type="varchar" MaxLength="80" />
+          <Property Name="Tx_Descripcion" Type="varchar" MaxLength="120" />
+          <Property Name="Tx_Responsable" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Campania">
+          <Key>
+            <PropertyRef Name="Cod_Camp" />
+          </Key>
+          <Property Name="Cod_Camp" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nro_Camp" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fec_Ini" Type="datetime" Nullable="false" />
+          <Property Name="Fec_Fin" Type="datetime" Nullable="false" />
+          <Property Name="Qtd_Meta" Type="int" Nullable="false" />
+          <Property Name="Flg_Flag" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CanalVenta">
+          <Key>
+            <PropertyRef Name="Cod_Cnl_Vta" />
+          </Key>
+          <Property Name="Cod_Cnl_Vta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nro_Cnl_Vta" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Txt_Tipo" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cargo">
+          <Key>
+            <PropertyRef Name="Cod_Car" />
+          </Key>
+          <Property Name="Cod_Car" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nro_Car" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Co_Cliente" />
+          </Key>
+          <Property Name="Co_Cliente" Type="int" Nullable="false" />
+          <Property Name="No_Cliente" Type="varchar" MaxLength="80" />
+          <Property Name="No_ApePaterno" Type="varchar" MaxLength="80" />
+          <Property Name="No_ApeMaterno" Type="varchar" MaxLength="80" />
+          <Property Name="Fi_Sexo" Type="varchar" MaxLength="1" />
+          <Property Name="Nu_DNI" Type="varchar" MaxLength="8" />
+          <Property Name="Fe_Nacimiento" Type="datetime" />
+          <Property Name="Nu_Telefono" Type="varchar" MaxLength="20" />
+          <Property Name="Nu_Movil" Type="varchar" MaxLength="20" />
+          <Property Name="Tx_Direccion" Type="varchar" MaxLength="20" />
+          <Property Name="Tx_Correo" Type="varchar" MaxLength="30" />
+          <Property Name="Fi_Estado" Type="varchar" MaxLength="1" />
+          <Property Name="Tx_CentroTrabajo" Type="varchar" MaxLength="80" />
+          <Property Name="Tx_CargoTrabajo" Type="varchar" MaxLength="80" />
+        </EntityType>
+        <EntityType Name="Comision">
+          <Key>
+            <PropertyRef Name="Cod_Com" />
+          </Key>
+          <Property Name="Cod_Com" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nro_Com" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fec_Reg" Type="datetime" Nullable="false" />
+          <Property Name="Cod_Camp" Type="int" Nullable="false" />
+          <Property Name="Cod_Cnl_Vta" Type="int" Nullable="false" />
+          <Property Name="Cod_Car" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ComisionRequisito">
+          <Key>
+            <PropertyRef Name="Cod_Com" />
+            <PropertyRef Name="Cod_Req" />
+          </Key>
+          <Property Name="Cod_Com" Type="int" Nullable="false" />
+          <Property Name="Cod_Req" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'BDPacifico.dbo.ContratoPrestadora' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="ContratoPrestadora">
+          <Property Name="numeroContrato" Type="int" />
+          <Property Name="fechaInicioContrato" Type="date" />
+          <Property Name="fechaFinContrato" Type="date" />
+          <Property Name="descripcionLegal" Type="varchar" MaxLength="100" />
+        </EntityType>-->
+        <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'BDPacifico.dbo.ContratoServicio' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="ContratoServicio">
+          <Property Name="tarifaNueva" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="fechaNueva" Type="date" />
+        </EntityType>-->
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="Co_Departamento" />
+          </Key>
+          <Property Name="Co_Departamento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="No_Departamento" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetallePropuestaSolucion">
+          <Key>
+            <PropertyRef Name="Cod_Det_Prop_Sol" />
+          </Key>
+          <Property Name="Cod_Det_Prop_Sol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cod_Prop_Sol" Type="int" Nullable="false" />
+          <Property Name="Num_Anio" Type="int" Nullable="false" />
+          <Property Name="Num_Edad" Type="int" Nullable="false" />
+          <Property Name="Ss_Mon_Prim" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Ss_Mon_Ahr" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Ss_Val_Resc" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Ss_Mon_Aseg" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Distrito">
+          <Key>
+            <PropertyRef Name="Co_Distrito" />
+          </Key>
+          <Property Name="Co_Distrito" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="No_Distrito" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Co_Provincia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="Cod_Emp" />
+          </Key>
+          <Property Name="Cod_Emp" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nro_Emp" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nro_Ape_Pat" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nro_Ape_Mat" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Flg_Sex" Type="bit" Nullable="false" />
+          <Property Name="Nu_Dni" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="Fe_Nacimiento" Type="date" Nullable="false" />
+          <Property Name="Nu_Telefono" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Nu_Movil" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="Tx_Direccion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Co_Distrito" Type="int" Nullable="false" />
+          <Property Name="Tx_Correo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Co_Cargo" Type="int" Nullable="false" />
+          <Property Name="Co_Area" Type="int" Nullable="false" />
+          <Property Name="Fe_RegistroIns" Type="datetime" Nullable="false" />
+          <Property Name="No_UsuarioIns" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Fe_RegistroUpd" Type="datetime" Nullable="false" />
+          <Property Name="No_UsuarioUpd" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Estado_Solicitud">
+          <Key>
+            <PropertyRef Name="Co_Estado" />
+          </Key>
+          <Property Name="Co_Estado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="No_Estado" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormatoPlanTrabajo">
+          <Key>
+            <PropertyRef Name="IDFormatoPlanTrabajo" />
+            <PropertyRef Name="IDPlan" />
+            <PropertyRef Name="IDPeriodo" />
+          </Key>
+          <Property Name="IDFormatoPlanTrabajo" Type="int" Nullable="false" />
+          <Property Name="IDPlan" Type="int" Nullable="false" />
+          <Property Name="IDPeriodo" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="IDResponsable" Type="int" Nullable="false" />
+          <Property Name="Version" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adjunto" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Comentario" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Invitacion">
+          <Key>
+            <PropertyRef Name="Co_Invitacion" />
+          </Key>
+          <Property Name="Co_Invitacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fe_Invitacion" Type="date" Nullable="false" />
+          <Property Name="Fe_Expiracion" Type="date" Nullable="false" />
+          <Property Name="Fl_Estado" Type="int" Nullable="false" />
+          <Property Name="Fe_RegistroIns" Type="datetime" Nullable="false" />
+          <Property Name="No_UsuarioIns" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Fe_RegistroUpd" Type="datetime" Nullable="false" />
+          <Property Name="No_UsuarioUpd" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Materia">
+          <Key>
+            <PropertyRef Name="IDMateria" />
+          </Key>
+          <Property Name="IDMateria" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Periodo">
+          <Key>
+            <PropertyRef Name="IDPeriodo" />
+          </Key>
+          <Property Name="IDPeriodo" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlanProducto">
+          <Key>
+            <PropertyRef Name="Cod_Plan_Prod" />
+          </Key>
+          <Property Name="Cod_Plan_Prod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nro_Plan_Prod" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ss_Prim_Min" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Ss_Sum_Min_Aseg" Type="int" Nullable="false" />
+          <Property Name="Ss_Sum_Max_Aseg" Type="int" Nullable="false" />
+          <Property Name="Cod_Prod" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlanTrabajo">
+          <Key>
+            <PropertyRef Name="IDPlan" />
+            <PropertyRef Name="IDPeriodo" />
+          </Key>
+          <Property Name="IDPlan" Type="int" Nullable="false" />
+          <Property Name="IDPeriodo" Type="int" Nullable="false" />
+          <Property Name="Actividades" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="FechaFin" Type="datetime" Nullable="false" />
+          <Property Name="Version" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adjunto" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Comentario" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Poliza">
+          <Key>
+            <PropertyRef Name="Co_Poliza" />
+          </Key>
+          <Property Name="Co_Poliza" Type="int" Nullable="false" />
+          <Property Name="Nu_Poliza" Type="varchar" MaxLength="20" />
+          <Property Name="Co_Cliente" Type="int" />
+          <Property Name="SS_Prima" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="Fe_Creacion" Type="datetime" />
+          <Property Name="Fe_Renovacion" Type="datetime" />
+          <Property Name="Fe_InicioVigencia" Type="datetime" />
+          <Property Name="Fe_Vencimiento" Type="datetime" />
+          <Property Name="Tx_TipoPago" Type="varchar" MaxLength="20" />
+          <Property Name="Tx_MarcaTarjeta" Type="varchar" MaxLength="20" />
+          <Property Name="Nu_Tarjeta" Type="varchar" MaxLength="20" />
+          <Property Name="Fl_Estado" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Prestadora">
+          <Key>
+            <PropertyRef Name="Co_Prestadora" />
+          </Key>
+          <Property Name="Co_Prestadora" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nu_Ruc" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="Tx_RazonSocial" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Tx_DomicilioFiscal" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Co_Distrito" Type="int" Nullable="false" />
+          <Property Name="No_RepresentanteLegal" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="No_ApePatRepresentanteLegal" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="No_ApeMatRepresentanteLegal" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Tx_CorreoRepresentanteLegal" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Nu_TelefonoRepresentanteLegal" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Tx_PaginaWeb" Type="varchar" MaxLength="50" />
+          <Property Name="Fe_Afiliacion" Type="date" />
+          <Property Name="Fl_Activo" Type="int" Nullable="false" />
+          <Property Name="Fe_RegistroIns" Type="datetime" Nullable="false" />
+          <Property Name="No_UsuarioIns" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Fe_RegistroUpd" Type="datetime" Nullable="false" />
+          <Property Name="No_UsuarioUpd" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Procedimiento">
+          <Key>
+            <PropertyRef Name="Co_Procedimiento" />
+          </Key>
+          <Property Name="Co_Procedimiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="No_Procedimiento" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProcedimientoAuditoria">
+          <Key>
+            <PropertyRef Name="IDProcedimientoAuditoria" />
+            <PropertyRef Name="IDPlan" />
+            <PropertyRef Name="IDPeriodo" />
+          </Key>
+          <Property Name="IDProcedimientoAuditoria" Type="int" Nullable="false" />
+          <Property Name="IDPlan" Type="int" Nullable="false" />
+          <Property Name="IDPeriodo" Type="int" Nullable="false" />
+          <Property Name="FechaInicio" Type="datetime" Nullable="false" />
+          <Property Name="FechaFin" Type="datetime" Nullable="false" />
+          <Property Name="TiempoEjecucion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IDEmpleadoResponsable" Type="int" Nullable="false" />
+          <Property Name="IDRepresentanteUnidad" Type="int" Nullable="false" />
+          <Property Name="Co_Area" Type="int" Nullable="false" />
+          <Property Name="IDMateria" Type="int" Nullable="false" />
+          <Property Name="Comentario" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="ProcedimientoSeguimiento">
+          <Key>
+            <PropertyRef Name="IDProcedimientoSeguimiento" />
+            <PropertyRef Name="IDPlan" />
+            <PropertyRef Name="IDPeriodo" />
+          </Key>
+          <Property Name="IDProcedimientoSeguimiento" Type="int" Nullable="false" />
+          <Property Name="IDPlan" Type="int" Nullable="false" />
+          <Property Name="IDPeriodo" Type="int" Nullable="false" />
+          <Property Name="EvaluacionVerificacion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="FechaInicio" Type="datetime" Nullable="false" />
+          <Property Name="FechaFin" Type="datetime" Nullable="false" />
+          <Property Name="TiempoEjecucion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IDEmpleadoResponsable" Type="int" Nullable="false" />
+          <Property Name="IDRepresentanteUnidad" Type="int" Nullable="false" />
+          <Property Name="Co_Area" Type="int" Nullable="false" />
+          <Property Name="IDMateria" Type="int" Nullable="false" />
+          <Property Name="Comentario" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="Cod_Prod" />
+          </Key>
+          <Property Name="Cod_Prod" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nro_Prod" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fec_Crea" Type="datetime" Nullable="false" />
+          <Property Name="FI_Estado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Flg_Flag" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PropuestaSolucion">
+          <Key>
+            <PropertyRef Name="Cod_Prop_Sol" />
+          </Key>
+          <Property Name="Cod_Prop_Sol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ss_Mon_Prim" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Fec_Nac" Type="datetime" Nullable="false" />
+          <Property Name="Ss_Mon_Ret" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Ss_Mon_Aseg" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Cod_Pros" Type="int" Nullable="false" />
+          <Property Name="Cod_Prod" Type="int" Nullable="false" />
+          <Property Name="Cod_Plan" Type="int" Nullable="false" />
+          <Property Name="Fec_Crea" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Prospecto">
+          <Key>
+            <PropertyRef Name="Cod_Pros" />
+          </Key>
+          <Property Name="Cod_Pros" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Txt_Pros" Type="varchar" MaxLength="50" />
+          <Property Name="Txt_Ape_Pat" Type="varchar" MaxLength="50" />
+          <Property Name="Txt_Ape_Mat" Type="varchar" MaxLength="50" />
+          <Property Name="Txt_Dir" Type="varchar" MaxLength="50" />
+          <Property Name="Txt_Tel" Type="varchar" MaxLength="50" />
+          <Property Name="Txt_Mov" Type="varchar" MaxLength="50" />
+          <Property Name="Txt_Crr" Type="varchar" MaxLength="50" />
+          <Property Name="Num_DNI" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Provincia">
+          <Key>
+            <PropertyRef Name="Co_Provincia" />
+          </Key>
+          <Property Name="Co_Provincia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="No_Provincia" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Co_Departamento" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rango">
+          <Key>
+            <PropertyRef Name="Cod_Rang" />
+          </Key>
+          <Property Name="Cod_Rang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ss_Min" Type="float" Nullable="false" />
+          <Property Name="Ss_Max" Type="float" Nullable="false" />
+          <Property Name="Qtd_Cant" Type="int" Nullable="false" />
+          <Property Name="Cod_Com" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reclamante">
+          <Key>
+            <PropertyRef Name="Co_Reclamante" />
+          </Key>
+          <Property Name="Co_Reclamante" Type="int" Nullable="false" />
+          <Property Name="No_Reclamante" Type="varchar" MaxLength="80" />
+          <Property Name="No_ApePaterno" Type="varchar" MaxLength="80" />
+          <Property Name="No_ApeMaterno" Type="varchar" MaxLength="80" />
+          <Property Name="Fi_Sexo" Type="varchar" MaxLength="1" />
+          <Property Name="Nu_DNI" Type="varchar" MaxLength="8" />
+          <Property Name="Fe_Nacimiento" Type="datetime" />
+          <Property Name="Tx_Telefono" Type="varchar" MaxLength="30" />
+          <Property Name="Tx_Movil" Type="varchar" MaxLength="30" />
+          <Property Name="Tx_Correo" Type="varchar" MaxLength="80" />
+          <Property Name="Co_Distrito" Type="int" />
+          <Property Name="Tx_Direccion" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Reclamo">
+          <Key>
+            <PropertyRef Name="Nu_Reclamo" />
+          </Key>
+          <Property Name="Nu_Reclamo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Co_Reclamante" Type="int" />
+          <Property Name="Co_Empleado" Type="int" />
+          <Property Name="Co_MotivoReclamo" Type="int" />
+          <Property Name="Fe_Registro" Type="datetime" />
+          <Property Name="Fe_Ocurrencia" Type="datetime" />
+          <Property Name="Tx_LugIncidencia" Type="varchar" MaxLength="80" />
+          <Property Name="Tx_PersAtendio" Type="varchar" MaxLength="150" />
+          <Property Name="Tx_DescReclamo" Type="varchar" MaxLength="2000" Nullable="false" />
+          <Property Name="Tx_ResInmediata" Type="varchar" MaxLength="2000" />
+          <Property Name="Fi_Estado" Type="varchar" MaxLength="1" />
+          <Property Name="Fe_CierreReclamo" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Reclamo_Motivo">
+          <Key>
+            <PropertyRef Name="Co_MotivoReclamo" />
+          </Key>
+          <Property Name="Co_MotivoReclamo" Type="int" Nullable="false" />
+          <Property Name="Tx_Descripcion" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Reclamo_Poliza">
+          <Key>
+            <PropertyRef Name="Co_ReclamoPoliza" />
+          </Key>
+          <Property Name="Co_ReclamoPoliza" Type="int" Nullable="false" />
+          <Property Name="Fi_Estado" Type="varchar" MaxLength="20" />
+          <Property Name="Co_Poliza" Type="int" />
+          <Property Name="Nu_Reclamo" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'BDPacifico.dbo.RedAtencion' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="RedAtencion">
+          <Property Name="numeroRed" Type="int" />
+          <Property Name="nombreRed" Type="int" />
+        </EntityType>-->
+        <EntityType Name="Requisito">
+          <Key>
+            <PropertyRef Name="Cod_Req" />
+          </Key>
+          <Property Name="Cod_Req" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nro_Req" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'BDPacifico.dbo.ServicioNegociacion' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="ServicioNegociacion">
+          <Property Name="tarifaAcordada" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="tarifaPropuesta" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>-->
+        <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'BDPacifico.dbo.Servicios' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="Servicios">
+          <Property Name="numeroServicio" Type="int" />
+          <Property Name="nombreServicio" Type="varchar" MaxLength="50" />
+          <Property Name="detalle" Type="varchar" MaxLength="300" />
+          <Property Name="categoria" Type="varchar" MaxLength="100" />
+          <Property Name="activo" Type="int" />
+        </EntityType>-->
+        <EntityType Name="Solicitud_Afiliacion">
+          <Key>
+            <PropertyRef Name="Co_Solicitud" />
+          </Key>
+          <Property Name="Co_Solicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Co_Invitacion" Type="int" Nullable="false" />
+          <Property Name="Nu_Folio" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fe_Solicitud" Type="date" Nullable="false" />
+          <Property Name="No_Contacto" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="No_ApePatContacto" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="No_ApeMatContacto" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Nu_TelefonoContacto" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Tx_CorreoContacto" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Tx_EvaluacionSunat" Type="varchar" MaxLength="300" />
+          <Property Name="Tx_EvaluacionRiesgos" Type="varchar" MaxLength="300" />
+          <Property Name="Co_Coordinador" Type="int" Nullable="false" />
+          <Property Name="Co_Evaluador" Type="int" Nullable="false" />
+          <Property Name="Tx_EvaluacionServicios" Type="varchar" MaxLength="300" />
+          <Property Name="Tx_ObservacionAprobador" Type="varchar" MaxLength="300" />
+          <Property Name="Tx_ObservacionNegociador" Type="varchar" MaxLength="300" />
+          <Property Name="Co_Estado" Type="int" Nullable="false" />
+          <Property Name="Fe_RegistroIns" Type="datetime" Nullable="false" />
+          <Property Name="No_UsuarioIns" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Fe_RegistroUpd" Type="datetime" Nullable="false" />
+          <Property Name="No_UsuarioUpd" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Solicitud_Autorizacion">
+          <Key>
+            <PropertyRef Name="Co_Solicitud" />
+          </Key>
+          <Property Name="Co_Solicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Co_Poliza" Type="int" Nullable="false" />
+          <Property Name="Co_Sede" Type="int" Nullable="false" />
+          <Property Name="Fe_Solicitud" Type="date" Nullable="false" />
+          <Property Name="No_Contacto" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="No_ApePatContacto" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="No_ApeMatContacto" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Nu_TelefonoContacto" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Tx_CorreoContacto" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Co_Procedimiento" Type="int" Nullable="false" />
+          <Property Name="Ss_Monto" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Co_Evaluador" Type="int" Nullable="false" />
+          <Property Name="Co_Autorizador" Type="int" Nullable="false" />
+          <Property Name="Tx_ObservacionEvaluador" Type="varchar" MaxLength="300" />
+          <Property Name="Tx_ObservacionAutorizador" Type="varchar" MaxLength="300" />
+          <Property Name="Fl_Estado" Type="int" Nullable="false" />
+          <Property Name="Fe_RegistroIns" Type="datetime" Nullable="false" />
+          <Property Name="No_UsuarioIns" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Fe_RegistroUpd" Type="datetime" Nullable="false" />
+          <Property Name="No_UsuarioUpd" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sugerencia">
+          <Key>
+            <PropertyRef Name="Nu_Sugerencia" />
+          </Key>
+          <Property Name="Nu_Sugerencia" Type="int" Nullable="false" />
+          <Property Name="Tx_Sugerencia" Type="varchar" MaxLength="400" />
+          <Property Name="Fe_Registro" Type="datetime" />
+          <Property Name="Fi_Estado" Type="varchar" MaxLength="1" />
+          <Property Name="Co_Tema" Type="int" />
+          <Property Name="Co_Area" Type="int" />
+          <Property Name="Co_Cliente" Type="int" />
+        </EntityType>
+        <EntityType Name="Tema">
+          <Key>
+            <PropertyRef Name="Co_Tema" />
+          </Key>
+          <Property Name="Co_Tema" Type="int" Nullable="false" />
+          <Property Name="No_Nombre" Type="varchar" MaxLength="80" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="TipoPrestadora">
+          <Property Name="numeroTipoPrestadora" Type="int" />
+          <Property Name="descripción" Type="varchar" MaxLength="100" />
+          <Property Name="activo" Type="int" />
+        </EntityType>-->
+        <Association Name="FK__Poliza__Co_Clien__571DF1D5">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Co_Cliente" />
+            </Principal>
+            <Dependent Role="Poliza">
+              <PropertyRef Name="Co_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Poliza__Co_Clien__5812160E">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Co_Cliente" />
+            </Principal>
+            <Dependent Role="Poliza">
+              <PropertyRef Name="Co_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reclamant__Co_Di__5AEE82B9">
+          <End Role="Distrito" Type="Self.Distrito" Multiplicity="0..1" />
+          <End Role="Reclamante" Type="Self.Reclamante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distrito">
+              <PropertyRef Name="Co_Distrito" />
+            </Principal>
+            <Dependent Role="Reclamante">
+              <PropertyRef Name="Co_Distrito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reclamo__Co_Empl__5BE2A6F2">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
+          <End Role="Reclamo" Type="Self.Reclamo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Cod_Emp" />
+            </Principal>
+            <Dependent Role="Reclamo">
+              <PropertyRef Name="Co_Empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reclamo__Co_Moti__5CD6CB2B">
+          <End Role="Reclamo_Motivo" Type="Self.Reclamo_Motivo" Multiplicity="0..1" />
+          <End Role="Reclamo" Type="Self.Reclamo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reclamo_Motivo">
+              <PropertyRef Name="Co_MotivoReclamo" />
+            </Principal>
+            <Dependent Role="Reclamo">
+              <PropertyRef Name="Co_MotivoReclamo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reclamo__Co_Recl__5DCAEF64">
+          <End Role="Reclamante" Type="Self.Reclamante" Multiplicity="0..1" />
+          <End Role="Reclamo" Type="Self.Reclamo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reclamante">
+              <PropertyRef Name="Co_Reclamante" />
+            </Principal>
+            <Dependent Role="Reclamo">
+              <PropertyRef Name="Co_Reclamante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reclamo_P__Co_Po__5EBF139D">
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="0..1" />
+          <End Role="Reclamo_Poliza" Type="Self.Reclamo_Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poliza">
+              <PropertyRef Name="Co_Poliza" />
+            </Principal>
+            <Dependent Role="Reclamo_Poliza">
+              <PropertyRef Name="Co_Poliza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reclamo_P__Nu_Re__5FB337D6">
+          <End Role="Reclamo" Type="Self.Reclamo" Multiplicity="0..1" />
+          <End Role="Reclamo_Poliza" Type="Self.Reclamo_Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reclamo">
+              <PropertyRef Name="Nu_Reclamo" />
+            </Principal>
+            <Dependent Role="Reclamo_Poliza">
+              <PropertyRef Name="Nu_Reclamo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sugerenci__Co_Ar__66603565">
+          <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
+          <End Role="Sugerencia" Type="Self.Sugerencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="Co_Area" />
+            </Principal>
+            <Dependent Role="Sugerencia">
+              <PropertyRef Name="Co_Area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sugerenci__Co_Cl__6754599E">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Sugerencia" Type="Self.Sugerencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Co_Cliente" />
+            </Principal>
+            <Dependent Role="Sugerencia">
+              <PropertyRef Name="Co_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sugerenci__Co_Te__68487DD7">
+          <End Role="Tema" Type="Self.Tema" Multiplicity="0..1" />
+          <End Role="Sugerencia" Type="Self.Sugerencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tema">
+              <PropertyRef Name="Co_Tema" />
+            </Principal>
+            <Dependent Role="Sugerencia">
+              <PropertyRef Name="Co_Tema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampaniaComision">
+          <End Role="Campania" Type="Self.Campania" Multiplicity="1" />
+          <End Role="Comision" Type="Self.Comision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campania">
+              <PropertyRef Name="Cod_Camp" />
+            </Principal>
+            <Dependent Role="Comision">
+              <PropertyRef Name="Cod_Camp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CanalVentaComision">
+          <End Role="CanalVenta" Type="Self.CanalVenta" Multiplicity="1" />
+          <End Role="Comision" Type="Self.Comision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CanalVenta">
+              <PropertyRef Name="Cod_Cnl_Vta" />
+            </Principal>
+            <Dependent Role="Comision">
+              <PropertyRef Name="Cod_Cnl_Vta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CargoComision">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
+          <End Role="Comision" Type="Self.Comision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="Cod_Car" />
+            </Principal>
+            <Dependent Role="Comision">
+              <PropertyRef Name="Cod_Car" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComisionComisionRequisito">
+          <End Role="Comision" Type="Self.Comision" Multiplicity="1" />
+          <End Role="ComisionRequisito" Type="Self.ComisionRequisito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comision">
+              <PropertyRef Name="Cod_Com" />
+            </Principal>
+            <Dependent Role="ComisionRequisito">
+              <PropertyRef Name="Cod_Com" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComisionRango">
+          <End Role="Comision" Type="Self.Comision" Multiplicity="1" />
+          <End Role="Rango" Type="Self.Rango" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comision">
+              <PropertyRef Name="Cod_Com" />
+            </Principal>
+            <Dependent Role="Rango">
+              <PropertyRef Name="Cod_Com" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetallePropuestaSolucion_PropuestaSolucion">
+          <End Role="PropuestaSolucion" Type="Self.PropuestaSolucion" Multiplicity="1" />
+          <End Role="DetallePropuestaSolucion" Type="Self.DetallePropuestaSolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropuestaSolucion">
+              <PropertyRef Name="Cod_Prop_Sol" />
+            </Principal>
+            <Dependent Role="DetallePropuestaSolucion">
+              <PropertyRef Name="Cod_Prop_Sol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DISTRITO_PROVINCIA">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
+          <End Role="Distrito" Type="Self.Distrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="Co_Provincia" />
+            </Principal>
+            <Dependent Role="Distrito">
+              <PropertyRef Name="Co_Provincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_AREA">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="Co_Area" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="Co_Area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_CARGO">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="Cod_Car" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="Co_Cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_DISTRITO">
+          <End Role="Distrito" Type="Self.Distrito" Multiplicity="1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distrito">
+              <PropertyRef Name="Co_Distrito" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="Co_Distrito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormatoPlanTrabajo_Periodo">
+          <End Role="Periodo" Type="Self.Periodo" Multiplicity="1" />
+          <End Role="FormatoPlanTrabajo" Type="Self.FormatoPlanTrabajo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periodo">
+              <PropertyRef Name="IDPeriodo" />
+            </Principal>
+            <Dependent Role="FormatoPlanTrabajo">
+              <PropertyRef Name="IDPeriodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormatoPlanTrabajo_PlanTrabajo">
+          <End Role="PlanTrabajo" Type="Self.PlanTrabajo" Multiplicity="1" />
+          <End Role="FormatoPlanTrabajo" Type="Self.FormatoPlanTrabajo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlanTrabajo">
+              <PropertyRef Name="IDPlan" />
+              <PropertyRef Name="IDPeriodo" />
+            </Principal>
+            <Dependent Role="FormatoPlanTrabajo">
+              <PropertyRef Name="IDPlan" />
+              <PropertyRef Name="IDPeriodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlanProducto_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="PlanProducto" Type="Self.PlanProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="Cod_Prod" />
+            </Principal>
+            <Dependent Role="PlanProducto">
+              <PropertyRef Name="Cod_Prod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlanTrabajo_Periodo">
+          <End Role="Periodo" Type="Self.Periodo" Multiplicity="1" />
+          <End Role="PlanTrabajo" Type="Self.PlanTrabajo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periodo">
+              <PropertyRef Name="IDPeriodo" />
+            </Principal>
+            <Dependent Role="PlanTrabajo">
+              <PropertyRef Name="IDPeriodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRESTADORA_DISTRITO">
+          <End Role="Distrito" Type="Self.Distrito" Multiplicity="1" />
+          <End Role="Prestadora" Type="Self.Prestadora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distrito">
+              <PropertyRef Name="Co_Distrito" />
+            </Principal>
+            <Dependent Role="Prestadora">
+              <PropertyRef Name="Co_Distrito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedimientoAuditoria_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="ProcedimientoAuditoria" Type="Self.ProcedimientoAuditoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="Co_Area" />
+            </Principal>
+            <Dependent Role="ProcedimientoAuditoria">
+              <PropertyRef Name="Co_Area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedimientoAuditoria_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="ProcedimientoAuditoria" Type="Self.ProcedimientoAuditoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Cod_Emp" />
+            </Principal>
+            <Dependent Role="ProcedimientoAuditoria">
+              <PropertyRef Name="IDEmpleadoResponsable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedimientoAuditoria_Empleado1">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="ProcedimientoAuditoria" Type="Self.ProcedimientoAuditoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Cod_Emp" />
+            </Principal>
+            <Dependent Role="ProcedimientoAuditoria">
+              <PropertyRef Name="IDRepresentanteUnidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedimientoAuditoria_Materia">
+          <End Role="Materia" Type="Self.Materia" Multiplicity="1" />
+          <End Role="ProcedimientoAuditoria" Type="Self.ProcedimientoAuditoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materia">
+              <PropertyRef Name="IDMateria" />
+            </Principal>
+            <Dependent Role="ProcedimientoAuditoria">
+              <PropertyRef Name="IDMateria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedimientoAuditoria_Periodo">
+          <End Role="Periodo" Type="Self.Periodo" Multiplicity="1" />
+          <End Role="ProcedimientoAuditoria" Type="Self.ProcedimientoAuditoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periodo">
+              <PropertyRef Name="IDPeriodo" />
+            </Principal>
+            <Dependent Role="ProcedimientoAuditoria">
+              <PropertyRef Name="IDPeriodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedimientoSeguimiento_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="ProcedimientoSeguimiento" Type="Self.ProcedimientoSeguimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="Co_Area" />
+            </Principal>
+            <Dependent Role="ProcedimientoSeguimiento">
+              <PropertyRef Name="Co_Area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedimientoSeguimiento_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="ProcedimientoSeguimiento" Type="Self.ProcedimientoSeguimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Cod_Emp" />
+            </Principal>
+            <Dependent Role="ProcedimientoSeguimiento">
+              <PropertyRef Name="IDEmpleadoResponsable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedimientoSeguimiento_Empleado1">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="ProcedimientoSeguimiento" Type="Self.ProcedimientoSeguimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Cod_Emp" />
+            </Principal>
+            <Dependent Role="ProcedimientoSeguimiento">
+              <PropertyRef Name="IDRepresentanteUnidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedimientoSeguimiento_Materia">
+          <End Role="Materia" Type="Self.Materia" Multiplicity="1" />
+          <End Role="ProcedimientoSeguimiento" Type="Self.ProcedimientoSeguimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materia">
+              <PropertyRef Name="IDMateria" />
+            </Principal>
+            <Dependent Role="ProcedimientoSeguimiento">
+              <PropertyRef Name="IDMateria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedimientoSeguimiento_Periodo">
+          <End Role="Periodo" Type="Self.Periodo" Multiplicity="1" />
+          <End Role="ProcedimientoSeguimiento" Type="Self.ProcedimientoSeguimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periodo">
+              <PropertyRef Name="IDPeriodo" />
+            </Principal>
+            <Dependent Role="ProcedimientoSeguimiento">
+              <PropertyRef Name="IDPeriodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropuestaSolucion_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="PropuestaSolucion" Type="Self.PropuestaSolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="Cod_Prod" />
+            </Principal>
+            <Dependent Role="PropuestaSolucion">
+              <PropertyRef Name="Cod_Prod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropuestaSolucion_Prospecto">
+          <End Role="Prospecto" Type="Self.Prospecto" Multiplicity="1" />
+          <End Role="PropuestaSolucion" Type="Self.PropuestaSolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prospecto">
+              <PropertyRef Name="Cod_Pros" />
+            </Principal>
+            <Dependent Role="PropuestaSolucion">
+              <PropertyRef Name="Cod_Pros" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROVINCIA_DEPARTAMENTO">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="Co_Departamento" />
+            </Principal>
+            <Dependent Role="Provincia">
+              <PropertyRef Name="Co_Departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequisitoComisionRequisito">
+          <End Role="Requisito" Type="Self.Requisito" Multiplicity="1" />
+          <End Role="ComisionRequisito" Type="Self.ComisionRequisito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Requisito">
+              <PropertyRef Name="Cod_Req" />
+            </Principal>
+            <Dependent Role="ComisionRequisito">
+              <PropertyRef Name="Cod_Req" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOLICITUD_AFILIACION_EMPLEADO">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Solicitud_Afiliacion" Type="Self.Solicitud_Afiliacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Cod_Emp" />
+            </Principal>
+            <Dependent Role="Solicitud_Afiliacion">
+              <PropertyRef Name="Co_Coordinador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOLICITUD_AFILIACION_EMPLEADO1">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Solicitud_Afiliacion" Type="Self.Solicitud_Afiliacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Cod_Emp" />
+            </Principal>
+            <Dependent Role="Solicitud_Afiliacion">
+              <PropertyRef Name="Co_Evaluador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOLICITUD_AFILIACION_ESTADO_SOLICITUD">
+          <End Role="Estado_Solicitud" Type="Self.Estado_Solicitud" Multiplicity="1" />
+          <End Role="Solicitud_Afiliacion" Type="Self.Solicitud_Afiliacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado_Solicitud">
+              <PropertyRef Name="Co_Estado" />
+            </Principal>
+            <Dependent Role="Solicitud_Afiliacion">
+              <PropertyRef Name="Co_Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOLICITUD_AFILIACION_INVITACION">
+          <End Role="Invitacion" Type="Self.Invitacion" Multiplicity="1" />
+          <End Role="Solicitud_Afiliacion" Type="Self.Solicitud_Afiliacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invitacion">
+              <PropertyRef Name="Co_Invitacion" />
+            </Principal>
+            <Dependent Role="Solicitud_Afiliacion">
+              <PropertyRef Name="Co_Invitacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOLICITUD_AUTORIZACION_EMPLEADO">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Solicitud_Autorizacion" Type="Self.Solicitud_Autorizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Cod_Emp" />
+            </Principal>
+            <Dependent Role="Solicitud_Autorizacion">
+              <PropertyRef Name="Co_Evaluador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOLICITUD_AUTORIZACION_EMPLEADO1">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Solicitud_Autorizacion" Type="Self.Solicitud_Autorizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Cod_Emp" />
+            </Principal>
+            <Dependent Role="Solicitud_Autorizacion">
+              <PropertyRef Name="Co_Autorizador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDPacificoModelStoreContainer">
+          <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Campania" EntityType="Self.Campania" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CanalVenta" EntityType="Self.CanalVenta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cargo" EntityType="Self.Cargo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comision" EntityType="Self.Comision" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ComisionRequisito" EntityType="Self.ComisionRequisito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetallePropuestaSolucion" EntityType="Self.DetallePropuestaSolucion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Distrito" EntityType="Self.Distrito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estado_Solicitud" EntityType="Self.Estado_Solicitud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormatoPlanTrabajo" EntityType="Self.FormatoPlanTrabajo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invitacion" EntityType="Self.Invitacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Materia" EntityType="Self.Materia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Periodo" EntityType="Self.Periodo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlanProducto" EntityType="Self.PlanProducto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlanTrabajo" EntityType="Self.PlanTrabajo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Poliza" EntityType="Self.Poliza" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prestadora" EntityType="Self.Prestadora" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Procedimiento" EntityType="Self.Procedimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProcedimientoAuditoria" EntityType="Self.ProcedimientoAuditoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProcedimientoSeguimiento" EntityType="Self.ProcedimientoSeguimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PropuestaSolucion" EntityType="Self.PropuestaSolucion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prospecto" EntityType="Self.Prospecto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rango" EntityType="Self.Rango" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reclamante" EntityType="Self.Reclamante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reclamo" EntityType="Self.Reclamo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reclamo_Motivo" EntityType="Self.Reclamo_Motivo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reclamo_Poliza" EntityType="Self.Reclamo_Poliza" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Requisito" EntityType="Self.Requisito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Solicitud_Afiliacion" EntityType="Self.Solicitud_Afiliacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Solicitud_Autorizacion" EntityType="Self.Solicitud_Autorizacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sugerencia" EntityType="Self.Sugerencia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tema" EntityType="Self.Tema" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Poliza__Co_Clien__571DF1D5" Association="Self.FK__Poliza__Co_Clien__571DF1D5">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Poliza" EntitySet="Poliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Poliza__Co_Clien__5812160E" Association="Self.FK__Poliza__Co_Clien__5812160E">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Poliza" EntitySet="Poliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reclamant__Co_Di__5AEE82B9" Association="Self.FK__Reclamant__Co_Di__5AEE82B9">
+            <End Role="Distrito" EntitySet="Distrito" />
+            <End Role="Reclamante" EntitySet="Reclamante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reclamo__Co_Empl__5BE2A6F2" Association="Self.FK__Reclamo__Co_Empl__5BE2A6F2">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Reclamo" EntitySet="Reclamo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reclamo__Co_Moti__5CD6CB2B" Association="Self.FK__Reclamo__Co_Moti__5CD6CB2B">
+            <End Role="Reclamo_Motivo" EntitySet="Reclamo_Motivo" />
+            <End Role="Reclamo" EntitySet="Reclamo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reclamo__Co_Recl__5DCAEF64" Association="Self.FK__Reclamo__Co_Recl__5DCAEF64">
+            <End Role="Reclamante" EntitySet="Reclamante" />
+            <End Role="Reclamo" EntitySet="Reclamo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reclamo_P__Co_Po__5EBF139D" Association="Self.FK__Reclamo_P__Co_Po__5EBF139D">
+            <End Role="Poliza" EntitySet="Poliza" />
+            <End Role="Reclamo_Poliza" EntitySet="Reclamo_Poliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reclamo_P__Nu_Re__5FB337D6" Association="Self.FK__Reclamo_P__Nu_Re__5FB337D6">
+            <End Role="Reclamo" EntitySet="Reclamo" />
+            <End Role="Reclamo_Poliza" EntitySet="Reclamo_Poliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sugerenci__Co_Ar__66603565" Association="Self.FK__Sugerenci__Co_Ar__66603565">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="Sugerencia" EntitySet="Sugerencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sugerenci__Co_Cl__6754599E" Association="Self.FK__Sugerenci__Co_Cl__6754599E">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Sugerencia" EntitySet="Sugerencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sugerenci__Co_Te__68487DD7" Association="Self.FK__Sugerenci__Co_Te__68487DD7">
+            <End Role="Tema" EntitySet="Tema" />
+            <End Role="Sugerencia" EntitySet="Sugerencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampaniaComision" Association="Self.FK_CampaniaComision">
+            <End Role="Campania" EntitySet="Campania" />
+            <End Role="Comision" EntitySet="Comision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CanalVentaComision" Association="Self.FK_CanalVentaComision">
+            <End Role="CanalVenta" EntitySet="CanalVenta" />
+            <End Role="Comision" EntitySet="Comision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CargoComision" Association="Self.FK_CargoComision">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="Comision" EntitySet="Comision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComisionComisionRequisito" Association="Self.FK_ComisionComisionRequisito">
+            <End Role="Comision" EntitySet="Comision" />
+            <End Role="ComisionRequisito" EntitySet="ComisionRequisito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComisionRango" Association="Self.FK_ComisionRango">
+            <End Role="Comision" EntitySet="Comision" />
+            <End Role="Rango" EntitySet="Rango" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetallePropuestaSolucion_PropuestaSolucion" Association="Self.FK_DetallePropuestaSolucion_PropuestaSolucion">
+            <End Role="PropuestaSolucion" EntitySet="PropuestaSolucion" />
+            <End Role="DetallePropuestaSolucion" EntitySet="DetallePropuestaSolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DISTRITO_PROVINCIA" Association="Self.FK_DISTRITO_PROVINCIA">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Distrito" EntitySet="Distrito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_AREA" Association="Self.FK_EMPLEADO_AREA">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="Empleado" EntitySet="Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_CARGO" Association="Self.FK_EMPLEADO_CARGO">
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="Empleado" EntitySet="Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_DISTRITO" Association="Self.FK_EMPLEADO_DISTRITO">
+            <End Role="Distrito" EntitySet="Distrito" />
+            <End Role="Empleado" EntitySet="Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormatoPlanTrabajo_Periodo" Association="Self.FK_FormatoPlanTrabajo_Periodo">
+            <End Role="Periodo" EntitySet="Periodo" />
+            <End Role="FormatoPlanTrabajo" EntitySet="FormatoPlanTrabajo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormatoPlanTrabajo_PlanTrabajo" Association="Self.FK_FormatoPlanTrabajo_PlanTrabajo">
+            <End Role="PlanTrabajo" EntitySet="PlanTrabajo" />
+            <End Role="FormatoPlanTrabajo" EntitySet="FormatoPlanTrabajo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlanProducto_Producto" Association="Self.FK_PlanProducto_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="PlanProducto" EntitySet="PlanProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlanTrabajo_Periodo" Association="Self.FK_PlanTrabajo_Periodo">
+            <End Role="Periodo" EntitySet="Periodo" />
+            <End Role="PlanTrabajo" EntitySet="PlanTrabajo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTADORA_DISTRITO" Association="Self.FK_PRESTADORA_DISTRITO">
+            <End Role="Distrito" EntitySet="Distrito" />
+            <End Role="Prestadora" EntitySet="Prestadora" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedimientoAuditoria_Area" Association="Self.FK_ProcedimientoAuditoria_Area">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="ProcedimientoAuditoria" EntitySet="ProcedimientoAuditoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedimientoAuditoria_Empleado" Association="Self.FK_ProcedimientoAuditoria_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="ProcedimientoAuditoria" EntitySet="ProcedimientoAuditoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedimientoAuditoria_Empleado1" Association="Self.FK_ProcedimientoAuditoria_Empleado1">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="ProcedimientoAuditoria" EntitySet="ProcedimientoAuditoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedimientoAuditoria_Materia" Association="Self.FK_ProcedimientoAuditoria_Materia">
+            <End Role="Materia" EntitySet="Materia" />
+            <End Role="ProcedimientoAuditoria" EntitySet="ProcedimientoAuditoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedimientoAuditoria_Periodo" Association="Self.FK_ProcedimientoAuditoria_Periodo">
+            <End Role="Periodo" EntitySet="Periodo" />
+            <End Role="ProcedimientoAuditoria" EntitySet="ProcedimientoAuditoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedimientoSeguimiento_Area" Association="Self.FK_ProcedimientoSeguimiento_Area">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="ProcedimientoSeguimiento" EntitySet="ProcedimientoSeguimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedimientoSeguimiento_Empleado" Association="Self.FK_ProcedimientoSeguimiento_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="ProcedimientoSeguimiento" EntitySet="ProcedimientoSeguimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedimientoSeguimiento_Empleado1" Association="Self.FK_ProcedimientoSeguimiento_Empleado1">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="ProcedimientoSeguimiento" EntitySet="ProcedimientoSeguimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedimientoSeguimiento_Materia" Association="Self.FK_ProcedimientoSeguimiento_Materia">
+            <End Role="Materia" EntitySet="Materia" />
+            <End Role="ProcedimientoSeguimiento" EntitySet="ProcedimientoSeguimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedimientoSeguimiento_Periodo" Association="Self.FK_ProcedimientoSeguimiento_Periodo">
+            <End Role="Periodo" EntitySet="Periodo" />
+            <End Role="ProcedimientoSeguimiento" EntitySet="ProcedimientoSeguimiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropuestaSolucion_Producto" Association="Self.FK_PropuestaSolucion_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="PropuestaSolucion" EntitySet="PropuestaSolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropuestaSolucion_Prospecto" Association="Self.FK_PropuestaSolucion_Prospecto">
+            <End Role="Prospecto" EntitySet="Prospecto" />
+            <End Role="PropuestaSolucion" EntitySet="PropuestaSolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROVINCIA_DEPARTAMENTO" Association="Self.FK_PROVINCIA_DEPARTAMENTO">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Provincia" EntitySet="Provincia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequisitoComisionRequisito" Association="Self.FK_RequisitoComisionRequisito">
+            <End Role="Requisito" EntitySet="Requisito" />
+            <End Role="ComisionRequisito" EntitySet="ComisionRequisito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOLICITUD_AFILIACION_EMPLEADO" Association="Self.FK_SOLICITUD_AFILIACION_EMPLEADO">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Solicitud_Afiliacion" EntitySet="Solicitud_Afiliacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOLICITUD_AFILIACION_EMPLEADO1" Association="Self.FK_SOLICITUD_AFILIACION_EMPLEADO1">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Solicitud_Afiliacion" EntitySet="Solicitud_Afiliacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOLICITUD_AFILIACION_ESTADO_SOLICITUD" Association="Self.FK_SOLICITUD_AFILIACION_ESTADO_SOLICITUD">
+            <End Role="Estado_Solicitud" EntitySet="Estado_Solicitud" />
+            <End Role="Solicitud_Afiliacion" EntitySet="Solicitud_Afiliacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOLICITUD_AFILIACION_INVITACION" Association="Self.FK_SOLICITUD_AFILIACION_INVITACION">
+            <End Role="Invitacion" EntitySet="Invitacion" />
+            <End Role="Solicitud_Afiliacion" EntitySet="Solicitud_Afiliacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOLICITUD_AUTORIZACION_EMPLEADO" Association="Self.FK_SOLICITUD_AUTORIZACION_EMPLEADO">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Solicitud_Autorizacion" EntitySet="Solicitud_Autorizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOLICITUD_AUTORIZACION_EMPLEADO1" Association="Self.FK_SOLICITUD_AUTORIZACION_EMPLEADO1">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Solicitud_Autorizacion" EntitySet="Solicitud_Autorizacion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BDPacificoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="Co_Area" />
+          </Key>
+          <Property Name="Co_Area" Type="Int32" Nullable="false" />
+          <Property Name="No_Area" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Tx_Descripcion" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="Tx_Responsable" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Sugerencias" Relationship="Self.FK__Sugerenci__Co_Ar__66603565" FromRole="Area" ToRole="Sugerencia" />
+          <NavigationProperty Name="Empleadoes" Relationship="Self.FK_EMPLEADO_AREA" FromRole="Area" ToRole="Empleado" />
+          <NavigationProperty Name="ProcedimientoAuditorias" Relationship="Self.FK_ProcedimientoAuditoria_Area" FromRole="Area" ToRole="ProcedimientoAuditoria" />
+          <NavigationProperty Name="ProcedimientoSeguimientoes" Relationship="Self.FK_ProcedimientoSeguimiento_Area" FromRole="Area" ToRole="ProcedimientoSeguimiento" />
+        </EntityType>
+        <EntityType Name="Campania">
+          <Key>
+            <PropertyRef Name="Cod_Camp" />
+          </Key>
+          <Property Name="Cod_Camp" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nro_Camp" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fec_Ini" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fec_Fin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Qtd_Meta" Type="Int32" Nullable="false" />
+          <Property Name="Flg_Flag" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Comisions" Relationship="Self.FK_CampaniaComision" FromRole="Campania" ToRole="Comision" />
+        </EntityType>
+        <EntityType Name="CanalVenta">
+          <Key>
+            <PropertyRef Name="Cod_Cnl_Vta" />
+          </Key>
+          <Property Name="Cod_Cnl_Vta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nro_Cnl_Vta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Txt_Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Comisions" Relationship="Self.FK_CanalVentaComision" FromRole="CanalVenta" ToRole="Comision" />
+        </EntityType>
+        <EntityType Name="Cargo">
+          <Key>
+            <PropertyRef Name="Cod_Car" />
+          </Key>
+          <Property Name="Cod_Car" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nro_Car" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Comisions" Relationship="Self.FK_CargoComision" FromRole="Cargo" ToRole="Comision" />
+          <NavigationProperty Name="Empleadoes" Relationship="Self.FK_EMPLEADO_CARGO" FromRole="Cargo" ToRole="Empleado" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Co_Cliente" />
+          </Key>
+          <Property Name="Co_Cliente" Type="Int32" Nullable="false" />
+          <Property Name="No_Cliente" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="No_ApePaterno" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="No_ApeMaterno" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Fi_Sexo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Nu_DNI" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Fe_Nacimiento" Type="DateTime" Precision="3" />
+          <Property Name="Nu_Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Nu_Movil" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Tx_Direccion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Tx_Correo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Fi_Estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Tx_CentroTrabajo" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Tx_CargoTrabajo" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Polizas" Relationship="Self.FK__Poliza__Co_Clien__571DF1D5" FromRole="Cliente" ToRole="Poliza" />
+          <NavigationProperty Name="Polizas1" Relationship="Self.FK__Poliza__Co_Clien__5812160E" FromRole="Cliente" ToRole="Poliza" />
+          <NavigationProperty Name="Sugerencias" Relationship="Self.FK__Sugerenci__Co_Cl__6754599E" FromRole="Cliente" ToRole="Sugerencia" />
+        </EntityType>
+        <EntityType Name="Comision">
+          <Key>
+            <PropertyRef Name="Cod_Com" />
+          </Key>
+          <Property Name="Cod_Com" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nro_Com" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fec_Reg" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Cod_Camp" Type="Int32" Nullable="false" />
+          <Property Name="Cod_Cnl_Vta" Type="Int32" Nullable="false" />
+          <Property Name="Cod_Car" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Campania" Relationship="Self.FK_CampaniaComision" FromRole="Comision" ToRole="Campania" />
+          <NavigationProperty Name="CanalVenta" Relationship="Self.FK_CanalVentaComision" FromRole="Comision" ToRole="CanalVenta" />
+          <NavigationProperty Name="Cargo" Relationship="Self.FK_CargoComision" FromRole="Comision" ToRole="Cargo" />
+          <NavigationProperty Name="Rangoes" Relationship="Self.FK_ComisionRango" FromRole="Comision" ToRole="Rango" />
+          <NavigationProperty Name="Requisitoes" Relationship="Self.ComisionRequisito" FromRole="Comision" ToRole="Requisito" />
+        </EntityType>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="Co_Departamento" />
+          </Key>
+          <Property Name="Co_Departamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="No_Departamento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Provincias" Relationship="Self.FK_PROVINCIA_DEPARTAMENTO" FromRole="Departamento" ToRole="Provincia" />
+        </EntityType>
+        <EntityType Name="DetallePropuestaSolucion">
+          <Key>
+            <PropertyRef Name="Cod_Det_Prop_Sol" />
+          </Key>
+          <Property Name="Cod_Det_Prop_Sol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cod_Prop_Sol" Type="Int32" Nullable="false" />
+          <Property Name="Num_Anio" Type="Int32" Nullable="false" />
+          <Property Name="Num_Edad" Type="Int32" Nullable="false" />
+          <Property Name="Ss_Mon_Prim" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Ss_Mon_Ahr" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Ss_Val_Resc" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Ss_Mon_Aseg" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="PropuestaSolucion" Relationship="Self.FK_DetallePropuestaSolucion_PropuestaSolucion" FromRole="DetallePropuestaSolucion" ToRole="PropuestaSolucion" />
+        </EntityType>
+        <EntityType Name="Distrito">
+          <Key>
+            <PropertyRef Name="Co_Distrito" />
+          </Key>
+          <Property Name="Co_Distrito" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="No_Distrito" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Co_Provincia" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Reclamantes" Relationship="Self.FK__Reclamant__Co_Di__5AEE82B9" FromRole="Distrito" ToRole="Reclamante" />
+          <NavigationProperty Name="Provincia" Relationship="Self.FK_DISTRITO_PROVINCIA" FromRole="Distrito" ToRole="Provincia" />
+          <NavigationProperty Name="Empleadoes" Relationship="Self.FK_EMPLEADO_DISTRITO" FromRole="Distrito" ToRole="Empleado" />
+          <NavigationProperty Name="Prestadoras" Relationship="Self.FK_PRESTADORA_DISTRITO" FromRole="Distrito" ToRole="Prestadora" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="Cod_Emp" />
+          </Key>
+          <Property Name="Cod_Emp" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nro_Emp" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nro_Ape_Pat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nro_Ape_Mat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Flg_Sex" Type="Boolean" Nullable="false" />
+          <Property Name="Nu_Dni" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Fe_Nacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Nu_Telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nu_Movil" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tx_Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Co_Distrito" Type="Int32" Nullable="false" />
+          <Property Name="Tx_Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Co_Cargo" Type="Int32" Nullable="false" />
+          <Property Name="Co_Area" Type="Int32" Nullable="false" />
+          <Property Name="Fe_RegistroIns" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="No_UsuarioIns" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fe_RegistroUpd" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="No_UsuarioUpd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Area" Relationship="Self.FK_EMPLEADO_AREA" FromRole="Empleado" ToRole="Area" />
+          <NavigationProperty Name="Cargo" Relationship="Self.FK_EMPLEADO_CARGO" FromRole="Empleado" ToRole="Cargo" />
+          <NavigationProperty Name="Distrito" Relationship="Self.FK_EMPLEADO_DISTRITO" FromRole="Empleado" ToRole="Distrito" />
+          <NavigationProperty Name="Reclamoes" Relationship="Self.FK__Reclamo__Co_Empl__5BE2A6F2" FromRole="Empleado" ToRole="Reclamo" />
+          <NavigationProperty Name="ProcedimientoAuditorias" Relationship="Self.FK_ProcedimientoAuditoria_Empleado" FromRole="Empleado" ToRole="ProcedimientoAuditoria" />
+          <NavigationProperty Name="ProcedimientoAuditorias1" Relationship="Self.FK_ProcedimientoAuditoria_Empleado1" FromRole="Empleado" ToRole="ProcedimientoAuditoria" />
+          <NavigationProperty Name="ProcedimientoSeguimientoes" Relationship="Self.FK_ProcedimientoSeguimiento_Empleado" FromRole="Empleado" ToRole="ProcedimientoSeguimiento" />
+          <NavigationProperty Name="ProcedimientoSeguimientoes1" Relationship="Self.FK_ProcedimientoSeguimiento_Empleado1" FromRole="Empleado" ToRole="ProcedimientoSeguimiento" />
+          <NavigationProperty Name="Solicitud_Afiliacion" Relationship="Self.FK_SOLICITUD_AFILIACION_EMPLEADO" FromRole="Empleado" ToRole="Solicitud_Afiliacion" />
+          <NavigationProperty Name="Solicitud_Afiliacion1" Relationship="Self.FK_SOLICITUD_AFILIACION_EMPLEADO1" FromRole="Empleado" ToRole="Solicitud_Afiliacion" />
+          <NavigationProperty Name="Solicitud_Autorizacion" Relationship="Self.FK_SOLICITUD_AUTORIZACION_EMPLEADO" FromRole="Empleado" ToRole="Solicitud_Autorizacion" />
+          <NavigationProperty Name="Solicitud_Autorizacion1" Relationship="Self.FK_SOLICITUD_AUTORIZACION_EMPLEADO1" FromRole="Empleado" ToRole="Solicitud_Autorizacion" />
+        </EntityType>
+        <EntityType Name="Estado_Solicitud">
+          <Key>
+            <PropertyRef Name="Co_Estado" />
+          </Key>
+          <Property Name="Co_Estado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="No_Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Solicitud_Afiliacion" Relationship="Self.FK_SOLICITUD_AFILIACION_ESTADO_SOLICITUD" FromRole="Estado_Solicitud" ToRole="Solicitud_Afiliacion" />
+        </EntityType>
+        <EntityType Name="FormatoPlanTrabajo">
+          <Key>
+            <PropertyRef Name="IDFormatoPlanTrabajo" />
+            <PropertyRef Name="IDPlan" />
+            <PropertyRef Name="IDPeriodo" />
+          </Key>
+          <Property Name="IDFormatoPlanTrabajo" Type="Int32" Nullable="false" />
+          <Property Name="IDPlan" Type="Int32" Nullable="false" />
+          <Property Name="IDPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDResponsable" Type="Int32" Nullable="false" />
+          <Property Name="Version" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adjunto" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Comentario" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Periodo" Relationship="Self.FK_FormatoPlanTrabajo_Periodo" FromRole="FormatoPlanTrabajo" ToRole="Periodo" />
+          <NavigationProperty Name="PlanTrabajo" Relationship="Self.FK_FormatoPlanTrabajo_PlanTrabajo" FromRole="FormatoPlanTrabajo" ToRole="PlanTrabajo" />
+        </EntityType>
+        <EntityType Name="Invitacion">
+          <Key>
+            <PropertyRef Name="Co_Invitacion" />
+          </Key>
+          <Property Name="Co_Invitacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fe_Invitacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Fe_Expiracion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Fl_Estado" Type="Int32" Nullable="false" />
+          <Property Name="Fe_RegistroIns" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="No_UsuarioIns" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fe_RegistroUpd" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="No_UsuarioUpd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Solicitud_Afiliacion" Relationship="Self.FK_SOLICITUD_AFILIACION_INVITACION" FromRole="Invitacion" ToRole="Solicitud_Afiliacion" />
+        </EntityType>
+        <EntityType Name="Materia">
+          <Key>
+            <PropertyRef Name="IDMateria" />
+          </Key>
+          <Property Name="IDMateria" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ProcedimientoAuditorias" Relationship="Self.FK_ProcedimientoAuditoria_Materia" FromRole="Materia" ToRole="ProcedimientoAuditoria" />
+          <NavigationProperty Name="ProcedimientoSeguimientoes" Relationship="Self.FK_ProcedimientoSeguimiento_Materia" FromRole="Materia" ToRole="ProcedimientoSeguimiento" />
+        </EntityType>
+        <EntityType Name="Periodo">
+          <Key>
+            <PropertyRef Name="IDPeriodo" />
+          </Key>
+          <Property Name="IDPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="FormatoPlanTrabajoes" Relationship="Self.FK_FormatoPlanTrabajo_Periodo" FromRole="Periodo" ToRole="FormatoPlanTrabajo" />
+          <NavigationProperty Name="PlanTrabajoes" Relationship="Self.FK_PlanTrabajo_Periodo" FromRole="Periodo" ToRole="PlanTrabajo" />
+          <NavigationProperty Name="ProcedimientoAuditorias" Relationship="Self.FK_ProcedimientoAuditoria_Periodo" FromRole="Periodo" ToRole="ProcedimientoAuditoria" />
+          <NavigationProperty Name="ProcedimientoSeguimientoes" Relationship="Self.FK_ProcedimientoSeguimiento_Periodo" FromRole="Periodo" ToRole="ProcedimientoSeguimiento" />
+        </EntityType>
+        <EntityType Name="PlanProducto">
+          <Key>
+            <PropertyRef Name="Cod_Plan_Prod" />
+          </Key>
+          <Property Name="Cod_Plan_Prod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nro_Plan_Prod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ss_Prim_Min" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Ss_Sum_Min_Aseg" Type="Int32" Nullable="false" />
+          <Property Name="Ss_Sum_Max_Aseg" Type="Int32" Nullable="false" />
+          <Property Name="Cod_Prod" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_PlanProducto_Producto" FromRole="PlanProducto" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="PlanTrabajo">
+          <Key>
+            <PropertyRef Name="IDPlan" />
+            <PropertyRef Name="IDPeriodo" />
+          </Key>
+          <Property Name="IDPlan" Type="Int32" Nullable="false" />
+          <Property Name="IDPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="Actividades" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Version" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adjunto" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Comentario" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FormatoPlanTrabajoes" Relationship="Self.FK_FormatoPlanTrabajo_PlanTrabajo" FromRole="PlanTrabajo" ToRole="FormatoPlanTrabajo" />
+          <NavigationProperty Name="Periodo" Relationship="Self.FK_PlanTrabajo_Periodo" FromRole="PlanTrabajo" ToRole="Periodo" />
+        </EntityType>
+        <EntityType Name="Poliza">
+          <Key>
+            <PropertyRef Name="Co_Poliza" />
+          </Key>
+          <Property Name="Co_Poliza" Type="Int32" Nullable="false" />
+          <Property Name="Nu_Poliza" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Co_Cliente" Type="Int32" />
+          <Property Name="SS_Prima" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="Fe_Creacion" Type="DateTime" Precision="3" />
+          <Property Name="Fe_Renovacion" Type="DateTime" Precision="3" />
+          <Property Name="Fe_InicioVigencia" Type="DateTime" Precision="3" />
+          <Property Name="Fe_Vencimiento" Type="DateTime" Precision="3" />
+          <Property Name="Tx_TipoPago" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Tx_MarcaTarjeta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Nu_Tarjeta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fl_Estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__Poliza__Co_Clien__571DF1D5" FromRole="Poliza" ToRole="Cliente" />
+          <NavigationProperty Name="Cliente1" Relationship="Self.FK__Poliza__Co_Clien__5812160E" FromRole="Poliza" ToRole="Cliente" />
+          <NavigationProperty Name="Reclamo_Poliza" Relationship="Self.FK__Reclamo_P__Co_Po__5EBF139D" FromRole="Poliza" ToRole="Reclamo_Poliza" />
+        </EntityType>
+        <EntityType Name="Prestadora">
+          <Key>
+            <PropertyRef Name="Co_Prestadora" />
+          </Key>
+          <Property Name="Co_Prestadora" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nu_Ruc" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tx_RazonSocial" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tx_DomicilioFiscal" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Co_Distrito" Type="Int32" Nullable="false" />
+          <Property Name="No_RepresentanteLegal" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="No_ApePatRepresentanteLegal" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="No_ApeMatRepresentanteLegal" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tx_CorreoRepresentanteLegal" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nu_TelefonoRepresentanteLegal" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tx_PaginaWeb" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fe_Afiliacion" Type="DateTime" Precision="0" />
+          <Property Name="Fl_Activo" Type="Int32" Nullable="false" />
+          <Property Name="Fe_RegistroIns" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="No_UsuarioIns" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fe_RegistroUpd" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="No_UsuarioUpd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Distrito" Relationship="Self.FK_PRESTADORA_DISTRITO" FromRole="Prestadora" ToRole="Distrito" />
+        </EntityType>
+        <EntityType Name="Procedimiento">
+          <Key>
+            <PropertyRef Name="Co_Procedimiento" />
+          </Key>
+          <Property Name="Co_Procedimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="No_Procedimiento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProcedimientoAuditoria">
+          <Key>
+            <PropertyRef Name="IDProcedimientoAuditoria" />
+            <PropertyRef Name="IDPlan" />
+            <PropertyRef Name="IDPeriodo" />
+          </Key>
+          <Property Name="IDProcedimientoAuditoria" Type="Int32" Nullable="false" />
+          <Property Name="IDPlan" Type="Int32" Nullable="false" />
+          <Property Name="IDPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TiempoEjecucion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDEmpleadoResponsable" Type="Int32" Nullable="false" />
+          <Property Name="IDRepresentanteUnidad" Type="Int32" Nullable="false" />
+          <Property Name="Co_Area" Type="Int32" Nullable="false" />
+          <Property Name="IDMateria" Type="Int32" Nullable="false" />
+          <Property Name="Comentario" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Area" Relationship="Self.FK_ProcedimientoAuditoria_Area" FromRole="ProcedimientoAuditoria" ToRole="Area" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_ProcedimientoAuditoria_Empleado" FromRole="ProcedimientoAuditoria" ToRole="Empleado" />
+          <NavigationProperty Name="Empleado1" Relationship="Self.FK_ProcedimientoAuditoria_Empleado1" FromRole="ProcedimientoAuditoria" ToRole="Empleado" />
+          <NavigationProperty Name="Materia" Relationship="Self.FK_ProcedimientoAuditoria_Materia" FromRole="ProcedimientoAuditoria" ToRole="Materia" />
+          <NavigationProperty Name="Periodo" Relationship="Self.FK_ProcedimientoAuditoria_Periodo" FromRole="ProcedimientoAuditoria" ToRole="Periodo" />
+        </EntityType>
+        <EntityType Name="ProcedimientoSeguimiento">
+          <Key>
+            <PropertyRef Name="IDProcedimientoSeguimiento" />
+            <PropertyRef Name="IDPlan" />
+            <PropertyRef Name="IDPeriodo" />
+          </Key>
+          <Property Name="IDProcedimientoSeguimiento" Type="Int32" Nullable="false" />
+          <Property Name="IDPlan" Type="Int32" Nullable="false" />
+          <Property Name="IDPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="EvaluacionVerificacion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TiempoEjecucion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDEmpleadoResponsable" Type="Int32" Nullable="false" />
+          <Property Name="IDRepresentanteUnidad" Type="Int32" Nullable="false" />
+          <Property Name="Co_Area" Type="Int32" Nullable="false" />
+          <Property Name="IDMateria" Type="Int32" Nullable="false" />
+          <Property Name="Comentario" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Area" Relationship="Self.FK_ProcedimientoSeguimiento_Area" FromRole="ProcedimientoSeguimiento" ToRole="Area" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_ProcedimientoSeguimiento_Empleado" FromRole="ProcedimientoSeguimiento" ToRole="Empleado" />
+          <NavigationProperty Name="Empleado1" Relationship="Self.FK_ProcedimientoSeguimiento_Empleado1" FromRole="ProcedimientoSeguimiento" ToRole="Empleado" />
+          <NavigationProperty Name="Materia" Relationship="Self.FK_ProcedimientoSeguimiento_Materia" FromRole="ProcedimientoSeguimiento" ToRole="Materia" />
+          <NavigationProperty Name="Periodo" Relationship="Self.FK_ProcedimientoSeguimiento_Periodo" FromRole="ProcedimientoSeguimiento" ToRole="Periodo" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="Cod_Prod" />
+          </Key>
+          <Property Name="Cod_Prod" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nro_Prod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fec_Crea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FI_Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Flg_Flag" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="PlanProductoes" Relationship="Self.FK_PlanProducto_Producto" FromRole="Producto" ToRole="PlanProducto" />
+          <NavigationProperty Name="PropuestaSolucions" Relationship="Self.FK_PropuestaSolucion_Producto" FromRole="Producto" ToRole="PropuestaSolucion" />
+        </EntityType>
+        <EntityType Name="PropuestaSolucion">
+          <Key>
+            <PropertyRef Name="Cod_Prop_Sol" />
+          </Key>
+          <Property Name="Cod_Prop_Sol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ss_Mon_Prim" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Fec_Nac" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Ss_Mon_Ret" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Ss_Mon_Aseg" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Cod_Pros" Type="Int32" Nullable="false" />
+          <Property Name="Cod_Prod" Type="Int32" Nullable="false" />
+          <Property Name="Cod_Plan" Type="Int32" Nullable="false" />
+          <Property Name="Fec_Crea" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DetallePropuestaSolucions" Relationship="Self.FK_DetallePropuestaSolucion_PropuestaSolucion" FromRole="PropuestaSolucion" ToRole="DetallePropuestaSolucion" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_PropuestaSolucion_Producto" FromRole="PropuestaSolucion" ToRole="Producto" />
+          <NavigationProperty Name="Prospecto" Relationship="Self.FK_PropuestaSolucion_Prospecto" FromRole="PropuestaSolucion" ToRole="Prospecto" />
+        </EntityType>
+        <EntityType Name="Prospecto">
+          <Key>
+            <PropertyRef Name="Cod_Pros" />
+          </Key>
+          <Property Name="Cod_Pros" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Txt_Pros" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Txt_Ape_Pat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Txt_Ape_Mat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Txt_Dir" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Txt_Tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Txt_Mov" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Txt_Crr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Num_DNI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PropuestaSolucions" Relationship="Self.FK_PropuestaSolucion_Prospecto" FromRole="Prospecto" ToRole="PropuestaSolucion" />
+        </EntityType>
+        <EntityType Name="Provincia">
+          <Key>
+            <PropertyRef Name="Co_Provincia" />
+          </Key>
+          <Property Name="Co_Provincia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="No_Provincia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Co_Departamento" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Departamento" Relationship="Self.FK_PROVINCIA_DEPARTAMENTO" FromRole="Provincia" ToRole="Departamento" />
+          <NavigationProperty Name="Distritoes" Relationship="Self.FK_DISTRITO_PROVINCIA" FromRole="Provincia" ToRole="Distrito" />
+        </EntityType>
+        <EntityType Name="Rango">
+          <Key>
+            <PropertyRef Name="Cod_Rang" />
+          </Key>
+          <Property Name="Cod_Rang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ss_Min" Type="Double" Nullable="false" />
+          <Property Name="Ss_Max" Type="Double" Nullable="false" />
+          <Property Name="Qtd_Cant" Type="Int32" Nullable="false" />
+          <Property Name="Cod_Com" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Comision" Relationship="Self.FK_ComisionRango" FromRole="Rango" ToRole="Comision" />
+        </EntityType>
+        <EntityType Name="Reclamante">
+          <Key>
+            <PropertyRef Name="Co_Reclamante" />
+          </Key>
+          <Property Name="Co_Reclamante" Type="Int32" Nullable="false" />
+          <Property Name="No_Reclamante" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="No_ApePaterno" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="No_ApeMaterno" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Fi_Sexo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Nu_DNI" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Fe_Nacimiento" Type="DateTime" Precision="3" />
+          <Property Name="Tx_Telefono" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Tx_Movil" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Tx_Correo" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Co_Distrito" Type="Int32" />
+          <Property Name="Tx_Direccion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Distrito" Relationship="Self.FK__Reclamant__Co_Di__5AEE82B9" FromRole="Reclamante" ToRole="Distrito" />
+          <NavigationProperty Name="Reclamoes" Relationship="Self.FK__Reclamo__Co_Recl__5DCAEF64" FromRole="Reclamante" ToRole="Reclamo" />
+        </EntityType>
+        <EntityType Name="Reclamo">
+          <Key>
+            <PropertyRef Name="Nu_Reclamo" />
+          </Key>
+          <Property Name="Nu_Reclamo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Co_Reclamante" Type="Int32" />
+          <Property Name="Co_Empleado" Type="Int32" />
+          <Property Name="Co_MotivoReclamo" Type="Int32" />
+          <Property Name="Fe_Registro" Type="DateTime" Precision="3" />
+          <Property Name="Fe_Ocurrencia" Type="DateTime" Precision="3" />
+          <Property Name="Tx_LugIncidencia" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Tx_PersAtendio" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Tx_DescReclamo" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tx_ResInmediata" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="Fi_Estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Fe_CierreReclamo" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK__Reclamo__Co_Empl__5BE2A6F2" FromRole="Reclamo" ToRole="Empleado" />
+          <NavigationProperty Name="Reclamante" Relationship="Self.FK__Reclamo__Co_Recl__5DCAEF64" FromRole="Reclamo" ToRole="Reclamante" />
+          <NavigationProperty Name="Reclamo_Motivo" Relationship="Self.FK__Reclamo__Co_Moti__5CD6CB2B" FromRole="Reclamo" ToRole="Reclamo_Motivo" />
+          <NavigationProperty Name="Reclamo_Poliza" Relationship="Self.FK__Reclamo_P__Nu_Re__5FB337D6" FromRole="Reclamo" ToRole="Reclamo_Poliza" />
+        </EntityType>
+        <EntityType Name="Reclamo_Motivo">
+          <Key>
+            <PropertyRef Name="Co_MotivoReclamo" />
+          </Key>
+          <Property Name="Co_MotivoReclamo" Type="Int32" Nullable="false" />
+          <Property Name="Tx_Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Reclamoes" Relationship="Self.FK__Reclamo__Co_Moti__5CD6CB2B" FromRole="Reclamo_Motivo" ToRole="Reclamo" />
+        </EntityType>
+        <EntityType Name="Reclamo_Poliza">
+          <Key>
+            <PropertyRef Name="Co_ReclamoPoliza" />
+          </Key>
+          <Property Name="Co_ReclamoPoliza" Type="Int32" Nullable="false" />
+          <Property Name="Fi_Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Co_Poliza" Type="Int32" />
+          <Property Name="Nu_Reclamo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Poliza" Relationship="Self.FK__Reclamo_P__Co_Po__5EBF139D" FromRole="Reclamo_Poliza" ToRole="Poliza" />
+          <NavigationProperty Name="Reclamo" Relationship="Self.FK__Reclamo_P__Nu_Re__5FB337D6" FromRole="Reclamo_Poliza" ToRole="Reclamo" />
+        </EntityType>
+        <EntityType Name="Requisito">
+          <Key>
+            <PropertyRef Name="Cod_Req" />
+          </Key>
+          <Property Name="Cod_Req" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nro_Req" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Comisions" Relationship="Self.ComisionRequisito" FromRole="Requisito" ToRole="Comision" />
+        </EntityType>
+        <EntityType Name="Solicitud_Afiliacion">
+          <Key>
+            <PropertyRef Name="Co_Solicitud" />
+          </Key>
+          <Property Name="Co_Solicitud" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Co_Invitacion" Type="Int32" Nullable="false" />
+          <Property Name="Nu_Folio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fe_Solicitud" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="No_Contacto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="No_ApePatContacto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="No_ApeMatContacto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nu_TelefonoContacto" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tx_CorreoContacto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tx_EvaluacionSunat" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Tx_EvaluacionRiesgos" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Co_Coordinador" Type="Int32" Nullable="false" />
+          <Property Name="Co_Evaluador" Type="Int32" Nullable="false" />
+          <Property Name="Tx_EvaluacionServicios" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Tx_ObservacionAprobador" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Tx_ObservacionNegociador" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Co_Estado" Type="Int32" Nullable="false" />
+          <Property Name="Fe_RegistroIns" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="No_UsuarioIns" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fe_RegistroUpd" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="No_UsuarioUpd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_SOLICITUD_AFILIACION_EMPLEADO" FromRole="Solicitud_Afiliacion" ToRole="Empleado" />
+          <NavigationProperty Name="Empleado1" Relationship="Self.FK_SOLICITUD_AFILIACION_EMPLEADO1" FromRole="Solicitud_Afiliacion" ToRole="Empleado" />
+          <NavigationProperty Name="Estado_Solicitud" Relationship="Self.FK_SOLICITUD_AFILIACION_ESTADO_SOLICITUD" FromRole="Solicitud_Afiliacion" ToRole="Estado_Solicitud" />
+          <NavigationProperty Name="Invitacion" Relationship="Self.FK_SOLICITUD_AFILIACION_INVITACION" FromRole="Solicitud_Afiliacion" ToRole="Invitacion" />
+        </EntityType>
+        <EntityType Name="Solicitud_Autorizacion">
+          <Key>
+            <PropertyRef Name="Co_Solicitud" />
+          </Key>
+          <Property Name="Co_Solicitud" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Co_Poliza" Type="Int32" Nullable="false" />
+          <Property Name="Co_Sede" Type="Int32" Nullable="false" />
+          <Property Name="Fe_Solicitud" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="No_Contacto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="No_ApePatContacto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="No_ApeMatContacto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nu_TelefonoContacto" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tx_CorreoContacto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Co_Procedimiento" Type="Int32" Nullable="false" />
+          <Property Name="Ss_Monto" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Co_Evaluador" Type="Int32" Nullable="false" />
+          <Property Name="Co_Autorizador" Type="Int32" Nullable="false" />
+          <Property Name="Tx_ObservacionEvaluador" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Tx_ObservacionAutorizador" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Fl_Estado" Type="Int32" Nullable="false" />
+          <Property Name="Fe_RegistroIns" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="No_UsuarioIns" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fe_RegistroUpd" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="No_UsuarioUpd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_SOLICITUD_AUTORIZACION_EMPLEADO" FromRole="Solicitud_Autorizacion" ToRole="Empleado" />
+          <NavigationProperty Name="Empleado1" Relationship="Self.FK_SOLICITUD_AUTORIZACION_EMPLEADO1" FromRole="Solicitud_Autorizacion" ToRole="Empleado" />
+        </EntityType>
+        <EntityType Name="Sugerencia">
+          <Key>
+            <PropertyRef Name="Nu_Sugerencia" />
+          </Key>
+          <Property Name="Nu_Sugerencia" Type="Int32" Nullable="false" />
+          <Property Name="Tx_Sugerencia" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="Fe_Registro" Type="DateTime" Precision="3" />
+          <Property Name="Fi_Estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Co_Tema" Type="Int32" />
+          <Property Name="Co_Area" Type="Int32" />
+          <Property Name="Co_Cliente" Type="Int32" />
+          <NavigationProperty Name="Area" Relationship="Self.FK__Sugerenci__Co_Ar__66603565" FromRole="Sugerencia" ToRole="Area" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__Sugerenci__Co_Cl__6754599E" FromRole="Sugerencia" ToRole="Cliente" />
+          <NavigationProperty Name="Tema" Relationship="Self.FK__Sugerenci__Co_Te__68487DD7" FromRole="Sugerencia" ToRole="Tema" />
+        </EntityType>
+        <EntityType Name="Tema">
+          <Key>
+            <PropertyRef Name="Co_Tema" />
+          </Key>
+          <Property Name="Co_Tema" Type="Int32" Nullable="false" />
+          <Property Name="No_Nombre" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Sugerencias" Relationship="Self.FK__Sugerenci__Co_Te__68487DD7" FromRole="Tema" ToRole="Sugerencia" />
+        </EntityType>
+        <Association Name="FK__Sugerenci__Co_Ar__66603565">
+          <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
+          <End Role="Sugerencia" Type="Self.Sugerencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="Co_Area" />
+            </Principal>
+            <Dependent Role="Sugerencia">
+              <PropertyRef Name="Co_Area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_AREA">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="Co_Area" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="Co_Area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedimientoAuditoria_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="ProcedimientoAuditoria" Type="Self.ProcedimientoAuditoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="Co_Area" />
+            </Principal>
+            <Dependent Role="ProcedimientoAuditoria">
+              <PropertyRef Name="Co_Area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedimientoSeguimiento_Area">
+          <End Role="Area" Type="Self.Area" Multiplicity="1" />
+          <End Role="ProcedimientoSeguimiento" Type="Self.ProcedimientoSeguimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="Co_Area" />
+            </Principal>
+            <Dependent Role="ProcedimientoSeguimiento">
+              <PropertyRef Name="Co_Area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CampaniaComision">
+          <End Role="Campania" Type="Self.Campania" Multiplicity="1" />
+          <End Role="Comision" Type="Self.Comision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campania">
+              <PropertyRef Name="Cod_Camp" />
+            </Principal>
+            <Dependent Role="Comision">
+              <PropertyRef Name="Cod_Camp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CanalVentaComision">
+          <End Role="CanalVenta" Type="Self.CanalVenta" Multiplicity="1" />
+          <End Role="Comision" Type="Self.Comision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CanalVenta">
+              <PropertyRef Name="Cod_Cnl_Vta" />
+            </Principal>
+            <Dependent Role="Comision">
+              <PropertyRef Name="Cod_Cnl_Vta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CargoComision">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
+          <End Role="Comision" Type="Self.Comision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="Cod_Car" />
+            </Principal>
+            <Dependent Role="Comision">
+              <PropertyRef Name="Cod_Car" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_CARGO">
+          <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargo">
+              <PropertyRef Name="Cod_Car" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="Co_Cargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Poliza__Co_Clien__571DF1D5">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Co_Cliente" />
+            </Principal>
+            <Dependent Role="Poliza">
+              <PropertyRef Name="Co_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Poliza__Co_Clien__5812160E">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Co_Cliente" />
+            </Principal>
+            <Dependent Role="Poliza">
+              <PropertyRef Name="Co_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sugerenci__Co_Cl__6754599E">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Sugerencia" Type="Self.Sugerencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Co_Cliente" />
+            </Principal>
+            <Dependent Role="Sugerencia">
+              <PropertyRef Name="Co_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ComisionRango">
+          <End Role="Comision" Type="Self.Comision" Multiplicity="1" />
+          <End Role="Rango" Type="Self.Rango" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comision">
+              <PropertyRef Name="Cod_Com" />
+            </Principal>
+            <Dependent Role="Rango">
+              <PropertyRef Name="Cod_Com" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PROVINCIA_DEPARTAMENTO">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="1" />
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="Co_Departamento" />
+            </Principal>
+            <Dependent Role="Provincia">
+              <PropertyRef Name="Co_Departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetallePropuestaSolucion_PropuestaSolucion">
+          <End Role="PropuestaSolucion" Type="Self.PropuestaSolucion" Multiplicity="1" />
+          <End Role="DetallePropuestaSolucion" Type="Self.DetallePropuestaSolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropuestaSolucion">
+              <PropertyRef Name="Cod_Prop_Sol" />
+            </Principal>
+            <Dependent Role="DetallePropuestaSolucion">
+              <PropertyRef Name="Cod_Prop_Sol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reclamant__Co_Di__5AEE82B9">
+          <End Role="Distrito" Type="Self.Distrito" Multiplicity="0..1" />
+          <End Role="Reclamante" Type="Self.Reclamante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distrito">
+              <PropertyRef Name="Co_Distrito" />
+            </Principal>
+            <Dependent Role="Reclamante">
+              <PropertyRef Name="Co_Distrito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DISTRITO_PROVINCIA">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
+          <End Role="Distrito" Type="Self.Distrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="Co_Provincia" />
+            </Principal>
+            <Dependent Role="Distrito">
+              <PropertyRef Name="Co_Provincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_DISTRITO">
+          <End Role="Distrito" Type="Self.Distrito" Multiplicity="1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distrito">
+              <PropertyRef Name="Co_Distrito" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="Co_Distrito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRESTADORA_DISTRITO">
+          <End Role="Distrito" Type="Self.Distrito" Multiplicity="1" />
+          <End Role="Prestadora" Type="Self.Prestadora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distrito">
+              <PropertyRef Name="Co_Distrito" />
+            </Principal>
+            <Dependent Role="Prestadora">
+              <PropertyRef Name="Co_Distrito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reclamo__Co_Empl__5BE2A6F2">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
+          <End Role="Reclamo" Type="Self.Reclamo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Cod_Emp" />
+            </Principal>
+            <Dependent Role="Reclamo">
+              <PropertyRef Name="Co_Empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedimientoAuditoria_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="ProcedimientoAuditoria" Type="Self.ProcedimientoAuditoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Cod_Emp" />
+            </Principal>
+            <Dependent Role="ProcedimientoAuditoria">
+              <PropertyRef Name="IDEmpleadoResponsable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedimientoAuditoria_Empleado1">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="ProcedimientoAuditoria" Type="Self.ProcedimientoAuditoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Cod_Emp" />
+            </Principal>
+            <Dependent Role="ProcedimientoAuditoria">
+              <PropertyRef Name="IDRepresentanteUnidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedimientoSeguimiento_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="ProcedimientoSeguimiento" Type="Self.ProcedimientoSeguimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Cod_Emp" />
+            </Principal>
+            <Dependent Role="ProcedimientoSeguimiento">
+              <PropertyRef Name="IDEmpleadoResponsable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedimientoSeguimiento_Empleado1">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="ProcedimientoSeguimiento" Type="Self.ProcedimientoSeguimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Cod_Emp" />
+            </Principal>
+            <Dependent Role="ProcedimientoSeguimiento">
+              <PropertyRef Name="IDRepresentanteUnidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOLICITUD_AFILIACION_EMPLEADO">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Solicitud_Afiliacion" Type="Self.Solicitud_Afiliacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Cod_Emp" />
+            </Principal>
+            <Dependent Role="Solicitud_Afiliacion">
+              <PropertyRef Name="Co_Coordinador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOLICITUD_AFILIACION_EMPLEADO1">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Solicitud_Afiliacion" Type="Self.Solicitud_Afiliacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Cod_Emp" />
+            </Principal>
+            <Dependent Role="Solicitud_Afiliacion">
+              <PropertyRef Name="Co_Evaluador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOLICITUD_AUTORIZACION_EMPLEADO">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Solicitud_Autorizacion" Type="Self.Solicitud_Autorizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Cod_Emp" />
+            </Principal>
+            <Dependent Role="Solicitud_Autorizacion">
+              <PropertyRef Name="Co_Evaluador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOLICITUD_AUTORIZACION_EMPLEADO1">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Solicitud_Autorizacion" Type="Self.Solicitud_Autorizacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="Cod_Emp" />
+            </Principal>
+            <Dependent Role="Solicitud_Autorizacion">
+              <PropertyRef Name="Co_Autorizador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOLICITUD_AFILIACION_ESTADO_SOLICITUD">
+          <End Role="Estado_Solicitud" Type="Self.Estado_Solicitud" Multiplicity="1" />
+          <End Role="Solicitud_Afiliacion" Type="Self.Solicitud_Afiliacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado_Solicitud">
+              <PropertyRef Name="Co_Estado" />
+            </Principal>
+            <Dependent Role="Solicitud_Afiliacion">
+              <PropertyRef Name="Co_Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormatoPlanTrabajo_Periodo">
+          <End Role="Periodo" Type="Self.Periodo" Multiplicity="1" />
+          <End Role="FormatoPlanTrabajo" Type="Self.FormatoPlanTrabajo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periodo">
+              <PropertyRef Name="IDPeriodo" />
+            </Principal>
+            <Dependent Role="FormatoPlanTrabajo">
+              <PropertyRef Name="IDPeriodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormatoPlanTrabajo_PlanTrabajo">
+          <End Role="PlanTrabajo" Type="Self.PlanTrabajo" Multiplicity="1" />
+          <End Role="FormatoPlanTrabajo" Type="Self.FormatoPlanTrabajo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlanTrabajo">
+              <PropertyRef Name="IDPlan" />
+              <PropertyRef Name="IDPeriodo" />
+            </Principal>
+            <Dependent Role="FormatoPlanTrabajo">
+              <PropertyRef Name="IDPlan" />
+              <PropertyRef Name="IDPeriodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOLICITUD_AFILIACION_INVITACION">
+          <End Role="Invitacion" Type="Self.Invitacion" Multiplicity="1" />
+          <End Role="Solicitud_Afiliacion" Type="Self.Solicitud_Afiliacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invitacion">
+              <PropertyRef Name="Co_Invitacion" />
+            </Principal>
+            <Dependent Role="Solicitud_Afiliacion">
+              <PropertyRef Name="Co_Invitacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedimientoAuditoria_Materia">
+          <End Role="Materia" Type="Self.Materia" Multiplicity="1" />
+          <End Role="ProcedimientoAuditoria" Type="Self.ProcedimientoAuditoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materia">
+              <PropertyRef Name="IDMateria" />
+            </Principal>
+            <Dependent Role="ProcedimientoAuditoria">
+              <PropertyRef Name="IDMateria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedimientoSeguimiento_Materia">
+          <End Role="Materia" Type="Self.Materia" Multiplicity="1" />
+          <End Role="ProcedimientoSeguimiento" Type="Self.ProcedimientoSeguimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materia">
+              <PropertyRef Name="IDMateria" />
+            </Principal>
+            <Dependent Role="ProcedimientoSeguimiento">
+              <PropertyRef Name="IDMateria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlanTrabajo_Periodo">
+          <End Role="Periodo" Type="Self.Periodo" Multiplicity="1" />
+          <End Role="PlanTrabajo" Type="Self.PlanTrabajo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periodo">
+              <PropertyRef Name="IDPeriodo" />
+            </Principal>
+            <Dependent Role="PlanTrabajo">
+              <PropertyRef Name="IDPeriodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedimientoAuditoria_Periodo">
+          <End Role="Periodo" Type="Self.Periodo" Multiplicity="1" />
+          <End Role="ProcedimientoAuditoria" Type="Self.ProcedimientoAuditoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periodo">
+              <PropertyRef Name="IDPeriodo" />
+            </Principal>
+            <Dependent Role="ProcedimientoAuditoria">
+              <PropertyRef Name="IDPeriodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedimientoSeguimiento_Periodo">
+          <End Role="Periodo" Type="Self.Periodo" Multiplicity="1" />
+          <End Role="ProcedimientoSeguimiento" Type="Self.ProcedimientoSeguimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periodo">
+              <PropertyRef Name="IDPeriodo" />
+            </Principal>
+            <Dependent Role="ProcedimientoSeguimiento">
+              <PropertyRef Name="IDPeriodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlanProducto_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="PlanProducto" Type="Self.PlanProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="Cod_Prod" />
+            </Principal>
+            <Dependent Role="PlanProducto">
+              <PropertyRef Name="Cod_Prod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reclamo_P__Co_Po__5EBF139D">
+          <End Role="Poliza" Type="Self.Poliza" Multiplicity="0..1" />
+          <End Role="Reclamo_Poliza" Type="Self.Reclamo_Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poliza">
+              <PropertyRef Name="Co_Poliza" />
+            </Principal>
+            <Dependent Role="Reclamo_Poliza">
+              <PropertyRef Name="Co_Poliza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropuestaSolucion_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="PropuestaSolucion" Type="Self.PropuestaSolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="Cod_Prod" />
+            </Principal>
+            <Dependent Role="PropuestaSolucion">
+              <PropertyRef Name="Cod_Prod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropuestaSolucion_Prospecto">
+          <End Role="Prospecto" Type="Self.Prospecto" Multiplicity="1" />
+          <End Role="PropuestaSolucion" Type="Self.PropuestaSolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prospecto">
+              <PropertyRef Name="Cod_Pros" />
+            </Principal>
+            <Dependent Role="PropuestaSolucion">
+              <PropertyRef Name="Cod_Pros" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reclamo__Co_Recl__5DCAEF64">
+          <End Role="Reclamante" Type="Self.Reclamante" Multiplicity="0..1" />
+          <End Role="Reclamo" Type="Self.Reclamo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reclamante">
+              <PropertyRef Name="Co_Reclamante" />
+            </Principal>
+            <Dependent Role="Reclamo">
+              <PropertyRef Name="Co_Reclamante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reclamo__Co_Moti__5CD6CB2B">
+          <End Role="Reclamo_Motivo" Type="Self.Reclamo_Motivo" Multiplicity="0..1" />
+          <End Role="Reclamo" Type="Self.Reclamo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reclamo_Motivo">
+              <PropertyRef Name="Co_MotivoReclamo" />
+            </Principal>
+            <Dependent Role="Reclamo">
+              <PropertyRef Name="Co_MotivoReclamo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reclamo_P__Nu_Re__5FB337D6">
+          <End Role="Reclamo" Type="Self.Reclamo" Multiplicity="0..1" />
+          <End Role="Reclamo_Poliza" Type="Self.Reclamo_Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reclamo">
+              <PropertyRef Name="Nu_Reclamo" />
+            </Principal>
+            <Dependent Role="Reclamo_Poliza">
+              <PropertyRef Name="Nu_Reclamo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sugerenci__Co_Te__68487DD7">
+          <End Role="Tema" Type="Self.Tema" Multiplicity="0..1" />
+          <End Role="Sugerencia" Type="Self.Sugerencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tema">
+              <PropertyRef Name="Co_Tema" />
+            </Principal>
+            <Dependent Role="Sugerencia">
+              <PropertyRef Name="Co_Tema" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ComisionRequisito">
+          <End Role="Comision" Type="Self.Comision" Multiplicity="*" />
+          <End Role="Requisito" Type="Self.Requisito" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="BDPacificoEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Areas" EntityType="Self.Area" />
+          <EntitySet Name="Campanias" EntityType="Self.Campania" />
+          <EntitySet Name="CanalVentas" EntityType="Self.CanalVenta" />
+          <EntitySet Name="Cargoes" EntityType="Self.Cargo" />
+          <EntitySet Name="Clientes" EntityType="Self.Cliente" />
+          <EntitySet Name="Comisions" EntityType="Self.Comision" />
+          <EntitySet Name="Departamentoes" EntityType="Self.Departamento" />
+          <EntitySet Name="DetallePropuestaSolucions" EntityType="Self.DetallePropuestaSolucion" />
+          <EntitySet Name="Distritoes" EntityType="Self.Distrito" />
+          <EntitySet Name="Empleadoes" EntityType="Self.Empleado" />
+          <EntitySet Name="Estado_Solicitud" EntityType="Self.Estado_Solicitud" />
+          <EntitySet Name="FormatoPlanTrabajoes" EntityType="Self.FormatoPlanTrabajo" />
+          <EntitySet Name="Invitacions" EntityType="Self.Invitacion" />
+          <EntitySet Name="Materias" EntityType="Self.Materia" />
+          <EntitySet Name="Periodoes" EntityType="Self.Periodo" />
+          <EntitySet Name="PlanProductoes" EntityType="Self.PlanProducto" />
+          <EntitySet Name="PlanTrabajoes" EntityType="Self.PlanTrabajo" />
+          <EntitySet Name="Polizas" EntityType="Self.Poliza" />
+          <EntitySet Name="Prestadoras" EntityType="Self.Prestadora" />
+          <EntitySet Name="Procedimientoes" EntityType="Self.Procedimiento" />
+          <EntitySet Name="ProcedimientoAuditorias" EntityType="Self.ProcedimientoAuditoria" />
+          <EntitySet Name="ProcedimientoSeguimientoes" EntityType="Self.ProcedimientoSeguimiento" />
+          <EntitySet Name="Productoes" EntityType="Self.Producto" />
+          <EntitySet Name="PropuestaSolucions" EntityType="Self.PropuestaSolucion" />
+          <EntitySet Name="Prospectoes" EntityType="Self.Prospecto" />
+          <EntitySet Name="Provincias" EntityType="Self.Provincia" />
+          <EntitySet Name="Rangoes" EntityType="Self.Rango" />
+          <EntitySet Name="Reclamantes" EntityType="Self.Reclamante" />
+          <EntitySet Name="Reclamoes" EntityType="Self.Reclamo" />
+          <EntitySet Name="Reclamo_Motivo" EntityType="Self.Reclamo_Motivo" />
+          <EntitySet Name="Reclamo_Poliza" EntityType="Self.Reclamo_Poliza" />
+          <EntitySet Name="Requisitoes" EntityType="Self.Requisito" />
+          <EntitySet Name="Solicitud_Afiliacion" EntityType="Self.Solicitud_Afiliacion" />
+          <EntitySet Name="Solicitud_Autorizacion" EntityType="Self.Solicitud_Autorizacion" />
+          <EntitySet Name="Sugerencias" EntityType="Self.Sugerencia" />
+          <EntitySet Name="Temas" EntityType="Self.Tema" />
+          <AssociationSet Name="FK__Sugerenci__Co_Ar__66603565" Association="Self.FK__Sugerenci__Co_Ar__66603565">
+            <End Role="Area" EntitySet="Areas" />
+            <End Role="Sugerencia" EntitySet="Sugerencias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_AREA" Association="Self.FK_EMPLEADO_AREA">
+            <End Role="Area" EntitySet="Areas" />
+            <End Role="Empleado" EntitySet="Empleadoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedimientoAuditoria_Area" Association="Self.FK_ProcedimientoAuditoria_Area">
+            <End Role="Area" EntitySet="Areas" />
+            <End Role="ProcedimientoAuditoria" EntitySet="ProcedimientoAuditorias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedimientoSeguimiento_Area" Association="Self.FK_ProcedimientoSeguimiento_Area">
+            <End Role="Area" EntitySet="Areas" />
+            <End Role="ProcedimientoSeguimiento" EntitySet="ProcedimientoSeguimientoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CampaniaComision" Association="Self.FK_CampaniaComision">
+            <End Role="Campania" EntitySet="Campanias" />
+            <End Role="Comision" EntitySet="Comisions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CanalVentaComision" Association="Self.FK_CanalVentaComision">
+            <End Role="CanalVenta" EntitySet="CanalVentas" />
+            <End Role="Comision" EntitySet="Comisions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CargoComision" Association="Self.FK_CargoComision">
+            <End Role="Cargo" EntitySet="Cargoes" />
+            <End Role="Comision" EntitySet="Comisions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_CARGO" Association="Self.FK_EMPLEADO_CARGO">
+            <End Role="Cargo" EntitySet="Cargoes" />
+            <End Role="Empleado" EntitySet="Empleadoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Poliza__Co_Clien__571DF1D5" Association="Self.FK__Poliza__Co_Clien__571DF1D5">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="Poliza" EntitySet="Polizas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Poliza__Co_Clien__5812160E" Association="Self.FK__Poliza__Co_Clien__5812160E">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="Poliza" EntitySet="Polizas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sugerenci__Co_Cl__6754599E" Association="Self.FK__Sugerenci__Co_Cl__6754599E">
+            <End Role="Cliente" EntitySet="Clientes" />
+            <End Role="Sugerencia" EntitySet="Sugerencias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ComisionRango" Association="Self.FK_ComisionRango">
+            <End Role="Comision" EntitySet="Comisions" />
+            <End Role="Rango" EntitySet="Rangoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PROVINCIA_DEPARTAMENTO" Association="Self.FK_PROVINCIA_DEPARTAMENTO">
+            <End Role="Departamento" EntitySet="Departamentoes" />
+            <End Role="Provincia" EntitySet="Provincias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetallePropuestaSolucion_PropuestaSolucion" Association="Self.FK_DetallePropuestaSolucion_PropuestaSolucion">
+            <End Role="PropuestaSolucion" EntitySet="PropuestaSolucions" />
+            <End Role="DetallePropuestaSolucion" EntitySet="DetallePropuestaSolucions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reclamant__Co_Di__5AEE82B9" Association="Self.FK__Reclamant__Co_Di__5AEE82B9">
+            <End Role="Distrito" EntitySet="Distritoes" />
+            <End Role="Reclamante" EntitySet="Reclamantes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DISTRITO_PROVINCIA" Association="Self.FK_DISTRITO_PROVINCIA">
+            <End Role="Provincia" EntitySet="Provincias" />
+            <End Role="Distrito" EntitySet="Distritoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_DISTRITO" Association="Self.FK_EMPLEADO_DISTRITO">
+            <End Role="Distrito" EntitySet="Distritoes" />
+            <End Role="Empleado" EntitySet="Empleadoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTADORA_DISTRITO" Association="Self.FK_PRESTADORA_DISTRITO">
+            <End Role="Distrito" EntitySet="Distritoes" />
+            <End Role="Prestadora" EntitySet="Prestadoras" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reclamo__Co_Empl__5BE2A6F2" Association="Self.FK__Reclamo__Co_Empl__5BE2A6F2">
+            <End Role="Empleado" EntitySet="Empleadoes" />
+            <End Role="Reclamo" EntitySet="Reclamoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedimientoAuditoria_Empleado" Association="Self.FK_ProcedimientoAuditoria_Empleado">
+            <End Role="Empleado" EntitySet="Empleadoes" />
+            <End Role="ProcedimientoAuditoria" EntitySet="ProcedimientoAuditorias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedimientoAuditoria_Empleado1" Association="Self.FK_ProcedimientoAuditoria_Empleado1">
+            <End Role="Empleado" EntitySet="Empleadoes" />
+            <End Role="ProcedimientoAuditoria" EntitySet="ProcedimientoAuditorias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedimientoSeguimiento_Empleado" Association="Self.FK_ProcedimientoSeguimiento_Empleado">
+            <End Role="Empleado" EntitySet="Empleadoes" />
+            <End Role="ProcedimientoSeguimiento" EntitySet="ProcedimientoSeguimientoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedimientoSeguimiento_Empleado1" Association="Self.FK_ProcedimientoSeguimiento_Empleado1">
+            <End Role="Empleado" EntitySet="Empleadoes" />
+            <End Role="ProcedimientoSeguimiento" EntitySet="ProcedimientoSeguimientoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOLICITUD_AFILIACION_EMPLEADO" Association="Self.FK_SOLICITUD_AFILIACION_EMPLEADO">
+            <End Role="Empleado" EntitySet="Empleadoes" />
+            <End Role="Solicitud_Afiliacion" EntitySet="Solicitud_Afiliacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOLICITUD_AFILIACION_EMPLEADO1" Association="Self.FK_SOLICITUD_AFILIACION_EMPLEADO1">
+            <End Role="Empleado" EntitySet="Empleadoes" />
+            <End Role="Solicitud_Afiliacion" EntitySet="Solicitud_Afiliacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOLICITUD_AUTORIZACION_EMPLEADO" Association="Self.FK_SOLICITUD_AUTORIZACION_EMPLEADO">
+            <End Role="Empleado" EntitySet="Empleadoes" />
+            <End Role="Solicitud_Autorizacion" EntitySet="Solicitud_Autorizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOLICITUD_AUTORIZACION_EMPLEADO1" Association="Self.FK_SOLICITUD_AUTORIZACION_EMPLEADO1">
+            <End Role="Empleado" EntitySet="Empleadoes" />
+            <End Role="Solicitud_Autorizacion" EntitySet="Solicitud_Autorizacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOLICITUD_AFILIACION_ESTADO_SOLICITUD" Association="Self.FK_SOLICITUD_AFILIACION_ESTADO_SOLICITUD">
+            <End Role="Estado_Solicitud" EntitySet="Estado_Solicitud" />
+            <End Role="Solicitud_Afiliacion" EntitySet="Solicitud_Afiliacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormatoPlanTrabajo_Periodo" Association="Self.FK_FormatoPlanTrabajo_Periodo">
+            <End Role="Periodo" EntitySet="Periodoes" />
+            <End Role="FormatoPlanTrabajo" EntitySet="FormatoPlanTrabajoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormatoPlanTrabajo_PlanTrabajo" Association="Self.FK_FormatoPlanTrabajo_PlanTrabajo">
+            <End Role="PlanTrabajo" EntitySet="PlanTrabajoes" />
+            <End Role="FormatoPlanTrabajo" EntitySet="FormatoPlanTrabajoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOLICITUD_AFILIACION_INVITACION" Association="Self.FK_SOLICITUD_AFILIACION_INVITACION">
+            <End Role="Invitacion" EntitySet="Invitacions" />
+            <End Role="Solicitud_Afiliacion" EntitySet="Solicitud_Afiliacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedimientoAuditoria_Materia" Association="Self.FK_ProcedimientoAuditoria_Materia">
+            <End Role="Materia" EntitySet="Materias" />
+            <End Role="ProcedimientoAuditoria" EntitySet="ProcedimientoAuditorias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedimientoSeguimiento_Materia" Association="Self.FK_ProcedimientoSeguimiento_Materia">
+            <End Role="Materia" EntitySet="Materias" />
+            <End Role="ProcedimientoSeguimiento" EntitySet="ProcedimientoSeguimientoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlanTrabajo_Periodo" Association="Self.FK_PlanTrabajo_Periodo">
+            <End Role="Periodo" EntitySet="Periodoes" />
+            <End Role="PlanTrabajo" EntitySet="PlanTrabajoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedimientoAuditoria_Periodo" Association="Self.FK_ProcedimientoAuditoria_Periodo">
+            <End Role="Periodo" EntitySet="Periodoes" />
+            <End Role="ProcedimientoAuditoria" EntitySet="ProcedimientoAuditorias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedimientoSeguimiento_Periodo" Association="Self.FK_ProcedimientoSeguimiento_Periodo">
+            <End Role="Periodo" EntitySet="Periodoes" />
+            <End Role="ProcedimientoSeguimiento" EntitySet="ProcedimientoSeguimientoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlanProducto_Producto" Association="Self.FK_PlanProducto_Producto">
+            <End Role="Producto" EntitySet="Productoes" />
+            <End Role="PlanProducto" EntitySet="PlanProductoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reclamo_P__Co_Po__5EBF139D" Association="Self.FK__Reclamo_P__Co_Po__5EBF139D">
+            <End Role="Poliza" EntitySet="Polizas" />
+            <End Role="Reclamo_Poliza" EntitySet="Reclamo_Poliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropuestaSolucion_Producto" Association="Self.FK_PropuestaSolucion_Producto">
+            <End Role="Producto" EntitySet="Productoes" />
+            <End Role="PropuestaSolucion" EntitySet="PropuestaSolucions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropuestaSolucion_Prospecto" Association="Self.FK_PropuestaSolucion_Prospecto">
+            <End Role="Prospecto" EntitySet="Prospectoes" />
+            <End Role="PropuestaSolucion" EntitySet="PropuestaSolucions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reclamo__Co_Recl__5DCAEF64" Association="Self.FK__Reclamo__Co_Recl__5DCAEF64">
+            <End Role="Reclamante" EntitySet="Reclamantes" />
+            <End Role="Reclamo" EntitySet="Reclamoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reclamo__Co_Moti__5CD6CB2B" Association="Self.FK__Reclamo__Co_Moti__5CD6CB2B">
+            <End Role="Reclamo_Motivo" EntitySet="Reclamo_Motivo" />
+            <End Role="Reclamo" EntitySet="Reclamoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reclamo_P__Nu_Re__5FB337D6" Association="Self.FK__Reclamo_P__Nu_Re__5FB337D6">
+            <End Role="Reclamo" EntitySet="Reclamoes" />
+            <End Role="Reclamo_Poliza" EntitySet="Reclamo_Poliza" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sugerenci__Co_Te__68487DD7" Association="Self.FK__Sugerenci__Co_Te__68487DD7">
+            <End Role="Tema" EntitySet="Temas" />
+            <End Role="Sugerencia" EntitySet="Sugerencias" />
+          </AssociationSet>
+          <AssociationSet Name="ComisionRequisito" Association="Self.ComisionRequisito">
+            <End Role="Comision" EntitySet="Comisions" />
+            <End Role="Requisito" EntitySet="Requisitoes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BDPacificoModelStoreContainer" CdmEntityContainer="BDPacificoEntities1">
+          <EntitySetMapping Name="Areas">
+            <EntityTypeMapping TypeName="BDPacificoModel.Area">
+              <MappingFragment StoreEntitySet="Area">
+                <ScalarProperty Name="Co_Area" ColumnName="Co_Area" />
+                <ScalarProperty Name="No_Area" ColumnName="No_Area" />
+                <ScalarProperty Name="Tx_Descripcion" ColumnName="Tx_Descripcion" />
+                <ScalarProperty Name="Tx_Responsable" ColumnName="Tx_Responsable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Campanias">
+            <EntityTypeMapping TypeName="BDPacificoModel.Campania">
+              <MappingFragment StoreEntitySet="Campania">
+                <ScalarProperty Name="Cod_Camp" ColumnName="Cod_Camp" />
+                <ScalarProperty Name="Nro_Camp" ColumnName="Nro_Camp" />
+                <ScalarProperty Name="Fec_Ini" ColumnName="Fec_Ini" />
+                <ScalarProperty Name="Fec_Fin" ColumnName="Fec_Fin" />
+                <ScalarProperty Name="Qtd_Meta" ColumnName="Qtd_Meta" />
+                <ScalarProperty Name="Flg_Flag" ColumnName="Flg_Flag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CanalVentas">
+            <EntityTypeMapping TypeName="BDPacificoModel.CanalVenta">
+              <MappingFragment StoreEntitySet="CanalVenta">
+                <ScalarProperty Name="Cod_Cnl_Vta" ColumnName="Cod_Cnl_Vta" />
+                <ScalarProperty Name="Nro_Cnl_Vta" ColumnName="Nro_Cnl_Vta" />
+                <ScalarProperty Name="Txt_Tipo" ColumnName="Txt_Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cargoes">
+            <EntityTypeMapping TypeName="BDPacificoModel.Cargo">
+              <MappingFragment StoreEntitySet="Cargo">
+                <ScalarProperty Name="Cod_Car" ColumnName="Cod_Car" />
+                <ScalarProperty Name="Nro_Car" ColumnName="Nro_Car" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="BDPacificoModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="Co_Cliente" ColumnName="Co_Cliente" />
+                <ScalarProperty Name="No_Cliente" ColumnName="No_Cliente" />
+                <ScalarProperty Name="No_ApePaterno" ColumnName="No_ApePaterno" />
+                <ScalarProperty Name="No_ApeMaterno" ColumnName="No_ApeMaterno" />
+                <ScalarProperty Name="Fi_Sexo" ColumnName="Fi_Sexo" />
+                <ScalarProperty Name="Nu_DNI" ColumnName="Nu_DNI" />
+                <ScalarProperty Name="Fe_Nacimiento" ColumnName="Fe_Nacimiento" />
+                <ScalarProperty Name="Nu_Telefono" ColumnName="Nu_Telefono" />
+                <ScalarProperty Name="Nu_Movil" ColumnName="Nu_Movil" />
+                <ScalarProperty Name="Tx_Direccion" ColumnName="Tx_Direccion" />
+                <ScalarProperty Name="Tx_Correo" ColumnName="Tx_Correo" />
+                <ScalarProperty Name="Fi_Estado" ColumnName="Fi_Estado" />
+                <ScalarProperty Name="Tx_CentroTrabajo" ColumnName="Tx_CentroTrabajo" />
+                <ScalarProperty Name="Tx_CargoTrabajo" ColumnName="Tx_CargoTrabajo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comisions">
+            <EntityTypeMapping TypeName="BDPacificoModel.Comision">
+              <MappingFragment StoreEntitySet="Comision">
+                <ScalarProperty Name="Cod_Com" ColumnName="Cod_Com" />
+                <ScalarProperty Name="Nro_Com" ColumnName="Nro_Com" />
+                <ScalarProperty Name="Fec_Reg" ColumnName="Fec_Reg" />
+                <ScalarProperty Name="Cod_Camp" ColumnName="Cod_Camp" />
+                <ScalarProperty Name="Cod_Cnl_Vta" ColumnName="Cod_Cnl_Vta" />
+                <ScalarProperty Name="Cod_Car" ColumnName="Cod_Car" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departamentoes">
+            <EntityTypeMapping TypeName="BDPacificoModel.Departamento">
+              <MappingFragment StoreEntitySet="Departamento">
+                <ScalarProperty Name="Co_Departamento" ColumnName="Co_Departamento" />
+                <ScalarProperty Name="No_Departamento" ColumnName="No_Departamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetallePropuestaSolucions">
+            <EntityTypeMapping TypeName="BDPacificoModel.DetallePropuestaSolucion">
+              <MappingFragment StoreEntitySet="DetallePropuestaSolucion">
+                <ScalarProperty Name="Cod_Det_Prop_Sol" ColumnName="Cod_Det_Prop_Sol" />
+                <ScalarProperty Name="Cod_Prop_Sol" ColumnName="Cod_Prop_Sol" />
+                <ScalarProperty Name="Num_Anio" ColumnName="Num_Anio" />
+                <ScalarProperty Name="Num_Edad" ColumnName="Num_Edad" />
+                <ScalarProperty Name="Ss_Mon_Prim" ColumnName="Ss_Mon_Prim" />
+                <ScalarProperty Name="Ss_Mon_Ahr" ColumnName="Ss_Mon_Ahr" />
+                <ScalarProperty Name="Ss_Val_Resc" ColumnName="Ss_Val_Resc" />
+                <ScalarProperty Name="Ss_Mon_Aseg" ColumnName="Ss_Mon_Aseg" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Distritoes">
+            <EntityTypeMapping TypeName="BDPacificoModel.Distrito">
+              <MappingFragment StoreEntitySet="Distrito">
+                <ScalarProperty Name="Co_Distrito" ColumnName="Co_Distrito" />
+                <ScalarProperty Name="No_Distrito" ColumnName="No_Distrito" />
+                <ScalarProperty Name="Co_Provincia" ColumnName="Co_Provincia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleadoes">
+            <EntityTypeMapping TypeName="BDPacificoModel.Empleado">
+              <MappingFragment StoreEntitySet="Empleado">
+                <ScalarProperty Name="Cod_Emp" ColumnName="Cod_Emp" />
+                <ScalarProperty Name="Nro_Emp" ColumnName="Nro_Emp" />
+                <ScalarProperty Name="Nro_Ape_Pat" ColumnName="Nro_Ape_Pat" />
+                <ScalarProperty Name="Nro_Ape_Mat" ColumnName="Nro_Ape_Mat" />
+                <ScalarProperty Name="Flg_Sex" ColumnName="Flg_Sex" />
+                <ScalarProperty Name="Nu_Dni" ColumnName="Nu_Dni" />
+                <ScalarProperty Name="Fe_Nacimiento" ColumnName="Fe_Nacimiento" />
+                <ScalarProperty Name="Nu_Telefono" ColumnName="Nu_Telefono" />
+                <ScalarProperty Name="Nu_Movil" ColumnName="Nu_Movil" />
+                <ScalarProperty Name="Tx_Direccion" ColumnName="Tx_Direccion" />
+                <ScalarProperty Name="Co_Distrito" ColumnName="Co_Distrito" />
+                <ScalarProperty Name="Tx_Correo" ColumnName="Tx_Correo" />
+                <ScalarProperty Name="Co_Cargo" ColumnName="Co_Cargo" />
+                <ScalarProperty Name="Co_Area" ColumnName="Co_Area" />
+                <ScalarProperty Name="Fe_RegistroIns" ColumnName="Fe_RegistroIns" />
+                <ScalarProperty Name="No_UsuarioIns" ColumnName="No_UsuarioIns" />
+                <ScalarProperty Name="Fe_RegistroUpd" ColumnName="Fe_RegistroUpd" />
+                <ScalarProperty Name="No_UsuarioUpd" ColumnName="No_UsuarioUpd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estado_Solicitud">
+            <EntityTypeMapping TypeName="BDPacificoModel.Estado_Solicitud">
+              <MappingFragment StoreEntitySet="Estado_Solicitud">
+                <ScalarProperty Name="Co_Estado" ColumnName="Co_Estado" />
+                <ScalarProperty Name="No_Estado" ColumnName="No_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormatoPlanTrabajoes">
+            <EntityTypeMapping TypeName="BDPacificoModel.FormatoPlanTrabajo">
+              <MappingFragment StoreEntitySet="FormatoPlanTrabajo">
+                <ScalarProperty Name="IDFormatoPlanTrabajo" ColumnName="IDFormatoPlanTrabajo" />
+                <ScalarProperty Name="IDPlan" ColumnName="IDPlan" />
+                <ScalarProperty Name="IDPeriodo" ColumnName="IDPeriodo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IDResponsable" ColumnName="IDResponsable" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="Adjunto" ColumnName="Adjunto" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invitacions">
+            <EntityTypeMapping TypeName="BDPacificoModel.Invitacion">
+              <MappingFragment StoreEntitySet="Invitacion">
+                <ScalarProperty Name="Co_Invitacion" ColumnName="Co_Invitacion" />
+                <ScalarProperty Name="Fe_Invitacion" ColumnName="Fe_Invitacion" />
+                <ScalarProperty Name="Fe_Expiracion" ColumnName="Fe_Expiracion" />
+                <ScalarProperty Name="Fl_Estado" ColumnName="Fl_Estado" />
+                <ScalarProperty Name="Fe_RegistroIns" ColumnName="Fe_RegistroIns" />
+                <ScalarProperty Name="No_UsuarioIns" ColumnName="No_UsuarioIns" />
+                <ScalarProperty Name="Fe_RegistroUpd" ColumnName="Fe_RegistroUpd" />
+                <ScalarProperty Name="No_UsuarioUpd" ColumnName="No_UsuarioUpd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materias">
+            <EntityTypeMapping TypeName="BDPacificoModel.Materia">
+              <MappingFragment StoreEntitySet="Materia">
+                <ScalarProperty Name="IDMateria" ColumnName="IDMateria" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Periodoes">
+            <EntityTypeMapping TypeName="BDPacificoModel.Periodo">
+              <MappingFragment StoreEntitySet="Periodo">
+                <ScalarProperty Name="IDPeriodo" ColumnName="IDPeriodo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlanProductoes">
+            <EntityTypeMapping TypeName="BDPacificoModel.PlanProducto">
+              <MappingFragment StoreEntitySet="PlanProducto">
+                <ScalarProperty Name="Cod_Plan_Prod" ColumnName="Cod_Plan_Prod" />
+                <ScalarProperty Name="Nro_Plan_Prod" ColumnName="Nro_Plan_Prod" />
+                <ScalarProperty Name="Ss_Prim_Min" ColumnName="Ss_Prim_Min" />
+                <ScalarProperty Name="Ss_Sum_Min_Aseg" ColumnName="Ss_Sum_Min_Aseg" />
+                <ScalarProperty Name="Ss_Sum_Max_Aseg" ColumnName="Ss_Sum_Max_Aseg" />
+                <ScalarProperty Name="Cod_Prod" ColumnName="Cod_Prod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlanTrabajoes">
+            <EntityTypeMapping TypeName="BDPacificoModel.PlanTrabajo">
+              <MappingFragment StoreEntitySet="PlanTrabajo">
+                <ScalarProperty Name="IDPlan" ColumnName="IDPlan" />
+                <ScalarProperty Name="IDPeriodo" ColumnName="IDPeriodo" />
+                <ScalarProperty Name="Actividades" ColumnName="Actividades" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="Adjunto" ColumnName="Adjunto" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Polizas">
+            <EntityTypeMapping TypeName="BDPacificoModel.Poliza">
+              <MappingFragment StoreEntitySet="Poliza">
+                <ScalarProperty Name="Co_Poliza" ColumnName="Co_Poliza" />
+                <ScalarProperty Name="Nu_Poliza" ColumnName="Nu_Poliza" />
+                <ScalarProperty Name="Co_Cliente" ColumnName="Co_Cliente" />
+                <ScalarProperty Name="SS_Prima" ColumnName="SS_Prima" />
+                <ScalarProperty Name="Fe_Creacion" ColumnName="Fe_Creacion" />
+                <ScalarProperty Name="Fe_Renovacion" ColumnName="Fe_Renovacion" />
+                <ScalarProperty Name="Fe_InicioVigencia" ColumnName="Fe_InicioVigencia" />
+                <ScalarProperty Name="Fe_Vencimiento" ColumnName="Fe_Vencimiento" />
+                <ScalarProperty Name="Tx_TipoPago" ColumnName="Tx_TipoPago" />
+                <ScalarProperty Name="Tx_MarcaTarjeta" ColumnName="Tx_MarcaTarjeta" />
+                <ScalarProperty Name="Nu_Tarjeta" ColumnName="Nu_Tarjeta" />
+                <ScalarProperty Name="Fl_Estado" ColumnName="Fl_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prestadoras">
+            <EntityTypeMapping TypeName="BDPacificoModel.Prestadora">
+              <MappingFragment StoreEntitySet="Prestadora">
+                <ScalarProperty Name="Co_Prestadora" ColumnName="Co_Prestadora" />
+                <ScalarProperty Name="Nu_Ruc" ColumnName="Nu_Ruc" />
+                <ScalarProperty Name="Tx_RazonSocial" ColumnName="Tx_RazonSocial" />
+                <ScalarProperty Name="Tx_DomicilioFiscal" ColumnName="Tx_DomicilioFiscal" />
+                <ScalarProperty Name="Co_Distrito" ColumnName="Co_Distrito" />
+                <ScalarProperty Name="No_RepresentanteLegal" ColumnName="No_RepresentanteLegal" />
+                <ScalarProperty Name="No_ApePatRepresentanteLegal" ColumnName="No_ApePatRepresentanteLegal" />
+                <ScalarProperty Name="No_ApeMatRepresentanteLegal" ColumnName="No_ApeMatRepresentanteLegal" />
+                <ScalarProperty Name="Tx_CorreoRepresentanteLegal" ColumnName="Tx_CorreoRepresentanteLegal" />
+                <ScalarProperty Name="Nu_TelefonoRepresentanteLegal" ColumnName="Nu_TelefonoRepresentanteLegal" />
+                <ScalarProperty Name="Tx_PaginaWeb" ColumnName="Tx_PaginaWeb" />
+                <ScalarProperty Name="Fe_Afiliacion" ColumnName="Fe_Afiliacion" />
+                <ScalarProperty Name="Fl_Activo" ColumnName="Fl_Activo" />
+                <ScalarProperty Name="Fe_RegistroIns" ColumnName="Fe_RegistroIns" />
+                <ScalarProperty Name="No_UsuarioIns" ColumnName="No_UsuarioIns" />
+                <ScalarProperty Name="Fe_RegistroUpd" ColumnName="Fe_RegistroUpd" />
+                <ScalarProperty Name="No_UsuarioUpd" ColumnName="No_UsuarioUpd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Procedimientoes">
+            <EntityTypeMapping TypeName="BDPacificoModel.Procedimiento">
+              <MappingFragment StoreEntitySet="Procedimiento">
+                <ScalarProperty Name="Co_Procedimiento" ColumnName="Co_Procedimiento" />
+                <ScalarProperty Name="No_Procedimiento" ColumnName="No_Procedimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProcedimientoAuditorias">
+            <EntityTypeMapping TypeName="BDPacificoModel.ProcedimientoAuditoria">
+              <MappingFragment StoreEntitySet="ProcedimientoAuditoria">
+                <ScalarProperty Name="IDProcedimientoAuditoria" ColumnName="IDProcedimientoAuditoria" />
+                <ScalarProperty Name="IDPlan" ColumnName="IDPlan" />
+                <ScalarProperty Name="IDPeriodo" ColumnName="IDPeriodo" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="TiempoEjecucion" ColumnName="TiempoEjecucion" />
+                <ScalarProperty Name="IDEmpleadoResponsable" ColumnName="IDEmpleadoResponsable" />
+                <ScalarProperty Name="IDRepresentanteUnidad" ColumnName="IDRepresentanteUnidad" />
+                <ScalarProperty Name="Co_Area" ColumnName="Co_Area" />
+                <ScalarProperty Name="IDMateria" ColumnName="IDMateria" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProcedimientoSeguimientoes">
+            <EntityTypeMapping TypeName="BDPacificoModel.ProcedimientoSeguimiento">
+              <MappingFragment StoreEntitySet="ProcedimientoSeguimiento">
+                <ScalarProperty Name="IDProcedimientoSeguimiento" ColumnName="IDProcedimientoSeguimiento" />
+                <ScalarProperty Name="IDPlan" ColumnName="IDPlan" />
+                <ScalarProperty Name="IDPeriodo" ColumnName="IDPeriodo" />
+                <ScalarProperty Name="EvaluacionVerificacion" ColumnName="EvaluacionVerificacion" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="TiempoEjecucion" ColumnName="TiempoEjecucion" />
+                <ScalarProperty Name="IDEmpleadoResponsable" ColumnName="IDEmpleadoResponsable" />
+                <ScalarProperty Name="IDRepresentanteUnidad" ColumnName="IDRepresentanteUnidad" />
+                <ScalarProperty Name="Co_Area" ColumnName="Co_Area" />
+                <ScalarProperty Name="IDMateria" ColumnName="IDMateria" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productoes">
+            <EntityTypeMapping TypeName="BDPacificoModel.Producto">
+              <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="Cod_Prod" ColumnName="Cod_Prod" />
+                <ScalarProperty Name="Nro_Prod" ColumnName="Nro_Prod" />
+                <ScalarProperty Name="Fec_Crea" ColumnName="Fec_Crea" />
+                <ScalarProperty Name="FI_Estado" ColumnName="FI_Estado" />
+                <ScalarProperty Name="Flg_Flag" ColumnName="Flg_Flag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropuestaSolucions">
+            <EntityTypeMapping TypeName="BDPacificoModel.PropuestaSolucion">
+              <MappingFragment StoreEntitySet="PropuestaSolucion">
+                <ScalarProperty Name="Cod_Prop_Sol" ColumnName="Cod_Prop_Sol" />
+                <ScalarProperty Name="Ss_Mon_Prim" ColumnName="Ss_Mon_Prim" />
+                <ScalarProperty Name="Fec_Nac" ColumnName="Fec_Nac" />
+                <ScalarProperty Name="Ss_Mon_Ret" ColumnName="Ss_Mon_Ret" />
+                <ScalarProperty Name="Ss_Mon_Aseg" ColumnName="Ss_Mon_Aseg" />
+                <ScalarProperty Name="Cod_Pros" ColumnName="Cod_Pros" />
+                <ScalarProperty Name="Cod_Prod" ColumnName="Cod_Prod" />
+                <ScalarProperty Name="Cod_Plan" ColumnName="Cod_Plan" />
+                <ScalarProperty Name="Fec_Crea" ColumnName="Fec_Crea" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prospectoes">
+            <EntityTypeMapping TypeName="BDPacificoModel.Prospecto">
+              <MappingFragment StoreEntitySet="Prospecto">
+                <ScalarProperty Name="Cod_Pros" ColumnName="Cod_Pros" />
+                <ScalarProperty Name="Txt_Pros" ColumnName="Txt_Pros" />
+                <ScalarProperty Name="Txt_Ape_Pat" ColumnName="Txt_Ape_Pat" />
+                <ScalarProperty Name="Txt_Ape_Mat" ColumnName="Txt_Ape_Mat" />
+                <ScalarProperty Name="Txt_Dir" ColumnName="Txt_Dir" />
+                <ScalarProperty Name="Txt_Tel" ColumnName="Txt_Tel" />
+                <ScalarProperty Name="Txt_Mov" ColumnName="Txt_Mov" />
+                <ScalarProperty Name="Txt_Crr" ColumnName="Txt_Crr" />
+                <ScalarProperty Name="Num_DNI" ColumnName="Num_DNI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provincias">
+            <EntityTypeMapping TypeName="BDPacificoModel.Provincia">
+              <MappingFragment StoreEntitySet="Provincia">
+                <ScalarProperty Name="Co_Provincia" ColumnName="Co_Provincia" />
+                <ScalarProperty Name="No_Provincia" ColumnName="No_Provincia" />
+                <ScalarProperty Name="Co_Departamento" ColumnName="Co_Departamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rangoes">
+            <EntityTypeMapping TypeName="BDPacificoModel.Rango">
+              <MappingFragment StoreEntitySet="Rango">
+                <ScalarProperty Name="Cod_Rang" ColumnName="Cod_Rang" />
+                <ScalarProperty Name="Ss_Min" ColumnName="Ss_Min" />
+                <ScalarProperty Name="Ss_Max" ColumnName="Ss_Max" />
+                <ScalarProperty Name="Qtd_Cant" ColumnName="Qtd_Cant" />
+                <ScalarProperty Name="Cod_Com" ColumnName="Cod_Com" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reclamantes">
+            <EntityTypeMapping TypeName="BDPacificoModel.Reclamante">
+              <MappingFragment StoreEntitySet="Reclamante">
+                <ScalarProperty Name="Co_Reclamante" ColumnName="Co_Reclamante" />
+                <ScalarProperty Name="No_Reclamante" ColumnName="No_Reclamante" />
+                <ScalarProperty Name="No_ApePaterno" ColumnName="No_ApePaterno" />
+                <ScalarProperty Name="No_ApeMaterno" ColumnName="No_ApeMaterno" />
+                <ScalarProperty Name="Fi_Sexo" ColumnName="Fi_Sexo" />
+                <ScalarProperty Name="Nu_DNI" ColumnName="Nu_DNI" />
+                <ScalarProperty Name="Fe_Nacimiento" ColumnName="Fe_Nacimiento" />
+                <ScalarProperty Name="Tx_Telefono" ColumnName="Tx_Telefono" />
+                <ScalarProperty Name="Tx_Movil" ColumnName="Tx_Movil" />
+                <ScalarProperty Name="Tx_Correo" ColumnName="Tx_Correo" />
+                <ScalarProperty Name="Co_Distrito" ColumnName="Co_Distrito" />
+                <ScalarProperty Name="Tx_Direccion" ColumnName="Tx_Direccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reclamoes">
+            <EntityTypeMapping TypeName="BDPacificoModel.Reclamo">
+              <MappingFragment StoreEntitySet="Reclamo">
+                <ScalarProperty Name="Nu_Reclamo" ColumnName="Nu_Reclamo" />
+                <ScalarProperty Name="Co_Reclamante" ColumnName="Co_Reclamante" />
+                <ScalarProperty Name="Co_Empleado" ColumnName="Co_Empleado" />
+                <ScalarProperty Name="Co_MotivoReclamo" ColumnName="Co_MotivoReclamo" />
+                <ScalarProperty Name="Fe_Registro" ColumnName="Fe_Registro" />
+                <ScalarProperty Name="Fe_Ocurrencia" ColumnName="Fe_Ocurrencia" />
+                <ScalarProperty Name="Tx_LugIncidencia" ColumnName="Tx_LugIncidencia" />
+                <ScalarProperty Name="Tx_PersAtendio" ColumnName="Tx_PersAtendio" />
+                <ScalarProperty Name="Tx_DescReclamo" ColumnName="Tx_DescReclamo" />
+                <ScalarProperty Name="Tx_ResInmediata" ColumnName="Tx_ResInmediata" />
+                <ScalarProperty Name="Fi_Estado" ColumnName="Fi_Estado" />
+                <ScalarProperty Name="Fe_CierreReclamo" ColumnName="Fe_CierreReclamo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reclamo_Motivo">
+            <EntityTypeMapping TypeName="BDPacificoModel.Reclamo_Motivo">
+              <MappingFragment StoreEntitySet="Reclamo_Motivo">
+                <ScalarProperty Name="Co_MotivoReclamo" ColumnName="Co_MotivoReclamo" />
+                <ScalarProperty Name="Tx_Descripcion" ColumnName="Tx_Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reclamo_Poliza">
+            <EntityTypeMapping TypeName="BDPacificoModel.Reclamo_Poliza">
+              <MappingFragment StoreEntitySet="Reclamo_Poliza">
+                <ScalarProperty Name="Co_ReclamoPoliza" ColumnName="Co_ReclamoPoliza" />
+                <ScalarProperty Name="Fi_Estado" ColumnName="Fi_Estado" />
+                <ScalarProperty Name="Co_Poliza" ColumnName="Co_Poliza" />
+                <ScalarProperty Name="Nu_Reclamo" ColumnName="Nu_Reclamo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requisitoes">
+            <EntityTypeMapping TypeName="BDPacificoModel.Requisito">
+              <MappingFragment StoreEntitySet="Requisito">
+                <ScalarProperty Name="Cod_Req" ColumnName="Cod_Req" />
+                <ScalarProperty Name="Nro_Req" ColumnName="Nro_Req" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Solicitud_Afiliacion">
+            <EntityTypeMapping TypeName="BDPacificoModel.Solicitud_Afiliacion">
+              <MappingFragment StoreEntitySet="Solicitud_Afiliacion">
+                <ScalarProperty Name="Co_Solicitud" ColumnName="Co_Solicitud" />
+                <ScalarProperty Name="Co_Invitacion" ColumnName="Co_Invitacion" />
+                <ScalarProperty Name="Nu_Folio" ColumnName="Nu_Folio" />
+                <ScalarProperty Name="Fe_Solicitud" ColumnName="Fe_Solicitud" />
+                <ScalarProperty Name="No_Contacto" ColumnName="No_Contacto" />
+                <ScalarProperty Name="No_ApePatContacto" ColumnName="No_ApePatContacto" />
+                <ScalarProperty Name="No_ApeMatContacto" ColumnName="No_ApeMatContacto" />
+                <ScalarProperty Name="Nu_TelefonoContacto" ColumnName="Nu_TelefonoContacto" />
+                <ScalarProperty Name="Tx_CorreoContacto" ColumnName="Tx_CorreoContacto" />
+                <ScalarProperty Name="Tx_EvaluacionSunat" ColumnName="Tx_EvaluacionSunat" />
+                <ScalarProperty Name="Tx_EvaluacionRiesgos" ColumnName="Tx_EvaluacionRiesgos" />
+                <ScalarProperty Name="Co_Coordinador" ColumnName="Co_Coordinador" />
+                <ScalarProperty Name="Co_Evaluador" ColumnName="Co_Evaluador" />
+                <ScalarProperty Name="Tx_EvaluacionServicios" ColumnName="Tx_EvaluacionServicios" />
+                <ScalarProperty Name="Tx_ObservacionAprobador" ColumnName="Tx_ObservacionAprobador" />
+                <ScalarProperty Name="Tx_ObservacionNegociador" ColumnName="Tx_ObservacionNegociador" />
+                <ScalarProperty Name="Co_Estado" ColumnName="Co_Estado" />
+                <ScalarProperty Name="Fe_RegistroIns" ColumnName="Fe_RegistroIns" />
+                <ScalarProperty Name="No_UsuarioIns" ColumnName="No_UsuarioIns" />
+                <ScalarProperty Name="Fe_RegistroUpd" ColumnName="Fe_RegistroUpd" />
+                <ScalarProperty Name="No_UsuarioUpd" ColumnName="No_UsuarioUpd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Solicitud_Autorizacion">
+            <EntityTypeMapping TypeName="BDPacificoModel.Solicitud_Autorizacion">
+              <MappingFragment StoreEntitySet="Solicitud_Autorizacion">
+                <ScalarProperty Name="Co_Solicitud" ColumnName="Co_Solicitud" />
+                <ScalarProperty Name="Co_Poliza" ColumnName="Co_Poliza" />
+                <ScalarProperty Name="Co_Sede" ColumnName="Co_Sede" />
+                <ScalarProperty Name="Fe_Solicitud" ColumnName="Fe_Solicitud" />
+                <ScalarProperty Name="No_Contacto" ColumnName="No_Contacto" />
+                <ScalarProperty Name="No_ApePatContacto" ColumnName="No_ApePatContacto" />
+                <ScalarProperty Name="No_ApeMatContacto" ColumnName="No_ApeMatContacto" />
+                <ScalarProperty Name="Nu_TelefonoContacto" ColumnName="Nu_TelefonoContacto" />
+                <ScalarProperty Name="Tx_CorreoContacto" ColumnName="Tx_CorreoContacto" />
+                <ScalarProperty Name="Co_Procedimiento" ColumnName="Co_Procedimiento" />
+                <ScalarProperty Name="Ss_Monto" ColumnName="Ss_Monto" />
+                <ScalarProperty Name="Co_Evaluador" ColumnName="Co_Evaluador" />
+                <ScalarProperty Name="Co_Autorizador" ColumnName="Co_Autorizador" />
+                <ScalarProperty Name="Tx_ObservacionEvaluador" ColumnName="Tx_ObservacionEvaluador" />
+                <ScalarProperty Name="Tx_ObservacionAutorizador" ColumnName="Tx_ObservacionAutorizador" />
+                <ScalarProperty Name="Fl_Estado" ColumnName="Fl_Estado" />
+                <ScalarProperty Name="Fe_RegistroIns" ColumnName="Fe_RegistroIns" />
+                <ScalarProperty Name="No_UsuarioIns" ColumnName="No_UsuarioIns" />
+                <ScalarProperty Name="Fe_RegistroUpd" ColumnName="Fe_RegistroUpd" />
+                <ScalarProperty Name="No_UsuarioUpd" ColumnName="No_UsuarioUpd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sugerencias">
+            <EntityTypeMapping TypeName="BDPacificoModel.Sugerencia">
+              <MappingFragment StoreEntitySet="Sugerencia">
+                <ScalarProperty Name="Nu_Sugerencia" ColumnName="Nu_Sugerencia" />
+                <ScalarProperty Name="Tx_Sugerencia" ColumnName="Tx_Sugerencia" />
+                <ScalarProperty Name="Fe_Registro" ColumnName="Fe_Registro" />
+                <ScalarProperty Name="Fi_Estado" ColumnName="Fi_Estado" />
+                <ScalarProperty Name="Co_Tema" ColumnName="Co_Tema" />
+                <ScalarProperty Name="Co_Area" ColumnName="Co_Area" />
+                <ScalarProperty Name="Co_Cliente" ColumnName="Co_Cliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Temas">
+            <EntityTypeMapping TypeName="BDPacificoModel.Tema">
+              <MappingFragment StoreEntitySet="Tema">
+                <ScalarProperty Name="Co_Tema" ColumnName="Co_Tema" />
+                <ScalarProperty Name="No_Nombre" ColumnName="No_Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ComisionRequisito" TypeName="BDPacificoModel.ComisionRequisito" StoreEntitySet="ComisionRequisito">
+            <EndProperty Name="Comision">
+              <ScalarProperty Name="Cod_Com" ColumnName="Cod_Com" />
+            </EndProperty>
+            <EndProperty Name="Requisito">
+              <ScalarProperty Name="Cod_Req" ColumnName="Cod_Req" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

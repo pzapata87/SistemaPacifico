@@ -3,15 +3,15 @@
 /************************************************/
 
 USE master
-IF EXISTS(select * from sys.databases where name='BDPacifico201500Mod2')
-DROP DATABASE BDPacifico201500Mod2
+IF EXISTS(select * from sys.databases where name='BDPacifico')
+DROP DATABASE BDPacifico
 GO
 
 --Crea Base de Datos
-CREATE DATABASE BDPacifico201500Mod2
+CREATE DATABASE BDPacifico
 GO
 
-USE BDPacifico201500Mod2
+USE BDPacifico
 GO
 
 --GRUPO 01 - Campania
@@ -52,7 +52,7 @@ CREATE TABLE [dbo].[Cargo](
 ) ON [PRIMARY]
 GO
 
---GRUPO 01 - Comisisn
+--GRUPO 01 - Comisión
 CREATE TABLE [dbo].[Comision](
 	[Cod_Com] [int] IDENTITY(1,1) NOT NULL,
 	[Nro_Com] [nvarchar](50) NOT NULL,
@@ -85,10 +85,10 @@ CREATE TABLE [dbo].[DetallePropuestaSolucion](
 	[Cod_Prop_Sol] [int] NOT NULL,
 	[Num_Anio] [int] NOT NULL,
 	[Num_Edad] [int] NOT NULL,
-	[Ss_Mon_Prim] [decimal](18, 0) NOT NULL,
-	[Ss_Mon_Ahr] [decimal](18, 0) NOT NULL,
-	[Ss_Val_Resc] [decimal](18, 0) NOT NULL,
-	[Ss_Mon_Aseg] [decimal](18, 0) NOT NULL,
+	[Ss_Mon_Prim] [decimal](10, 2) NOT NULL,
+	[Ss_Mon_Ahr] [decimal](10, 2) NOT NULL,
+	[Ss_Val_Resc] [decimal](10, 2) NOT NULL,
+	[Ss_Mon_Aseg] [decimal](10, 2) NOT NULL,
  CONSTRAINT [PK_DetallePropuestaSolucion] PRIMARY KEY CLUSTERED 
 (
 	[Cod_Det_Prop_Sol] ASC
@@ -173,7 +173,7 @@ GO
 --GRUPO 01 - Prospecto
 CREATE TABLE [dbo].[Prospecto](
 	[Cod_Pros] [int] IDENTITY(1,1) NOT NULL,
-	[Txt_Pros] [varchar](50) NULL, -- Grupo01: Cambis campo
+	[Txt_Pros] [varchar](50) NULL, -- Grupo01: Cambió campo
 	[Txt_Ape_Pat] [varchar](50) NULL,
 	[Txt_Ape_Mat] [varchar](50) NULL,
 	[Txt_Dir] [varchar](50) NULL,
@@ -696,7 +696,7 @@ GO
 --GRUPO 03 - TipoPrestadora
 CREATE TABLE TipoPrestadora(
 numeroTipoPrestadora	Int,
-descripcisn				Varchar(100),
+descripción				Varchar(100),
 activo					Int
 )
 GO
