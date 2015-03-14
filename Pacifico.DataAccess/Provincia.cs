@@ -16,7 +16,7 @@ namespace Pacifico.DataAccess
     {
         public Provincia()
         {
-            this.Distritoes = new HashSet<Distrito>();
+            this.Distrito = new HashSet<Distrito>();
         }
     
         public int Co_Provincia { get; set; }
@@ -24,6 +24,6 @@ namespace Pacifico.DataAccess
         public int Co_Departamento { get; set; }
     
         public virtual Departamento Departamento { get; set; }
-        public virtual ICollection<Distrito> Distritoes { get; set; }
+        public virtual ICollection<Distrito> Distrito { get; set; }
     }
 }

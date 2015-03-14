@@ -1,0 +1,19 @@
+﻿@using Stimulsoft.Report.Mvc
+
+@Html.Stimulsoft().StiMvcViewer("StiReporte", new StiMvcViewerOptions
+{
+    ActionGetReportSnapshot = "GetReportSnapshot",
+    ActionViewerEvent = "ViewerEvent",
+    ActionPrintReport = "PrintReport",
+    ActionExportReport = "ExportReport",
+    ActionInteraction = "Interaction",
+    MenuAnimation = false,
+    MenuShowMode = StiShowMenuMode.Click,
+    Theme = StiTheme.Office2013,
+    PageShowShadow = false,
+    ShowExportDialog = false,
+    Controller = ViewData["ControllerGetSnapshot"].ToString(),
+    //Localization = "~/Content/Localization/es.xml",
+    ServerTimeout = new TimeSpan(0, 10, 0),
+    ClientRequestTimeout = 600
+})

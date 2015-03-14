@@ -16,10 +16,10 @@ namespace Pacifico.DataAccess
     {
         public Area()
         {
-            this.Sugerencias = new HashSet<Sugerencia>();
-            this.Empleadoes = new HashSet<Empleado>();
-            this.ProcedimientoAuditorias = new HashSet<ProcedimientoAuditoria>();
-            this.ProcedimientoSeguimientoes = new HashSet<ProcedimientoSeguimiento>();
+            this.Sugerencia = new HashSet<Sugerencia>();
+            this.Empleado = new HashSet<Empleado>();
+            this.ProcedimientoAuditoria = new HashSet<ProcedimientoAuditoria>();
+            this.ProcedimientoSeguimiento = new HashSet<ProcedimientoSeguimiento>();
         }
     
         public int Co_Area { get; set; }
@@ -27,9 +27,9 @@ namespace Pacifico.DataAccess
         public string Tx_Descripcion { get; set; }
         public string Tx_Responsable { get; set; }
     
-        public virtual ICollection<Sugerencia> Sugerencias { get; set; }
-        public virtual ICollection<Empleado> Empleadoes { get; set; }
-        public virtual ICollection<ProcedimientoAuditoria> ProcedimientoAuditorias { get; set; }
-        public virtual ICollection<ProcedimientoSeguimiento> ProcedimientoSeguimientoes { get; set; }
+        public virtual ICollection<Sugerencia> Sugerencia { get; set; }
+        public virtual ICollection<Empleado> Empleado { get; set; }
+        public virtual ICollection<ProcedimientoAuditoria> ProcedimientoAuditoria { get; set; }
+        public virtual ICollection<ProcedimientoSeguimiento> ProcedimientoSeguimiento { get; set; }
     }
 }

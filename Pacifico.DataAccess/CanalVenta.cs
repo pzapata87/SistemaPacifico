@@ -16,13 +16,13 @@ namespace Pacifico.DataAccess
     {
         public CanalVenta()
         {
-            this.Comisions = new HashSet<Comision>();
+            this.Comision = new HashSet<Comision>();
         }
     
         public int Cod_Cnl_Vta { get; set; }
         public string Nro_Cnl_Vta { get; set; }
         public string Txt_Tipo { get; set; }
     
-        public virtual ICollection<Comision> Comisions { get; set; }
+        public virtual ICollection<Comision> Comision { get; set; }
     }
 }

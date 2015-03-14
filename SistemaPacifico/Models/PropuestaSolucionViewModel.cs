@@ -23,6 +23,9 @@ namespace SistemaPacifico.Models
         [Required]
         [Display(Name = "Producto: ")]
         public int CodigoProducto { get; set; }
+
+        public string NombreProducto { get; set; }
+
         public IEnumerable<SelectListItem> Productos { get; set; }
         [Display(Name = "Plan: ")]
         public int CodigoPlan { get; set; }

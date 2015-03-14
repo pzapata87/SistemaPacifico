@@ -16,18 +16,18 @@ namespace Pacifico.DataAccess
     {
         public Distrito()
         {
-            this.Reclamantes = new HashSet<Reclamante>();
-            this.Empleadoes = new HashSet<Empleado>();
-            this.Prestadoras = new HashSet<Prestadora>();
+            this.Reclamante = new HashSet<Reclamante>();
+            this.Empleado = new HashSet<Empleado>();
+            this.Prestadora = new HashSet<Prestadora>();
         }
     
         public int Co_Distrito { get; set; }
         public string No_Distrito { get; set; }
         public int Co_Provincia { get; set; }
     
-        public virtual ICollection<Reclamante> Reclamantes { get; set; }
+        public virtual ICollection<Reclamante> Reclamante { get; set; }
         public virtual Provincia Provincia { get; set; }
-        public virtual ICollection<Empleado> Empleadoes { get; set; }
-        public virtual ICollection<Prestadora> Prestadoras { get; set; }
+        public virtual ICollection<Empleado> Empleado { get; set; }
+        public virtual ICollection<Prestadora> Prestadora { get; set; }
     }
 }

@@ -175,6 +175,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PacificoServiceController.cs" />
     <Compile Include="Controllers\PropuestaSolucionController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Core\Comun.cs" />
     <Compile Include="Core\JsonResponse.cs" />
     <Compile Include="Core\ReportBaseController.cs" />
@@ -206,6 +207,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\SistemaPacifico.pubxml" />
+    <Content Include="Reports\Report.mrt" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -224,6 +226,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\datepicker-es.js" />
+    <Content Include="Scripts\utilsCommon.js" />
     <Content Include="Scripts\vanadium.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
@@ -257,6 +260,7 @@
     <Content Include="Views\Comision\Index.cshtml" />
     <Content Include="Views\Comision\Edit.cshtml" />
     <Content Include="Views\Comision\Ver.cshtml" />
+    <Content Include="Views\Report\StimulsoftControl.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

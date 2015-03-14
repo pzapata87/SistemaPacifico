@@ -13,10 +13,10 @@ namespace Pacifico.DataAccess
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BDPacificoEntities1 : DbContext
+    public partial class BDPacificoEntities : DbContext
     {
-        public BDPacificoEntities1()
-            : base("name=BDPacificoEntities1")
+        public BDPacificoEntities()
+            : base("name=BDPacificoEntities")
         {
         }
     
@@ -25,41 +25,41 @@ namespace Pacifico.DataAccess
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Area> Areas { get; set; }
-        public virtual DbSet<Campania> Campanias { get; set; }
-        public virtual DbSet<CanalVenta> CanalVentas { get; set; }
-        public virtual DbSet<Cargo> Cargoes { get; set; }
-        public virtual DbSet<Cliente> Clientes { get; set; }
-        public virtual DbSet<Comision> Comisions { get; set; }
-        public virtual DbSet<Departamento> Departamentoes { get; set; }
-        public virtual DbSet<DetallePropuestaSolucion> DetallePropuestaSolucions { get; set; }
-        public virtual DbSet<Distrito> Distritoes { get; set; }
-        public virtual DbSet<Empleado> Empleadoes { get; set; }
+        public virtual DbSet<Area> Area { get; set; }
+        public virtual DbSet<Campania> Campania { get; set; }
+        public virtual DbSet<CanalVenta> CanalVenta { get; set; }
+        public virtual DbSet<Cargo> Cargo { get; set; }
+        public virtual DbSet<Cliente> Cliente { get; set; }
+        public virtual DbSet<Comision> Comision { get; set; }
+        public virtual DbSet<Departamento> Departamento { get; set; }
+        public virtual DbSet<DetallePropuestaSolucion> DetallePropuestaSolucion { get; set; }
+        public virtual DbSet<Distrito> Distrito { get; set; }
+        public virtual DbSet<Empleado> Empleado { get; set; }
         public virtual DbSet<Estado_Solicitud> Estado_Solicitud { get; set; }
-        public virtual DbSet<FormatoPlanTrabajo> FormatoPlanTrabajoes { get; set; }
-        public virtual DbSet<Invitacion> Invitacions { get; set; }
-        public virtual DbSet<Materia> Materias { get; set; }
-        public virtual DbSet<Periodo> Periodoes { get; set; }
-        public virtual DbSet<PlanProducto> PlanProductoes { get; set; }
-        public virtual DbSet<PlanTrabajo> PlanTrabajoes { get; set; }
-        public virtual DbSet<Poliza> Polizas { get; set; }
-        public virtual DbSet<Prestadora> Prestadoras { get; set; }
-        public virtual DbSet<Procedimiento> Procedimientoes { get; set; }
-        public virtual DbSet<ProcedimientoAuditoria> ProcedimientoAuditorias { get; set; }
-        public virtual DbSet<ProcedimientoSeguimiento> ProcedimientoSeguimientoes { get; set; }
-        public virtual DbSet<Producto> Productoes { get; set; }
-        public virtual DbSet<PropuestaSolucion> PropuestaSolucions { get; set; }
-        public virtual DbSet<Prospecto> Prospectoes { get; set; }
-        public virtual DbSet<Provincia> Provincias { get; set; }
-        public virtual DbSet<Rango> Rangoes { get; set; }
-        public virtual DbSet<Reclamante> Reclamantes { get; set; }
-        public virtual DbSet<Reclamo> Reclamoes { get; set; }
+        public virtual DbSet<FormatoPlanTrabajo> FormatoPlanTrabajo { get; set; }
+        public virtual DbSet<Invitacion> Invitacion { get; set; }
+        public virtual DbSet<Materia> Materia { get; set; }
+        public virtual DbSet<Periodo> Periodo { get; set; }
+        public virtual DbSet<PlanProducto> PlanProducto { get; set; }
+        public virtual DbSet<PlanTrabajo> PlanTrabajo { get; set; }
+        public virtual DbSet<Poliza> Poliza { get; set; }
+        public virtual DbSet<Prestadora> Prestadora { get; set; }
+        public virtual DbSet<Procedimiento> Procedimiento { get; set; }
+        public virtual DbSet<ProcedimientoAuditoria> ProcedimientoAuditoria { get; set; }
+        public virtual DbSet<ProcedimientoSeguimiento> ProcedimientoSeguimiento { get; set; }
+        public virtual DbSet<Producto> Producto { get; set; }
+        public virtual DbSet<PropuestaSolucion> PropuestaSolucion { get; set; }
+        public virtual DbSet<Prospecto> Prospecto { get; set; }
+        public virtual DbSet<Provincia> Provincia { get; set; }
+        public virtual DbSet<Rango> Rango { get; set; }
+        public virtual DbSet<Reclamante> Reclamante { get; set; }
+        public virtual DbSet<Reclamo> Reclamo { get; set; }
         public virtual DbSet<Reclamo_Motivo> Reclamo_Motivo { get; set; }
         public virtual DbSet<Reclamo_Poliza> Reclamo_Poliza { get; set; }
-        public virtual DbSet<Requisito> Requisitoes { get; set; }
+        public virtual DbSet<Requisito> Requisito { get; set; }
         public virtual DbSet<Solicitud_Afiliacion> Solicitud_Afiliacion { get; set; }
         public virtual DbSet<Solicitud_Autorizacion> Solicitud_Autorizacion { get; set; }
-        public virtual DbSet<Sugerencia> Sugerencias { get; set; }
-        public virtual DbSet<Tema> Temas { get; set; }
+        public virtual DbSet<Sugerencia> Sugerencia { get; set; }
+        public virtual DbSet<Tema> Tema { get; set; }
     }
 }

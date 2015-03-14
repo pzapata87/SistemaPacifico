@@ -16,12 +16,12 @@ namespace Pacifico.DataAccess
     {
         public Tema()
         {
-            this.Sugerencias = new HashSet<Sugerencia>();
+            this.Sugerencia = new HashSet<Sugerencia>();
         }
     
         public int Co_Tema { get; set; }
         public string No_Nombre { get; set; }
     
-        public virtual ICollection<Sugerencia> Sugerencias { get; set; }
+        public virtual ICollection<Sugerencia> Sugerencia { get; set; }
     }
 }

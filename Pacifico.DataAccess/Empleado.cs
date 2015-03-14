@@ -16,11 +16,11 @@ namespace Pacifico.DataAccess
     {
         public Empleado()
         {
-            this.Reclamoes = new HashSet<Reclamo>();
-            this.ProcedimientoAuditorias = new HashSet<ProcedimientoAuditoria>();
-            this.ProcedimientoAuditorias1 = new HashSet<ProcedimientoAuditoria>();
-            this.ProcedimientoSeguimientoes = new HashSet<ProcedimientoSeguimiento>();
-            this.ProcedimientoSeguimientoes1 = new HashSet<ProcedimientoSeguimiento>();
+            this.Reclamo = new HashSet<Reclamo>();
+            this.ProcedimientoAuditoria = new HashSet<ProcedimientoAuditoria>();
+            this.ProcedimientoAuditoria1 = new HashSet<ProcedimientoAuditoria>();
+            this.ProcedimientoSeguimiento = new HashSet<ProcedimientoSeguimiento>();
+            this.ProcedimientoSeguimiento1 = new HashSet<ProcedimientoSeguimiento>();
             this.Solicitud_Afiliacion = new HashSet<Solicitud_Afiliacion>();
             this.Solicitud_Afiliacion1 = new HashSet<Solicitud_Afiliacion>();
             this.Solicitud_Autorizacion = new HashSet<Solicitud_Autorizacion>();
@@ -49,11 +49,11 @@ namespace Pacifico.DataAccess
         public virtual Area Area { get; set; }
         public virtual Cargo Cargo { get; set; }
         public virtual Distrito Distrito { get; set; }
-        public virtual ICollection<Reclamo> Reclamoes { get; set; }
-        public virtual ICollection<ProcedimientoAuditoria> ProcedimientoAuditorias { get; set; }
-        public virtual ICollection<ProcedimientoAuditoria> ProcedimientoAuditorias1 { get; set; }
-        public virtual ICollection<ProcedimientoSeguimiento> ProcedimientoSeguimientoes { get; set; }
-        public virtual ICollection<ProcedimientoSeguimiento> ProcedimientoSeguimientoes1 { get; set; }
+        public virtual ICollection<Reclamo> Reclamo { get; set; }
+        public virtual ICollection<ProcedimientoAuditoria> ProcedimientoAuditoria { get; set; }
+        public virtual ICollection<ProcedimientoAuditoria> ProcedimientoAuditoria1 { get; set; }
+        public virtual ICollection<ProcedimientoSeguimiento> ProcedimientoSeguimiento { get; set; }
+        public virtual ICollection<ProcedimientoSeguimiento> ProcedimientoSeguimiento1 { get; set; }
         public virtual ICollection<Solicitud_Afiliacion> Solicitud_Afiliacion { get; set; }
         public virtual ICollection<Solicitud_Afiliacion> Solicitud_Afiliacion1 { get; set; }
         public virtual ICollection<Solicitud_Autorizacion> Solicitud_Autorizacion { get; set; }

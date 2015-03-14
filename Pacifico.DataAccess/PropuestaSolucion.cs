@@ -16,7 +16,7 @@ namespace Pacifico.DataAccess
     {
         public PropuestaSolucion()
         {
-            this.DetallePropuestaSolucions = new HashSet<DetallePropuestaSolucion>();
+            this.DetallePropuestaSolucion = new HashSet<DetallePropuestaSolucion>();
         }
     
         public int Cod_Prop_Sol { get; set; }
@@ -29,7 +29,7 @@ namespace Pacifico.DataAccess
         public int Cod_Plan { get; set; }
         public System.DateTime Fec_Crea { get; set; }
     
-        public virtual ICollection<DetallePropuestaSolucion> DetallePropuestaSolucions { get; set; }
+        public virtual ICollection<DetallePropuestaSolucion> DetallePropuestaSolucion { get; set; }
         public virtual Producto Producto { get; set; }
         public virtual Prospecto Prospecto { get; set; }
     }

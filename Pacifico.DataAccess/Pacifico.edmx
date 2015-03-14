@@ -1301,10 +1301,10 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
           <Property Name="No_Area" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
           <Property Name="Tx_Descripcion" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
           <Property Name="Tx_Responsable" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Sugerencias" Relationship="Self.FK__Sugerenci__Co_Ar__66603565" FromRole="Area" ToRole="Sugerencia" />
-          <NavigationProperty Name="Empleadoes" Relationship="Self.FK_EMPLEADO_AREA" FromRole="Area" ToRole="Empleado" />
-          <NavigationProperty Name="ProcedimientoAuditorias" Relationship="Self.FK_ProcedimientoAuditoria_Area" FromRole="Area" ToRole="ProcedimientoAuditoria" />
-          <NavigationProperty Name="ProcedimientoSeguimientoes" Relationship="Self.FK_ProcedimientoSeguimiento_Area" FromRole="Area" ToRole="ProcedimientoSeguimiento" />
+          <NavigationProperty Name="Sugerencia" Relationship="Self.FK__Sugerenci__Co_Ar__66603565" FromRole="Area" ToRole="Sugerencia" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_EMPLEADO_AREA" FromRole="Area" ToRole="Empleado" />
+          <NavigationProperty Name="ProcedimientoAuditoria" Relationship="Self.FK_ProcedimientoAuditoria_Area" FromRole="Area" ToRole="ProcedimientoAuditoria" />
+          <NavigationProperty Name="ProcedimientoSeguimiento" Relationship="Self.FK_ProcedimientoSeguimiento_Area" FromRole="Area" ToRole="ProcedimientoSeguimiento" />
         </EntityType>
         <EntityType Name="Campania">
           <Key>
@@ -1316,7 +1316,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
           <Property Name="Fec_Fin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Qtd_Meta" Type="Int32" Nullable="false" />
           <Property Name="Flg_Flag" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Comisions" Relationship="Self.FK_CampaniaComision" FromRole="Campania" ToRole="Comision" />
+          <NavigationProperty Name="Comision" Relationship="Self.FK_CampaniaComision" FromRole="Campania" ToRole="Comision" />
         </EntityType>
         <EntityType Name="CanalVenta">
           <Key>
@@ -1325,7 +1325,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
           <Property Name="Cod_Cnl_Vta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nro_Cnl_Vta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Txt_Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Comisions" Relationship="Self.FK_CanalVentaComision" FromRole="CanalVenta" ToRole="Comision" />
+          <NavigationProperty Name="Comision" Relationship="Self.FK_CanalVentaComision" FromRole="CanalVenta" ToRole="Comision" />
         </EntityType>
         <EntityType Name="Cargo">
           <Key>
@@ -1333,8 +1333,8 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
           </Key>
           <Property Name="Cod_Car" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nro_Car" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Comisions" Relationship="Self.FK_CargoComision" FromRole="Cargo" ToRole="Comision" />
-          <NavigationProperty Name="Empleadoes" Relationship="Self.FK_EMPLEADO_CARGO" FromRole="Cargo" ToRole="Empleado" />
+          <NavigationProperty Name="Comision" Relationship="Self.FK_CargoComision" FromRole="Cargo" ToRole="Comision" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_EMPLEADO_CARGO" FromRole="Cargo" ToRole="Empleado" />
         </EntityType>
         <EntityType Name="Cliente">
           <Key>
@@ -1354,9 +1354,9 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
           <Property Name="Fi_Estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="Tx_CentroTrabajo" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
           <Property Name="Tx_CargoTrabajo" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Polizas" Relationship="Self.FK__Poliza__Co_Clien__571DF1D5" FromRole="Cliente" ToRole="Poliza" />
-          <NavigationProperty Name="Polizas1" Relationship="Self.FK__Poliza__Co_Clien__5812160E" FromRole="Cliente" ToRole="Poliza" />
-          <NavigationProperty Name="Sugerencias" Relationship="Self.FK__Sugerenci__Co_Cl__6754599E" FromRole="Cliente" ToRole="Sugerencia" />
+          <NavigationProperty Name="Poliza" Relationship="Self.FK__Poliza__Co_Clien__571DF1D5" FromRole="Cliente" ToRole="Poliza" />
+          <NavigationProperty Name="Poliza1" Relationship="Self.FK__Poliza__Co_Clien__5812160E" FromRole="Cliente" ToRole="Poliza" />
+          <NavigationProperty Name="Sugerencia" Relationship="Self.FK__Sugerenci__Co_Cl__6754599E" FromRole="Cliente" ToRole="Sugerencia" />
         </EntityType>
         <EntityType Name="Comision">
           <Key>
@@ -1371,8 +1371,8 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
           <NavigationProperty Name="Campania" Relationship="Self.FK_CampaniaComision" FromRole="Comision" ToRole="Campania" />
           <NavigationProperty Name="CanalVenta" Relationship="Self.FK_CanalVentaComision" FromRole="Comision" ToRole="CanalVenta" />
           <NavigationProperty Name="Cargo" Relationship="Self.FK_CargoComision" FromRole="Comision" ToRole="Cargo" />
-          <NavigationProperty Name="Rangoes" Relationship="Self.FK_ComisionRango" FromRole="Comision" ToRole="Rango" />
-          <NavigationProperty Name="Requisitoes" Relationship="Self.ComisionRequisito" FromRole="Comision" ToRole="Requisito" />
+          <NavigationProperty Name="Rango" Relationship="Self.FK_ComisionRango" FromRole="Comision" ToRole="Rango" />
+          <NavigationProperty Name="Requisito" Relationship="Self.ComisionRequisito" FromRole="Comision" ToRole="Requisito" />
         </EntityType>
         <EntityType Name="Departamento">
           <Key>
@@ -1380,7 +1380,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
           </Key>
           <Property Name="Co_Departamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="No_Departamento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Provincias" Relationship="Self.FK_PROVINCIA_DEPARTAMENTO" FromRole="Departamento" ToRole="Provincia" />
+          <NavigationProperty Name="Provincia" Relationship="Self.FK_PROVINCIA_DEPARTAMENTO" FromRole="Departamento" ToRole="Provincia" />
         </EntityType>
         <EntityType Name="DetallePropuestaSolucion">
           <Key>
@@ -1403,10 +1403,10 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
           <Property Name="Co_Distrito" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="No_Distrito" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Co_Provincia" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Reclamantes" Relationship="Self.FK__Reclamant__Co_Di__5AEE82B9" FromRole="Distrito" ToRole="Reclamante" />
+          <NavigationProperty Name="Reclamante" Relationship="Self.FK__Reclamant__Co_Di__5AEE82B9" FromRole="Distrito" ToRole="Reclamante" />
           <NavigationProperty Name="Provincia" Relationship="Self.FK_DISTRITO_PROVINCIA" FromRole="Distrito" ToRole="Provincia" />
-          <NavigationProperty Name="Empleadoes" Relationship="Self.FK_EMPLEADO_DISTRITO" FromRole="Distrito" ToRole="Empleado" />
-          <NavigationProperty Name="Prestadoras" Relationship="Self.FK_PRESTADORA_DISTRITO" FromRole="Distrito" ToRole="Prestadora" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_EMPLEADO_DISTRITO" FromRole="Distrito" ToRole="Empleado" />
+          <NavigationProperty Name="Prestadora" Relationship="Self.FK_PRESTADORA_DISTRITO" FromRole="Distrito" ToRole="Prestadora" />
         </EntityType>
         <EntityType Name="Empleado">
           <Key>
@@ -1433,11 +1433,11 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
           <NavigationProperty Name="Area" Relationship="Self.FK_EMPLEADO_AREA" FromRole="Empleado" ToRole="Area" />
           <NavigationProperty Name="Cargo" Relationship="Self.FK_EMPLEADO_CARGO" FromRole="Empleado" ToRole="Cargo" />
           <NavigationProperty Name="Distrito" Relationship="Self.FK_EMPLEADO_DISTRITO" FromRole="Empleado" ToRole="Distrito" />
-          <NavigationProperty Name="Reclamoes" Relationship="Self.FK__Reclamo__Co_Empl__5BE2A6F2" FromRole="Empleado" ToRole="Reclamo" />
-          <NavigationProperty Name="ProcedimientoAuditorias" Relationship="Self.FK_ProcedimientoAuditoria_Empleado" FromRole="Empleado" ToRole="ProcedimientoAuditoria" />
-          <NavigationProperty Name="ProcedimientoAuditorias1" Relationship="Self.FK_ProcedimientoAuditoria_Empleado1" FromRole="Empleado" ToRole="ProcedimientoAuditoria" />
-          <NavigationProperty Name="ProcedimientoSeguimientoes" Relationship="Self.FK_ProcedimientoSeguimiento_Empleado" FromRole="Empleado" ToRole="ProcedimientoSeguimiento" />
-          <NavigationProperty Name="ProcedimientoSeguimientoes1" Relationship="Self.FK_ProcedimientoSeguimiento_Empleado1" FromRole="Empleado" ToRole="ProcedimientoSeguimiento" />
+          <NavigationProperty Name="Reclamo" Relationship="Self.FK__Reclamo__Co_Empl__5BE2A6F2" FromRole="Empleado" ToRole="Reclamo" />
+          <NavigationProperty Name="ProcedimientoAuditoria" Relationship="Self.FK_ProcedimientoAuditoria_Empleado" FromRole="Empleado" ToRole="ProcedimientoAuditoria" />
+          <NavigationProperty Name="ProcedimientoAuditoria1" Relationship="Self.FK_ProcedimientoAuditoria_Empleado1" FromRole="Empleado" ToRole="ProcedimientoAuditoria" />
+          <NavigationProperty Name="ProcedimientoSeguimiento" Relationship="Self.FK_ProcedimientoSeguimiento_Empleado" FromRole="Empleado" ToRole="ProcedimientoSeguimiento" />
+          <NavigationProperty Name="ProcedimientoSeguimiento1" Relationship="Self.FK_ProcedimientoSeguimiento_Empleado1" FromRole="Empleado" ToRole="ProcedimientoSeguimiento" />
           <NavigationProperty Name="Solicitud_Afiliacion" Relationship="Self.FK_SOLICITUD_AFILIACION_EMPLEADO" FromRole="Empleado" ToRole="Solicitud_Afiliacion" />
           <NavigationProperty Name="Solicitud_Afiliacion1" Relationship="Self.FK_SOLICITUD_AFILIACION_EMPLEADO1" FromRole="Empleado" ToRole="Solicitud_Afiliacion" />
           <NavigationProperty Name="Solicitud_Autorizacion" Relationship="Self.FK_SOLICITUD_AUTORIZACION_EMPLEADO" FromRole="Empleado" ToRole="Solicitud_Autorizacion" />
@@ -1488,8 +1488,8 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
           </Key>
           <Property Name="IDMateria" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="ProcedimientoAuditorias" Relationship="Self.FK_ProcedimientoAuditoria_Materia" FromRole="Materia" ToRole="ProcedimientoAuditoria" />
-          <NavigationProperty Name="ProcedimientoSeguimientoes" Relationship="Self.FK_ProcedimientoSeguimiento_Materia" FromRole="Materia" ToRole="ProcedimientoSeguimiento" />
+          <NavigationProperty Name="ProcedimientoAuditoria" Relationship="Self.FK_ProcedimientoAuditoria_Materia" FromRole="Materia" ToRole="ProcedimientoAuditoria" />
+          <NavigationProperty Name="ProcedimientoSeguimiento" Relationship="Self.FK_ProcedimientoSeguimiento_Materia" FromRole="Materia" ToRole="ProcedimientoSeguimiento" />
         </EntityType>
         <EntityType Name="Periodo">
           <Key>
@@ -1497,10 +1497,10 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
           </Key>
           <Property Name="IDPeriodo" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="FormatoPlanTrabajoes" Relationship="Self.FK_FormatoPlanTrabajo_Periodo" FromRole="Periodo" ToRole="FormatoPlanTrabajo" />
-          <NavigationProperty Name="PlanTrabajoes" Relationship="Self.FK_PlanTrabajo_Periodo" FromRole="Periodo" ToRole="PlanTrabajo" />
-          <NavigationProperty Name="ProcedimientoAuditorias" Relationship="Self.FK_ProcedimientoAuditoria_Periodo" FromRole="Periodo" ToRole="ProcedimientoAuditoria" />
-          <NavigationProperty Name="ProcedimientoSeguimientoes" Relationship="Self.FK_ProcedimientoSeguimiento_Periodo" FromRole="Periodo" ToRole="ProcedimientoSeguimiento" />
+          <NavigationProperty Name="FormatoPlanTrabajo" Relationship="Self.FK_FormatoPlanTrabajo_Periodo" FromRole="Periodo" ToRole="FormatoPlanTrabajo" />
+          <NavigationProperty Name="PlanTrabajo" Relationship="Self.FK_PlanTrabajo_Periodo" FromRole="Periodo" ToRole="PlanTrabajo" />
+          <NavigationProperty Name="ProcedimientoAuditoria" Relationship="Self.FK_ProcedimientoAuditoria_Periodo" FromRole="Periodo" ToRole="ProcedimientoAuditoria" />
+          <NavigationProperty Name="ProcedimientoSeguimiento" Relationship="Self.FK_ProcedimientoSeguimiento_Periodo" FromRole="Periodo" ToRole="ProcedimientoSeguimiento" />
         </EntityType>
         <EntityType Name="PlanProducto">
           <Key>
@@ -1527,7 +1527,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
           <Property Name="Version" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Adjunto" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="Comentario" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="FormatoPlanTrabajoes" Relationship="Self.FK_FormatoPlanTrabajo_PlanTrabajo" FromRole="PlanTrabajo" ToRole="FormatoPlanTrabajo" />
+          <NavigationProperty Name="FormatoPlanTrabajo" Relationship="Self.FK_FormatoPlanTrabajo_PlanTrabajo" FromRole="PlanTrabajo" ToRole="FormatoPlanTrabajo" />
           <NavigationProperty Name="Periodo" Relationship="Self.FK_PlanTrabajo_Periodo" FromRole="PlanTrabajo" ToRole="Periodo" />
         </EntityType>
         <EntityType Name="Poliza">
@@ -1636,8 +1636,8 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
           <Property Name="Fec_Crea" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="FI_Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Flg_Flag" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="PlanProductoes" Relationship="Self.FK_PlanProducto_Producto" FromRole="Producto" ToRole="PlanProducto" />
-          <NavigationProperty Name="PropuestaSolucions" Relationship="Self.FK_PropuestaSolucion_Producto" FromRole="Producto" ToRole="PropuestaSolucion" />
+          <NavigationProperty Name="PlanProducto" Relationship="Self.FK_PlanProducto_Producto" FromRole="Producto" ToRole="PlanProducto" />
+          <NavigationProperty Name="PropuestaSolucion" Relationship="Self.FK_PropuestaSolucion_Producto" FromRole="Producto" ToRole="PropuestaSolucion" />
         </EntityType>
         <EntityType Name="PropuestaSolucion">
           <Key>
@@ -1652,7 +1652,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
           <Property Name="Cod_Prod" Type="Int32" Nullable="false" />
           <Property Name="Cod_Plan" Type="Int32" Nullable="false" />
           <Property Name="Fec_Crea" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="DetallePropuestaSolucions" Relationship="Self.FK_DetallePropuestaSolucion_PropuestaSolucion" FromRole="PropuestaSolucion" ToRole="DetallePropuestaSolucion" />
+          <NavigationProperty Name="DetallePropuestaSolucion" Relationship="Self.FK_DetallePropuestaSolucion_PropuestaSolucion" FromRole="PropuestaSolucion" ToRole="DetallePropuestaSolucion" />
           <NavigationProperty Name="Producto" Relationship="Self.FK_PropuestaSolucion_Producto" FromRole="PropuestaSolucion" ToRole="Producto" />
           <NavigationProperty Name="Prospecto" Relationship="Self.FK_PropuestaSolucion_Prospecto" FromRole="PropuestaSolucion" ToRole="Prospecto" />
         </EntityType>
@@ -1669,7 +1669,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
           <Property Name="Txt_Mov" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Txt_Crr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Num_DNI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="PropuestaSolucions" Relationship="Self.FK_PropuestaSolucion_Prospecto" FromRole="Prospecto" ToRole="PropuestaSolucion" />
+          <NavigationProperty Name="PropuestaSolucion" Relationship="Self.FK_PropuestaSolucion_Prospecto" FromRole="Prospecto" ToRole="PropuestaSolucion" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
@@ -1679,7 +1679,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
           <Property Name="No_Provincia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Co_Departamento" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Departamento" Relationship="Self.FK_PROVINCIA_DEPARTAMENTO" FromRole="Provincia" ToRole="Departamento" />
-          <NavigationProperty Name="Distritoes" Relationship="Self.FK_DISTRITO_PROVINCIA" FromRole="Provincia" ToRole="Distrito" />
+          <NavigationProperty Name="Distrito" Relationship="Self.FK_DISTRITO_PROVINCIA" FromRole="Provincia" ToRole="Distrito" />
         </EntityType>
         <EntityType Name="Rango">
           <Key>
@@ -1709,7 +1709,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
           <Property Name="Co_Distrito" Type="Int32" />
           <Property Name="Tx_Direccion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Distrito" Relationship="Self.FK__Reclamant__Co_Di__5AEE82B9" FromRole="Reclamante" ToRole="Distrito" />
-          <NavigationProperty Name="Reclamoes" Relationship="Self.FK__Reclamo__Co_Recl__5DCAEF64" FromRole="Reclamante" ToRole="Reclamo" />
+          <NavigationProperty Name="Reclamo" Relationship="Self.FK__Reclamo__Co_Recl__5DCAEF64" FromRole="Reclamante" ToRole="Reclamo" />
         </EntityType>
         <EntityType Name="Reclamo">
           <Key>
@@ -1738,7 +1738,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
           </Key>
           <Property Name="Co_MotivoReclamo" Type="Int32" Nullable="false" />
           <Property Name="Tx_Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Reclamoes" Relationship="Self.FK__Reclamo__Co_Moti__5CD6CB2B" FromRole="Reclamo_Motivo" ToRole="Reclamo" />
+          <NavigationProperty Name="Reclamo" Relationship="Self.FK__Reclamo__Co_Moti__5CD6CB2B" FromRole="Reclamo_Motivo" ToRole="Reclamo" />
         </EntityType>
         <EntityType Name="Reclamo_Poliza">
           <Key>
@@ -1757,7 +1757,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
           </Key>
           <Property Name="Cod_Req" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nro_Req" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Comisions" Relationship="Self.ComisionRequisito" FromRole="Requisito" ToRole="Comision" />
+          <NavigationProperty Name="Comision" Relationship="Self.ComisionRequisito" FromRole="Requisito" ToRole="Comision" />
         </EntityType>
         <EntityType Name="Solicitud_Afiliacion">
           <Key>
@@ -1837,7 +1837,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
           </Key>
           <Property Name="Co_Tema" Type="Int32" Nullable="false" />
           <Property Name="No_Nombre" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Sugerencias" Relationship="Self.FK__Sugerenci__Co_Te__68487DD7" FromRole="Tema" ToRole="Sugerencia" />
+          <NavigationProperty Name="Sugerencia" Relationship="Self.FK__Sugerenci__Co_Te__68487DD7" FromRole="Tema" ToRole="Sugerencia" />
         </EntityType>
         <Association Name="FK__Sugerenci__Co_Ar__66603565">
           <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
@@ -2373,149 +2373,149 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
           <End Role="Comision" Type="Self.Comision" Multiplicity="*" />
           <End Role="Requisito" Type="Self.Requisito" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="BDPacificoEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Areas" EntityType="Self.Area" />
-          <EntitySet Name="Campanias" EntityType="Self.Campania" />
-          <EntitySet Name="CanalVentas" EntityType="Self.CanalVenta" />
-          <EntitySet Name="Cargoes" EntityType="Self.Cargo" />
-          <EntitySet Name="Clientes" EntityType="Self.Cliente" />
-          <EntitySet Name="Comisions" EntityType="Self.Comision" />
-          <EntitySet Name="Departamentoes" EntityType="Self.Departamento" />
-          <EntitySet Name="DetallePropuestaSolucions" EntityType="Self.DetallePropuestaSolucion" />
-          <EntitySet Name="Distritoes" EntityType="Self.Distrito" />
-          <EntitySet Name="Empleadoes" EntityType="Self.Empleado" />
+        <EntityContainer Name="BDPacificoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Area" EntityType="Self.Area" />
+          <EntitySet Name="Campania" EntityType="Self.Campania" />
+          <EntitySet Name="CanalVenta" EntityType="Self.CanalVenta" />
+          <EntitySet Name="Cargo" EntityType="Self.Cargo" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="Comision" EntityType="Self.Comision" />
+          <EntitySet Name="Departamento" EntityType="Self.Departamento" />
+          <EntitySet Name="DetallePropuestaSolucion" EntityType="Self.DetallePropuestaSolucion" />
+          <EntitySet Name="Distrito" EntityType="Self.Distrito" />
+          <EntitySet Name="Empleado" EntityType="Self.Empleado" />
           <EntitySet Name="Estado_Solicitud" EntityType="Self.Estado_Solicitud" />
-          <EntitySet Name="FormatoPlanTrabajoes" EntityType="Self.FormatoPlanTrabajo" />
-          <EntitySet Name="Invitacions" EntityType="Self.Invitacion" />
-          <EntitySet Name="Materias" EntityType="Self.Materia" />
-          <EntitySet Name="Periodoes" EntityType="Self.Periodo" />
-          <EntitySet Name="PlanProductoes" EntityType="Self.PlanProducto" />
-          <EntitySet Name="PlanTrabajoes" EntityType="Self.PlanTrabajo" />
-          <EntitySet Name="Polizas" EntityType="Self.Poliza" />
-          <EntitySet Name="Prestadoras" EntityType="Self.Prestadora" />
-          <EntitySet Name="Procedimientoes" EntityType="Self.Procedimiento" />
-          <EntitySet Name="ProcedimientoAuditorias" EntityType="Self.ProcedimientoAuditoria" />
-          <EntitySet Name="ProcedimientoSeguimientoes" EntityType="Self.ProcedimientoSeguimiento" />
-          <EntitySet Name="Productoes" EntityType="Self.Producto" />
-          <EntitySet Name="PropuestaSolucions" EntityType="Self.PropuestaSolucion" />
-          <EntitySet Name="Prospectoes" EntityType="Self.Prospecto" />
-          <EntitySet Name="Provincias" EntityType="Self.Provincia" />
-          <EntitySet Name="Rangoes" EntityType="Self.Rango" />
-          <EntitySet Name="Reclamantes" EntityType="Self.Reclamante" />
-          <EntitySet Name="Reclamoes" EntityType="Self.Reclamo" />
+          <EntitySet Name="FormatoPlanTrabajo" EntityType="Self.FormatoPlanTrabajo" />
+          <EntitySet Name="Invitacion" EntityType="Self.Invitacion" />
+          <EntitySet Name="Materia" EntityType="Self.Materia" />
+          <EntitySet Name="Periodo" EntityType="Self.Periodo" />
+          <EntitySet Name="PlanProducto" EntityType="Self.PlanProducto" />
+          <EntitySet Name="PlanTrabajo" EntityType="Self.PlanTrabajo" />
+          <EntitySet Name="Poliza" EntityType="Self.Poliza" />
+          <EntitySet Name="Prestadora" EntityType="Self.Prestadora" />
+          <EntitySet Name="Procedimiento" EntityType="Self.Procedimiento" />
+          <EntitySet Name="ProcedimientoAuditoria" EntityType="Self.ProcedimientoAuditoria" />
+          <EntitySet Name="ProcedimientoSeguimiento" EntityType="Self.ProcedimientoSeguimiento" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" />
+          <EntitySet Name="PropuestaSolucion" EntityType="Self.PropuestaSolucion" />
+          <EntitySet Name="Prospecto" EntityType="Self.Prospecto" />
+          <EntitySet Name="Provincia" EntityType="Self.Provincia" />
+          <EntitySet Name="Rango" EntityType="Self.Rango" />
+          <EntitySet Name="Reclamante" EntityType="Self.Reclamante" />
+          <EntitySet Name="Reclamo" EntityType="Self.Reclamo" />
           <EntitySet Name="Reclamo_Motivo" EntityType="Self.Reclamo_Motivo" />
           <EntitySet Name="Reclamo_Poliza" EntityType="Self.Reclamo_Poliza" />
-          <EntitySet Name="Requisitoes" EntityType="Self.Requisito" />
+          <EntitySet Name="Requisito" EntityType="Self.Requisito" />
           <EntitySet Name="Solicitud_Afiliacion" EntityType="Self.Solicitud_Afiliacion" />
           <EntitySet Name="Solicitud_Autorizacion" EntityType="Self.Solicitud_Autorizacion" />
-          <EntitySet Name="Sugerencias" EntityType="Self.Sugerencia" />
-          <EntitySet Name="Temas" EntityType="Self.Tema" />
+          <EntitySet Name="Sugerencia" EntityType="Self.Sugerencia" />
+          <EntitySet Name="Tema" EntityType="Self.Tema" />
           <AssociationSet Name="FK__Sugerenci__Co_Ar__66603565" Association="Self.FK__Sugerenci__Co_Ar__66603565">
-            <End Role="Area" EntitySet="Areas" />
-            <End Role="Sugerencia" EntitySet="Sugerencias" />
+            <End Role="Area" EntitySet="Area" />
+            <End Role="Sugerencia" EntitySet="Sugerencia" />
           </AssociationSet>
           <AssociationSet Name="FK_EMPLEADO_AREA" Association="Self.FK_EMPLEADO_AREA">
-            <End Role="Area" EntitySet="Areas" />
-            <End Role="Empleado" EntitySet="Empleadoes" />
+            <End Role="Area" EntitySet="Area" />
+            <End Role="Empleado" EntitySet="Empleado" />
           </AssociationSet>
           <AssociationSet Name="FK_ProcedimientoAuditoria_Area" Association="Self.FK_ProcedimientoAuditoria_Area">
-            <End Role="Area" EntitySet="Areas" />
-            <End Role="ProcedimientoAuditoria" EntitySet="ProcedimientoAuditorias" />
+            <End Role="Area" EntitySet="Area" />
+            <End Role="ProcedimientoAuditoria" EntitySet="ProcedimientoAuditoria" />
           </AssociationSet>
           <AssociationSet Name="FK_ProcedimientoSeguimiento_Area" Association="Self.FK_ProcedimientoSeguimiento_Area">
-            <End Role="Area" EntitySet="Areas" />
-            <End Role="ProcedimientoSeguimiento" EntitySet="ProcedimientoSeguimientoes" />
+            <End Role="Area" EntitySet="Area" />
+            <End Role="ProcedimientoSeguimiento" EntitySet="ProcedimientoSeguimiento" />
           </AssociationSet>
           <AssociationSet Name="FK_CampaniaComision" Association="Self.FK_CampaniaComision">
-            <End Role="Campania" EntitySet="Campanias" />
-            <End Role="Comision" EntitySet="Comisions" />
+            <End Role="Campania" EntitySet="Campania" />
+            <End Role="Comision" EntitySet="Comision" />
           </AssociationSet>
           <AssociationSet Name="FK_CanalVentaComision" Association="Self.FK_CanalVentaComision">
-            <End Role="CanalVenta" EntitySet="CanalVentas" />
-            <End Role="Comision" EntitySet="Comisions" />
+            <End Role="CanalVenta" EntitySet="CanalVenta" />
+            <End Role="Comision" EntitySet="Comision" />
           </AssociationSet>
           <AssociationSet Name="FK_CargoComision" Association="Self.FK_CargoComision">
-            <End Role="Cargo" EntitySet="Cargoes" />
-            <End Role="Comision" EntitySet="Comisions" />
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="Comision" EntitySet="Comision" />
           </AssociationSet>
           <AssociationSet Name="FK_EMPLEADO_CARGO" Association="Self.FK_EMPLEADO_CARGO">
-            <End Role="Cargo" EntitySet="Cargoes" />
-            <End Role="Empleado" EntitySet="Empleadoes" />
+            <End Role="Cargo" EntitySet="Cargo" />
+            <End Role="Empleado" EntitySet="Empleado" />
           </AssociationSet>
           <AssociationSet Name="FK__Poliza__Co_Clien__571DF1D5" Association="Self.FK__Poliza__Co_Clien__571DF1D5">
-            <End Role="Cliente" EntitySet="Clientes" />
-            <End Role="Poliza" EntitySet="Polizas" />
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Poliza" EntitySet="Poliza" />
           </AssociationSet>
           <AssociationSet Name="FK__Poliza__Co_Clien__5812160E" Association="Self.FK__Poliza__Co_Clien__5812160E">
-            <End Role="Cliente" EntitySet="Clientes" />
-            <End Role="Poliza" EntitySet="Polizas" />
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Poliza" EntitySet="Poliza" />
           </AssociationSet>
           <AssociationSet Name="FK__Sugerenci__Co_Cl__6754599E" Association="Self.FK__Sugerenci__Co_Cl__6754599E">
-            <End Role="Cliente" EntitySet="Clientes" />
-            <End Role="Sugerencia" EntitySet="Sugerencias" />
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Sugerencia" EntitySet="Sugerencia" />
           </AssociationSet>
           <AssociationSet Name="FK_ComisionRango" Association="Self.FK_ComisionRango">
-            <End Role="Comision" EntitySet="Comisions" />
-            <End Role="Rango" EntitySet="Rangoes" />
+            <End Role="Comision" EntitySet="Comision" />
+            <End Role="Rango" EntitySet="Rango" />
           </AssociationSet>
           <AssociationSet Name="FK_PROVINCIA_DEPARTAMENTO" Association="Self.FK_PROVINCIA_DEPARTAMENTO">
-            <End Role="Departamento" EntitySet="Departamentoes" />
-            <End Role="Provincia" EntitySet="Provincias" />
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Provincia" EntitySet="Provincia" />
           </AssociationSet>
           <AssociationSet Name="FK_DetallePropuestaSolucion_PropuestaSolucion" Association="Self.FK_DetallePropuestaSolucion_PropuestaSolucion">
-            <End Role="PropuestaSolucion" EntitySet="PropuestaSolucions" />
-            <End Role="DetallePropuestaSolucion" EntitySet="DetallePropuestaSolucions" />
+            <End Role="PropuestaSolucion" EntitySet="PropuestaSolucion" />
+            <End Role="DetallePropuestaSolucion" EntitySet="DetallePropuestaSolucion" />
           </AssociationSet>
           <AssociationSet Name="FK__Reclamant__Co_Di__5AEE82B9" Association="Self.FK__Reclamant__Co_Di__5AEE82B9">
-            <End Role="Distrito" EntitySet="Distritoes" />
-            <End Role="Reclamante" EntitySet="Reclamantes" />
+            <End Role="Distrito" EntitySet="Distrito" />
+            <End Role="Reclamante" EntitySet="Reclamante" />
           </AssociationSet>
           <AssociationSet Name="FK_DISTRITO_PROVINCIA" Association="Self.FK_DISTRITO_PROVINCIA">
-            <End Role="Provincia" EntitySet="Provincias" />
-            <End Role="Distrito" EntitySet="Distritoes" />
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Distrito" EntitySet="Distrito" />
           </AssociationSet>
           <AssociationSet Name="FK_EMPLEADO_DISTRITO" Association="Self.FK_EMPLEADO_DISTRITO">
-            <End Role="Distrito" EntitySet="Distritoes" />
-            <End Role="Empleado" EntitySet="Empleadoes" />
+            <End Role="Distrito" EntitySet="Distrito" />
+            <End Role="Empleado" EntitySet="Empleado" />
           </AssociationSet>
           <AssociationSet Name="FK_PRESTADORA_DISTRITO" Association="Self.FK_PRESTADORA_DISTRITO">
-            <End Role="Distrito" EntitySet="Distritoes" />
-            <End Role="Prestadora" EntitySet="Prestadoras" />
+            <End Role="Distrito" EntitySet="Distrito" />
+            <End Role="Prestadora" EntitySet="Prestadora" />
           </AssociationSet>
           <AssociationSet Name="FK__Reclamo__Co_Empl__5BE2A6F2" Association="Self.FK__Reclamo__Co_Empl__5BE2A6F2">
-            <End Role="Empleado" EntitySet="Empleadoes" />
-            <End Role="Reclamo" EntitySet="Reclamoes" />
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Reclamo" EntitySet="Reclamo" />
           </AssociationSet>
           <AssociationSet Name="FK_ProcedimientoAuditoria_Empleado" Association="Self.FK_ProcedimientoAuditoria_Empleado">
-            <End Role="Empleado" EntitySet="Empleadoes" />
-            <End Role="ProcedimientoAuditoria" EntitySet="ProcedimientoAuditorias" />
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="ProcedimientoAuditoria" EntitySet="ProcedimientoAuditoria" />
           </AssociationSet>
           <AssociationSet Name="FK_ProcedimientoAuditoria_Empleado1" Association="Self.FK_ProcedimientoAuditoria_Empleado1">
-            <End Role="Empleado" EntitySet="Empleadoes" />
-            <End Role="ProcedimientoAuditoria" EntitySet="ProcedimientoAuditorias" />
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="ProcedimientoAuditoria" EntitySet="ProcedimientoAuditoria" />
           </AssociationSet>
           <AssociationSet Name="FK_ProcedimientoSeguimiento_Empleado" Association="Self.FK_ProcedimientoSeguimiento_Empleado">
-            <End Role="Empleado" EntitySet="Empleadoes" />
-            <End Role="ProcedimientoSeguimiento" EntitySet="ProcedimientoSeguimientoes" />
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="ProcedimientoSeguimiento" EntitySet="ProcedimientoSeguimiento" />
           </AssociationSet>
           <AssociationSet Name="FK_ProcedimientoSeguimiento_Empleado1" Association="Self.FK_ProcedimientoSeguimiento_Empleado1">
-            <End Role="Empleado" EntitySet="Empleadoes" />
-            <End Role="ProcedimientoSeguimiento" EntitySet="ProcedimientoSeguimientoes" />
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="ProcedimientoSeguimiento" EntitySet="ProcedimientoSeguimiento" />
           </AssociationSet>
           <AssociationSet Name="FK_SOLICITUD_AFILIACION_EMPLEADO" Association="Self.FK_SOLICITUD_AFILIACION_EMPLEADO">
-            <End Role="Empleado" EntitySet="Empleadoes" />
+            <End Role="Empleado" EntitySet="Empleado" />
             <End Role="Solicitud_Afiliacion" EntitySet="Solicitud_Afiliacion" />
           </AssociationSet>
           <AssociationSet Name="FK_SOLICITUD_AFILIACION_EMPLEADO1" Association="Self.FK_SOLICITUD_AFILIACION_EMPLEADO1">
-            <End Role="Empleado" EntitySet="Empleadoes" />
+            <End Role="Empleado" EntitySet="Empleado" />
             <End Role="Solicitud_Afiliacion" EntitySet="Solicitud_Afiliacion" />
           </AssociationSet>
           <AssociationSet Name="FK_SOLICITUD_AUTORIZACION_EMPLEADO" Association="Self.FK_SOLICITUD_AUTORIZACION_EMPLEADO">
-            <End Role="Empleado" EntitySet="Empleadoes" />
+            <End Role="Empleado" EntitySet="Empleado" />
             <End Role="Solicitud_Autorizacion" EntitySet="Solicitud_Autorizacion" />
           </AssociationSet>
           <AssociationSet Name="FK_SOLICITUD_AUTORIZACION_EMPLEADO1" Association="Self.FK_SOLICITUD_AUTORIZACION_EMPLEADO1">
-            <End Role="Empleado" EntitySet="Empleadoes" />
+            <End Role="Empleado" EntitySet="Empleado" />
             <End Role="Solicitud_Autorizacion" EntitySet="Solicitud_Autorizacion" />
           </AssociationSet>
           <AssociationSet Name="FK_SOLICITUD_AFILIACION_ESTADO_SOLICITUD" Association="Self.FK_SOLICITUD_AFILIACION_ESTADO_SOLICITUD">
@@ -2523,72 +2523,72 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
             <End Role="Solicitud_Afiliacion" EntitySet="Solicitud_Afiliacion" />
           </AssociationSet>
           <AssociationSet Name="FK_FormatoPlanTrabajo_Periodo" Association="Self.FK_FormatoPlanTrabajo_Periodo">
-            <End Role="Periodo" EntitySet="Periodoes" />
-            <End Role="FormatoPlanTrabajo" EntitySet="FormatoPlanTrabajoes" />
+            <End Role="Periodo" EntitySet="Periodo" />
+            <End Role="FormatoPlanTrabajo" EntitySet="FormatoPlanTrabajo" />
           </AssociationSet>
           <AssociationSet Name="FK_FormatoPlanTrabajo_PlanTrabajo" Association="Self.FK_FormatoPlanTrabajo_PlanTrabajo">
-            <End Role="PlanTrabajo" EntitySet="PlanTrabajoes" />
-            <End Role="FormatoPlanTrabajo" EntitySet="FormatoPlanTrabajoes" />
+            <End Role="PlanTrabajo" EntitySet="PlanTrabajo" />
+            <End Role="FormatoPlanTrabajo" EntitySet="FormatoPlanTrabajo" />
           </AssociationSet>
           <AssociationSet Name="FK_SOLICITUD_AFILIACION_INVITACION" Association="Self.FK_SOLICITUD_AFILIACION_INVITACION">
-            <End Role="Invitacion" EntitySet="Invitacions" />
+            <End Role="Invitacion" EntitySet="Invitacion" />
             <End Role="Solicitud_Afiliacion" EntitySet="Solicitud_Afiliacion" />
           </AssociationSet>
           <AssociationSet Name="FK_ProcedimientoAuditoria_Materia" Association="Self.FK_ProcedimientoAuditoria_Materia">
-            <End Role="Materia" EntitySet="Materias" />
-            <End Role="ProcedimientoAuditoria" EntitySet="ProcedimientoAuditorias" />
+            <End Role="Materia" EntitySet="Materia" />
+            <End Role="ProcedimientoAuditoria" EntitySet="ProcedimientoAuditoria" />
           </AssociationSet>
           <AssociationSet Name="FK_ProcedimientoSeguimiento_Materia" Association="Self.FK_ProcedimientoSeguimiento_Materia">
-            <End Role="Materia" EntitySet="Materias" />
-            <End Role="ProcedimientoSeguimiento" EntitySet="ProcedimientoSeguimientoes" />
+            <End Role="Materia" EntitySet="Materia" />
+            <End Role="ProcedimientoSeguimiento" EntitySet="ProcedimientoSeguimiento" />
           </AssociationSet>
           <AssociationSet Name="FK_PlanTrabajo_Periodo" Association="Self.FK_PlanTrabajo_Periodo">
-            <End Role="Periodo" EntitySet="Periodoes" />
-            <End Role="PlanTrabajo" EntitySet="PlanTrabajoes" />
+            <End Role="Periodo" EntitySet="Periodo" />
+            <End Role="PlanTrabajo" EntitySet="PlanTrabajo" />
           </AssociationSet>
           <AssociationSet Name="FK_ProcedimientoAuditoria_Periodo" Association="Self.FK_ProcedimientoAuditoria_Periodo">
-            <End Role="Periodo" EntitySet="Periodoes" />
-            <End Role="ProcedimientoAuditoria" EntitySet="ProcedimientoAuditorias" />
+            <End Role="Periodo" EntitySet="Periodo" />
+            <End Role="ProcedimientoAuditoria" EntitySet="ProcedimientoAuditoria" />
           </AssociationSet>
           <AssociationSet Name="FK_ProcedimientoSeguimiento_Periodo" Association="Self.FK_ProcedimientoSeguimiento_Periodo">
-            <End Role="Periodo" EntitySet="Periodoes" />
-            <End Role="ProcedimientoSeguimiento" EntitySet="ProcedimientoSeguimientoes" />
+            <End Role="Periodo" EntitySet="Periodo" />
+            <End Role="ProcedimientoSeguimiento" EntitySet="ProcedimientoSeguimiento" />
           </AssociationSet>
           <AssociationSet Name="FK_PlanProducto_Producto" Association="Self.FK_PlanProducto_Producto">
-            <End Role="Producto" EntitySet="Productoes" />
-            <End Role="PlanProducto" EntitySet="PlanProductoes" />
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="PlanProducto" EntitySet="PlanProducto" />
           </AssociationSet>
           <AssociationSet Name="FK__Reclamo_P__Co_Po__5EBF139D" Association="Self.FK__Reclamo_P__Co_Po__5EBF139D">
-            <End Role="Poliza" EntitySet="Polizas" />
+            <End Role="Poliza" EntitySet="Poliza" />
             <End Role="Reclamo_Poliza" EntitySet="Reclamo_Poliza" />
           </AssociationSet>
           <AssociationSet Name="FK_PropuestaSolucion_Producto" Association="Self.FK_PropuestaSolucion_Producto">
-            <End Role="Producto" EntitySet="Productoes" />
-            <End Role="PropuestaSolucion" EntitySet="PropuestaSolucions" />
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="PropuestaSolucion" EntitySet="PropuestaSolucion" />
           </AssociationSet>
           <AssociationSet Name="FK_PropuestaSolucion_Prospecto" Association="Self.FK_PropuestaSolucion_Prospecto">
-            <End Role="Prospecto" EntitySet="Prospectoes" />
-            <End Role="PropuestaSolucion" EntitySet="PropuestaSolucions" />
+            <End Role="Prospecto" EntitySet="Prospecto" />
+            <End Role="PropuestaSolucion" EntitySet="PropuestaSolucion" />
           </AssociationSet>
           <AssociationSet Name="FK__Reclamo__Co_Recl__5DCAEF64" Association="Self.FK__Reclamo__Co_Recl__5DCAEF64">
-            <End Role="Reclamante" EntitySet="Reclamantes" />
-            <End Role="Reclamo" EntitySet="Reclamoes" />
+            <End Role="Reclamante" EntitySet="Reclamante" />
+            <End Role="Reclamo" EntitySet="Reclamo" />
           </AssociationSet>
           <AssociationSet Name="FK__Reclamo__Co_Moti__5CD6CB2B" Association="Self.FK__Reclamo__Co_Moti__5CD6CB2B">
             <End Role="Reclamo_Motivo" EntitySet="Reclamo_Motivo" />
-            <End Role="Reclamo" EntitySet="Reclamoes" />
+            <End Role="Reclamo" EntitySet="Reclamo" />
           </AssociationSet>
           <AssociationSet Name="FK__Reclamo_P__Nu_Re__5FB337D6" Association="Self.FK__Reclamo_P__Nu_Re__5FB337D6">
-            <End Role="Reclamo" EntitySet="Reclamoes" />
+            <End Role="Reclamo" EntitySet="Reclamo" />
             <End Role="Reclamo_Poliza" EntitySet="Reclamo_Poliza" />
           </AssociationSet>
           <AssociationSet Name="FK__Sugerenci__Co_Te__68487DD7" Association="Self.FK__Sugerenci__Co_Te__68487DD7">
-            <End Role="Tema" EntitySet="Temas" />
-            <End Role="Sugerencia" EntitySet="Sugerencias" />
+            <End Role="Tema" EntitySet="Tema" />
+            <End Role="Sugerencia" EntitySet="Sugerencia" />
           </AssociationSet>
           <AssociationSet Name="ComisionRequisito" Association="Self.ComisionRequisito">
-            <End Role="Comision" EntitySet="Comisions" />
-            <End Role="Requisito" EntitySet="Requisitoes" />
+            <End Role="Comision" EntitySet="Comision" />
+            <End Role="Requisito" EntitySet="Requisito" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -2596,8 +2596,8 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="BDPacificoModelStoreContainer" CdmEntityContainer="BDPacificoEntities1">
-          <EntitySetMapping Name="Areas">
+        <EntityContainerMapping StorageEntityContainer="BDPacificoModelStoreContainer" CdmEntityContainer="BDPacificoEntities">
+          <EntitySetMapping Name="Area">
             <EntityTypeMapping TypeName="BDPacificoModel.Area">
               <MappingFragment StoreEntitySet="Area">
                 <ScalarProperty Name="Co_Area" ColumnName="Co_Area" />
@@ -2607,7 +2607,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Campanias">
+          <EntitySetMapping Name="Campania">
             <EntityTypeMapping TypeName="BDPacificoModel.Campania">
               <MappingFragment StoreEntitySet="Campania">
                 <ScalarProperty Name="Cod_Camp" ColumnName="Cod_Camp" />
@@ -2619,7 +2619,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CanalVentas">
+          <EntitySetMapping Name="CanalVenta">
             <EntityTypeMapping TypeName="BDPacificoModel.CanalVenta">
               <MappingFragment StoreEntitySet="CanalVenta">
                 <ScalarProperty Name="Cod_Cnl_Vta" ColumnName="Cod_Cnl_Vta" />
@@ -2628,7 +2628,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Cargoes">
+          <EntitySetMapping Name="Cargo">
             <EntityTypeMapping TypeName="BDPacificoModel.Cargo">
               <MappingFragment StoreEntitySet="Cargo">
                 <ScalarProperty Name="Cod_Car" ColumnName="Cod_Car" />
@@ -2636,7 +2636,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Clientes">
+          <EntitySetMapping Name="Cliente">
             <EntityTypeMapping TypeName="BDPacificoModel.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
                 <ScalarProperty Name="Co_Cliente" ColumnName="Co_Cliente" />
@@ -2656,7 +2656,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Comisions">
+          <EntitySetMapping Name="Comision">
             <EntityTypeMapping TypeName="BDPacificoModel.Comision">
               <MappingFragment StoreEntitySet="Comision">
                 <ScalarProperty Name="Cod_Com" ColumnName="Cod_Com" />
@@ -2668,7 +2668,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Departamentoes">
+          <EntitySetMapping Name="Departamento">
             <EntityTypeMapping TypeName="BDPacificoModel.Departamento">
               <MappingFragment StoreEntitySet="Departamento">
                 <ScalarProperty Name="Co_Departamento" ColumnName="Co_Departamento" />
@@ -2676,7 +2676,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DetallePropuestaSolucions">
+          <EntitySetMapping Name="DetallePropuestaSolucion">
             <EntityTypeMapping TypeName="BDPacificoModel.DetallePropuestaSolucion">
               <MappingFragment StoreEntitySet="DetallePropuestaSolucion">
                 <ScalarProperty Name="Cod_Det_Prop_Sol" ColumnName="Cod_Det_Prop_Sol" />
@@ -2690,7 +2690,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Distritoes">
+          <EntitySetMapping Name="Distrito">
             <EntityTypeMapping TypeName="BDPacificoModel.Distrito">
               <MappingFragment StoreEntitySet="Distrito">
                 <ScalarProperty Name="Co_Distrito" ColumnName="Co_Distrito" />
@@ -2699,7 +2699,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Empleadoes">
+          <EntitySetMapping Name="Empleado">
             <EntityTypeMapping TypeName="BDPacificoModel.Empleado">
               <MappingFragment StoreEntitySet="Empleado">
                 <ScalarProperty Name="Cod_Emp" ColumnName="Cod_Emp" />
@@ -2731,7 +2731,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FormatoPlanTrabajoes">
+          <EntitySetMapping Name="FormatoPlanTrabajo">
             <EntityTypeMapping TypeName="BDPacificoModel.FormatoPlanTrabajo">
               <MappingFragment StoreEntitySet="FormatoPlanTrabajo">
                 <ScalarProperty Name="IDFormatoPlanTrabajo" ColumnName="IDFormatoPlanTrabajo" />
@@ -2745,7 +2745,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Invitacions">
+          <EntitySetMapping Name="Invitacion">
             <EntityTypeMapping TypeName="BDPacificoModel.Invitacion">
               <MappingFragment StoreEntitySet="Invitacion">
                 <ScalarProperty Name="Co_Invitacion" ColumnName="Co_Invitacion" />
@@ -2759,7 +2759,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Materias">
+          <EntitySetMapping Name="Materia">
             <EntityTypeMapping TypeName="BDPacificoModel.Materia">
               <MappingFragment StoreEntitySet="Materia">
                 <ScalarProperty Name="IDMateria" ColumnName="IDMateria" />
@@ -2767,7 +2767,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Periodoes">
+          <EntitySetMapping Name="Periodo">
             <EntityTypeMapping TypeName="BDPacificoModel.Periodo">
               <MappingFragment StoreEntitySet="Periodo">
                 <ScalarProperty Name="IDPeriodo" ColumnName="IDPeriodo" />
@@ -2775,7 +2775,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PlanProductoes">
+          <EntitySetMapping Name="PlanProducto">
             <EntityTypeMapping TypeName="BDPacificoModel.PlanProducto">
               <MappingFragment StoreEntitySet="PlanProducto">
                 <ScalarProperty Name="Cod_Plan_Prod" ColumnName="Cod_Plan_Prod" />
@@ -2787,7 +2787,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PlanTrabajoes">
+          <EntitySetMapping Name="PlanTrabajo">
             <EntityTypeMapping TypeName="BDPacificoModel.PlanTrabajo">
               <MappingFragment StoreEntitySet="PlanTrabajo">
                 <ScalarProperty Name="IDPlan" ColumnName="IDPlan" />
@@ -2801,7 +2801,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Polizas">
+          <EntitySetMapping Name="Poliza">
             <EntityTypeMapping TypeName="BDPacificoModel.Poliza">
               <MappingFragment StoreEntitySet="Poliza">
                 <ScalarProperty Name="Co_Poliza" ColumnName="Co_Poliza" />
@@ -2819,7 +2819,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Prestadoras">
+          <EntitySetMapping Name="Prestadora">
             <EntityTypeMapping TypeName="BDPacificoModel.Prestadora">
               <MappingFragment StoreEntitySet="Prestadora">
                 <ScalarProperty Name="Co_Prestadora" ColumnName="Co_Prestadora" />
@@ -2842,7 +2842,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Procedimientoes">
+          <EntitySetMapping Name="Procedimiento">
             <EntityTypeMapping TypeName="BDPacificoModel.Procedimiento">
               <MappingFragment StoreEntitySet="Procedimiento">
                 <ScalarProperty Name="Co_Procedimiento" ColumnName="Co_Procedimiento" />
@@ -2850,7 +2850,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProcedimientoAuditorias">
+          <EntitySetMapping Name="ProcedimientoAuditoria">
             <EntityTypeMapping TypeName="BDPacificoModel.ProcedimientoAuditoria">
               <MappingFragment StoreEntitySet="ProcedimientoAuditoria">
                 <ScalarProperty Name="IDProcedimientoAuditoria" ColumnName="IDProcedimientoAuditoria" />
@@ -2867,7 +2867,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProcedimientoSeguimientoes">
+          <EntitySetMapping Name="ProcedimientoSeguimiento">
             <EntityTypeMapping TypeName="BDPacificoModel.ProcedimientoSeguimiento">
               <MappingFragment StoreEntitySet="ProcedimientoSeguimiento">
                 <ScalarProperty Name="IDProcedimientoSeguimiento" ColumnName="IDProcedimientoSeguimiento" />
@@ -2885,7 +2885,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Productoes">
+          <EntitySetMapping Name="Producto">
             <EntityTypeMapping TypeName="BDPacificoModel.Producto">
               <MappingFragment StoreEntitySet="Producto">
                 <ScalarProperty Name="Cod_Prod" ColumnName="Cod_Prod" />
@@ -2896,7 +2896,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PropuestaSolucions">
+          <EntitySetMapping Name="PropuestaSolucion">
             <EntityTypeMapping TypeName="BDPacificoModel.PropuestaSolucion">
               <MappingFragment StoreEntitySet="PropuestaSolucion">
                 <ScalarProperty Name="Cod_Prop_Sol" ColumnName="Cod_Prop_Sol" />
@@ -2911,7 +2911,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Prospectoes">
+          <EntitySetMapping Name="Prospecto">
             <EntityTypeMapping TypeName="BDPacificoModel.Prospecto">
               <MappingFragment StoreEntitySet="Prospecto">
                 <ScalarProperty Name="Cod_Pros" ColumnName="Cod_Pros" />
@@ -2926,7 +2926,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Provincias">
+          <EntitySetMapping Name="Provincia">
             <EntityTypeMapping TypeName="BDPacificoModel.Provincia">
               <MappingFragment StoreEntitySet="Provincia">
                 <ScalarProperty Name="Co_Provincia" ColumnName="Co_Provincia" />
@@ -2935,7 +2935,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Rangoes">
+          <EntitySetMapping Name="Rango">
             <EntityTypeMapping TypeName="BDPacificoModel.Rango">
               <MappingFragment StoreEntitySet="Rango">
                 <ScalarProperty Name="Cod_Rang" ColumnName="Cod_Rang" />
@@ -2946,7 +2946,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Reclamantes">
+          <EntitySetMapping Name="Reclamante">
             <EntityTypeMapping TypeName="BDPacificoModel.Reclamante">
               <MappingFragment StoreEntitySet="Reclamante">
                 <ScalarProperty Name="Co_Reclamante" ColumnName="Co_Reclamante" />
@@ -2964,7 +2964,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Reclamoes">
+          <EntitySetMapping Name="Reclamo">
             <EntityTypeMapping TypeName="BDPacificoModel.Reclamo">
               <MappingFragment StoreEntitySet="Reclamo">
                 <ScalarProperty Name="Nu_Reclamo" ColumnName="Nu_Reclamo" />
@@ -3000,7 +3000,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Requisitoes">
+          <EntitySetMapping Name="Requisito">
             <EntityTypeMapping TypeName="BDPacificoModel.Requisito">
               <MappingFragment StoreEntitySet="Requisito">
                 <ScalarProperty Name="Cod_Req" ColumnName="Cod_Req" />
@@ -3061,7 +3061,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Sugerencias">
+          <EntitySetMapping Name="Sugerencia">
             <EntityTypeMapping TypeName="BDPacificoModel.Sugerencia">
               <MappingFragment StoreEntitySet="Sugerencia">
                 <ScalarProperty Name="Nu_Sugerencia" ColumnName="Nu_Sugerencia" />
@@ -3074,7 +3074,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Temas">
+          <EntitySetMapping Name="Tema">
             <EntityTypeMapping TypeName="BDPacificoModel.Tema">
               <MappingFragment StoreEntitySet="Tema">
                 <ScalarProperty Name="Co_Tema" ColumnName="Co_Tema" />
@@ -3104,7 +3104,7 @@ advertencia 6013: La tabla o vista 'BDPacifico.dbo.TipoPrestadora' no tiene defi
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />

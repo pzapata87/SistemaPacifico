@@ -86,6 +86,8 @@
 }
 
 
+
+
 <script type="text/javascript">
     var initialData = [];
 
@@ -148,6 +150,22 @@
             window.location = vURL;
         });
 
+        $('#btnReporte').click(function () {
+            var opcionesAjax = {
+                url: '@Url.Action("StimulsoftControl", "Report", new { area = "" })',
+                parametros: {
+                    parametros: [{ key: 'id', value: '@Model.Codigo' }],
+                    controllerGetSnapshot: "PropuestaSolucion"
+                }
+            };
+            debugger ;
+            Utils.Ajax(opcionesAjax, function(response) {
+                debugger ;
+                $('#divReport').modal('show');
+                $('#divReport .modal-body').html(response);
+            });
+        });
+
     });
 
     function CargarPropuestaDetalle() {
@@ -182,7 +200,7 @@
             alert("Request failed: " + textStatus);
         });
     }
-    
+
     function round2Fixed(value) {
         value = +value;
 

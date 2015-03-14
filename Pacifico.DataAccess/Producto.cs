@@ -16,8 +16,8 @@ namespace Pacifico.DataAccess
     {
         public Producto()
         {
-            this.PlanProductoes = new HashSet<PlanProducto>();
-            this.PropuestaSolucions = new HashSet<PropuestaSolucion>();
+            this.PlanProducto = new HashSet<PlanProducto>();
+            this.PropuestaSolucion = new HashSet<PropuestaSolucion>();
         }
     
         public int Cod_Prod { get; set; }
@@ -26,7 +26,7 @@ namespace Pacifico.DataAccess
         public string FI_Estado { get; set; }
         public bool Flg_Flag { get; set; }
     
-        public virtual ICollection<PlanProducto> PlanProductoes { get; set; }
-        public virtual ICollection<PropuestaSolucion> PropuestaSolucions { get; set; }
+        public virtual ICollection<PlanProducto> PlanProducto { get; set; }
+        public virtual ICollection<PropuestaSolucion> PropuestaSolucion { get; set; }
     }
 }

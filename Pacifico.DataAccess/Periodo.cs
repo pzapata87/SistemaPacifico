@@ -16,18 +16,18 @@ namespace Pacifico.DataAccess
     {
         public Periodo()
         {
-            this.FormatoPlanTrabajoes = new HashSet<FormatoPlanTrabajo>();
-            this.PlanTrabajoes = new HashSet<PlanTrabajo>();
-            this.ProcedimientoAuditorias = new HashSet<ProcedimientoAuditoria>();
-            this.ProcedimientoSeguimientoes = new HashSet<ProcedimientoSeguimiento>();
+            this.FormatoPlanTrabajo = new HashSet<FormatoPlanTrabajo>();
+            this.PlanTrabajo = new HashSet<PlanTrabajo>();
+            this.ProcedimientoAuditoria = new HashSet<ProcedimientoAuditoria>();
+            this.ProcedimientoSeguimiento = new HashSet<ProcedimientoSeguimiento>();
         }
     
         public int IDPeriodo { get; set; }
         public string Descripcion { get; set; }
     
-        public virtual ICollection<FormatoPlanTrabajo> FormatoPlanTrabajoes { get; set; }
-        public virtual ICollection<PlanTrabajo> PlanTrabajoes { get; set; }
-        public virtual ICollection<ProcedimientoAuditoria> ProcedimientoAuditorias { get; set; }
-        public virtual ICollection<ProcedimientoSeguimiento> ProcedimientoSeguimientoes { get; set; }
+        public virtual ICollection<FormatoPlanTrabajo> FormatoPlanTrabajo { get; set; }
+        public virtual ICollection<PlanTrabajo> PlanTrabajo { get; set; }
+        public virtual ICollection<ProcedimientoAuditoria> ProcedimientoAuditoria { get; set; }
+        public virtual ICollection<ProcedimientoSeguimiento> ProcedimientoSeguimiento { get; set; }
     }
 }

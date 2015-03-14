@@ -16,7 +16,7 @@ namespace Pacifico.DataAccess
     {
         public Campania()
         {
-            this.Comisions = new HashSet<Comision>();
+            this.Comision = new HashSet<Comision>();
         }
     
         public int Cod_Camp { get; set; }
@@ -26,6 +26,6 @@ namespace Pacifico.DataAccess
         public int Qtd_Meta { get; set; }
         public bool Flg_Flag { get; set; }
     
-        public virtual ICollection<Comision> Comisions { get; set; }
+        public virtual ICollection<Comision> Comision { get; set; }
     }
 }

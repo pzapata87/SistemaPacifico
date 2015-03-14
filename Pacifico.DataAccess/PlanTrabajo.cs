@@ -16,7 +16,7 @@ namespace Pacifico.DataAccess
     {
         public PlanTrabajo()
         {
-            this.FormatoPlanTrabajoes = new HashSet<FormatoPlanTrabajo>();
+            this.FormatoPlanTrabajo = new HashSet<FormatoPlanTrabajo>();
         }
     
         public int IDPlan { get; set; }
@@ -28,7 +28,7 @@ namespace Pacifico.DataAccess
         public byte[] Adjunto { get; set; }
         public string Comentario { get; set; }
     
-        public virtual ICollection<FormatoPlanTrabajo> FormatoPlanTrabajoes { get; set; }
+        public virtual ICollection<FormatoPlanTrabajo> FormatoPlanTrabajo { get; set; }
         public virtual Periodo Periodo { get; set; }
     }
 }

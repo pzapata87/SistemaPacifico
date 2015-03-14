@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Stimulsoft.Report.Mvc;
 
@@ -6,6 +7,19 @@ namespace SistemaPacifico.Core
 {
     public class ReportBaseController : Controller
     {
+        #region Propiedades
+
+        public Dictionary<string, string> ParametrosReport
+        {
+            get
+            {
+                return TempData["Parametros"] != null
+                    ? (Dictionary<string, string>)TempData["Parametros"]
+                    : null;
+            }
+        }
+
+        #endregion
 
         public virtual ActionResult GerReportSnapshot()
         {

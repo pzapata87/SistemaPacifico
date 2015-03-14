@@ -16,12 +16,12 @@ namespace Pacifico.DataAccess
     {
         public Departamento()
         {
-            this.Provincias = new HashSet<Provincia>();
+            this.Provincia = new HashSet<Provincia>();
         }
     
         public int Co_Departamento { get; set; }
         public string No_Departamento { get; set; }
     
-        public virtual ICollection<Provincia> Provincias { get; set; }
+        public virtual ICollection<Provincia> Provincia { get; set; }
     }
 }

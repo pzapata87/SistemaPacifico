@@ -16,14 +16,14 @@ namespace Pacifico.DataAccess
     {
         public Materia()
         {
-            this.ProcedimientoAuditorias = new HashSet<ProcedimientoAuditoria>();
-            this.ProcedimientoSeguimientoes = new HashSet<ProcedimientoSeguimiento>();
+            this.ProcedimientoAuditoria = new HashSet<ProcedimientoAuditoria>();
+            this.ProcedimientoSeguimiento = new HashSet<ProcedimientoSeguimiento>();
         }
     
         public int IDMateria { get; set; }
         public string Descripcion { get; set; }
     
-        public virtual ICollection<ProcedimientoAuditoria> ProcedimientoAuditorias { get; set; }
-        public virtual ICollection<ProcedimientoSeguimiento> ProcedimientoSeguimientoes { get; set; }
+        public virtual ICollection<ProcedimientoAuditoria> ProcedimientoAuditoria { get; set; }
+        public virtual ICollection<ProcedimientoSeguimiento> ProcedimientoSeguimiento { get; set; }
     }
 }

@@ -16,12 +16,12 @@ namespace Pacifico.DataAccess
     {
         public Reclamo_Motivo()
         {
-            this.Reclamoes = new HashSet<Reclamo>();
+            this.Reclamo = new HashSet<Reclamo>();
         }
     
         public int Co_MotivoReclamo { get; set; }
         public string Tx_Descripcion { get; set; }
     
-        public virtual ICollection<Reclamo> Reclamoes { get; set; }
+        public virtual ICollection<Reclamo> Reclamo { get; set; }
     }
 }
