@@ -4,61 +4,65 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6e2305473ac049ed9dafd5b62cc108c8" Name="Diagram1">
-        <EntityTypeShape EntityType="BDPacificoModel.Area" Width="1.5" PointX="0.75" PointY="19" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Campania" Width="1.5" PointX="3.75" PointY="45.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.CanalVenta" Width="1.5" PointX="3.75" PointY="48.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Cargo" Width="1.5" PointX="0.75" PointY="15.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Cliente" Width="1.5" PointX="3.75" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Comision" Width="1.5" PointX="6" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Departamento" Width="1.5" PointX="1.5" PointY="28.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.DetallePropuestaSolucion" Width="1.5" PointX="18.25" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Distrito" Width="1.5" PointX="0.75" PointY="22.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Empleado" Width="1.5" PointX="3" PointY="16.875" IsExpanded="true" />
+      <Diagram DiagramId="a6b712e33b6347878941b9bca3a1cd59" Name="Diagram1" ZoomLevel="99">
+        <EntityTypeShape EntityType="BDPacificoModel.Area" Width="1.5" PointX="0.75" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.Campania" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.CanalVenta" Width="1.5" PointX="5.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.Cargo" Width="1.5" PointX="0.75" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.Cliente" Width="1.5" PointX="3.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.Comision" Width="1.5" PointX="11.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.Departamento" Width="1.5" PointX="1.5" PointY="30.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.DetallePropuestaSolucion" Width="1.5" PointX="13.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.Distrito" Width="1.5" PointX="0.75" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.Empleado" Width="1.5" PointX="3" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BDPacificoModel.Estado_Solicitud" Width="1.5" PointX="9" PointY="15.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.FormatoPlanTrabajo" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Invitacion" Width="1.5" PointX="9" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Materia" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Periodo" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.PlanProducto" Width="1.5" PointX="13" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.PlanTrabajo" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Poliza" Width="1.5" PointX="5.25" PointY="32.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.FormatoPlanTrabajo" Width="1.5" PointX="11.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.Invitacion" Width="1.5" PointX="9" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.Materia" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.Periodo" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.PlanProducto" Width="1.5" PointX="8" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.PlanTrabajo" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.Poliza" Width="1.5" PointX="5.25" PointY="32" IsExpanded="true" />
         <EntityTypeShape EntityType="BDPacificoModel.Prestadora" Width="1.5" PointX="3" PointY="39.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Procedimiento" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.Procedimiento" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BDPacificoModel.ProcedimientoAuditoria" Width="1.5" PointX="8.25" PointY="18.25" IsExpanded="true" />
         <EntityTypeShape EntityType="BDPacificoModel.ProcedimientoSeguimiento" Width="1.5" PointX="5.25" PointY="13.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Producto" Width="1.5" PointX="10.75" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.PropuestaSolucion" Width="1.5" PointX="16" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Prospecto" Width="1.5" PointX="13.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Provincia" Width="1.5" PointX="1.5" PointY="25.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Rango" Width="1.5" PointX="8.25" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Reclamante" Width="1.5" PointX="3" PointY="32.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Reclamo" Width="1.5" PointX="5.25" PointY="23.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Reclamo_Motivo" Width="1.5" PointX="3" PointY="36.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Reclamo_Poliza" Width="1.5" PointX="7.5" PointY="24.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Requisito" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.Producto" Width="1.5" PointX="5.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.PropuestaSolucion" Width="1.5" PointX="11" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.Prospecto" Width="1.5" PointX="8.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.Provincia" Width="1.5" PointX="1.5" PointY="27.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.Rango" Width="1.5" PointX="14" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.Reclamante" Width="1.5" PointX="3" PointY="34" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.Reclamo" Width="1.5" PointX="5.25" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.Reclamo_Motivo" Width="1.5" PointX="3" PointY="24.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.Reclamo_Poliza" Width="1.5" PointX="7.5" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.Requisito" Width="1.5" PointX="15.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BDPacificoModel.Solicitud_Afiliacion" Width="1.5" PointX="11.25" PointY="17.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Solicitud_Autorizacion" Width="1.5" PointX="5.25" PointY="39" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Sugerencia" Width="1.5" PointX="6" PointY="18.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDPacificoModel.Tema" Width="1.5" PointX="3.75" PointY="29" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.Solicitud_Autorizacion" Width="1.5" PointX="5.25" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.Sugerencia" Width="1.5" PointX="6" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDPacificoModel.Tema" Width="1.5" PointX="3.75" PointY="29.25" IsExpanded="true" />
+        <AssociationConnector Association="BDPacificoModel.FK__Sugerenci__Co_Ar__2BFE89A6" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK__Sugerenci__Co_Ar__66603565" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK_EMPLEADO_AREA" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK_ProcedimientoAuditoria_Area" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK_ProcedimientoSeguimiento_Area" ManuallyRouted="false" />
-        <AssociationConnector Association="BDPacificoModel.FK_CampaniaComision" ManuallyRouted="false" />
-        <AssociationConnector Association="BDPacificoModel.FK_CanalVentaComision" ManuallyRouted="false" />
-        <AssociationConnector Association="BDPacificoModel.FK_CargoComision" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK_EMPLEADO_CARGO" ManuallyRouted="false" />
+        <AssociationConnector Association="BDPacificoModel.FK__Poliza__Co_Clien__245D67DE" ManuallyRouted="false" />
+        <AssociationConnector Association="BDPacificoModel.FK__Poliza__Co_Clien__25518C17" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK__Poliza__Co_Clien__571DF1D5" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK__Poliza__Co_Clien__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="BDPacificoModel.FK__Sugerenci__Co_Cl__2CF2ADDF" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK__Sugerenci__Co_Cl__6754599E" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK_ComisionRango" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK_PROVINCIA_DEPARTAMENTO" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK_DetallePropuestaSolucion_PropuestaSolucion" ManuallyRouted="false" />
+        <AssociationConnector Association="BDPacificoModel.FK__Reclamant__Co_Di__2645B050" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK__Reclamant__Co_Di__5AEE82B9" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK_DISTRITO_PROVINCIA" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK_EMPLEADO_DISTRITO" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK_PRESTADORA_DISTRITO" ManuallyRouted="false" />
+        <AssociationConnector Association="BDPacificoModel.FK__Reclamo__Co_Empl__2739D489" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK__Reclamo__Co_Empl__5BE2A6F2" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK_ProcedimientoAuditoria_Empleado" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK_ProcedimientoAuditoria_Empleado1" ManuallyRouted="false" />
@@ -78,14 +82,24 @@
         <AssociationConnector Association="BDPacificoModel.FK_ProcedimientoAuditoria_Periodo" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK_ProcedimientoSeguimiento_Periodo" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK_PlanProducto_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="BDPacificoModel.FK__Reclamo_P__Co_Po__2A164134" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK__Reclamo_P__Co_Po__5EBF139D" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK_PropuestaSolucion_Producto" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK_PropuestaSolucion_Prospecto" ManuallyRouted="false" />
+        <AssociationConnector Association="BDPacificoModel.FK__Reclamo__Co_Recl__29221CFB" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK__Reclamo__Co_Recl__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="BDPacificoModel.FK__Reclamo__Co_Moti__282DF8C2" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK__Reclamo__Co_Moti__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="BDPacificoModel.FK__Reclamo_P__Nu_Re__2B0A656D" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK__Reclamo_P__Nu_Re__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="BDPacificoModel.FK__Sugerenci__Co_Te__2DE6D218" ManuallyRouted="false" />
         <AssociationConnector Association="BDPacificoModel.FK__Sugerenci__Co_Te__68487DD7" ManuallyRouted="false" />
-        <AssociationConnector Association="BDPacificoModel.ComisionRequisito" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BDPacificoModel.ComisionRequisito" Width="1.5" PointX="12.875" PointY="14.25" />
+        <AssociationConnector Association="BDPacificoModel.ComisionComisionRequisito" />
+        <AssociationConnector Association="BDPacificoModel.RequisitoComisionRequisito" />
+        <AssociationConnector Association="BDPacificoModel.CanalVentaComision" />
+        <AssociationConnector Association="BDPacificoModel.CampaniaComision" />
+        <AssociationConnector Association="BDPacificoModel.CargoComision" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

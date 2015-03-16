@@ -65,20 +65,13 @@ namespace Pacifico.Bussines
             return _db.PlanProducto.FirstOrDefault(x => x.Cod_Plan_Prod == codPlanProducto);
         }
 
-        public PropuestaSolucion RegistrarPropuestaSolucion(PropuestaSolucion propuesta, List<DetallePropuestaSolucion> detalle)
+        public PropuestaSolucion RegistrarPropuestaSolucion(PropuestaSolucion propuesta)
         {
             try
             {
-                propuesta.DetallePropuestaSolucion = detalle;
                 var newPropuesta = _db.PropuestaSolucion.Add(propuesta);
                 _db.SaveChanges();
 
-                //foreach (var item in detalle)
-                //{
-                //    item.Cod_Prop_Sol = newPropuesta.Cod_Prop_Sol;
-                //    _db.DetallePropuestaSolucion.Add(item);
-                //}
-                //_db.SaveChanges();
                 return newPropuesta;
             }
             catch (Exception ex)
@@ -138,58 +131,5 @@ namespace Pacifico.Bussines
 
             return lst;
         }
-
-        //public List<DetallePropuestaSolucion> GenerarDetallePropuesta(double montoAsegurado, int edad)
-        //{
-        //    var primaAnual = Convert.ToDouble(montoAsegurado) * 0.09;
-        //    //var primaMensual = primaAnual / 12;
-        //    var montoAhorro = Convert.ToDouble(primaAnual) * 0.05;
-        //    //var valorRescate = montoAhorro;
-        //    var montoCalcAsegurado =  Convert.ToDouble(montoAsegurado + (montoAsegurado * 0.0005));
-
-            
-        //    var lst = new List<DetallePropuestaSolucion>
-        //    {
-        //        new DetallePropuestaSolucion
-        //        {
-        //            Num_Anio = 1,
-        //            Num_Edad = edad,
-        //            Ss_Mon_Prim = Convert.ToDecimal(primaAnual),
-        //            Ss_Mon_Ahr = Convert.ToDecimal(montoAhorro),
-        //            Ss_Val_Resc = Convert.ToDecimal(montoAhorro),
-        //            Ss_Mon_Aseg = Convert.ToDecimal(montoCalcAsegurado)
-        //        }
-        //    };
-
-        //    for (int i = 0; i < edad; i++)
-        //    {
-        //        var edadCalc = lst[i].Num_Edad + 1;
-        //        var anio = lst[i].Num_Anio + 1;
-        //        var montoPrima = Convert.ToDecimal(Math.Round(lst[i].Ss_Mon_Prim,2) + Convert.ToDecimal(Math.Round(primaAnual,2)) + 1);
-        //        var montoAhorroDet = Convert.ToDouble(Math.Round(montoPrima,2)) * 0.05;
-        //        decimal valorRescateDet = 0;
-        //        if (i == 1)
-        //        {
-        //            valorRescateDet = Convert.ToDecimal(Convert.ToDouble(Math.Round(lst[i].Ss_Val_Resc, 2)) + Convert.ToDouble(Math.Round(montoAhorroDet, 2)) * 4);
-        //        }
-        //        else
-        //        {
-        //            valorRescateDet = Convert.ToDecimal(Convert.ToDouble(Math.Round(lst[i].Ss_Val_Resc, 2)) + Convert.ToDouble(Math.Round(montoAhorroDet, 2)) * 1.035);
-        //        }
-        //        var montoAseguradoCalc = Convert.ToDouble(lst[i].Ss_Mon_Aseg) + (Convert.ToDouble(lst[i].Ss_Mon_Aseg)*0.0005);
-
-
-        //        lst.Add(new DetallePropuestaSolucion {
-        //            Num_Edad = edadCalc,
-        //            Num_Anio = anio,
-        //            Ss_Mon_Prim = montoPrima,
-        //            Ss_Mon_Ahr = Convert.ToDecimal(montoAhorroDet),
-        //            Ss_Val_Resc = Math.Round(valorRescateDet,2),
-        //            Ss_Mon_Aseg = Convert.ToDecimal(Math.Round(montoAseguradoCalc,2))
-        //        });
-        //    }
-
-        //    return lst;
-        //}
     }
 }

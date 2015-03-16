@@ -5,134 +5,133 @@
 }
 
 <div class="container">
-    <div class="page-header">
-    </div>
+    <hr/>
     @using (Html.BeginForm(Model.Accion, "Comision", FormMethod.Post, new { id = "frmModel" }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
 
+        <div id="divMsg" class="alert alert-success" style="display: none">
+            <label id="lblMsg" style="font-weight: normal">Comisión registrada</label>
+        </div>
+        
         <div id="labelError" class="alert alert-danger" style="display: none">
             @*<button type="button" class="close" data-dismiss="alert">×</button>*@
             <strong>Error:</strong> <label id="lblMensaje" style="font-weight: normal"></label>
         </div>
 
-        <table width="100%">
+        <table style="width: 85%" class="fondo" align="center">
             <tr>
-                <td>&nbsp;</td>
-                <td>Nombre Comisión</td>
-                <td>:</td>
                 <td>
-                    @Html.TextBoxFor(model => model.NombreComision, new {@maxlength = 50, @class = ":required :alpha form-control", @style="display: inline-block;"}) 
+                    <label class="control-label col-md-4" for="NombreComision">Nombre Comisión:</label>
+                    @Html.TextBoxFor(model => model.NombreComision, new { @maxlength = 50, @class = ":required :alpha form-control", @style = "display: inline-block;" })
                 </td>
-                <td>&nbsp;</td>
-                <td>Canal Venta</td>
-                <td>:</td>
                 <td>
-                    @Html.DropDownListFor(model => model.CanalVentaId, new SelectList(Model.CanalVentList, "Valor", "Nombre"), new {@class = "btn btn-default", @style = "width: 190px"})
+                    <label class="control-label col-md-4" for="CanalVentaId">Canal Venta:</label>
+                    @Html.DropDownListFor(model => model.CanalVentaId, new SelectList(Model.CanalVentList, "Valor", "Nombre"), new { @class = "form-control" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="control-label col-md-4" for="CampaniaId">Campaña:</label>
+                    @Html.DropDownListFor(model => model.CampaniaId, new SelectList(Model.CampaniaList, "Valor", "Nombre"), new { @class = "form-control" })
+                </td>
+                <td>
+                    <label class="control-label col-md-4" for="CargoId">Cargo Comisionista:</label>
+                    @Html.DropDownListFor(model => model.CargoId, new SelectList(Model.CargoList, "Valor", "Nombre"), new { @class = "form-control" })
                 </td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td>&nbsp;</td>
-                <td>Campaña</td>
-                <td>:</td>
                 <td>
-                    @Html.DropDownListFor(model => model.CampaniaId, new SelectList(Model.CampaniaList, "Valor", "Nombre"), new {@class = "btn btn-default", @style = "width: 190px"})
-                </td>
-                <td>&nbsp;</td>
-                <td>Cargo Comisionista</td>
-                <td>:</td>
-                <td>
-                    @Html.DropDownListFor(model => model.CargoId, new SelectList(Model.CargoList, "Valor", "Nombre"), new {@class = "btn btn-default", @style = "width: 190px"})
-                </td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td>Requisitos</td>
-                <td>:</td>
-                <td colspan="6">
-                    @Html.ListBoxFor(model => model.RequisitoListSelected, new SelectList(Model.RequisitoList, "Valor", "Nombre"), new {@class = "btn btn-default", @style = "width: 200px"})
+                    <label class="control-label col-md-4" for="RequisitoListSelected">Requisitos:</label>
+                    @Html.ListBoxFor(model => model.RequisitoListSelected, new SelectList(Model.RequisitoList, "Valor", "Nombre"), new { @class = "form-control"})
                 </td>
             </tr>
             <tr>
-                <td>&nbsp;</td>
-                <td>Rangos de Comisión</td>
-                <td>:</td>
-                <td>
+                <td colspan="2">
                     <br />
-                    <input id="txtMinimo" maxlength="4" class="form-control" style="width: 80%" placeholder="Monto Mínimo" />
+                    <table id="tblRangos" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Rangos de Comisión
+                                </th>
+                            </tr>
+                            <tr class="btn-primary">
+                                <th>Monto Mínimo</th>
+                                <th>Monto Máximo</th>
+                                <th>Porcentaje Comisión</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var rango in Model.RangoList)
+                            {
+                                <tr>
+                                    <td class="tdMinimo">
+                                        <div class="input-group-sm">
+                                            <input type="number" class="form-control" readonly="readonly" value="@rango.Minimo" />
+                                        </div>
+                                    </td>
+                                    <td class="tdMaximo">
+                                        <div class="input-group-sm">
+                                            <input type="number" class="form-control" readonly="readonly" value="@rango.Maximo" />
+                                        </div>
+                                    </td>
+                                    <td class="tdComision">
+                                        <div class="input-group-sm">
+                                            <input type="number" class="form-control" readonly="readonly" value="@rango.Cantidad" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a title="Eliminar" class="btn btn-danger btn-sm btnEliminarFila"><i class="glyphicon glyphicon-remove"></i></a>
+                                        &nbsp;<a title="Editar" class="btn btn-primary btn-sm btnEditarFila"><i class="glyphicon glyphicon-pencil"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>
+                                    <div class="input-group-sm">
+                                        <input id="txtMinimo" type="number" class="form-control" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group-sm">
+                                        <input id="txtMaximo" type="number" class="form-control" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group-sm">
+                                        <input id="txtComision" type="number" class="form-control" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="#" id="btnAgregarFila" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-plus"></i></a>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </td>
-                <td>
-                    <br />
-                    <input id="txtMaximo" maxlength="4" class="form-control" style="width: 80%" placeholder="Monto Máximo"/>
-                </td>
-                <td>
-                    <br />
-                    <input id="txtComision" maxlength="3" class="form-control" style="width: 80%" placeholder="Porcentaje Comisión"/>
-                </td>
-                <td colspan="3"><button id="btnAgregar" type="button" class="btn">+</button></td>
             </tr>
             <tr>
-                <td colspan="3"></td>
-                <td colspan="3">
-                    <br />
-                    <div data-bind='simpleGrid: gridViewModel'> </div>
+                <td colspan="2" align="center">
+                    <button id="btnGrabar" type="submit" class="btn btn-primary btn-sm">Grabar</button>
+                    <button type="reset" class="btn btn-primary btn-sm" onclick=" javascript:window.history.back(); ">Cancelar</button>
                 </td>
-                <td colspan="3"></td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td colspan="7" align="center">
-                    <button id="btnGrabar" type="submit" class="btn">Grabar</button>
-                    <button type="reset" class="btn" onclick=" javascript:window.history.back(); ">Cancelar</button>
-                </td>
-                <td>&nbsp;</td>
             </tr>
         </table>
     }
 </div>
 
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/mustache.js")" type="text/javascript"></script>
+}
+
 <script type="text/javascript">
-    var initialData = [];
-
-    var PagedGridModel = function(items) {
-        this.items = ko.observableArray(items);
-
-        this.addItem = function(montoMinimo, montoMaximo, montoComision) {
-            this.items.push({ Minimo: montoMinimo, Maximo: montoMaximo, Cantidad: montoComision });
-        };
-
-        this.clearData = function() {
-            this.items.removeAll();
-        };
-
-        this.sortByName = function() {
-            this.items.sort(function(a, b) {
-                return a.name < b.name ? -1 : 1;
-            });
-        };
-
-        this.jumpToFirstPage = function() {
-            this.gridViewModel.currentPageIndex(0);
-        };
-
-        this.gridViewModel = new ko.simpleGrid.viewModel({
-            data: this.items,
-            columns: [
-                { headerText: "Monto Mínimo", rowText: "Minimo" },
-                { headerText: "Monto Máximo", rowText: "Maximo" },
-                { headerText: "Porcentaje Comisión", rowText: "Cantidad" }
-            ],
-            pageSize: 100
-        });
-    };
-
-    var modeloGrilla = new PagedGridModel(initialData);
-    ko.applyBindings(modeloGrilla);
-
-    $(document).ready(function() {
+    $(document).ready(function () {
         $("#RequisitoListSelected").multiselect({
             checkAllText: 'Marcar Todas',
             uncheckAllText: 'Desmarque Todas',
@@ -141,35 +140,122 @@
             height: 200
         });
 
-        $('#btnGrabar').click(function(e) {
-            Grabar();
+        $('#btnGrabar').click(function (e) {
+            Guardar();
             e.preventDefault();
         });
 
-        $('#btnAgregar').click(function() {
-            var minimo = $("#txtMinimo").val() * 1;
-            var maximo = $("#txtMaximo").val() * 1;
-            var comision = $("#txtComision").val() * 1;
+        $('#btnAgregarFila').click(function() {
+            if (!HayDatosEnEdicion()) {
+                var minimo = $("#txtMinimo").val();
+                var maximo = $("#txtMaximo").val();
+                var comision = $("#txtComision").val();
+                
+                if (minimo != '' && maximo != '' && comision != '') {
+                    minimo = minimo * 1;
+                    maximo = maximo * 1;
+                    comision = comision * 1;
+                    
+                    if (comision <= 0) {
+                        MostrarError('Porcentaje de comisión no debe ser menor o igual a cero');
+                    }
+                    else if (minimo > maximo) {
+                        MostrarError('Monto Mínimo debe ser menor que Monto Máximo');
+                    } else {
+                        var valido = ValidarRangos(minimo, maximo);
 
-            if (minimo != '' && maximo != '' && comision != '') {
-                if (minimo > maximo) {
-                    $('#labelError').show();
-                    $('#lblMensaje').text('Monto Mínimo debe ser menor que Monto Máximo');
+                        if (valido) {
+                            $('#labelError').hide();
+                            $('#lblMensaje').text('');
+
+                            var trHtmlTemplate = '' +
+                                '<tr>' +
+                                '<td class = "tdMinimo">' +
+                                '<div class="input-group-sm">' +
+                                '<input type="number" class="form-control" value="{{minimo}}" maxlength="10" readonly="readonly"/>' +
+                                '</div>' +
+                                '</td>' +
+                                '<td class="tdMaximo">' +
+                                '<div class="input-group-sm">' +
+                                '<input type="number" class="form-control" value="{{maximo}}" maxlength="10" readonly="readonly"/>' +
+                                '</div>' +
+                                '</td>' +
+                                '<td class="tdComision">' +
+                                '<div class="input-group-sm">' +
+                                '<input type="number" class="form-control" value="{{comision}}" maxlength="10" readonly="readonly"/>' +
+                                '</div>' +
+                                '</td>' +
+                                '<td>' +
+                                '<a title="Eliminar" class="btn btn-danger btn-sm btnEliminarFila"><i class="glyphicon glyphicon-remove"></i></a>' +
+                                '&nbsp;<a title="Editar" class="btn btn-primary btn-sm btnEditarFila"><i class="glyphicon glyphicon-pencil"></i></a>' +
+                                '</td>' +
+                                '</tr>';
+
+                            var trHtml = Mustache.render(trHtmlTemplate, {
+                                minimo: minimo,
+                                maximo: maximo,
+                                comision: comision
+                            });
+
+                            $('#tblRangos').find("tbody").append(trHtml);
+                            $("#txtMinimo").val('');
+                            $("#txtMaximo").val('');
+                            $("#txtComision").val('');
+                        } else {
+                            MostrarError('Los valores de los rangos no son válidos');
+                        }
+                    }
                 } else {
-                    $('#labelError').hide();
-                    $('#lblMensaje').text('');
-
-                    modeloGrilla.addItem(minimo, maximo, comision);
-                    $("#txtMinimo").val('');
-                    $("#txtMaximo").val('');
-                    $("#txtComision").val('');
+                    MostrarError('Por favor ingrese Montos en la fila');
                 }
             } else {
-                $('#labelError').show();
-                $('#lblMensaje').text('Por favor ingrese Monto Mínimo/Monto Máximo/Monto Comisión');
-                setTimeout(function() {
-                    $("#labelError").slideUp(400);
-                }, 5000);
+                MostrarError('Por favor guarde primero los datos de la fila en edición');
+            }
+        });
+
+        $("#tblRangos").on("click", ".btnEliminarFila", function () {
+            $(this).parents("tr").eq(0).remove();
+        });
+
+        $("#tblRangos").on("click", ".btnEditarFila", function() {
+            var $tr = $(this).parents("tr").eq(0);
+            var esEdit = $tr.data("edit");
+
+            if (esEdit == 'undefined' || esEdit != 1) {
+                if (!HayDatosEnEdicion()) {
+                    $tr.data("edit", 1);
+                    $tr.find('input').prop('readonly', false);
+                    $tr.find('.btnEliminarFila').hide();
+                    $(this).find('i').toggleClass("glyphicon-floppy-saved");
+                } else {
+                    MostrarError('Por favor guarde primero los datos de la fila en edición');
+                }
+            } else {
+                var minimo = $tr.find(".tdMinimo input").val();
+                var maximo = $tr.find(".tdMaximo input").val();
+                var comision = $tr.find(".tdComision input").val();
+                
+                if (minimo != '' && maximo != '' && comision != '') {
+                    minimo = minimo * 1;
+                    maximo = maximo * 1;
+                    comision = comision * 1;
+
+                    if (comision <= 0) {
+                        MostrarError('Porcentaje de comisión no debe ser menor o igual a cero');
+                    } else {
+                        var valido = ValidarRangos(minimo, maximo, comision);
+                        if (!valido) {
+                            $tr.data("edit", 0);
+                            $tr.find('input').prop('readonly', true);
+                            $tr.find('.btnEliminarFila').show();
+                            $(this).find('i').toggleClass("glyphicon-floppy-saved");
+                        } else {
+                            MostrarError('Los valores de los rangos no son válidos');
+                        }
+                    }
+                } else {
+                    MostrarError('Por favor ingrese Montos en la fila');
+                }
             }
         });
 
@@ -178,70 +264,127 @@
 
     function CargarDatosGrilla() {
         var seleccionados = JSON.parse('@Html.Raw(Json.Encode(@Model.RangoList))');
-        $.each(seleccionados, function(index, item) {
+        $.each(seleccionados, function (index, item) {
             modeloGrilla.addItem(item.Minimo, item.Maximo, item.Cantidad);
         });
     }
 
-    function Grabar() {
+    function Guardar() {
         if ($("#frmModel").validate().form()) {
-            
             var list = $("#RequisitoListSelected").multiselect("widget").find("input:checked");
 
             if (list.length == 0) {
-                $('#labelError').show();
-                $('#lblMensaje').text('Por seleccione al menos un Requisito');
-                setTimeout(function () {
-                    $("#labelError").slideUp(400);
-                }, 5000);
+                MostrarError('Por seleccione al menos un Requisito');
                 return false;
             }
 
-            if (initialData.length == 0) {
-                $('#labelError').show();
-                $('#lblMensaje').text('Por favor ingrese Rangos de Comisión a la grilla');
-                setTimeout(function() {
-                    $("#labelError").slideUp(400);
-                }, 5000);
+            var rangos = ObtenerRangos();
+
+            if (rangos.length == 0) {
+                MostrarError('Por favor agrege Rangos de Comisión');
                 return false;
             }
-            
+
             var comision = {};
             comision.NombreComision = $("#NombreComision").val();
             comision.CampaniaId = $("#CampaniaId").val();
             comision.CanalVentaId = $("#CanalVentaId").val();
             comision.CargoId = $("#CargoId").val();
             comision.RequisitoListSelected = [];
-            comision.RangoList = [];
+            comision.RangoList = rangos;
             comision.CodigoComision = '@Model.CodigoComision';
-            
+
             for (var i = 0; i < list.length; i++) {
                 comision.RequisitoListSelected.push(list[i].value);
             }
 
-            for (i = 0; i < initialData.length; i++) {
-                comision.RangoList.push({
-                    Minimo: initialData[i].Minimo,
-                    Maximo: initialData[i].Maximo,
-                    Cantidad: initialData[i].Cantidad
-                });
-            }
+            var opcionesAjax = {
+                url: '@Url.Action(Model.Accion, "Comision", new { area = "" })',
+                parametros: {
+                    model: comision
+                }
+            };
 
-            var request = $.ajax({
-                url: '@Url.Action(Model.Accion, "Comision")',
-                data: JSON.stringify(comision),
-                contentType: 'application/json',
-                dataType: 'json',
-                type: 'post'
+            Utils.Ajax(opcionesAjax, function(response) {
+                $("#divMsg").show();
+                setTimeout(function() {
+                    window.location.href = response;
+                }, 2000);
             });
-
-            request.done(function(data) {
-                //$("#labelSuccess").show();
-                window.location.href = data;
-            });
-            request.fail(function(jqXHR, textStatus) {
-                alert("Request failed: " + textStatus);
-            });
+        } else {
+            MostrarError('Por favor ingrese los datos requeridos');
         }
+    }
+
+    function ObtenerRangos() {
+        var tbl = $('#tblRangos tbody tr');
+
+        var listaRangos = [];
+
+        for (var i = 0; i < tbl.length; i++) {
+            var $fila = $(tbl[i]);
+
+            var minimo = $fila.find(".tdMinimo input").val() * 1;
+            var maximo = $fila.find(".tdMaximo input").val() * 1;
+            var comision = $fila.find(".tdComision input").val() * 1;
+
+            var rango = {
+                Minimo: minimo,
+                Maximo: maximo,
+                Cantidad: comision
+            };
+
+            listaRangos.push(rango);
+        }
+
+        return listaRangos;
+    }
+
+    function ValidarRangos(minimoActual, maximoActual) {
+        var valido = true;
+        var tbl = $('#tblRangos tbody tr');
+
+        for (var i = 0; i < tbl.length; i++) {
+            var $fila = $(tbl[i]);
+
+            if ($fila.data("edit") == 1) {
+
+                var minimo = $fila.find(".tdMinimo input").val() * 1;
+                var maximo = $fila.find(".tdMaximo input").val() * 1;
+
+                if (minimoActual >= minimo && minimoActual <= maximo) {
+                    valido = false;
+                    break;
+                } else if (maximoActual >= minimo && maximoActual <= maximo) {
+                    valido = false;
+                    break;
+                } else if (minimoActual <= minimo && maximoActual >= maximo) {
+                    valido = false;
+                    break;
+                }
+            }
+        }
+
+        return valido;
+    }
+
+    function HayDatosEnEdicion() {
+        var esEdit = false;
+
+        $('#tblRangos tbody tr').each(function () {
+            if ($(this).data("edit") == 1) {
+                esEdit = true;
+            }
+        });
+
+        return esEdit;
+    }
+
+    function MostrarError(msg) {
+        $('#labelError').show();
+        $('#lblMensaje').text(msg);
+        setTimeout(function () {
+            $("#labelError").slideUp(400);
+        }, 5000);
     }
 </script>

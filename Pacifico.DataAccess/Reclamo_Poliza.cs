@@ -20,6 +20,8 @@ namespace Pacifico.DataAccess
         public string Nu_Reclamo { get; set; }
     
         public virtual Poliza Poliza { get; set; }
+        public virtual Poliza Poliza1 { get; set; }
         public virtual Reclamo Reclamo { get; set; }
+        public virtual Reclamo Reclamo1 { get; set; }
     }
 }

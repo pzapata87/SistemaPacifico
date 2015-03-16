@@ -23,7 +23,10 @@ namespace Pacifico.DataAccess
         public Nullable<int> Co_Cliente { get; set; }
     
         public virtual Area Area { get; set; }
+        public virtual Area Area1 { get; set; }
         public virtual Cliente Cliente { get; set; }
+        public virtual Cliente Cliente1 { get; set; }
         public virtual Tema Tema { get; set; }
+        public virtual Tema Tema1 { get; set; }
     }
 }

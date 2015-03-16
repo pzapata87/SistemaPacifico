@@ -17,7 +17,7 @@ namespace Pacifico.DataAccess
         public Comision()
         {
             this.Rango = new HashSet<Rango>();
-            this.Requisito = new HashSet<Requisito>();
+            this.ComisionRequisito = new HashSet<ComisionRequisito>();
         }
     
         public int Cod_Com { get; set; }
@@ -27,10 +27,10 @@ namespace Pacifico.DataAccess
         public int Cod_Cnl_Vta { get; set; }
         public int Cod_Car { get; set; }
     
-        public virtual Campania Campania { get; set; }
-        public virtual CanalVenta CanalVenta { get; set; }
-        public virtual Cargo Cargo { get; set; }
         public virtual ICollection<Rango> Rango { get; set; }
-        public virtual ICollection<Requisito> Requisito { get; set; }
+        public virtual ICollection<ComisionRequisito> ComisionRequisito { get; set; }
+        public virtual CanalVenta CanalVenta { get; set; }
+        public virtual Campania Campania { get; set; }
+        public virtual Cargo Cargo { get; set; }
     }
 }

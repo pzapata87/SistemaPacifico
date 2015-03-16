@@ -17,6 +17,7 @@ namespace Pacifico.DataAccess
         public Reclamante()
         {
             this.Reclamo = new HashSet<Reclamo>();
+            this.Reclamo1 = new HashSet<Reclamo>();
         }
     
         public int Co_Reclamante { get; set; }
@@ -33,6 +34,8 @@ namespace Pacifico.DataAccess
         public string Tx_Direccion { get; set; }
     
         public virtual Distrito Distrito { get; set; }
+        public virtual Distrito Distrito1 { get; set; }
         public virtual ICollection<Reclamo> Reclamo { get; set; }
+        public virtual ICollection<Reclamo> Reclamo1 { get; set; }
     }
 }

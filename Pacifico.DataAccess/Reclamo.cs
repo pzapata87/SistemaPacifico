@@ -17,6 +17,7 @@ namespace Pacifico.DataAccess
         public Reclamo()
         {
             this.Reclamo_Poliza = new HashSet<Reclamo_Poliza>();
+            this.Reclamo_Poliza1 = new HashSet<Reclamo_Poliza>();
         }
     
         public string Nu_Reclamo { get; set; }
@@ -33,8 +34,12 @@ namespace Pacifico.DataAccess
         public Nullable<System.DateTime> Fe_CierreReclamo { get; set; }
     
         public virtual Empleado Empleado { get; set; }
+        public virtual Empleado Empleado1 { get; set; }
         public virtual Reclamante Reclamante { get; set; }
+        public virtual Reclamante Reclamante1 { get; set; }
         public virtual Reclamo_Motivo Reclamo_Motivo { get; set; }
+        public virtual Reclamo_Motivo Reclamo_Motivo1 { get; set; }
         public virtual ICollection<Reclamo_Poliza> Reclamo_Poliza { get; set; }
+        public virtual ICollection<Reclamo_Poliza> Reclamo_Poliza1 { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace Pacifico.DataAccess
         public Poliza()
         {
             this.Reclamo_Poliza = new HashSet<Reclamo_Poliza>();
+            this.Reclamo_Poliza1 = new HashSet<Reclamo_Poliza>();
         }
     
         public int Co_Poliza { get; set; }
@@ -34,6 +35,9 @@ namespace Pacifico.DataAccess
     
         public virtual Cliente Cliente { get; set; }
         public virtual Cliente Cliente1 { get; set; }
+        public virtual Cliente Cliente2 { get; set; }
+        public virtual Cliente Cliente3 { get; set; }
         public virtual ICollection<Reclamo_Poliza> Reclamo_Poliza { get; set; }
+        public virtual ICollection<Reclamo_Poliza> Reclamo_Poliza1 { get; set; }
     }
 }

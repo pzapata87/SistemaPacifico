@@ -5,12 +5,10 @@ using System.Web.Mvc;
 using SistemaPacifico.Core;
 using SistemaPacifico.Models;
 using Pacifico.DataAccess;
-using Stimulsoft.Report;
-using Stimulsoft.Report.Mvc;
 
 namespace SistemaPacifico.Controllers
 {
-    public class PropuestaSolucionController : ReportBaseController
+    public class PropuestaSolucionController : Controller
     {
         public ActionResult Index()
         {
@@ -110,9 +108,11 @@ namespace SistemaPacifico.Controllers
                 Ss_Mon_Aseg = model.MontoAsegurado.GetValueOrDefault(),
                 Ss_Mon_Ret = model.MontoRetorno.GetValueOrDefault(),
                 Ss_Mon_Prim = model.MontoPrima.GetValueOrDefault(),
-                Fec_Crea = DateTime.Now
+                Fec_Crea = DateTime.Now,
+                DetallePropuestaSolucion = model.Detalle
             };
-            new PropuestaSolucionBusiness().RegistrarPropuestaSolucion(propuesta,model.Detalle);
+
+            new PropuestaSolucionBusiness().RegistrarPropuestaSolucion(propuesta);
             return Json(Url.Action("Index", "PropuestaSolucion"));
         }
 
@@ -156,33 +156,6 @@ namespace SistemaPacifico.Controllers
                                     Text = x.Nro_Plan_Prod
                                 });
             return new SelectList(plan, "Value", "Text");
-        }
-
-        public override ActionResult GerReportSnapshot()
-        {
-            var id = Convert.ToInt32(ParametrosReport["Id"]);
-
-            var propuesta = new PropuestaSolucionBusiness().ObtenerPropuestaSolucion(id);
-
-            var datos = new PropuestaSolucionViewModel
-            {
-                Codigo = id,
-                DNIProspecto = propuesta.Prospecto.Num_DNI,
-                NombreProspecto = propuesta.Prospecto.Txt_Pros,
-                ApellidoProspecto = propuesta.Prospecto.Txt_Ape_Pat + " " + propuesta.Prospecto.Txt_Ape_Mat,
-                FechaNacimiento = propuesta.Fec_Nac.GetDate(),
-                NombreProducto = propuesta.Producto.Nro_Prod,
-                CodigoPlan = propuesta.Cod_Plan,
-                MontoAsegurado = propuesta.Ss_Mon_Aseg,
-                MontoRetorno = propuesta.Ss_Mon_Ret,
-                MontoPrima = propuesta.Ss_Mon_Prim
-            };
-
-            var report = new StiReport();
-            report.Load(Server.MapPath("~/Reports/Report.mrt"));
-            report.RegBusinessObject("PropuestaSolucion", "PropuestaSolucion", datos);
-
-            return StiMvcViewer.GetReportSnapshotResult(HttpContext, report);
         }
 	}
 }

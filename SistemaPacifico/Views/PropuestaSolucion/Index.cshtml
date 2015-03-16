@@ -10,8 +10,7 @@
         <button type="button" class="close" data-dismiss="alert">×</button>
         <strong>Aviso:</strong> Propuesta de solución registrada.
     </div>*@
-    <div class="page-header">
-    </div>
+    <hr />
     <table width="85%" class="fondo" align="center">
         <tr>
             <td>N° Propuesta: </td>
@@ -83,13 +82,13 @@
                         @Html.DisplayFor(modelItem => item.FechaRegistro)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.MontoAsegurado)
+                        @string.Format("{0:n}", item.MontoAsegurado)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.MontoPrima)
+                        @string.Format("{0:n}", item.MontoPrima)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.MontoRetorno)
+                        @string.Format("{0:n}", item.MontoRetorno)
                     </td>
                     <td>
                         @Html.ActionLink("Ver Propuesta", "EditarPropuesta", new {id = item.Codigo})

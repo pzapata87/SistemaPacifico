@@ -17,6 +17,7 @@ namespace Pacifico.DataAccess
         public Empleado()
         {
             this.Reclamo = new HashSet<Reclamo>();
+            this.Reclamo1 = new HashSet<Reclamo>();
             this.ProcedimientoAuditoria = new HashSet<ProcedimientoAuditoria>();
             this.ProcedimientoAuditoria1 = new HashSet<ProcedimientoAuditoria>();
             this.ProcedimientoSeguimiento = new HashSet<ProcedimientoSeguimiento>();
@@ -50,6 +51,7 @@ namespace Pacifico.DataAccess
         public virtual Cargo Cargo { get; set; }
         public virtual Distrito Distrito { get; set; }
         public virtual ICollection<Reclamo> Reclamo { get; set; }
+        public virtual ICollection<Reclamo> Reclamo1 { get; set; }
         public virtual ICollection<ProcedimientoAuditoria> ProcedimientoAuditoria { get; set; }
         public virtual ICollection<ProcedimientoAuditoria> ProcedimientoAuditoria1 { get; set; }
         public virtual ICollection<ProcedimientoSeguimiento> ProcedimientoSeguimiento { get; set; }

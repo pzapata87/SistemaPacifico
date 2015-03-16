@@ -60,6 +60,8 @@ namespace Pacifico.DataAccess
         public virtual DbSet<Solicitud_Afiliacion> Solicitud_Afiliacion { get; set; }
         public virtual DbSet<Solicitud_Autorizacion> Solicitud_Autorizacion { get; set; }
         public virtual DbSet<Sugerencia> Sugerencia { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tema> Tema { get; set; }
+        public virtual DbSet<ComisionRequisito> ComisionRequisito { get; set; }
     }
 }

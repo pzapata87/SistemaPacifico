@@ -93,7 +93,7 @@ namespace SistemaPacifico.Controllers
                 CargoId = comision.Cod_Car,
                 CanalVentaId = comision.Cod_Cnl_Vta,
                 CampaniaId = comision.Cod_Camp,
-                RequisitoListSelected = comision.Requisito.Select(p => p.Cod_Req).ToList(),
+                RequisitoListSelected = comision.ComisionRequisito.Select(p => p.Cod_Req).ToList(),
                 RangoList = comision.Rango.Select(p => new RangoModel
                 {
                     Minimo = p.Ss_Min,
@@ -122,10 +122,10 @@ namespace SistemaPacifico.Controllers
                 CampaniaNombre = comision.Campania.Nro_Camp,
                 CargoNombre = comision.Cargo.Nro_Car,
                 CanalVentaNombre = comision.CanalVenta.Nro_Cnl_Vta,
-                RequisitoList = comision.Requisito.Select(p => new Comun
+                RequisitoList = comision.ComisionRequisito.Select(p => new Comun
                 {
                     Valor = Convert.ToString(p.Cod_Req),
-                    Nombre = p.Nro_Req
+                    Nombre = p.Requisito.Nro_Req
                 }).ToList(),
                 RangoList = comision.Rango.Select(p => new RangoModel
                 {
@@ -153,7 +153,7 @@ namespace SistemaPacifico.Controllers
                 {
                     foreach (var item in model.RequisitoListSelected)
                     {
-                        comision.Requisito.Add(new Requisito
+                        comision.ComisionRequisito.Add(new ComisionRequisito
                         {
                             Cod_Req = item
                         });
@@ -201,7 +201,7 @@ namespace SistemaPacifico.Controllers
                 {
                     foreach (var item in model.RequisitoListSelected)
                     {
-                        comision.Requisito.Add(new Requisito
+                        comision.ComisionRequisito.Add(new ComisionRequisito
                         {
                             Cod_Req = item
                         });
@@ -222,6 +222,7 @@ namespace SistemaPacifico.Controllers
                 }
 
                 _comisionBL.Add(comision);
+
             }
             catch (Exception)
             {

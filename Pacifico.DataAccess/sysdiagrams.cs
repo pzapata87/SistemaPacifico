@@ -12,18 +12,12 @@ namespace Pacifico.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class Cargo
+    public partial class sysdiagrams
     {
-        public Cargo()
-        {
-            this.Empleado = new HashSet<Empleado>();
-            this.Comision = new HashSet<Comision>();
-        }
-    
-        public int Cod_Car { get; set; }
-        public string Nro_Car { get; set; }
-    
-        public virtual ICollection<Empleado> Empleado { get; set; }
-        public virtual ICollection<Comision> Comision { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

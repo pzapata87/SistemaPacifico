@@ -7,8 +7,7 @@
 @using (Html.BeginForm("Index", "Comision", FormMethod.Post))
 {
     <div class="container">
-        <div class="page-header">
-        </div>
+        <hr />
         <table style="width: 85%" class="fondo" align="center">
             <tr>
                 <td>Comisión: </td>
@@ -75,7 +74,7 @@
                 <tr>
                     <td colspan="8">
                         <div id="labelError" class="alert alert-danger">
-                            No se encontraron registros en la base de datos
+                            No se encontraron comisiones relacionadas
                         </div>
                     </td>
                 </tr>
@@ -84,12 +83,8 @@
         <table style="width: 100%">
             <tr>
                 <td>
-                    @*@using (Html.BeginForm("CrearComision", "Comision", FormMethod.Post, new {@class = "form-search"}))
-                    {
-                        <button type="submit" class="btn btn-large">Nuevo</button>
-                    }*@
                     <p>
-                        @Html.ActionLink("Nuevo", "CrearComision")
+                        <a href="@Url.Action("CrearComision", "Comision")" class="btn btn-primary">Nuevo</a>
                     </p>
                 </td>
             </tr>

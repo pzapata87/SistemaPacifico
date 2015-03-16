@@ -5,114 +5,82 @@
 }
 
 <div class="container">
-    <div class="page-header">
-    </div>
+    <hr />
     @Html.AntiForgeryToken()
-    <table width="100%">
+    <table style="width: 85%" class="fondo" align="center">
         <tr>
-            <td>&nbsp;</td>
-            <td>Nombre Comisión</td>
-            <td>:</td>
             <td>
-                @Html.TextBoxFor(model => model.NombreComision, new {@maxlength = 50, @class = "form-control"}) 
+                <label class="control-label col-md-4" for="NombreComision">Nombre Comisión:</label>
+                @Html.TextBoxFor(model => model.NombreComision, new { @class = "form-control", @readonly="readonly"})
             </td>
-            <td>&nbsp;</td>
-            <td>Canal Venta</td>
-            <td>:</td>
             <td>
-                @Html.TextBoxFor(model => model.CanalVentaNombre, new {@maxlength = 50, @class = "form-control"})
+                <label class="control-label col-md-4" for="CanalVentaNombre">Canal Venta:</label>
+                @Html.TextBoxFor(model => model.CanalVentaNombre, new { @readonly="readonly", @class = "form-control" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="control-label col-md-4" for="CampaniaNombre">Campaña:</label>
+                @Html.TextBoxFor(model => model.CampaniaNombre, new { @readonly = "readonly", @class = "form-control" })
+            </td>
+            <td>
+                <label class="control-label col-md-4" for="CargoNombre">Cargo Comisionista:</label>
+                @Html.TextBoxFor(model => model.CargoNombre, new { @readonly = "readonly", @class = "form-control" })
             </td>
             <td>&nbsp;</td>
         </tr>
         <tr>
-            <td>&nbsp;</td>
-            <td>Campaña</td>
-            <td>:</td>
             <td>
-                @Html.TextBoxFor(model => model.CampaniaNombre, new {@maxlength = 50, @class = "form-control"})
-            </td>
-            <td>&nbsp;</td>
-            <td>Cargo Comisionista</td>
-            <td>:</td>
-            <td>
-                @Html.TextBoxFor(model => model.CargoNombre, new {@maxlength = 50, @class = "form-control"})
-            </td>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>Requisitos</td>
-            <td>:</td>
-            <td colspan="6">
-                @Html.ListBox("ddlRequisito", new SelectList(Model.RequisitoList, "Valor", "Nombre"), new {@class = "btn btn-default", @style = "width: 200px"})
+                <label class="control-label col-md-4" for="ddlRequisito">Requisitos:</label>
+                @Html.ListBox("ddlRequisito", new SelectList(Model.RequisitoList, "Valor", "Nombre"), new { @readonly = "readonly", @class = "form-control" })
             </td>
         </tr>
         <tr>
-            <td>&nbsp;</td>
-            <td style="vertical-align: top">Rangos de Comisión</td>
-            <td>:</td>
-            <td colspan="3">
+            <td colspan="2">
                 <br />
-                <div data-bind='simpleGrid: gridViewModel'> </div>
+                <table id="tblRangos" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Rangos de Comisión
+                            </th>
+                        </tr>
+                        <tr class="btn-primary">
+                            <th>Monto Mínimo</th>
+                            <th>Monto Máximo</th>
+                            <th>Porcentaje Comisión</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var rango in Model.RangoList)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="input-group-sm">
+                                        <input type="number" class="form-control" readonly="readonly" value="@rango.Minimo" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group-sm">
+                                        <input type="number" class="form-control" readonly="readonly" value="@rango.Maximo" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-group-sm">
+                                        <input type="number" class="form-control" readonly="readonly" value="@rango.Cantidad" />
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </td>
-            <td colspan="3"></td>
         </tr>
         <tr>
-            <td>&nbsp;</td>
-            <td colspan="7" align="right">
-                <button type="reset" class="btn" onclick=" javascript:window.history.back(); ">Atrás</button>
+            <td colspan="2" align="center">
+                <button type="reset" class="btn btn-primary btn-sm" onclick=" javascript:window.history.back(); ">Atrás</button>
             </td>
-            <td>&nbsp;</td>
         </tr>
     </table>
 </div>
-
-<script type="text/javascript">
-    var initialData = [];
-
-    var PagedGridModel = function (items) {
-        this.items = ko.observableArray(items);
-
-        this.addItem = function (montoMinimo, montoMaximo, montoComision) {
-            this.items.push({ Minimo: montoMinimo, Maximo: montoMaximo, Cantidad: montoComision });
-        };
-
-        this.clearData = function () {
-            this.items.removeAll();
-        };
-
-        this.sortByName = function () {
-            this.items.sort(function (a, b) {
-                return a.name < b.name ? -1 : 1;
-            });
-        };
-
-        this.jumpToFirstPage = function () {
-            this.gridViewModel.currentPageIndex(0);
-        };
-
-        this.gridViewModel = new ko.simpleGrid.viewModel({
-            data: this.items,
-            columns: [
-                { headerText: "Monto Mínimo", rowText: "Minimo" },
-                { headerText: "Monto Máximo", rowText: "Maximo" },
-                { headerText: "Monto Comisión", rowText: "Cantidad" }
-            ],
-            pageSize: 100
-        });
-    };
-
-    var modeloGrilla = new PagedGridModel(initialData);
-    ko.applyBindings(modeloGrilla);
-
-    $(document).ready(function () {
-        CargarDatosGrilla();
-    });
-    
-    function CargarDatosGrilla() {
-        var seleccionados = JSON.parse('@Html.Raw(Json.Encode(@Model.RangoList))');
-        $.each(seleccionados, function (index, item) {
-            modeloGrilla.addItem(item.Minimo, item.Maximo, item.Cantidad);
-        });
-    }
-</script>

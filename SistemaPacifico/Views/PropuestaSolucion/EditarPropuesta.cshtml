@@ -66,6 +66,7 @@
                 </td>
                 <td>
                     <input id="btnGenerarPropuesta" type="button" value="Generar Propuesta" class="btn btn-default" disabled="disabled" />
+                    <input id="btnExportar" type="button" value="Exportar" class="btn btn-default" />
                 </td>
             </tr>
             <tr>
@@ -84,27 +85,6 @@
         </table>
     </div>
 }
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" id="btnReporte">
-    Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="divReport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Reporte</h4>
-            </div>
-            <div class="modal-body">
-                
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <script type="text/javascript">
     var initialData = [];
@@ -168,26 +148,13 @@
             window.location = vURL;
         });
 
-        $('#btnReporte').click(function () {
-            var opcionesAjax = {
-                url: '@Url.Action("StimulsoftControl", "Report", new { area = "" })',
-                parametros: {
-                    parametros: [{ key: 'id', value: '@Model.Codigo' }],
-                    controllerGetSnapshot: "PropuestaSolucion"
-                }
-            };
-            debugger ;
-            Utils.Ajax(opcionesAjax, function(response) {
-                debugger ;
-                $('#divReport').modal('show');
-                $('#divReport .modal-body').html(response);
-            });
+        $('#btnExportar').click(function () {
+            vURL = '@Url.Action("Index", "PropuestaSolucion")';
+            window.location = vURL;
         });
-
     });
 
     function CargarPropuestaDetalle() {
-        debugger;
         var codigo = @(Model.Codigo);
 
         var request = $.ajax({
@@ -198,7 +165,6 @@
             dataType: 'json'
         });
         request.done(function (detalles) {
-            debugger;
             modeloGrilla.clearData();
 
             for (var i in detalles) {
@@ -214,24 +180,12 @@
             }
         });
         request.fail(function (jqXHR, textStatus) {
-            debugger;
             alert("Request failed: " + textStatus);
         });
     }
 
     function round2Fixed(value) {
-        value = +value;
-
-        if (isNaN(value))
-            return NaN;
-
-        // Shift
-        value = value.toString().split('e');
-        value = Math.round(+(value[0] + 'e' + (value[1] ? (+value[1] + 2) : 2)));
-
-        // Shift back
-        value = value.toString().split('e');
-        return (+(value[0] + 'e' + (value[1] ? (+value[1] - 2) : -2))).toFixed(2);
+        return parseFloat(value).toFixed(2);
     }
 
 </script>
