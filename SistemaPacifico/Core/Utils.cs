@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 
 namespace SistemaPacifico.Core
 {
@@ -75,5 +76,37 @@ namespace SistemaPacifico.Core
         }
 
         #endregion Métodos adicionales y de extensión para fechas
+
+        #region Manejo de URLs
+
+        private static string _relativeWebRoot;
+
+        /// <summary>
+        /// Retorna la ruta relativa al sitio
+        /// </summary>
+        public static string RelativeWebRoot
+        {
+            get { return _relativeWebRoot ?? (_relativeWebRoot = VirtualPathUtility.ToAbsolute("~/")); }
+        }
+
+        /// <summary>
+        /// Retorna la ruta absoluta al sitio
+        /// </summary>
+        public static Uri AbsoluteWebRoot
+        {
+            get
+            {
+                HttpContext context = HttpContext.Current;
+                if (context == null)
+                    throw new System.Net.WebException("El actual HttpContext es nulo");
+
+                if (context.Items["absoluteurl"] == null)
+                    context.Items["absoluteurl"] = new Uri(context.Request.Url.GetLeftPart(UriPartial.Authority) + RelativeWebRoot);
+
+                return context.Items["absoluteurl"] as Uri;
+            }
+        }
+
+        #endregion Manejo de URLs
     }
 }

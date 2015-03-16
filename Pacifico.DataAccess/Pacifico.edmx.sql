@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/15/2015 04:09:46
+-- Date Created: 03/16/2015 01:51:56
 -- Generated from EDMX file: D:\Proyectos\Academico - Servicio Web\SistemaPacifico(2)\SistemaPacifico\Pacifico.DataAccess\Pacifico.edmx
 -- --------------------------------------------------
 
@@ -17,6 +17,24 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK__Sugerenci__Co_Ar__2BFE89A6]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Sugerencia] DROP CONSTRAINT [FK__Sugerenci__Co_Ar__2BFE89A6];
+GO
+IF OBJECT_ID(N'[dbo].[FK__Sugerenci__Co_Ar__66603565]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Sugerencia] DROP CONSTRAINT [FK__Sugerenci__Co_Ar__66603565];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EMPLEADO_AREA]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Empleado] DROP CONSTRAINT [FK_EMPLEADO_AREA];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProcedimientoAuditoria_Area]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ProcedimientoAuditoria] DROP CONSTRAINT [FK_ProcedimientoAuditoria_Area];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProcedimientoSeguimiento_Area]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ProcedimientoSeguimiento] DROP CONSTRAINT [FK_ProcedimientoSeguimiento_Area];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EMPLEADO_CARGO]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Empleado] DROP CONSTRAINT [FK_EMPLEADO_CARGO];
+GO
 IF OBJECT_ID(N'[dbo].[FK__Poliza__Co_Clien__245D67DE]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Poliza] DROP CONSTRAINT [FK__Poliza__Co_Clien__245D67DE];
 GO
@@ -29,11 +47,35 @@ GO
 IF OBJECT_ID(N'[dbo].[FK__Poliza__Co_Clien__5812160E]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Poliza] DROP CONSTRAINT [FK__Poliza__Co_Clien__5812160E];
 GO
+IF OBJECT_ID(N'[dbo].[FK__Sugerenci__Co_Cl__2CF2ADDF]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Sugerencia] DROP CONSTRAINT [FK__Sugerenci__Co_Cl__2CF2ADDF];
+GO
+IF OBJECT_ID(N'[dbo].[FK__Sugerenci__Co_Cl__6754599E]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Sugerencia] DROP CONSTRAINT [FK__Sugerenci__Co_Cl__6754599E];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ComisionRango]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Rango] DROP CONSTRAINT [FK_ComisionRango];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PROVINCIA_DEPARTAMENTO]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Provincia] DROP CONSTRAINT [FK_PROVINCIA_DEPARTAMENTO];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DetallePropuestaSolucion_PropuestaSolucion]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[DetallePropuestaSolucion] DROP CONSTRAINT [FK_DetallePropuestaSolucion_PropuestaSolucion];
+GO
 IF OBJECT_ID(N'[dbo].[FK__Reclamant__Co_Di__2645B050]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Reclamante] DROP CONSTRAINT [FK__Reclamant__Co_Di__2645B050];
 GO
 IF OBJECT_ID(N'[dbo].[FK__Reclamant__Co_Di__5AEE82B9]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Reclamante] DROP CONSTRAINT [FK__Reclamant__Co_Di__5AEE82B9];
+GO
+IF OBJECT_ID(N'[dbo].[FK_DISTRITO_PROVINCIA]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Distrito] DROP CONSTRAINT [FK_DISTRITO_PROVINCIA];
+GO
+IF OBJECT_ID(N'[dbo].[FK_EMPLEADO_DISTRITO]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Empleado] DROP CONSTRAINT [FK_EMPLEADO_DISTRITO];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PRESTADORA_DISTRITO]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Prestadora] DROP CONSTRAINT [FK_PRESTADORA_DISTRITO];
 GO
 IF OBJECT_ID(N'[dbo].[FK__Reclamo__Co_Empl__2739D489]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Reclamo] DROP CONSTRAINT [FK__Reclamo__Co_Empl__2739D489];
@@ -41,17 +83,59 @@ GO
 IF OBJECT_ID(N'[dbo].[FK__Reclamo__Co_Empl__5BE2A6F2]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Reclamo] DROP CONSTRAINT [FK__Reclamo__Co_Empl__5BE2A6F2];
 GO
-IF OBJECT_ID(N'[dbo].[FK__Reclamo__Co_Moti__282DF8C2]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Reclamo] DROP CONSTRAINT [FK__Reclamo__Co_Moti__282DF8C2];
+IF OBJECT_ID(N'[dbo].[FK_ProcedimientoAuditoria_Empleado]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ProcedimientoAuditoria] DROP CONSTRAINT [FK_ProcedimientoAuditoria_Empleado];
 GO
-IF OBJECT_ID(N'[dbo].[FK__Reclamo__Co_Moti__5CD6CB2B]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Reclamo] DROP CONSTRAINT [FK__Reclamo__Co_Moti__5CD6CB2B];
+IF OBJECT_ID(N'[dbo].[FK_ProcedimientoAuditoria_Empleado1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ProcedimientoAuditoria] DROP CONSTRAINT [FK_ProcedimientoAuditoria_Empleado1];
 GO
-IF OBJECT_ID(N'[dbo].[FK__Reclamo__Co_Recl__29221CFB]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Reclamo] DROP CONSTRAINT [FK__Reclamo__Co_Recl__29221CFB];
+IF OBJECT_ID(N'[dbo].[FK_ProcedimientoSeguimiento_Empleado]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ProcedimientoSeguimiento] DROP CONSTRAINT [FK_ProcedimientoSeguimiento_Empleado];
 GO
-IF OBJECT_ID(N'[dbo].[FK__Reclamo__Co_Recl__5DCAEF64]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Reclamo] DROP CONSTRAINT [FK__Reclamo__Co_Recl__5DCAEF64];
+IF OBJECT_ID(N'[dbo].[FK_ProcedimientoSeguimiento_Empleado1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ProcedimientoSeguimiento] DROP CONSTRAINT [FK_ProcedimientoSeguimiento_Empleado1];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SOLICITUD_AFILIACION_EMPLEADO]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Solicitud_Afiliacion] DROP CONSTRAINT [FK_SOLICITUD_AFILIACION_EMPLEADO];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SOLICITUD_AFILIACION_EMPLEADO1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Solicitud_Afiliacion] DROP CONSTRAINT [FK_SOLICITUD_AFILIACION_EMPLEADO1];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SOLICITUD_AUTORIZACION_EMPLEADO]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Solicitud_Autorizacion] DROP CONSTRAINT [FK_SOLICITUD_AUTORIZACION_EMPLEADO];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SOLICITUD_AUTORIZACION_EMPLEADO1]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Solicitud_Autorizacion] DROP CONSTRAINT [FK_SOLICITUD_AUTORIZACION_EMPLEADO1];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SOLICITUD_AFILIACION_ESTADO_SOLICITUD]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Solicitud_Afiliacion] DROP CONSTRAINT [FK_SOLICITUD_AFILIACION_ESTADO_SOLICITUD];
+GO
+IF OBJECT_ID(N'[dbo].[FK_FormatoPlanTrabajo_Periodo]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[FormatoPlanTrabajo] DROP CONSTRAINT [FK_FormatoPlanTrabajo_Periodo];
+GO
+IF OBJECT_ID(N'[dbo].[FK_FormatoPlanTrabajo_PlanTrabajo]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[FormatoPlanTrabajo] DROP CONSTRAINT [FK_FormatoPlanTrabajo_PlanTrabajo];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SOLICITUD_AFILIACION_INVITACION]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Solicitud_Afiliacion] DROP CONSTRAINT [FK_SOLICITUD_AFILIACION_INVITACION];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProcedimientoAuditoria_Materia]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ProcedimientoAuditoria] DROP CONSTRAINT [FK_ProcedimientoAuditoria_Materia];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProcedimientoSeguimiento_Materia]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ProcedimientoSeguimiento] DROP CONSTRAINT [FK_ProcedimientoSeguimiento_Materia];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlanTrabajo_Periodo]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PlanTrabajo] DROP CONSTRAINT [FK_PlanTrabajo_Periodo];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProcedimientoAuditoria_Periodo]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ProcedimientoAuditoria] DROP CONSTRAINT [FK_ProcedimientoAuditoria_Periodo];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProcedimientoSeguimiento_Periodo]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ProcedimientoSeguimiento] DROP CONSTRAINT [FK_ProcedimientoSeguimiento_Periodo];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlanProducto_Producto]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PlanProducto] DROP CONSTRAINT [FK_PlanProducto_Producto];
 GO
 IF OBJECT_ID(N'[dbo].[FK__Reclamo_P__Co_Po__2A164134]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Reclamo_Poliza] DROP CONSTRAINT [FK__Reclamo_P__Co_Po__2A164134];
@@ -59,23 +143,29 @@ GO
 IF OBJECT_ID(N'[dbo].[FK__Reclamo_P__Co_Po__5EBF139D]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Reclamo_Poliza] DROP CONSTRAINT [FK__Reclamo_P__Co_Po__5EBF139D];
 GO
+IF OBJECT_ID(N'[dbo].[FK_PropuestaSolucion_Producto]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PropuestaSolucion] DROP CONSTRAINT [FK_PropuestaSolucion_Producto];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PropuestaSolucion_Prospecto]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PropuestaSolucion] DROP CONSTRAINT [FK_PropuestaSolucion_Prospecto];
+GO
+IF OBJECT_ID(N'[dbo].[FK__Reclamo__Co_Recl__29221CFB]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Reclamo] DROP CONSTRAINT [FK__Reclamo__Co_Recl__29221CFB];
+GO
+IF OBJECT_ID(N'[dbo].[FK__Reclamo__Co_Recl__5DCAEF64]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Reclamo] DROP CONSTRAINT [FK__Reclamo__Co_Recl__5DCAEF64];
+GO
+IF OBJECT_ID(N'[dbo].[FK__Reclamo__Co_Moti__282DF8C2]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Reclamo] DROP CONSTRAINT [FK__Reclamo__Co_Moti__282DF8C2];
+GO
+IF OBJECT_ID(N'[dbo].[FK__Reclamo__Co_Moti__5CD6CB2B]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Reclamo] DROP CONSTRAINT [FK__Reclamo__Co_Moti__5CD6CB2B];
+GO
 IF OBJECT_ID(N'[dbo].[FK__Reclamo_P__Nu_Re__2B0A656D]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Reclamo_Poliza] DROP CONSTRAINT [FK__Reclamo_P__Nu_Re__2B0A656D];
 GO
 IF OBJECT_ID(N'[dbo].[FK__Reclamo_P__Nu_Re__5FB337D6]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Reclamo_Poliza] DROP CONSTRAINT [FK__Reclamo_P__Nu_Re__5FB337D6];
-GO
-IF OBJECT_ID(N'[dbo].[FK__Sugerenci__Co_Ar__2BFE89A6]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Sugerencia] DROP CONSTRAINT [FK__Sugerenci__Co_Ar__2BFE89A6];
-GO
-IF OBJECT_ID(N'[dbo].[FK__Sugerenci__Co_Ar__66603565]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Sugerencia] DROP CONSTRAINT [FK__Sugerenci__Co_Ar__66603565];
-GO
-IF OBJECT_ID(N'[dbo].[FK__Sugerenci__Co_Cl__2CF2ADDF]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Sugerencia] DROP CONSTRAINT [FK__Sugerenci__Co_Cl__2CF2ADDF];
-GO
-IF OBJECT_ID(N'[dbo].[FK__Sugerenci__Co_Cl__6754599E]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Sugerencia] DROP CONSTRAINT [FK__Sugerenci__Co_Cl__6754599E];
 GO
 IF OBJECT_ID(N'[dbo].[FK__Sugerenci__Co_Te__2DE6D218]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Sugerencia] DROP CONSTRAINT [FK__Sugerenci__Co_Te__2DE6D218];
@@ -86,98 +176,23 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ComisionComisionRequisito]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ComisionRequisito] DROP CONSTRAINT [FK_ComisionComisionRequisito];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ComisionRango]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Rango] DROP CONSTRAINT [FK_ComisionRango];
-GO
-IF OBJECT_ID(N'[dbo].[FK_DetallePropuestaSolucion_PropuestaSolucion]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[DetallePropuestaSolucion] DROP CONSTRAINT [FK_DetallePropuestaSolucion_PropuestaSolucion];
-GO
-IF OBJECT_ID(N'[dbo].[FK_DISTRITO_PROVINCIA]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Distrito] DROP CONSTRAINT [FK_DISTRITO_PROVINCIA];
-GO
-IF OBJECT_ID(N'[dbo].[FK_EMPLEADO_AREA]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Empleado] DROP CONSTRAINT [FK_EMPLEADO_AREA];
-GO
-IF OBJECT_ID(N'[dbo].[FK_EMPLEADO_CARGO]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Empleado] DROP CONSTRAINT [FK_EMPLEADO_CARGO];
-GO
-IF OBJECT_ID(N'[dbo].[FK_EMPLEADO_DISTRITO]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Empleado] DROP CONSTRAINT [FK_EMPLEADO_DISTRITO];
-GO
-IF OBJECT_ID(N'[dbo].[FK_FormatoPlanTrabajo_Periodo]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[FormatoPlanTrabajo] DROP CONSTRAINT [FK_FormatoPlanTrabajo_Periodo];
-GO
-IF OBJECT_ID(N'[dbo].[FK_FormatoPlanTrabajo_PlanTrabajo]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[FormatoPlanTrabajo] DROP CONSTRAINT [FK_FormatoPlanTrabajo_PlanTrabajo];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PlanProducto_Producto]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PlanProducto] DROP CONSTRAINT [FK_PlanProducto_Producto];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PlanTrabajo_Periodo]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PlanTrabajo] DROP CONSTRAINT [FK_PlanTrabajo_Periodo];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PRESTADORA_DISTRITO]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Prestadora] DROP CONSTRAINT [FK_PRESTADORA_DISTRITO];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ProcedimientoAuditoria_Area]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ProcedimientoAuditoria] DROP CONSTRAINT [FK_ProcedimientoAuditoria_Area];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ProcedimientoAuditoria_Empleado]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ProcedimientoAuditoria] DROP CONSTRAINT [FK_ProcedimientoAuditoria_Empleado];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ProcedimientoAuditoria_Empleado1]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ProcedimientoAuditoria] DROP CONSTRAINT [FK_ProcedimientoAuditoria_Empleado1];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ProcedimientoAuditoria_Materia]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ProcedimientoAuditoria] DROP CONSTRAINT [FK_ProcedimientoAuditoria_Materia];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ProcedimientoAuditoria_Periodo]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ProcedimientoAuditoria] DROP CONSTRAINT [FK_ProcedimientoAuditoria_Periodo];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ProcedimientoSeguimiento_Area]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ProcedimientoSeguimiento] DROP CONSTRAINT [FK_ProcedimientoSeguimiento_Area];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ProcedimientoSeguimiento_Empleado]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ProcedimientoSeguimiento] DROP CONSTRAINT [FK_ProcedimientoSeguimiento_Empleado];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ProcedimientoSeguimiento_Empleado1]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ProcedimientoSeguimiento] DROP CONSTRAINT [FK_ProcedimientoSeguimiento_Empleado1];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ProcedimientoSeguimiento_Materia]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ProcedimientoSeguimiento] DROP CONSTRAINT [FK_ProcedimientoSeguimiento_Materia];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ProcedimientoSeguimiento_Periodo]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ProcedimientoSeguimiento] DROP CONSTRAINT [FK_ProcedimientoSeguimiento_Periodo];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PropuestaSolucion_Producto]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PropuestaSolucion] DROP CONSTRAINT [FK_PropuestaSolucion_Producto];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PropuestaSolucion_Prospecto]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[PropuestaSolucion] DROP CONSTRAINT [FK_PropuestaSolucion_Prospecto];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PROVINCIA_DEPARTAMENTO]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Provincia] DROP CONSTRAINT [FK_PROVINCIA_DEPARTAMENTO];
-GO
 IF OBJECT_ID(N'[dbo].[FK_RequisitoComisionRequisito]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ComisionRequisito] DROP CONSTRAINT [FK_RequisitoComisionRequisito];
 GO
-IF OBJECT_ID(N'[dbo].[FK_SOLICITUD_AFILIACION_EMPLEADO]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Solicitud_Afiliacion] DROP CONSTRAINT [FK_SOLICITUD_AFILIACION_EMPLEADO];
+IF OBJECT_ID(N'[dbo].[FK_CanalVentaComision]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Comision] DROP CONSTRAINT [FK_CanalVentaComision];
 GO
-IF OBJECT_ID(N'[dbo].[FK_SOLICITUD_AFILIACION_EMPLEADO1]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Solicitud_Afiliacion] DROP CONSTRAINT [FK_SOLICITUD_AFILIACION_EMPLEADO1];
+IF OBJECT_ID(N'[dbo].[FK_CampaniaComision]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Comision] DROP CONSTRAINT [FK_CampaniaComision];
 GO
-IF OBJECT_ID(N'[dbo].[FK_SOLICITUD_AFILIACION_ESTADO_SOLICITUD]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Solicitud_Afiliacion] DROP CONSTRAINT [FK_SOLICITUD_AFILIACION_ESTADO_SOLICITUD];
+IF OBJECT_ID(N'[dbo].[FK_CargoComision]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Comision] DROP CONSTRAINT [FK_CargoComision];
 GO
-IF OBJECT_ID(N'[dbo].[FK_SOLICITUD_AFILIACION_INVITACION]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Solicitud_Afiliacion] DROP CONSTRAINT [FK_SOLICITUD_AFILIACION_INVITACION];
+IF OBJECT_ID(N'[dbo].[FK_TipoVisitaVisita]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Visita] DROP CONSTRAINT [FK_TipoVisitaVisita];
 GO
-IF OBJECT_ID(N'[dbo].[FK_SOLICITUD_AUTORIZACION_EMPLEADO]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Solicitud_Autorizacion] DROP CONSTRAINT [FK_SOLICITUD_AUTORIZACION_EMPLEADO];
-GO
-IF OBJECT_ID(N'[dbo].[FK_SOLICITUD_AUTORIZACION_EMPLEADO1]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Solicitud_Autorizacion] DROP CONSTRAINT [FK_SOLICITUD_AUTORIZACION_EMPLEADO1];
+IF OBJECT_ID(N'[dbo].[FK_ProspectoVisita]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Visita] DROP CONSTRAINT [FK_ProspectoVisita];
 GO
 
 -- --------------------------------------------------
@@ -201,9 +216,6 @@ IF OBJECT_ID(N'[dbo].[Cliente]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Comision]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Comision];
-GO
-IF OBJECT_ID(N'[dbo].[ComisionRequisito]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ComisionRequisito];
 GO
 IF OBJECT_ID(N'[dbo].[Departamento]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Departamento];
@@ -297,6 +309,15 @@ IF OBJECT_ID(N'[dbo].[sysdiagrams]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Tema]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Tema];
+GO
+IF OBJECT_ID(N'[dbo].[ComisionRequisito]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ComisionRequisito];
+GO
+IF OBJECT_ID(N'[dbo].[Visita]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Visita];
+GO
+IF OBJECT_ID(N'[dbo].[TipoVisita]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TipoVisita];
 GO
 
 -- --------------------------------------------------
@@ -769,6 +790,24 @@ CREATE TABLE [dbo].[ComisionRequisito] (
 );
 GO
 
+-- Creating table 'Visita'
+CREATE TABLE [dbo].[Visita] (
+    [Cod_Visita] int IDENTITY(1,1) NOT NULL,
+    [Cod_Pros] int  NOT NULL,
+    [Fec_Ini] datetime  NOT NULL,
+    [Fec_Fin] datetime  NOT NULL,
+    [Txt_Comentario] nvarchar(200)  NOT NULL,
+    [Cod_Tipo_Visita] int  NOT NULL
+);
+GO
+
+-- Creating table 'TipoVisita'
+CREATE TABLE [dbo].[TipoVisita] (
+    [Cod_Tipo_Visita] int IDENTITY(1,1) NOT NULL,
+    [Nro_Visita] nvarchar(20)  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -999,6 +1038,18 @@ GO
 ALTER TABLE [dbo].[ComisionRequisito]
 ADD CONSTRAINT [PK_ComisionRequisito]
     PRIMARY KEY CLUSTERED ([Cod_Com], [Cod_Req] ASC);
+GO
+
+-- Creating primary key on [Cod_Visita] in table 'Visita'
+ALTER TABLE [dbo].[Visita]
+ADD CONSTRAINT [PK_Visita]
+    PRIMARY KEY CLUSTERED ([Cod_Visita] ASC);
+GO
+
+-- Creating primary key on [Cod_Tipo_Visita] in table 'TipoVisita'
+ALTER TABLE [dbo].[TipoVisita]
+ADD CONSTRAINT [PK_TipoVisita]
+    PRIMARY KEY CLUSTERED ([Cod_Tipo_Visita] ASC);
 GO
 
 -- --------------------------------------------------
@@ -1852,6 +1903,36 @@ GO
 CREATE INDEX [IX_FK_CargoComision]
 ON [dbo].[Comision]
     ([Cod_Car]);
+GO
+
+-- Creating foreign key on [Cod_Tipo_Visita] in table 'Visita'
+ALTER TABLE [dbo].[Visita]
+ADD CONSTRAINT [FK_TipoVisitaVisita]
+    FOREIGN KEY ([Cod_Tipo_Visita])
+    REFERENCES [dbo].[TipoVisita]
+        ([Cod_Tipo_Visita])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_TipoVisitaVisita'
+CREATE INDEX [IX_FK_TipoVisitaVisita]
+ON [dbo].[Visita]
+    ([Cod_Tipo_Visita]);
+GO
+
+-- Creating foreign key on [Cod_Pros] in table 'Visita'
+ALTER TABLE [dbo].[Visita]
+ADD CONSTRAINT [FK_ProspectoVisita]
+    FOREIGN KEY ([Cod_Pros])
+    REFERENCES [dbo].[Prospecto]
+        ([Cod_Pros])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ProspectoVisita'
+CREATE INDEX [IX_FK_ProspectoVisita]
+ON [dbo].[Visita]
+    ([Cod_Pros]);
 GO
 
 -- --------------------------------------------------

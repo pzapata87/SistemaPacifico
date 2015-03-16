@@ -17,6 +17,7 @@ namespace Pacifico.DataAccess
         public Prospecto()
         {
             this.PropuestaSolucion = new HashSet<PropuestaSolucion>();
+            this.Visita = new HashSet<Visita>();
         }
     
         public int Cod_Pros { get; set; }
@@ -30,5 +31,6 @@ namespace Pacifico.DataAccess
         public string Num_DNI { get; set; }
     
         public virtual ICollection<PropuestaSolucion> PropuestaSolucion { get; set; }
+        public virtual ICollection<Visita> Visita { get; set; }
     }
 }

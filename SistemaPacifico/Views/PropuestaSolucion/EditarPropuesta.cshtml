@@ -20,7 +20,7 @@
                     @Html.TextBoxFor(model => model.DNIProspecto, new { @class = "form-control", disabled = "true" })
                 </td>
                 <td>
-                    <input id="btnBuscar" type="button" value="Buscar" class="btn btn-default" disabled="disabled" />
+                    <input id="btnBuscar" type="button" value="Buscar" class="btn btn-primary btn-sm" disabled="disabled" />
                 </td>
             </tr>
             <tr>
@@ -65,8 +65,8 @@
                     @Html.TextBoxFor(model => model.MontoRetorno, htmlAttributes: new { @class = "form-control", disabled = "true" })
                 </td>
                 <td>
-                    <input id="btnGenerarPropuesta" type="button" value="Generar Propuesta" class="btn btn-default" disabled="disabled" />
-                    <input id="btnExportar" type="button" value="Exportar" class="btn btn-default" />
+                    <input id="btnGenerarPropuesta" type="button" value="Generar Propuesta" class="btn btn-primary btn-sm" disabled="disabled" />
+                    <input id="btnExportar" type="button" value="Exportar" class="btn btn-primary btn-sm" />
                 </td>
             </tr>
             <tr>
@@ -77,8 +77,8 @@
             </tr>
             <tr>
                 <td colspan="6" align="center">
-                    <input id="btnGrabar" type="button" value="Grabar" class="btn btn-default" style="display:none;" />
-                    <input id="btnCancelar" type="button" value="Regresar" class="btn btn-default" />
+                    <input id="btnGrabar" type="button" value="Grabar" class="btn btn-primary btn-sm" style="display:none;" />
+                    <input id="btnCancelar" type="button" value="Regresar" class="btn btn-primary btn-sm" />
                 </td>
                 <td></td>
             </tr>
@@ -149,8 +149,19 @@
         });
 
         $('#btnExportar').click(function () {
-            vURL = '@Url.Action("Index", "PropuestaSolucion")';
-            window.location = vURL;
+            var opcionesExcel = {
+                url: '@Url.Action("ExportarToExcel", "PropuestaSolucion", new { area = "" })',
+                parametros: {
+                    id: '@Model.Codigo'
+                }
+            };
+
+            Utils.Ajax(opcionesExcel, function(response) {
+                if (response.Success)
+                    window.location = response.Data;
+                else
+                    alert('Error al exportar');
+            });
         });
     });
 

@@ -44,6 +44,8 @@
     <EntitySet Name="sysdiagrams" EntityType="BDPacificoModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Tema" EntityType="BDPacificoModel.Store.Tema" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ComisionRequisito" EntityType="BDPacificoModel.Store.ComisionRequisito" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Visita" EntityType="BDPacificoModel.Store.Visita" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TipoVisita" EntityType="BDPacificoModel.Store.TipoVisita" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK__Sugerenci__Co_Ar__2BFE89A6" Association="BDPacificoModel.Store.FK__Sugerenci__Co_Ar__2BFE89A6">
       <End Role="Area" EntitySet="Area" />
       <End Role="Sugerencia" EntitySet="Sugerencia" />
@@ -271,6 +273,14 @@
     <AssociationSet Name="CargoComision" Association="BDPacificoModel.Store.CargoComision">
       <End Role="Cargo" EntitySet="Cargo" />
       <End Role="Comision" EntitySet="Comision" />
+    </AssociationSet>
+    <AssociationSet Name="TipoVisitaVisita" Association="BDPacificoModel.Store.TipoVisitaVisita">
+      <End Role="TipoVisita" EntitySet="TipoVisita" />
+      <End Role="Visita" EntitySet="Visita" />
+    </AssociationSet>
+    <AssociationSet Name="ProspectoVisita" Association="BDPacificoModel.Store.ProspectoVisita">
+      <End Role="Prospecto" EntitySet="Prospecto" />
+      <End Role="Visita" EntitySet="Visita" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Area">
@@ -746,6 +756,24 @@
     </Key>
     <Property Name="Cod_Com" Type="int" Nullable="false" />
     <Property Name="Cod_Req" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Visita">
+    <Key>
+      <PropertyRef Name="Cod_Visita" />
+    </Key>
+    <Property Name="Cod_Visita" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Cod_Pros" Type="int" Nullable="false" />
+    <Property Name="Fec_Ini" Type="datetime" Nullable="false" />
+    <Property Name="Fec_Fin" Type="datetime" Nullable="false" />
+    <Property Name="Txt_Comentario" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Cod_Tipo_Visita" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipoVisita">
+    <Key>
+      <PropertyRef Name="Cod_Tipo_Visita" />
+    </Key>
+    <Property Name="Cod_Tipo_Visita" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nro_Visita" Type="nvarchar" Nullable="false" MaxLength="20" />
   </EntityType>
   <Association Name="FK__Sugerenci__Co_Ar__2BFE89A6">
     <End Role="Area" Type="BDPacificoModel.Store.Area" Multiplicity="0..1" />
@@ -1433,6 +1461,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="TipoVisitaVisita">
+    <End Role="TipoVisita" Type="BDPacificoModel.Store.TipoVisita" Multiplicity="1" />
+    <End Role="Visita" Type="BDPacificoModel.Store.Visita" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoVisita">
+        <PropertyRef Name="Cod_Tipo_Visita" />
+      </Principal>
+      <Dependent Role="Visita">
+        <PropertyRef Name="Cod_Tipo_Visita" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProspectoVisita">
+    <End Role="Prospecto" Type="BDPacificoModel.Store.Prospecto" Multiplicity="1" />
+    <End Role="Visita" Type="BDPacificoModel.Store.Visita" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prospecto">
+        <PropertyRef Name="Cod_Pros" />
+      </Principal>
+      <Dependent Role="Visita">
+        <PropertyRef Name="Cod_Pros" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -1823,6 +1875,7 @@
           <Property Name="Txt_Crr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Num_DNI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PropuestaSolucion" Relationship="Self.FK_PropuestaSolucion_Prospecto" FromRole="Prospecto" ToRole="PropuestaSolucion" />
+          <NavigationProperty Name="Visita" Relationship="BDPacificoModel.ProspectoVisita" FromRole="Prospecto" ToRole="Visita" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
@@ -2908,6 +2961,16 @@
             <End Role="Cargo" EntitySet="Cargo" />
             <End Role="Comision" EntitySet="Comision" />
           </AssociationSet>
+          <EntitySet Name="Visita" EntityType="BDPacificoModel.Visita" />
+          <EntitySet Name="TipoVisita" EntityType="BDPacificoModel.TipoVisita" />
+          <AssociationSet Name="TipoVisitaVisita" Association="BDPacificoModel.TipoVisitaVisita">
+            <End Role="TipoVisita" EntitySet="TipoVisita" />
+            <End Role="Visita" EntitySet="Visita" />
+          </AssociationSet>
+          <AssociationSet Name="ProspectoVisita" Association="BDPacificoModel.ProspectoVisita">
+            <End Role="Prospecto" EntitySet="Prospecto" />
+            <End Role="Visita" EntitySet="Visita" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ComisionRequisito" >
           <Key>
@@ -2976,6 +3039,51 @@
             </Principal>
             <Dependent Role="Comision">
               <PropertyRef Name="Cod_Car" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Visita">
+          <Key>
+            <PropertyRef Name="Cod_Visita" />
+          </Key>
+          <Property Name="Cod_Visita" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cod_Pros" Type="Int32" Nullable="false" />
+          <Property Name="Fec_Ini" Type="DateTime" Nullable="false" />
+          <Property Name="Fec_Fin" Type="DateTime" Nullable="false" />
+          <Property Name="Txt_Comentario" Type="String" Nullable="false" MaxLength="200" />
+          <NavigationProperty Name="TipoVisita" Relationship="BDPacificoModel.TipoVisitaVisita" FromRole="Visita" ToRole="TipoVisita" />
+          <Property Name="Cod_Tipo_Visita" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Prospecto" Relationship="BDPacificoModel.ProspectoVisita" FromRole="Visita" ToRole="Prospecto" />
+        </EntityType>
+        <EntityType Name="TipoVisita">
+          <Key>
+            <PropertyRef Name="Cod_Tipo_Visita" />
+          </Key>
+          <Property Name="Cod_Tipo_Visita" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nro_Visita" Type="String" Nullable="false" MaxLength="20" />
+          <NavigationProperty Name="Visita" Relationship="BDPacificoModel.TipoVisitaVisita" FromRole="TipoVisita" ToRole="Visita" />
+        </EntityType>
+        <Association Name="TipoVisitaVisita">
+          <End Type="BDPacificoModel.TipoVisita" Role="TipoVisita" Multiplicity="1" />
+          <End Type="BDPacificoModel.Visita" Role="Visita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoVisita">
+              <PropertyRef Name="Cod_Tipo_Visita" />
+            </Principal>
+            <Dependent Role="Visita">
+              <PropertyRef Name="Cod_Tipo_Visita" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProspectoVisita">
+          <End Type="BDPacificoModel.Prospecto" Role="Prospecto" Multiplicity="1" />
+          <End Type="BDPacificoModel.Visita" Role="Visita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prospecto">
+              <PropertyRef Name="Cod_Pros" />
+            </Principal>
+            <Dependent Role="Visita">
+              <PropertyRef Name="Cod_Pros" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3486,6 +3594,26 @@
         <MappingFragment StoreEntitySet="ComisionRequisito">
           <ScalarProperty Name="Cod_Com" ColumnName="Cod_Com" />
           <ScalarProperty Name="Cod_Req" ColumnName="Cod_Req" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Visita">
+      <EntityTypeMapping TypeName="IsTypeOf(BDPacificoModel.Visita)">
+        <MappingFragment StoreEntitySet="Visita">
+          <ScalarProperty Name="Cod_Visita" ColumnName="Cod_Visita" />
+          <ScalarProperty Name="Cod_Pros" ColumnName="Cod_Pros" />
+          <ScalarProperty Name="Fec_Ini" ColumnName="Fec_Ini" />
+          <ScalarProperty Name="Fec_Fin" ColumnName="Fec_Fin" />
+          <ScalarProperty Name="Txt_Comentario" ColumnName="Txt_Comentario" />
+          <ScalarProperty Name="Cod_Tipo_Visita" ColumnName="Cod_Tipo_Visita" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoVisita">
+      <EntityTypeMapping TypeName="IsTypeOf(BDPacificoModel.TipoVisita)">
+        <MappingFragment StoreEntitySet="TipoVisita">
+          <ScalarProperty Name="Cod_Tipo_Visita" ColumnName="Cod_Tipo_Visita" />
+          <ScalarProperty Name="Nro_Visita" ColumnName="Nro_Visita" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

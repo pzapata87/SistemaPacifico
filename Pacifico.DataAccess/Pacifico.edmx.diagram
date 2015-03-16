@@ -100,6 +100,10 @@
         <AssociationConnector Association="BDPacificoModel.CanalVentaComision" />
         <AssociationConnector Association="BDPacificoModel.CampaniaComision" />
         <AssociationConnector Association="BDPacificoModel.CargoComision" />
+        <EntityTypeShape EntityType="BDPacificoModel.Visita" Width="1.5" PointX="1.875" PointY="1" />
+        <EntityTypeShape EntityType="BDPacificoModel.TipoVisita" Width="1.5" PointX="0.5" PointY="3.375" />
+        <AssociationConnector Association="BDPacificoModel.TipoVisitaVisita" />
+        <AssociationConnector Association="BDPacificoModel.ProspectoVisita" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
