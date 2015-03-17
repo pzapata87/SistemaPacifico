@@ -16,7 +16,7 @@ input.vanadium-invalid, select.vanadium-invalid, textarea.vanadium-invalid {
 	text-decoration:underline;
 }
 .vanadium-advice {
-	background:url(../Content/img/icon_alert.png) no-repeat;
+	background:url(../Content/images/icon_alert.png) no-repeat;
 	width:17px;
 	height:16px;
 	position:absolute;

@@ -43,7 +43,9 @@
             <tr>
                 <td>
                     <label class="control-label col-md-4" for="FechaInicial">Fecha Inicial:</label>
-                    @Html.TextBoxFor(model => model.FechaInicial, new { @class = "form-control :required", @style = "display: inline-block", @maxlength = 16 })
+                    <div>
+                        @Html.TextBoxFor(model => model.FechaInicial, new { @class = "form-control :required", @style = "display: inline-block", @maxlength = 16 })
+                    </div>
                 </td>
                 <td colspan="2">
                     <label class="control-label col-md-4" for="FechaFinal">Fecha Final:</label>
@@ -71,10 +73,6 @@
     }
 </div>
 
-@section Scripts {
-    <script src="@Url.Content("~/Scripts/datepicker-es.js")" type="text/javascript"></script>
-}
-
 <script type="text/javascript">
     $(document).ready(function() {
         $('#btnGrabar').click(function(e) {
@@ -85,14 +83,21 @@
 
     $("#btnBuscar").click(function() { obtenerProspecto(); });
 
-    $('#FechaInicial').datepicker({
+    $("#FechaInicial").datetimepicker({
         option: $.datepicker.regional['es'],
         onClose: function(selectedDate) {
             $("#FechaFinal").datepicker("option", "minDate", selectedDate);
         }
     });
 
-    $('#FechaFinal').datepicker({
+    //$('#FechaInicial').datepicker({
+    //    option: $.datepicker.regional['es'],
+    //    onClose: function(selectedDate) {
+    //        $("#FechaFinal").datepicker("option", "minDate", selectedDate);
+    //    }
+    //});
+
+    $('#FechaFinal').datetimepicker({
         option: $.datepicker.regional['es'],
         onClose: function(selectedDate) {
             $("#FechaInicial").datepicker("option", "maxDate", selectedDate);
