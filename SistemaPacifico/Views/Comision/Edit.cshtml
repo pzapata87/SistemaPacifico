@@ -28,17 +28,17 @@
                 </td>
                 <td>
                     <label class="control-label col-md-4" for="CanalVentaId">Canal Venta:</label>
-                    @Html.DropDownListFor(model => model.CanalVentaId, new SelectList(Model.CanalVentList, "Valor", "Nombre"), new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.CanalVentaId, new SelectList(Model.CanalVentList, "Valor", "Nombre"), new { @class = "form-control :required", @style = "display: inline-block" })
                 </td>
             </tr>
             <tr>
                 <td>
                     <label class="control-label col-md-4" for="CampaniaId">Campaña:</label>
-                    @Html.DropDownListFor(model => model.CampaniaId, new SelectList(Model.CampaniaList, "Valor", "Nombre"), new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.CampaniaId, new SelectList(Model.CampaniaList, "Valor", "Nombre"), new { @class = "form-control :required", @style = "display: inline-block" })
                 </td>
                 <td>
                     <label class="control-label col-md-4" for="CargoId">Cargo Comisionista:</label>
-                    @Html.DropDownListFor(model => model.CargoId, new SelectList(Model.CargoList, "Valor", "Nombre"), new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.CargoId, new SelectList(Model.CargoList, "Valor", "Nombre"), new { @class = "form-control :required", @style = "display: inline-block" })
                 </td>
                 <td>&nbsp;</td>
             </tr>

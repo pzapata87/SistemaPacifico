@@ -34,7 +34,7 @@ namespace Pacifico.Bussines
              if (!string.IsNullOrWhiteSpace(campania))
                  query = query.Where(p => p.Campania.Nro_Camp.Contains(campania));
 
-             return query.ToList();
+             return query.OrderByDescending(p => p.Cod_Com).ToList();
          }
 
          public Comision Get(int id)

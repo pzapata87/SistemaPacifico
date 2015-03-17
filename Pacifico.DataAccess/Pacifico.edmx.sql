@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/16/2015 01:51:56
+-- Date Created: 03/17/2015 02:48:42
 -- Generated from EDMX file: D:\Proyectos\Academico - Servicio Web\SistemaPacifico(2)\SistemaPacifico\Pacifico.DataAccess\Pacifico.edmx
 -- --------------------------------------------------
 
@@ -796,7 +796,7 @@ CREATE TABLE [dbo].[Visita] (
     [Cod_Pros] int  NOT NULL,
     [Fec_Ini] datetime  NOT NULL,
     [Fec_Fin] datetime  NOT NULL,
-    [Txt_Comentario] nvarchar(200)  NOT NULL,
+    [Txt_Comentario] nvarchar(200)  NULL,
     [Cod_Tipo_Visita] int  NOT NULL
 );
 GO

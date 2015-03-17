@@ -54,7 +54,7 @@ namespace Pacifico.Bussines
                     query = query.Where(p => DbFunctions.DiffDays(p.Fec_Fin, value).Value == 0);
             }
 
-            return query.ToList();
+            return query.OrderByDescending(p => p.Cod_Visita).ToList();
         }
 
         public Visita Get(int id)

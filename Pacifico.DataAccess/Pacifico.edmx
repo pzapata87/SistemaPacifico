@@ -765,7 +765,7 @@
     <Property Name="Cod_Pros" Type="int" Nullable="false" />
     <Property Name="Fec_Ini" Type="datetime" Nullable="false" />
     <Property Name="Fec_Fin" Type="datetime" Nullable="false" />
-    <Property Name="Txt_Comentario" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Txt_Comentario" Type="nvarchar" Nullable="true" MaxLength="200" />
     <Property Name="Cod_Tipo_Visita" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TipoVisita">
@@ -3050,7 +3050,7 @@
           <Property Name="Cod_Pros" Type="Int32" Nullable="false" />
           <Property Name="Fec_Ini" Type="DateTime" Nullable="false" />
           <Property Name="Fec_Fin" Type="DateTime" Nullable="false" />
-          <Property Name="Txt_Comentario" Type="String" Nullable="false" MaxLength="200" />
+          <Property Name="Txt_Comentario" Type="String" MaxLength="200" Nullable="true" />
           <NavigationProperty Name="TipoVisita" Relationship="BDPacificoModel.TipoVisitaVisita" FromRole="Visita" ToRole="TipoVisita" />
           <Property Name="Cod_Tipo_Visita" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Prospecto" Relationship="BDPacificoModel.ProspectoVisita" FromRole="Visita" ToRole="Prospecto" />

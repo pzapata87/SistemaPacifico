@@ -38,7 +38,7 @@ namespace SistemaPacifico.Controllers
 
         public ActionResult Index()
         {
-            var list = _comisionBL.FindAll().ToList().ConvertAll(p => new ComisionModel
+            var list = _comisionBL.FindAll().OrderByDescending(p => p.Cod_Com).ToList().ConvertAll(p => new ComisionModel
             {
                 CodigoComision = p.Cod_Com,
                 NombreComision = p.Nro_Com,

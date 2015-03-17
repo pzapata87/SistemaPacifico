@@ -19,40 +19,6 @@
             @*<button type="button" class="close" data-dismiss="alert">×</button>*@
             <strong>Error:</strong> <label id="lblMensaje" style="font-weight: normal"></label>
         </div>
-    @*<div>
-        <div class="row" style="padding-bottom: 5px;">
-            <div class="col-md-2"><label for="DniProspecto">DNI Prospecto:</label></div>
-            <div class="col-md-4">
-                @Html.TextBoxFor(model => model.CodProspecto, new { @class = "hidden" })
-                @Html.TextBoxFor(model => model.DniProspecto, new { @class = "form-control :required :digits", @style = "display: inline-block", @maxlength = 8 })
-                <input id="btnBuscar" type="button" value="Buscar" class="btn btn-primary btn-sm" />
-            </div>
-            <div class="col-md-2"></div>
-            <div class="col-md-4"></div>
-        </div>
-        <div class="row" style="padding-bottom: 5px;">
-            <div class="col-md-2"><label for="NombreProspecto">Nombre Prospecto:</label></div>
-            <div class="col-md-4">@Html.TextBoxFor(model => model.NombreProspecto, new { @readonly = "readonly", @class = "form-control" })</div>
-            <div class="col-md-2"><label for="ApellidoProspecto">Apellidos Prospecto:</label></div>
-            <div class="col-md-4">@Html.TextBoxFor(model => model.ApellidoProspecto, new { @readonly = "readonly", @class = "form-control" })</div>
-        </div>
-        <div class="row" style="padding-bottom: 5px;">
-            <div class="col-md-2"><label for="FechaInicial">Fecha Inicial:</label></div>
-            <div class="col-md-4">@Html.TextBoxFor(model => model.FechaInicial, new { @class = "form-control :required", @style = "display: inline-block", @maxlength = 10 })</div>
-            <div class="col-md-2"><label for="FechaFinal">Fecha Final:</label></div>
-            <div class="col-md-4">@Html.TextBoxFor(model => model.FechaFinal, new { @class = "form-control :required", @style = "display: inline-block", @maxlength = 10 })</div>
-        </div>
-        <div class="row" style="padding-bottom: 5px;">
-            <div class="col-md-2"><label for="CodTipoVisita">Tipo Visita:</label></div>
-            <div class="col-md-4">@Html.DropDownListFor(model => model.CodTipoVisita, new SelectList(Model.TipoVisitaList, "Valor", "Nombre"), new { @class = "form-control" })</div>
-            <div class="col-md-2"><label for="Comentario">Comentario:</label></div>
-            <div class="col-md-4">@Html.TextAreaFor(model => model.Comentario, new { @class = "form-control" })</div>
-        </div>
-        <div class="row" style="text-align: center">
-            <button id="btnGrabar" type="submit" class="btn btn-primary btn-sm">Grabar</button>
-            <button type="reset" class="btn btn-primary btn-sm" onclick=" javascript:window.history.back(); ">Cancelar</button>
-        </div>
-    </div>*@
         <table style="width: 95%" class="fondo" align="center">
             <tr>
                 <td>
@@ -137,12 +103,13 @@
         if ($("#frmModel").validate().form()) {
 
             var visita = new Object();
+            visita.CodVisita = $("#CodVisita").val();
             visita.CodProspecto = $("#CodProspecto").val();
             visita.FechaInicial = $("#FechaInicial").val();
             visita.FechaFinal = $("#FechaFinal").val();
             visita.CodTipoVisita = $("#CodTipoVisita").val();
             visita.Comentario = $("#Comentario").val();
-            debugger;
+
             if (visita.CodProspecto != '0') {
                 var opcionesAjax = {
                     url: '@Url.Action(Model.Accion, "Visita", new {area = ""})',

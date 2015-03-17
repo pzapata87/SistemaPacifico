@@ -30,7 +30,7 @@ namespace SistemaPacifico.Controllers
 
         public ActionResult Index()
         {
-            var list = _visitaBL.FindAll().ToList().ConvertAll(p => new VisitaModel
+            var list = _visitaBL.FindAll().OrderByDescending(p => p.Cod_Visita).ToList().ConvertAll(p => new VisitaModel
             {
                 CodVisita = p.Cod_Visita,
                 DniProspecto = p.Prospecto.Num_DNI,
