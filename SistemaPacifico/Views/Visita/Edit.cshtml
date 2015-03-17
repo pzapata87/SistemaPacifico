@@ -1,0 +1,204 @@
+﻿@model SistemaPacifico.Models.VisitaModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="container">
+    <hr />
+    @using (Html.BeginForm(Model.Accion, "Comision", FormMethod.Post, new { id = "frmModel" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <div id="divMsg" class="alert alert-success" style="display: none">
+            <label id="lblMsg" style="font-weight: normal">Comisión registrada</label>
+        </div>
+
+        <div id="labelError" class="alert alert-danger" style="display: none">
+            @*<button type="button" class="close" data-dismiss="alert">×</button>*@
+            <strong>Error:</strong> <label id="lblMensaje" style="font-weight: normal"></label>
+        </div>
+    @*<div>
+        <div class="row" style="padding-bottom: 5px;">
+            <div class="col-md-2"><label for="DniProspecto">DNI Prospecto:</label></div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(model => model.CodProspecto, new { @class = "hidden" })
+                @Html.TextBoxFor(model => model.DniProspecto, new { @class = "form-control :required :digits", @style = "display: inline-block", @maxlength = 8 })
+                <input id="btnBuscar" type="button" value="Buscar" class="btn btn-primary btn-sm" />
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="row" style="padding-bottom: 5px;">
+            <div class="col-md-2"><label for="NombreProspecto">Nombre Prospecto:</label></div>
+            <div class="col-md-4">@Html.TextBoxFor(model => model.NombreProspecto, new { @readonly = "readonly", @class = "form-control" })</div>
+            <div class="col-md-2"><label for="ApellidoProspecto">Apellidos Prospecto:</label></div>
+            <div class="col-md-4">@Html.TextBoxFor(model => model.ApellidoProspecto, new { @readonly = "readonly", @class = "form-control" })</div>
+        </div>
+        <div class="row" style="padding-bottom: 5px;">
+            <div class="col-md-2"><label for="FechaInicial">Fecha Inicial:</label></div>
+            <div class="col-md-4">@Html.TextBoxFor(model => model.FechaInicial, new { @class = "form-control :required", @style = "display: inline-block", @maxlength = 10 })</div>
+            <div class="col-md-2"><label for="FechaFinal">Fecha Final:</label></div>
+            <div class="col-md-4">@Html.TextBoxFor(model => model.FechaFinal, new { @class = "form-control :required", @style = "display: inline-block", @maxlength = 10 })</div>
+        </div>
+        <div class="row" style="padding-bottom: 5px;">
+            <div class="col-md-2"><label for="CodTipoVisita">Tipo Visita:</label></div>
+            <div class="col-md-4">@Html.DropDownListFor(model => model.CodTipoVisita, new SelectList(Model.TipoVisitaList, "Valor", "Nombre"), new { @class = "form-control" })</div>
+            <div class="col-md-2"><label for="Comentario">Comentario:</label></div>
+            <div class="col-md-4">@Html.TextAreaFor(model => model.Comentario, new { @class = "form-control" })</div>
+        </div>
+        <div class="row" style="text-align: center">
+            <button id="btnGrabar" type="submit" class="btn btn-primary btn-sm">Grabar</button>
+            <button type="reset" class="btn btn-primary btn-sm" onclick=" javascript:window.history.back(); ">Cancelar</button>
+        </div>
+    </div>*@
+        <table style="width: 95%" class="fondo" align="center">
+            <tr>
+                <td>
+                    <label class="control-label col-md-4" for="DniProspecto">DNI Prospecto:</label>
+                    @Html.TextBoxFor(model => model.CodProspecto, new { @class = "hidden" })
+                    @Html.TextBoxFor(model => model.CodVisita, new { @class = "hidden" })
+                    @Html.TextBoxFor(model => model.DniProspecto, new { @class = "form-control :required :digits", @style="display: inline-block", @maxlength = 8 })
+                </td>
+                <td><input id="btnBuscar" type="button" value="Buscar" class="btn btn-primary btn-sm" /></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="control-label col-md-4" for="NombreProspecto">Nombre Prospecto:</label>
+                    @Html.TextBoxFor(model => model.NombreProspecto, new { @readonly = "readonly", @class = "form-control" })
+                </td>
+                <td colspan="2">
+                    <label class="control-label col-md-4" for="ApellidoProspecto">Apellidos Prospecto:</label>
+                    @Html.TextBoxFor(model => model.ApellidoProspecto, new { @readonly = "readonly", @class = "form-control" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="control-label col-md-4" for="FechaInicial">Fecha Inicial:</label>
+                    @Html.TextBoxFor(model => model.FechaInicial, new { @class = "form-control :required", @style = "display: inline-block", @maxlength = 16 })
+                </td>
+                <td colspan="2">
+                    <label class="control-label col-md-4" for="FechaFinal">Fecha Final:</label>
+                    @Html.TextBoxFor(model => model.FechaFinal, new { @class = "form-control :required", @style = "display: inline-block", @maxlength = 16 })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="control-label col-md-4" for="CodTipoVisita">Tipo Visita:</label>
+                    @Html.DropDownListFor(model => model.CodTipoVisita, new SelectList(Model.TipoVisitaList, "Valor", "Nombre"), new { @class = "form-control :required", @style = "display: inline-block" })
+                </td>
+                <td colspan="2">
+                    <label class="control-label col-md-4" for="Comentario">Comentario:</label>
+                    @Html.TextAreaFor(model => model.Comentario, new { @class = "form-control" })
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" align="center">
+                    <hr/>
+                    <button id="btnGrabar" type="submit" class="btn btn-primary btn-sm">Grabar</button>
+                    <button type="reset" class="btn btn-primary btn-sm" onclick=" javascript:window.history.back(); ">Cancelar</button>
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/datepicker-es.js")" type="text/javascript"></script>
+}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#btnGrabar').click(function(e) {
+            Guardar();
+            e.preventDefault();
+        });
+    });
+
+    $("#btnBuscar").click(function() { obtenerProspecto(); });
+
+    $('#FechaInicial').datepicker({
+        option: $.datepicker.regional['es'],
+        onClose: function(selectedDate) {
+            $("#FechaFinal").datepicker("option", "minDate", selectedDate);
+        }
+    });
+
+    $('#FechaFinal').datepicker({
+        option: $.datepicker.regional['es'],
+        onClose: function(selectedDate) {
+            $("#FechaInicial").datepicker("option", "maxDate", selectedDate);
+        }
+    });
+
+    function Guardar() {
+        if ($("#frmModel").validate().form()) {
+
+            var visita = new Object();
+            visita.CodProspecto = $("#CodProspecto").val();
+            visita.FechaInicial = $("#FechaInicial").val();
+            visita.FechaFinal = $("#FechaFinal").val();
+            visita.CodTipoVisita = $("#CodTipoVisita").val();
+            visita.Comentario = $("#Comentario").val();
+            debugger;
+            if (visita.CodProspecto != '0') {
+                var opcionesAjax = {
+                    url: '@Url.Action(Model.Accion, "Visita", new {area = ""})',
+                    parametros: {
+                        model: visita
+                    }
+                };
+
+                Utils.Ajax(opcionesAjax, function(response) {
+                    $("#divMsg").show();
+                    setTimeout(function() {
+                        window.location.href = response;
+                    }, 2000);
+                });
+            } else {
+                MostrarError('Por favor ingrese un número de DNI ya registrado');
+                return false;
+            }
+        } else {
+            MostrarError('Por favor ingrese los datos requeridos');
+            return false;
+        }
+    }
+
+    function obtenerProspecto() {
+        var dni = $("#DniProspecto").val();
+
+        var opcionesAjax = {
+            url: '@Url.Action("ObtenerProspecto", "PacificoService", new {area = ""})',
+            type: "GET",
+            dataType: "json",
+            contentType: "text/plain",
+            parametros: {
+                numeroDNI: dni
+            }
+        };
+
+        Utils.Ajax(opcionesAjax, function(response) {
+            if (response.Co_Prospecto != "") {
+                $("#CodProspecto").val(response.Co_Prospecto);
+                $("#NombreProspecto").val(response.No_Prospecto);
+                $("#ApellidoProspecto").val(response.Tx_ApePaterno + " " + response.Tx_ApeMaterno);
+            } else {
+                $("#CodProspecto").val("");
+                $("#NombreProspecto").val("");
+                $("#ApellidoProspecto").val("");
+                alert("El DNI ingresado no se encuentra registrado como prospecto");
+            }
+        });
+    }
+
+    function MostrarError(msg) {
+        $('#labelError').show();
+        $('#lblMensaje').text(msg);
+        setTimeout(function () {
+            $("#labelError").slideUp(400);
+        }, 5000);
+    }
+</script>

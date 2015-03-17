@@ -6,10 +6,6 @@
 
 @using (Html.BeginForm("Index", "PropuestaSolucion", FormMethod.Post))
 {
-    @*<div id="labelSuccess" class="alert alert-success">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>Aviso:</strong> Propuesta de solución registrada.
-    </div>*@
     <hr />
     <table width="85%" class="fondo" align="center">
         <tr>
@@ -27,11 +23,8 @@
             <td><input type="text" class="form-control" name="nombre" value="@ViewBag.ParamNombre" /></td>
             <td colspan="3" align="right"><button type="submit" class="btn btn-primary">Buscar</button></td>
         </tr>
-        <tr>
-            <td>  </td>
-        </tr>
     </table>
-
+    <br />
     <table class="table table-striped">
         <tr>
             <th>

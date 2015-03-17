@@ -11,21 +11,19 @@
         <table style="width: 85%" class="fondo" align="center">
             <tr>
                 <td>Comisión: </td>
-                <td><input id="txtNombreComision" type="text" class="form-control" name="nombreComision" /></td>
+                <td><input id="txtNombreComision" type="text" class="form-control" value="@ViewBag.NombreComision" name="nombreComision" /></td>
                 <td></td>
                 <td>Canal Venta: </td>
-                <td><input id="txtCanalVenta" type="text" class="form-control" name="canalVenta"/></td>
+                <td><input id="txtCanalVenta" type="text" class="form-control" value="@ViewBag.CanalVenta" name="canalVenta" /></td>
             </tr>
             <tr>
                 <td>Campaña: </td>
-                <td><input id="txtCampania" type="text" class="form-control" name="campania"/></td>
-                <td colspan="2"></td>
-                <td align="right"><button type="submit" class="btn btn-primary">Buscar</button></td>
-            </tr>
-            <tr>
-                <td>  </td>
+                <td><input id="txtCampania" type="text" class="form-control" value="@ViewBag.Campania" name="campania" /></td>
+                <td colspan="2"><button type="submit" class="btn btn-primary">Buscar</button></td>
+                <td></td>
             </tr>
         </table>
+        <br />
         <table class="table table-striped">
             <tr>
                 <th>Código Comisión</th>

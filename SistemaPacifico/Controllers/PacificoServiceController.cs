@@ -26,8 +26,8 @@ namespace SistemaPacifico.Controllers
                             Tx_ApePaterno = dbProspecto.Txt_Ape_Pat,
                             Tx_ApeMaterno = dbProspecto.Txt_Ape_Mat
                         }, JsonRequestBehavior.AllowGet);
-            else
-                return Json(new {Co_Prospecto = ""}, JsonRequestBehavior.AllowGet);
+
+            return Json(new {Co_Prospecto = ""}, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult ObtenerPlanProducto(int codigoProducto)

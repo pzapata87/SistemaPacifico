@@ -54,6 +54,9 @@ namespace SistemaPacifico.Controllers
         [HttpPost]
         public ActionResult Index(string nombreComision, string canalVenta, string campania)
         {
+            ViewBag.NombreComision = nombreComision;
+            ViewBag.CanalVenta = canalVenta;
+            ViewBag.Campania = campania;
 
             var list =
                 _comisionBL.FindAll(nombreComision, canalVenta, campania).ToList().ConvertAll(p => new ComisionModel

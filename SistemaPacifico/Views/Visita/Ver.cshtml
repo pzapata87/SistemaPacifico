@@ -1,0 +1,61 @@
+﻿@model SistemaPacifico.Models.VisitaModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="container">
+    <hr />
+    @using (Html.BeginForm(Model.Accion, "Comision", FormMethod.Post, new { id = "frmModel" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <table style="width: 95%" class="fondo" align="center">
+            <tr>
+                <td>
+                    <label class="control-label col-md-4" for="DniProspecto">DNI Prospecto:</label>
+                    @Html.TextBoxFor(model => model.DniProspecto, new { @readonly = "readonly", @class = "form-control" })
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="control-label col-md-4" for="NombreProspecto">Nombre Prospecto:</label>
+                    @Html.TextBoxFor(model => model.NombreProspecto, new { @readonly = "readonly", @class = "form-control" })
+                </td>
+                <td colspan="2">
+                    <label class="control-label col-md-4" for="ApellidoProspecto">Apellidos Prospecto:</label>
+                    @Html.TextBoxFor(model => model.ApellidoProspecto, new { @readonly = "readonly", @class = "form-control" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="control-label col-md-4" for="FechaInicial">Fecha Inicial:</label>
+                    @Html.TextBoxFor(model => model.FechaInicial, new { @readonly = "readonly", @class = "form-control" })
+                </td>
+                <td colspan="2">
+                    <label class="control-label col-md-4" for="FechaFinal">Fecha Final:</label>
+                    @Html.TextBoxFor(model => model.FechaFinal, new { @readonly = "readonly", @class = "form-control"  })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="control-label col-md-4" for="NombreTipoVisita">Tipo Visita:</label>
+                    @Html.TextBoxFor(model => model.NombreTipoVisita, new { @readonly = "readonly", @class = "form-control" })
+                </td>
+                <td colspan="2">
+                    <label class="control-label col-md-4" for="Comentario">Comentario:</label>
+                    @Html.TextAreaFor(model => model.Comentario, new { @readonly = "readonly", @class = "form-control" })
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <br/>
+                    <button type="reset" class="btn btn-primary btn-sm" onclick=" javascript:window.history.back(); ">Regresar</button>
+                </td>
+            </tr>
+        </table>
+    }
+</div>
