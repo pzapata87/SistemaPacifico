@@ -200,7 +200,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Content\TemplateExcel\Template.xlsx" />
+    <Content Include="Content\TemplateExcel\Template.xls" />
     <None Include="Properties\PublishProfiles\SistemaPacifico.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
