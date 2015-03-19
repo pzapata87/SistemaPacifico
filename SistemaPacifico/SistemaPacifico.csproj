@@ -207,8 +207,6 @@
     <Content Include="Content\images\ui-icons_f9bd01_256x240.png" />
     <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\vanadium.css" />
-    <Content Include="Content\jquery.multiselect.css" />
-    <Content Include="Content\jquery.multiselect.filter.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -223,8 +221,6 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery-ui.min.js" />
-    <Content Include="Scripts\jquery.multiselect.filter.js" />
-    <Content Include="Scripts\jquery.multiselect.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -236,6 +232,8 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\datepicker-es.js" />
+    <Content Include="Scripts\Select2\select2.min.css" />
+    <Content Include="Scripts\Select2\select2.min.js" />
     <Content Include="Scripts\TimePicker\jquery-ui-timepicker-addon.css" />
     <Content Include="Scripts\TimePicker\jquery-ui-timepicker-addon.js" />
     <Content Include="Scripts\utilsCommon.js" />
