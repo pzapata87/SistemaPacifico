@@ -34,9 +34,6 @@ namespace Pacifico.DataAccess
         public string Fl_Estado { get; set; }
     
         public virtual Cliente Cliente { get; set; }
-        public virtual Cliente Cliente1 { get; set; }
-        public virtual Cliente Cliente2 { get; set; }
-        public virtual Cliente Cliente3 { get; set; }
         public virtual ICollection<Reclamo_Poliza> Reclamo_Poliza { get; set; }
         public virtual ICollection<Reclamo_Poliza> Reclamo_Poliza1 { get; set; }
     }

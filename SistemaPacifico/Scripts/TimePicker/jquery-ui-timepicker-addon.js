@@ -34,22 +34,39 @@
 	*/
 	var Timepicker = function () {
 		this.regional = []; // Available regional settings, indexed by language code
-		this.regional[''] = { // Default regional settings
-			currentText: 'Now',
-			closeText: 'Done',
-			amNames: ['AM', 'A'],
-			pmNames: ['PM', 'P'],
-			timeFormat: 'HH:mm',
-			timeSuffix: '',
-			timeOnlyTitle: 'Choose Time',
-			timeText: 'Time',
-			hourText: 'Hour',
-			minuteText: 'Minute',
-			secondText: 'Second',
-			millisecText: 'Millisecond',
-			microsecText: 'Microsecond',
-			timezoneText: 'Time Zone',
-			isRTL: false
+		//this.regional[''] = { // Default regional settings
+		//	currentText: 'Now',
+		//	closeText: 'Done',
+		//	amNames: ['AM', 'A'],
+		//	pmNames: ['PM', 'P'],
+		//	timeFormat: 'HH:mm',
+		//	timeSuffix: '',
+		//	timeOnlyTitle: 'Choose Time',
+		//	timeText: 'Time',
+		//	hourText: 'Hour',
+		//	minuteText: 'Minute',
+		//	secondText: 'Second',
+		//	millisecText: 'Millisecond',
+		//	microsecText: 'Microsecond',
+		//	timezoneText: 'Time Zone',
+		//	isRTL: false
+		//};
+		this.regional[''] = {
+		    timeOnlyTitle: 'Elegir una hora',
+		    timeText: 'Hora',
+		    hourText: 'Horas',
+		    minuteText: 'Minutos',
+		    secondText: 'Segundos',
+		    millisecText: 'Milisegundos',
+		    microsecText: 'Microsegundos',
+		    timezoneText: 'Uso horario',
+		    currentText: 'Hoy',
+		    closeText: 'Listo',
+		    timeFormat: 'HH:mm',
+		    timeSuffix: '',
+		    amNames: ['a.m.', 'AM', 'A'],
+		    pmNames: ['p.m.', 'PM', 'P'],
+		    isRTL: false
 		};
 		this._defaults = { // Global defaults for all the datetime picker instances
 			showButtonPanel: true,

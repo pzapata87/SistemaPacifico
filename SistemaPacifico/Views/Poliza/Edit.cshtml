@@ -1,0 +1,126 @@
+﻿@using SistemaPacifico.Core
+@model SistemaPacifico.Models.PolizaModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <hr />
+    <div role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#datSolicitante" aria-controls="datSolicitante" role="tab" data-toggle="tab">Datos del Solicitante</a></li>
+            <li role="presentation"><a href="#datSeguro" aria-controls="datSeguro" role="tab" data-toggle="tab">Datos del Seguro</a></li>
+            <li role="presentation"><a href="#decBeneficiarios" aria-controls="decBeneficiarios" role="tab" data-toggle="tab">Declaración de Beneficiarios</a></li>
+            <li role="presentation"><a href="#datSalud" aria-controls="datSalud" role="tab" data-toggle="tab">Datos de Salud</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="datSolicitante">
+                <br/>
+                <table style="width: 85%" class="fondo" align="center">
+                    <tr>
+                        <td>
+                            <label class="control-label col-md-4" for="NumSolicitud">Número Solicitud:</label>
+                            @Html.TextBoxFor(model => model.NumSolicitud, new { @class = "form-control", @readonly = "readonly" })
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="control-label col-md-4" for="DniCliente">Nº Documento:</label>
+                            @Html.TextBoxFor(model => model.DniCliente, new { @maxlength = 8, @class = ":required :alpha form-control", @style = "display: inline-block;" })
+                        </td>
+                        <td>
+                            <label class="control-label col-md-4" for="NombreCliente">Nombres:</label>
+                            @Html.TextBoxFor(model => model.NombreCliente, new { @maxlength = 25, @class = ":required :alpha form-control", @style = "display: inline-block;" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="control-label col-md-4" for="ApellidoPaternoCliente">Apellido Paterno:</label>
+                            @Html.TextBoxFor(model => model.ApellidoPaternoCliente, new { @maxlength = 25, @class = ":required :alpha form-control", @style = "display: inline-block;" })
+                        </td>
+                        <td>
+                            <label class="control-label col-md-4" for="ApellidoMaternoCliente">Apellido Materno:</label>
+                            @Html.TextBoxFor(model => model.ApellidoMaternoCliente, new { @maxlength = 25, @class = ":required :alpha form-control", @style = "display: inline-block;" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="control-label col-md-4" for="SexoCliente">Sexo:</label>
+                            @Html.RadioButtonFor(model => model.SexoCliente, "false") Femenino
+                            @Html.RadioButtonFor(model => model.SexoCliente, "true") Masculino
+                        </td>
+                        <td>
+                            <label class="control-label col-md-4" for="EstadoCivilCliente">Estado Civil:</label>
+                            @{
+                                var estadoCivilList = new List<Comun>
+                                {
+                                    new Comun { Nombre = "Soltero", Valor = "1" },
+                                    new Comun { Nombre = "Casado", Valor = "2" },
+                                    new Comun { Nombre = "Divorciado", Valor = "3" }
+                                };
+                            }
+                            @Html.DropDownListFor(model => model.EstadoCivilCliente, new SelectList(estadoCivilList, "Valor", "Nombre"), new { @class = "form-control" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="control-label col-md-4" for="FechaNacimientoCliente">Fecha Nacimiento:</label>
+                            @Html.TextBoxFor(model => model.FechaNacimientoCliente, new { @maxlength = 10, @class = ":required form-control", @style = "display: inline-block;" })
+                        </td>
+                        <td>
+                            <label class="control-label col-md-4" for="LugarNacimientoCliente">Lugar Nacimiento:</label>
+                            @Html.TextBoxFor(model => model.LugarNacimientoCliente, new { @maxlength = 25, @class = ":required :alpha form-control", @style = "display: inline-block;" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="control-label col-md-4" for="DireccionCliente">Direccion:</label>
+                            @Html.TextBoxFor(model => model.DireccionCliente, new { @maxlength = 25, @class = ":required :alpha form-control", @style = "display: inline-block;" })
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="datSeguro">
+                <br/>
+                <table style="width: 85%" class="fondo" align="center">
+                    <tr>
+                        <td>
+                            <label class="control-label col-md-4" for="CodTipoPlan">Tipo Plan:</label>
+                            @*@Html.DropDownListFor(model => model.CodTipoPlan, new SelectList(Model.TipoPlanList, "Valor", "Nombre"), new { @class = "form-control :required", @style = "display: inline-block" })*@
+                        </td>
+                        <td>
+                            <label class="control-label col-md-4" for="InicioVigencia">Inicio Vigencia:</label>
+                            @Html.TextBoxFor(model => model.InicioVigencia, new { @maxlength = 10, @class = ":required form-control", @style = "display: inline-block;" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="control-label col-md-4" for="CapitalAsegurado">Capital por Asegurar:</label>
+                            @Html.TextBoxFor(model => model.CapitalAsegurado, new { @maxlength = 10, @class = ":required form-control", @style = "display: inline-block;" })
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="decBeneficiarios">3</div>
+            <div role="tabpanel" class="tab-pane" id="datSalud">4</div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#FechaNacimientoCliente').datepicker({
+            option: $.datepicker.regional['es']
+        });
+    });
+</script>

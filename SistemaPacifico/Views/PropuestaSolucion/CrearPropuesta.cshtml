@@ -13,12 +13,12 @@
     </div>
 
     <div id="labelError" class="alert alert-danger">
-        <button type="button" class="close" data-dismiss="alert">×</button>
+        @*<button type="button" class="close" data-dismiss="alert">×</button>*@
         <strong>Error:</strong> Por favor valide los datos ingresados
     </div>
     
     <div id="labelErrorFecha" class="alert alert-danger">
-        <button type="button" class="close" data-dismiss="alert">×</button>
+        @*<button type="button" class="close" data-dismiss="alert">×</button>*@
         <strong>Error:</strong> El Prospecto debe tener entre 18 y 65 años.
     </div>
     
@@ -163,10 +163,10 @@
         });
 
         $('#btnCancelar').click(function () {
-            vURL = '@Url.Action("Index", "PropuestaSolucion")';
-            window.location = vURL;
+            var url = '@Url.Action("Index", "PropuestaSolucion")';
+            window.location = url;
         });
-        
+
         $('#FechaNacimiento').datepicker({
             changeMonth: true,
             changeYear: true,
@@ -198,32 +198,28 @@
     function round2Fixed(value) {
         return parseFloat(value).toFixed(2);
     }
-    
-    function _calculateAge(birthday) { // birthday is a date
+ 
+    function fnCalculaEdad(birthday) { // birthday is a date
+        //var dob = new Date(birthday);
+        //var today = new Date();
+        //var age = Math.floor((today - dob) / (365.25 * 24 * 60 * 60 * 1000));
+        ////alert(age + ' years old');
+        //return age;
         var ageDifMs = Date.now() - birthday.getTime();
         var ageDate = new Date(ageDifMs); // miliseconds from epoch
         return Math.abs(ageDate.getUTCFullYear() - 1970);
     }
 
 
-    function fnCalculaEdad(birthday) { // birthday is a date
-        var dob = new Date(birthday);
-        var today = new Date();
-        var age = Math.floor((today - dob) / (365.25 * 24 * 60 * 60 * 1000));
-        //alert(age + ' years old');
-        return age;
-    }
-
-
     function ValidarEdad() {
         $('#labelErrorFecha').hide();
-        var fechaNac = $("#FechaNacimiento").val();
-        var edad = fnCalculaEdad(new Date(fechaNac));
-        if (edad < 18 || edad > 65) {
+        var fechaNac = $("#FechaNacimiento").datepicker('getDate');
+        var edad = fnCalculaEdad(fechaNac);
+
+        if (isNaN(edad) || (edad < 18 || edad > 65)) {
             $('#labelErrorFecha').show();
         }
     }
-
 
     $("#CodigoProducto").change(function() { obtenerPlan(); });
     $("#FechaNacimiento").change(function() { ValidarEdad(); });
@@ -289,7 +285,7 @@
     function GenerarPropuesta() {
         var montoAsegurado = $("#MontoAsegurado").val();
         
-        var edad = _calculateAge($("#FechaNacimiento").datepicker('getDate'));
+        var edad = fnCalculaEdad($("#FechaNacimiento").datepicker('getDate'));
 
         var request = $.ajax({
             url: "/PacificoService/ObtenerDetalle",
@@ -353,10 +349,8 @@
             };
 
             Utils.Ajax(opcionesAjax, function (response) {
-                $("#divMsg").show();
-                setTimeout(function () {
-                    window.location.href = response;
-                }, 2000);
+                alert('Propuesta de solución registrada');
+                window.location.href = response;
             });
         }
     }

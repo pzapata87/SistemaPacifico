@@ -17,9 +17,6 @@ namespace Pacifico.DataAccess
         public Cliente()
         {
             this.Poliza = new HashSet<Poliza>();
-            this.Poliza1 = new HashSet<Poliza>();
-            this.Poliza2 = new HashSet<Poliza>();
-            this.Poliza3 = new HashSet<Poliza>();
             this.Sugerencia = new HashSet<Sugerencia>();
             this.Sugerencia1 = new HashSet<Sugerencia>();
         }
@@ -40,9 +37,6 @@ namespace Pacifico.DataAccess
         public string Tx_CargoTrabajo { get; set; }
     
         public virtual ICollection<Poliza> Poliza { get; set; }
-        public virtual ICollection<Poliza> Poliza1 { get; set; }
-        public virtual ICollection<Poliza> Poliza2 { get; set; }
-        public virtual ICollection<Poliza> Poliza3 { get; set; }
         public virtual ICollection<Sugerencia> Sugerencia { get; set; }
         public virtual ICollection<Sugerencia> Sugerencia1 { get; set; }
     }

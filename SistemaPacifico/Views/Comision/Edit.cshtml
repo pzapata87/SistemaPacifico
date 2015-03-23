@@ -7,14 +7,6 @@
 @section Content
 {
     <link href="@Url.Content("~/Scripts/Select2/select2.min.css")" rel="stylesheet" type="text/css" />
-    <style type="text/css">
-        .select2-container--default.select2-container--focus .select2-selection--multiple {
-            border-color: #66afe9;
-            outline: 0;
-            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6);
-            box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6);
-        }
-    </style>
 }
 
 <div class="container">
@@ -58,7 +50,7 @@
             <tr>
                 <td>
                     <label class="control-label col-md-4" for="RequisitoListSelected">Requisitos:</label>
-                    @Html.ListBoxFor(model => model.RequisitoListSelected, new SelectList(Model.RequisitoList, "Valor", "Nombre"), new { @class = "form-control" })
+                    @Html.ListBoxFor(model => model.RequisitoListSelected, new SelectList(Model.RequisitoList, "Valor", "Nombre"), new { @multiple="multiple", @class = "form-control" })
                 </td>
             </tr>
             <tr>
@@ -98,8 +90,8 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <a title="Eliminar" class="btn btn-danger btn-sm btnEliminarFila"><i class="glyphicon glyphicon-remove"></i></a>
-                                        &nbsp;<a title="Editar" class="btn btn-primary btn-sm btnEditarFila"><i class="glyphicon glyphicon-pencil"></i></a>
+                                        <a title="Eliminar" class="btn btn-danger btn-sm btnEliminarFila"><i class="glyphicon glyphicon-remove"></i>Quitar</a>
+                                        &nbsp;<a title="Editar" class="btn btn-primary btn-sm btnEditarFila"><i class="glyphicon glyphicon-pencil"></i>Editar</a>
                                     </td>
                                 </tr>
                             }
@@ -122,7 +114,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <a href="#" id="btnAgregarFila" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-plus"></i></a>
+                                    <a href="#" id="btnAgregarFila" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-plus"></i>Agregar</a>
                                 </td>
                             </tr>
                         </tfoot>
@@ -133,7 +125,7 @@
                 <td colspan="2" align="center">
                     <hr/>
                     <button id="btnGrabar" type="submit" class="btn btn-primary btn-sm">Grabar</button>
-                    <button type="reset" class="btn btn-primary btn-sm" onclick=" javascript:window.history.back(); ">Cancelar</button>
+                    <input id="btnCancelar" type="button" value="Cancelar" class="btn btn-primary btn-sm" />
                 </td>
             </tr>
         </table>
@@ -142,22 +134,14 @@
 
 @section Scripts {
     <script src="@Url.Content("~/Scripts/Select2/select2.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/Select2/es.js")"></script>
     <script src="@Url.Content("~/Scripts/mustache.js")" type="text/javascript"></script>
 }
 
 <script type="text/javascript">
     $(document).ready(function () {
-        //$("#RequisitoListSelected").multiselect({
-        //    checkAllText: 'Marcar Todas',
-        //    uncheckAllText: 'Desmarque Todas',
-        //    noneSelectedText: 'Seleccione',
-        //    selectedText: 'Seleccionados',
-        //    height: 200
-        //});
-
         $('#RequisitoListSelected').select2({
-            tags: true,
-            tokenSeparators: [',', ' ']
+            language: "es"
         });
 
         $('#btnGrabar').click(function (e) {
@@ -170,12 +154,12 @@
                 var minimo = $("#txtMinimo").val();
                 var maximo = $("#txtMaximo").val();
                 var comision = $("#txtComision").val();
-                
+
                 if (minimo != '' && maximo != '' && comision != '') {
                     minimo = minimo * 1;
                     maximo = maximo * 1;
                     comision = comision * 1;
-                    
+
                     if (comision <= 0 || comision > 100) {
                         MostrarError('El Porcentaje Comisión debe estar entre 1 y 100');
                     }
@@ -206,8 +190,8 @@
                                 '</div>' +
                                 '</td>' +
                                 '<td>' +
-                                '<a title="Eliminar" class="btn btn-danger btn-sm btnEliminarFila"><i class="glyphicon glyphicon-remove"></i></a>' +
-                                '&nbsp;<a title="Editar" class="btn btn-primary btn-sm btnEditarFila"><i class="glyphicon glyphicon-pencil"></i></a>' +
+                                '<a title="Eliminar" class="btn btn-danger btn-sm btnEliminarFila"><i class="glyphicon glyphicon-remove"></i>Quitar</a>' +
+                                '&nbsp;<a title="Editar" class="btn btn-primary btn-sm btnEditarFila"><i class="glyphicon glyphicon-pencil"></i>Editar</a>' +
                                 '</td>' +
                                 '</tr>';
 
@@ -237,6 +221,11 @@
             $(this).parents("tr").eq(0).remove();
         });
 
+        $('#btnCancelar').click(function () {
+            var url = '@Url.Action("Index", "Comision")';
+            window.location = url;
+        });
+
         $("#tblRangos").on("click", ".btnEditarFila", function() {
             var $tr = $(this).parents("tr").eq(0);
             var esEdit = $tr.data("edit");
@@ -254,7 +243,7 @@
                 var minimo = $tr.find(".tdMinimo input").val();
                 var maximo = $tr.find(".tdMaximo input").val();
                 var comision = $tr.find(".tdComision input").val();
-                
+
                 if (minimo != '' && maximo != '' && comision != '') {
                     minimo = minimo * 1;
                     maximo = maximo * 1;
@@ -278,20 +267,11 @@
                 }
             }
         });
-
-        CargarDatosGrilla();
     });
-
-    function CargarDatosGrilla() {
-        var seleccionados = JSON.parse('@Html.Raw(Json.Encode(@Model.RangoList))');
-        $.each(seleccionados, function (index, item) {
-            modeloGrilla.addItem(item.Minimo, item.Maximo, item.Cantidad);
-        });
-    }
 
     function Guardar() {
         if ($("#frmModel").validate().form()) {
-            var list = $("#RequisitoListSelected").multiselect("widget").find("input:checked");
+            var list = $("#RequisitoListSelected").val();
 
             if (list.length == 0) {
                 MostrarError('Por seleccione al menos un Requisito');
@@ -300,8 +280,8 @@
 
             var rangos = ObtenerRangos();
 
-            if (rangos.length == 0) {
-                MostrarError('Por favor agrege Rangos de Comisión');
+            if (rangos.length < 3) {
+                MostrarError('Por favor agrege al menos 3 Rangos de Comisión');
                 return false;
             }
 
@@ -310,13 +290,9 @@
             comision.CampaniaId = $("#CampaniaId").val();
             comision.CanalVentaId = $("#CanalVentaId").val();
             comision.CargoId = $("#CargoId").val();
-            comision.RequisitoListSelected = [];
+            comision.RequisitoListSelected = list;
             comision.RangoList = rangos;
             comision.CodigoComision = '@Model.CodigoComision';
-
-            for (var i = 0; i < list.length; i++) {
-                comision.RequisitoListSelected.push(list[i].value);
-            }
 
             var opcionesAjax = {
                 url: '@Url.Action(Model.Accion, "Comision", new { area = "" })',
@@ -325,11 +301,13 @@
                 }
             };
 
-            Utils.Ajax(opcionesAjax, function(response) {
-                $("#divMsg").show();
-                setTimeout(function() {
-                    window.location.href = response;
-                }, 2000);
+            Utils.Ajax(opcionesAjax, function (response) {
+                //$("#divMsg").show();
+                //setTimeout(function() {
+                //    window.location.href = response;
+                //}, 2000);
+                alert('Comisión registrada');
+                window.location.href = response;
             });
         } else {
             MostrarError('Por favor ingrese los datos requeridos');

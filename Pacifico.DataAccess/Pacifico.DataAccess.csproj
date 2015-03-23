@@ -182,6 +182,9 @@
     <Compile Include="Tema.cs">
       <DependentUpon>Pacifico.tt</DependentUpon>
     </Compile>
+    <Compile Include="TipoPlan.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
     <Compile Include="TipoVisita.cs">
       <DependentUpon>Pacifico.tt</DependentUpon>
     </Compile>

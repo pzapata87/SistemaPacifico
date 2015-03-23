@@ -167,6 +167,7 @@
     <Compile Include="Controllers\ComisionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PacificoServiceController.cs" />
+    <Compile Include="Controllers\PolizaController.cs" />
     <Compile Include="Controllers\PropuestaSolucionController.cs" />
     <Compile Include="Controllers\VisitaController.cs" />
     <Compile Include="Core\Comun.cs" />
@@ -179,6 +180,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ComisionModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\PolizaModel.cs" />
     <Compile Include="Models\PropuestaSolucionViewModel.cs" />
     <Compile Include="Models\RangoModel.cs" />
     <Compile Include="Models\VisitaModel.cs" />
@@ -215,7 +217,25 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\TemplateExcel\Template.xls" />
     <None Include="Properties\PublishProfiles\SistemaPacifico.pubxml" />
+    <Content Include="Scripts\images\datatables\desktop.ini" />
+    <Content Include="Scripts\images\datatables\Sorting icons.psd" />
+    <Content Include="Scripts\images\datatables\Thumbs.db" />
+    <Content Include="Scripts\DataTable\dataTables.es.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\DataTable\jquery.dataTables.min.js" />
+    <Content Include="Scripts\DataTable\style.datatables.css" />
+    <Content Include="Scripts\images\datatables\back_disabled.png" />
+    <Content Include="Scripts\images\datatables\back_enabled.png" />
+    <Content Include="Scripts\images\datatables\back_enabled_hover.png" />
+    <Content Include="Scripts\images\datatables\favicon.ico" />
+    <Content Include="Scripts\images\datatables\forward_disabled.png" />
+    <Content Include="Scripts\images\datatables\forward_enabled.png" />
+    <Content Include="Scripts\images\datatables\forward_enabled_hover.png" />
+    <Content Include="Scripts\images\datatables\sort_asc.png" />
+    <Content Include="Scripts\images\datatables\sort_asc_disabled.png" />
+    <Content Include="Scripts\images\datatables\sort_both.png" />
+    <Content Include="Scripts\images\datatables\sort_desc.png" />
+    <Content Include="Scripts\images\datatables\sort_desc_disabled.png" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -232,6 +252,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\datepicker-es.js" />
+    <Content Include="Scripts\Select2\es.js" />
     <Content Include="Scripts\Select2\select2.min.css" />
     <Content Include="Scripts\Select2\select2.min.js" />
     <Content Include="Scripts\TimePicker\jquery-ui-timepicker-addon.css" />
@@ -273,6 +294,8 @@
     <Content Include="Views\Visita\Index.cshtml" />
     <Content Include="Views\Visita\Edit.cshtml" />
     <Content Include="Views\Visita\Ver.cshtml" />
+    <Content Include="Views\Poliza\Index.cshtml" />
+    <Content Include="Views\Poliza\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

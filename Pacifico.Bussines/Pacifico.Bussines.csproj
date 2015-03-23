@@ -56,6 +56,7 @@
     <Compile Include="RequisitoBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropuestaSolucionBusiness.cs" />
+    <Compile Include="PolizaBusiness.cs" />
     <Compile Include="VisitaBusiness.cs" />
   </ItemGroup>
   <ItemGroup>

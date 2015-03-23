@@ -152,28 +152,35 @@ namespace SistemaPacifico.Controllers
                 comision.Cod_Cnl_Vta = model.CanalVentaId;
                 comision.Cod_Car = model.CargoId;
 
-                if (model.RequisitoListSelected != null)
+                while (comision.ComisionRequisito.Count != 0)
                 {
-                    foreach (var item in model.RequisitoListSelected)
-                    {
-                        comision.ComisionRequisito.Add(new ComisionRequisito
-                        {
-                            Cod_Req = item
-                        });
-                    }
+                    var item = comision.ComisionRequisito.ElementAt(0);
+                    comision.ComisionRequisito.Remove(item);
                 }
 
-                if (model.RangoList != null)
+                foreach (var item in model.RequisitoListSelected)
                 {
-                    foreach (var item in model.RangoList)
+                    comision.ComisionRequisito.Add(new ComisionRequisito
                     {
-                        comision.Rango.Add(new Rango
-                        {
-                            Ss_Max = item.Maximo,
-                            Ss_Min = item.Minimo,
-                            Qtd_Cant = item.Cantidad
-                        });
-                    }
+                        Cod_Req = item
+                    });
+                }
+
+                while (comision.Rango.Count != 0)
+                {
+                    var item = comision.Rango.ElementAt(0);
+                    _comisionBL.EliminarRango(item);
+                    //comision.Rango.Remove(item);
+                }
+
+                foreach (var item in model.RangoList)
+                {
+                    comision.Rango.Add(new Rango
+                    {
+                        Ss_Max = item.Maximo,
+                        Ss_Min = item.Minimo,
+                        Qtd_Cant = item.Cantidad
+                    });
                 }
 
                 _comisionBL.Update(comision);

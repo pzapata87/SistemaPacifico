@@ -1552,9 +1552,6 @@
           <Property Name="Tx_CentroTrabajo" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
           <Property Name="Tx_CargoTrabajo" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Poliza" Relationship="Self.FK__Poliza__Co_Clien__245D67DE" FromRole="Cliente" ToRole="Poliza" />
-          <NavigationProperty Name="Poliza1" Relationship="Self.FK__Poliza__Co_Clien__25518C17" FromRole="Cliente" ToRole="Poliza" />
-          <NavigationProperty Name="Poliza2" Relationship="Self.FK__Poliza__Co_Clien__571DF1D5" FromRole="Cliente" ToRole="Poliza" />
-          <NavigationProperty Name="Poliza3" Relationship="Self.FK__Poliza__Co_Clien__5812160E" FromRole="Cliente" ToRole="Poliza" />
           <NavigationProperty Name="Sugerencia" Relationship="Self.FK__Sugerenci__Co_Cl__2CF2ADDF" FromRole="Cliente" ToRole="Sugerencia" />
           <NavigationProperty Name="Sugerencia1" Relationship="Self.FK__Sugerenci__Co_Cl__6754599E" FromRole="Cliente" ToRole="Sugerencia" />
         </EntityType>
@@ -1749,9 +1746,6 @@
           <Property Name="Nu_Tarjeta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Fl_Estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Cliente" Relationship="Self.FK__Poliza__Co_Clien__245D67DE" FromRole="Poliza" ToRole="Cliente" />
-          <NavigationProperty Name="Cliente1" Relationship="Self.FK__Poliza__Co_Clien__25518C17" FromRole="Poliza" ToRole="Cliente" />
-          <NavigationProperty Name="Cliente2" Relationship="Self.FK__Poliza__Co_Clien__571DF1D5" FromRole="Poliza" ToRole="Cliente" />
-          <NavigationProperty Name="Cliente3" Relationship="Self.FK__Poliza__Co_Clien__5812160E" FromRole="Poliza" ToRole="Cliente" />
           <NavigationProperty Name="Reclamo_Poliza" Relationship="Self.FK__Reclamo_P__Co_Po__2A164134" FromRole="Poliza" ToRole="Reclamo_Poliza" />
           <NavigationProperty Name="Reclamo_Poliza1" Relationship="Self.FK__Reclamo_P__Co_Po__5EBF139D" FromRole="Poliza" ToRole="Reclamo_Poliza" />
         </EntityType>
@@ -2141,42 +2135,6 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Poliza__Co_Clien__245D67DE">
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
-          <End Role="Poliza" Type="Self.Poliza" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="Co_Cliente" />
-            </Principal>
-            <Dependent Role="Poliza">
-              <PropertyRef Name="Co_Cliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Poliza__Co_Clien__25518C17">
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
-          <End Role="Poliza" Type="Self.Poliza" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="Co_Cliente" />
-            </Principal>
-            <Dependent Role="Poliza">
-              <PropertyRef Name="Co_Cliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Poliza__Co_Clien__571DF1D5">
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
-          <End Role="Poliza" Type="Self.Poliza" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="Co_Cliente" />
-            </Principal>
-            <Dependent Role="Poliza">
-              <PropertyRef Name="Co_Cliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Poliza__Co_Clien__5812160E">
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
           <End Role="Poliza" Type="Self.Poliza" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2760,18 +2718,6 @@
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="Poliza" EntitySet="Poliza" />
           </AssociationSet>
-          <AssociationSet Name="FK__Poliza__Co_Clien__25518C17" Association="Self.FK__Poliza__Co_Clien__25518C17">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="Poliza" EntitySet="Poliza" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Poliza__Co_Clien__571DF1D5" Association="Self.FK__Poliza__Co_Clien__571DF1D5">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="Poliza" EntitySet="Poliza" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Poliza__Co_Clien__5812160E" Association="Self.FK__Poliza__Co_Clien__5812160E">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="Poliza" EntitySet="Poliza" />
-          </AssociationSet>
           <AssociationSet Name="FK__Sugerenci__Co_Cl__2CF2ADDF" Association="Self.FK__Sugerenci__Co_Cl__2CF2ADDF">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="Sugerencia" EntitySet="Sugerencia" />
@@ -2971,6 +2917,7 @@
             <End Role="Prospecto" EntitySet="Prospecto" />
             <End Role="Visita" EntitySet="Visita" />
           </AssociationSet>
+          <EntitySet Name="TipoPlan" EntityType="BDPacificoModel.TipoPlan" />
         </EntityContainer>
         <EntityType Name="ComisionRequisito" >
           <Key>
@@ -3087,6 +3034,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TipoPlan">
+          <Key>
+            <PropertyRef Name="Cod_Plan" />
+          </Key>
+          <Property Name="Cod_Plan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nro_Plan" Type="String" Nullable="false" MaxLength="50" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

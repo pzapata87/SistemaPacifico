@@ -6,13 +6,13 @@
 
 <div class="container">
     <hr />
-    @using (Html.BeginForm(Model.Accion, "Comision", FormMethod.Post, new { id = "frmModel" }))
+    @using (Html.BeginForm(Model.Accion, "Visita", FormMethod.Post, new { id = "frmModel" }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
 
         <div id="divMsg" class="alert alert-success" style="display: none">
-            <label id="lblMsg" style="font-weight: normal">Comisión registrada</label>
+            <label id="lblMsg" style="font-weight: normal">Visita registrada</label>
         </div>
 
         <div id="labelError" class="alert alert-danger" style="display: none">
@@ -66,7 +66,7 @@
                 <td colspan="3" align="center">
                     <hr/>
                     <button id="btnGrabar" type="submit" class="btn btn-primary btn-sm">Grabar</button>
-                    <button type="reset" class="btn btn-primary btn-sm" onclick=" javascript:window.history.back(); ">Cancelar</button>
+                    <input id="btnCancelar" type="button" value="Cancelar" class="btn btn-primary btn-sm" />
                 </td>
             </tr>
         </table>
@@ -89,13 +89,11 @@
             $("#FechaFinal").datepicker("option", "minDate", selectedDate);
         }
     });
-
-    //$('#FechaInicial').datepicker({
-    //    option: $.datepicker.regional['es'],
-    //    onClose: function(selectedDate) {
-    //        $("#FechaFinal").datepicker("option", "minDate", selectedDate);
-    //    }
-    //});
+    
+    $('#btnCancelar').click(function () {
+        var url = '@Url.Action("Index", "Visita")';
+        window.location = url;
+    });
 
     $('#FechaFinal').datetimepicker({
         option: $.datepicker.regional['es'],
@@ -124,10 +122,12 @@
                 };
 
                 Utils.Ajax(opcionesAjax, function(response) {
-                    $("#divMsg").show();
-                    setTimeout(function() {
-                        window.location.href = response;
-                    }, 2000);
+                    //$("#divMsg").show();
+                    //setTimeout(function() {
+                    //    window.location.href = response;
+                    //}, 2000);
+                    alert('Visita registrada');
+                    window.location.href = response;
                 });
             } else {
                 MostrarError('Por favor ingrese un número de DNI ya registrado');
