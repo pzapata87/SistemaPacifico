@@ -46,6 +46,8 @@
     <EntitySet Name="ComisionRequisito" EntityType="BDPacificoModel.Store.ComisionRequisito" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Visita" EntityType="BDPacificoModel.Store.Visita" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TipoVisita" EntityType="BDPacificoModel.Store.TipoVisita" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TipoPlan" EntityType="BDPacificoModel.Store.TipoPlan" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BeneficiarioSet" EntityType="BDPacificoModel.Store.BeneficiarioSet" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK__Sugerenci__Co_Ar__2BFE89A6" Association="BDPacificoModel.Store.FK__Sugerenci__Co_Ar__2BFE89A6">
       <End Role="Area" EntitySet="Area" />
       <End Role="Sugerencia" EntitySet="Sugerencia" />
@@ -71,18 +73,6 @@
       <End Role="Empleado" EntitySet="Empleado" />
     </AssociationSet>
     <AssociationSet Name="FK__Poliza__Co_Clien__245D67DE" Association="BDPacificoModel.Store.FK__Poliza__Co_Clien__245D67DE">
-      <End Role="Cliente" EntitySet="Cliente" />
-      <End Role="Poliza" EntitySet="Poliza" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Poliza__Co_Clien__25518C17" Association="BDPacificoModel.Store.FK__Poliza__Co_Clien__25518C17">
-      <End Role="Cliente" EntitySet="Cliente" />
-      <End Role="Poliza" EntitySet="Poliza" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Poliza__Co_Clien__571DF1D5" Association="BDPacificoModel.Store.FK__Poliza__Co_Clien__571DF1D5">
-      <End Role="Cliente" EntitySet="Cliente" />
-      <End Role="Poliza" EntitySet="Poliza" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Poliza__Co_Clien__5812160E" Association="BDPacificoModel.Store.FK__Poliza__Co_Clien__5812160E">
       <End Role="Cliente" EntitySet="Cliente" />
       <End Role="Poliza" EntitySet="Poliza" />
     </AssociationSet>
@@ -281,6 +271,14 @@
     <AssociationSet Name="ProspectoVisita" Association="BDPacificoModel.Store.ProspectoVisita">
       <End Role="Prospecto" EntitySet="Prospecto" />
       <End Role="Visita" EntitySet="Visita" />
+    </AssociationSet>
+    <AssociationSet Name="TipoPlanPoliza" Association="BDPacificoModel.Store.TipoPlanPoliza">
+      <End Role="TipoPlan" EntitySet="TipoPlan" />
+      <End Role="Poliza" EntitySet="Poliza" />
+    </AssociationSet>
+    <AssociationSet Name="PolizaBeneficiario" Association="BDPacificoModel.Store.PolizaBeneficiario">
+      <End Role="Poliza" EntitySet="Poliza" />
+      <End Role="Beneficiario" EntitySet="BeneficiarioSet" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Area">
@@ -489,6 +487,7 @@
     <Property Name="Tx_MarcaTarjeta" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="Nu_Tarjeta" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="Fl_Estado" Type="varchar" Nullable="true" MaxLength="1" />
+    <Property Name="Cod_Plan" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Prestadora">
     <Key>
@@ -775,6 +774,26 @@
     <Property Name="Cod_Tipo_Visita" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nro_Visita" Type="nvarchar" Nullable="false" MaxLength="20" />
   </EntityType>
+  <EntityType Name="TipoPlan">
+    <Key>
+      <PropertyRef Name="Cod_Plan" />
+    </Key>
+    <Property Name="Cod_Plan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nro_Plan" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="BeneficiarioSet">
+    <Key>
+      <PropertyRef Name="Cod_Benef" />
+    </Key>
+    <Property Name="Cod_Benef" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Num_DNI" Type="nvarchar" Nullable="false" MaxLength="8" />
+    <Property Name="Txt_Ape_Pat" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Txt_Nombre" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Txt_Ape_Mat" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Co_Poliza" Type="int" Nullable="false" />
+    <Property Name="Po_Cap_Aseg" Type="decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Fec_Nac" Type="datetime" Nullable="false" />
+  </EntityType>
   <Association Name="FK__Sugerenci__Co_Ar__2BFE89A6">
     <End Role="Area" Type="BDPacificoModel.Store.Area" Multiplicity="0..1" />
     <End Role="Sugerencia" Type="BDPacificoModel.Store.Sugerencia" Multiplicity="*" />
@@ -848,42 +867,6 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__Poliza__Co_Clien__245D67DE">
-    <End Role="Cliente" Type="BDPacificoModel.Store.Cliente" Multiplicity="0..1" />
-    <End Role="Poliza" Type="BDPacificoModel.Store.Poliza" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Cliente">
-        <PropertyRef Name="Co_Cliente" />
-      </Principal>
-      <Dependent Role="Poliza">
-        <PropertyRef Name="Co_Cliente" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Poliza__Co_Clien__25518C17">
-    <End Role="Cliente" Type="BDPacificoModel.Store.Cliente" Multiplicity="0..1" />
-    <End Role="Poliza" Type="BDPacificoModel.Store.Poliza" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Cliente">
-        <PropertyRef Name="Co_Cliente" />
-      </Principal>
-      <Dependent Role="Poliza">
-        <PropertyRef Name="Co_Cliente" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Poliza__Co_Clien__571DF1D5">
-    <End Role="Cliente" Type="BDPacificoModel.Store.Cliente" Multiplicity="0..1" />
-    <End Role="Poliza" Type="BDPacificoModel.Store.Poliza" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Cliente">
-        <PropertyRef Name="Co_Cliente" />
-      </Principal>
-      <Dependent Role="Poliza">
-        <PropertyRef Name="Co_Cliente" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Poliza__Co_Clien__5812160E">
     <End Role="Cliente" Type="BDPacificoModel.Store.Cliente" Multiplicity="0..1" />
     <End Role="Poliza" Type="BDPacificoModel.Store.Poliza" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1485,6 +1468,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="TipoPlanPoliza">
+    <End Role="TipoPlan" Type="BDPacificoModel.Store.TipoPlan" Multiplicity="1" />
+    <End Role="Poliza" Type="BDPacificoModel.Store.Poliza" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoPlan">
+        <PropertyRef Name="Cod_Plan" />
+      </Principal>
+      <Dependent Role="Poliza">
+        <PropertyRef Name="Cod_Plan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PolizaBeneficiario">
+    <End Role="Poliza" Type="BDPacificoModel.Store.Poliza" Multiplicity="1" />
+    <End Role="Beneficiario" Type="BDPacificoModel.Store.BeneficiarioSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Poliza">
+        <PropertyRef Name="Co_Poliza" />
+      </Principal>
+      <Dependent Role="Beneficiario">
+        <PropertyRef Name="Co_Poliza" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -1748,6 +1755,9 @@
           <NavigationProperty Name="Cliente" Relationship="Self.FK__Poliza__Co_Clien__245D67DE" FromRole="Poliza" ToRole="Cliente" />
           <NavigationProperty Name="Reclamo_Poliza" Relationship="Self.FK__Reclamo_P__Co_Po__2A164134" FromRole="Poliza" ToRole="Reclamo_Poliza" />
           <NavigationProperty Name="Reclamo_Poliza1" Relationship="Self.FK__Reclamo_P__Co_Po__5EBF139D" FromRole="Poliza" ToRole="Reclamo_Poliza" />
+          <NavigationProperty Name="TipoPlan" Relationship="BDPacificoModel.TipoPlanPoliza" FromRole="Poliza" ToRole="TipoPlan" />
+          <Property Name="Cod_Plan" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Beneficiario" Relationship="BDPacificoModel.PolizaBeneficiario" FromRole="Poliza" ToRole="Beneficiario" />
         </EntityType>
         <EntityType Name="Prestadora">
           <Key>
@@ -2918,6 +2928,15 @@
             <End Role="Visita" EntitySet="Visita" />
           </AssociationSet>
           <EntitySet Name="TipoPlan" EntityType="BDPacificoModel.TipoPlan" />
+          <AssociationSet Name="TipoPlanPoliza" Association="BDPacificoModel.TipoPlanPoliza">
+            <End Role="TipoPlan" EntitySet="TipoPlan" />
+            <End Role="Poliza" EntitySet="Poliza" />
+          </AssociationSet>
+          <EntitySet Name="BeneficiarioSet" EntityType="BDPacificoModel.Beneficiario" />
+          <AssociationSet Name="PolizaBeneficiario" Association="BDPacificoModel.PolizaBeneficiario">
+            <End Role="Poliza" EntitySet="Poliza" />
+            <End Role="Beneficiario" EntitySet="BeneficiarioSet" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ComisionRequisito" >
           <Key>
@@ -3040,7 +3059,46 @@
           </Key>
           <Property Name="Cod_Plan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nro_Plan" Type="String" Nullable="false" MaxLength="50" />
+          <NavigationProperty Name="Poliza" Relationship="BDPacificoModel.TipoPlanPoliza" FromRole="TipoPlan" ToRole="Poliza" />
         </EntityType>
+        <Association Name="TipoPlanPoliza">
+          <End Type="BDPacificoModel.TipoPlan" Role="TipoPlan" Multiplicity="1" />
+          <End Type="BDPacificoModel.Poliza" Role="Poliza" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoPlan">
+              <PropertyRef Name="Cod_Plan" />
+            </Principal>
+            <Dependent Role="Poliza">
+              <PropertyRef Name="Cod_Plan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Beneficiario">
+          <Key>
+            <PropertyRef Name="Cod_Benef" />
+          </Key>
+          <Property Name="Cod_Benef" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Num_DNI" Type="String" Nullable="false" MaxLength="8" />
+          <Property Name="Txt_Ape_Pat" Type="String" Nullable="false" MaxLength="50" />
+          <Property Name="Txt_Nombre" Type="String" Nullable="false" MaxLength="50" />
+          <Property Name="Txt_Ape_Mat" Type="String" Nullable="false" MaxLength="50" />
+          <NavigationProperty Name="Poliza" Relationship="BDPacificoModel.PolizaBeneficiario" FromRole="Beneficiario" ToRole="Poliza" />
+          <Property Name="Co_Poliza" Type="Int32" Nullable="false" />
+          <Property Name="Po_Cap_Aseg" Type="Decimal" Nullable="false" Scale="2" Precision="6" />
+          <Property Name="Fec_Nac" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <Association Name="PolizaBeneficiario">
+          <End Type="BDPacificoModel.Poliza" Role="Poliza" Multiplicity="1" />
+          <End Type="BDPacificoModel.Beneficiario" Role="Beneficiario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poliza">
+              <PropertyRef Name="Co_Poliza" />
+            </Principal>
+            <Dependent Role="Beneficiario">
+              <PropertyRef Name="Co_Poliza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3266,6 +3324,7 @@
           <ScalarProperty Name="Tx_MarcaTarjeta" ColumnName="Tx_MarcaTarjeta" />
           <ScalarProperty Name="Nu_Tarjeta" ColumnName="Nu_Tarjeta" />
           <ScalarProperty Name="Fl_Estado" ColumnName="Fl_Estado" />
+          <ScalarProperty Name="Cod_Plan" ColumnName="Cod_Plan" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -3568,6 +3627,28 @@
         <MappingFragment StoreEntitySet="TipoVisita">
           <ScalarProperty Name="Cod_Tipo_Visita" ColumnName="Cod_Tipo_Visita" />
           <ScalarProperty Name="Nro_Visita" ColumnName="Nro_Visita" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoPlan">
+      <EntityTypeMapping TypeName="IsTypeOf(BDPacificoModel.TipoPlan)">
+        <MappingFragment StoreEntitySet="TipoPlan">
+          <ScalarProperty Name="Cod_Plan" ColumnName="Cod_Plan" />
+          <ScalarProperty Name="Nro_Plan" ColumnName="Nro_Plan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BeneficiarioSet">
+      <EntityTypeMapping TypeName="IsTypeOf(BDPacificoModel.Beneficiario)">
+        <MappingFragment StoreEntitySet="BeneficiarioSet">
+          <ScalarProperty Name="Cod_Benef" ColumnName="Cod_Benef" />
+          <ScalarProperty Name="Num_DNI" ColumnName="Num_DNI" />
+          <ScalarProperty Name="Txt_Ape_Pat" ColumnName="Txt_Ape_Pat" />
+          <ScalarProperty Name="Txt_Nombre" ColumnName="Txt_Nombre" />
+          <ScalarProperty Name="Txt_Ape_Mat" ColumnName="Txt_Ape_Mat" />
+          <ScalarProperty Name="Co_Poliza" ColumnName="Co_Poliza" />
+          <ScalarProperty Name="Po_Cap_Aseg" ColumnName="Po_Cap_Aseg" />
+          <ScalarProperty Name="Fec_Nac" ColumnName="Fec_Nac" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

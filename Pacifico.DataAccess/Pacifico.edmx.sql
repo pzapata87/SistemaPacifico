@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/17/2015 02:48:42
--- Generated from EDMX file: D:\Proyectos\Academico - Servicio Web\SistemaPacifico(2)\SistemaPacifico\Pacifico.DataAccess\Pacifico.edmx
+-- Date Created: 03/23/2015 18:11:14
+-- Generated from EDMX file: D:\Proyectos\Desarrollo - Aplicacion Academica\Desarrollo\SistemaPacifico\Pacifico.DataAccess\Pacifico.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -37,15 +37,6 @@ IF OBJECT_ID(N'[dbo].[FK_EMPLEADO_CARGO]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK__Poliza__Co_Clien__245D67DE]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Poliza] DROP CONSTRAINT [FK__Poliza__Co_Clien__245D67DE];
-GO
-IF OBJECT_ID(N'[dbo].[FK__Poliza__Co_Clien__25518C17]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Poliza] DROP CONSTRAINT [FK__Poliza__Co_Clien__25518C17];
-GO
-IF OBJECT_ID(N'[dbo].[FK__Poliza__Co_Clien__571DF1D5]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Poliza] DROP CONSTRAINT [FK__Poliza__Co_Clien__571DF1D5];
-GO
-IF OBJECT_ID(N'[dbo].[FK__Poliza__Co_Clien__5812160E]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Poliza] DROP CONSTRAINT [FK__Poliza__Co_Clien__5812160E];
 GO
 IF OBJECT_ID(N'[dbo].[FK__Sugerenci__Co_Cl__2CF2ADDF]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Sugerencia] DROP CONSTRAINT [FK__Sugerenci__Co_Cl__2CF2ADDF];
@@ -194,6 +185,12 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ProspectoVisita]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Visita] DROP CONSTRAINT [FK_ProspectoVisita];
 GO
+IF OBJECT_ID(N'[dbo].[FK_TipoPlanPoliza]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Poliza] DROP CONSTRAINT [FK_TipoPlanPoliza];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PolizaBeneficiario]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[BeneficiarioSet] DROP CONSTRAINT [FK_PolizaBeneficiario];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -318,6 +315,12 @@ IF OBJECT_ID(N'[dbo].[Visita]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[TipoVisita]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TipoVisita];
+GO
+IF OBJECT_ID(N'[dbo].[TipoPlan]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TipoPlan];
+GO
+IF OBJECT_ID(N'[dbo].[BeneficiarioSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[BeneficiarioSet];
 GO
 
 -- --------------------------------------------------
@@ -524,7 +527,8 @@ CREATE TABLE [dbo].[Poliza] (
     [Tx_TipoPago] varchar(20)  NULL,
     [Tx_MarcaTarjeta] varchar(20)  NULL,
     [Nu_Tarjeta] varchar(20)  NULL,
-    [Fl_Estado] varchar(1)  NULL
+    [Fl_Estado] varchar(1)  NULL,
+    [Cod_Plan] int  NOT NULL
 );
 GO
 
@@ -808,6 +812,26 @@ CREATE TABLE [dbo].[TipoVisita] (
 );
 GO
 
+-- Creating table 'TipoPlan'
+CREATE TABLE [dbo].[TipoPlan] (
+    [Cod_Plan] int IDENTITY(1,1) NOT NULL,
+    [Nro_Plan] nvarchar(50)  NOT NULL
+);
+GO
+
+-- Creating table 'BeneficiarioSet'
+CREATE TABLE [dbo].[BeneficiarioSet] (
+    [Cod_Benef] int IDENTITY(1,1) NOT NULL,
+    [Num_DNI] nvarchar(8)  NOT NULL,
+    [Txt_Ape_Pat] nvarchar(50)  NOT NULL,
+    [Txt_Nombre] nvarchar(50)  NOT NULL,
+    [Txt_Ape_Mat] nvarchar(50)  NOT NULL,
+    [Co_Poliza] int  NOT NULL,
+    [Po_Cap_Aseg] decimal(6,2)  NOT NULL,
+    [Fec_Nac] datetime  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -1052,6 +1076,18 @@ ADD CONSTRAINT [PK_TipoVisita]
     PRIMARY KEY CLUSTERED ([Cod_Tipo_Visita] ASC);
 GO
 
+-- Creating primary key on [Cod_Plan] in table 'TipoPlan'
+ALTER TABLE [dbo].[TipoPlan]
+ADD CONSTRAINT [PK_TipoPlan]
+    PRIMARY KEY CLUSTERED ([Cod_Plan] ASC);
+GO
+
+-- Creating primary key on [Cod_Benef] in table 'BeneficiarioSet'
+ALTER TABLE [dbo].[BeneficiarioSet]
+ADD CONSTRAINT [PK_BeneficiarioSet]
+    PRIMARY KEY CLUSTERED ([Cod_Benef] ASC);
+GO
+
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
@@ -1157,51 +1193,6 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK__Poliza__Co_Clien__245D67DE'
 CREATE INDEX [IX_FK__Poliza__Co_Clien__245D67DE]
-ON [dbo].[Poliza]
-    ([Co_Cliente]);
-GO
-
--- Creating foreign key on [Co_Cliente] in table 'Poliza'
-ALTER TABLE [dbo].[Poliza]
-ADD CONSTRAINT [FK__Poliza__Co_Clien__25518C17]
-    FOREIGN KEY ([Co_Cliente])
-    REFERENCES [dbo].[Cliente]
-        ([Co_Cliente])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK__Poliza__Co_Clien__25518C17'
-CREATE INDEX [IX_FK__Poliza__Co_Clien__25518C17]
-ON [dbo].[Poliza]
-    ([Co_Cliente]);
-GO
-
--- Creating foreign key on [Co_Cliente] in table 'Poliza'
-ALTER TABLE [dbo].[Poliza]
-ADD CONSTRAINT [FK__Poliza__Co_Clien__571DF1D5]
-    FOREIGN KEY ([Co_Cliente])
-    REFERENCES [dbo].[Cliente]
-        ([Co_Cliente])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK__Poliza__Co_Clien__571DF1D5'
-CREATE INDEX [IX_FK__Poliza__Co_Clien__571DF1D5]
-ON [dbo].[Poliza]
-    ([Co_Cliente]);
-GO
-
--- Creating foreign key on [Co_Cliente] in table 'Poliza'
-ALTER TABLE [dbo].[Poliza]
-ADD CONSTRAINT [FK__Poliza__Co_Clien__5812160E]
-    FOREIGN KEY ([Co_Cliente])
-    REFERENCES [dbo].[Cliente]
-        ([Co_Cliente])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK__Poliza__Co_Clien__5812160E'
-CREATE INDEX [IX_FK__Poliza__Co_Clien__5812160E]
 ON [dbo].[Poliza]
     ([Co_Cliente]);
 GO
@@ -1933,6 +1924,36 @@ GO
 CREATE INDEX [IX_FK_ProspectoVisita]
 ON [dbo].[Visita]
     ([Cod_Pros]);
+GO
+
+-- Creating foreign key on [Cod_Plan] in table 'Poliza'
+ALTER TABLE [dbo].[Poliza]
+ADD CONSTRAINT [FK_TipoPlanPoliza]
+    FOREIGN KEY ([Cod_Plan])
+    REFERENCES [dbo].[TipoPlan]
+        ([Cod_Plan])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_TipoPlanPoliza'
+CREATE INDEX [IX_FK_TipoPlanPoliza]
+ON [dbo].[Poliza]
+    ([Cod_Plan]);
+GO
+
+-- Creating foreign key on [Co_Poliza] in table 'BeneficiarioSet'
+ALTER TABLE [dbo].[BeneficiarioSet]
+ADD CONSTRAINT [FK_PolizaBeneficiario]
+    FOREIGN KEY ([Co_Poliza])
+    REFERENCES [dbo].[Poliza]
+        ([Co_Poliza])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PolizaBeneficiario'
+CREATE INDEX [IX_FK_PolizaBeneficiario]
+ON [dbo].[BeneficiarioSet]
+    ([Co_Poliza]);
 GO
 
 -- --------------------------------------------------

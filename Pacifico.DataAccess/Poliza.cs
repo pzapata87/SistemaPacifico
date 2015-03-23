@@ -18,6 +18,7 @@ namespace Pacifico.DataAccess
         {
             this.Reclamo_Poliza = new HashSet<Reclamo_Poliza>();
             this.Reclamo_Poliza1 = new HashSet<Reclamo_Poliza>();
+            this.Beneficiario = new HashSet<Beneficiario>();
         }
     
         public int Co_Poliza { get; set; }
@@ -32,9 +33,12 @@ namespace Pacifico.DataAccess
         public string Tx_MarcaTarjeta { get; set; }
         public string Nu_Tarjeta { get; set; }
         public string Fl_Estado { get; set; }
+        public int Cod_Plan { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         public virtual ICollection<Reclamo_Poliza> Reclamo_Poliza { get; set; }
         public virtual ICollection<Reclamo_Poliza> Reclamo_Poliza1 { get; set; }
+        public virtual TipoPlan TipoPlan { get; set; }
+        public virtual ICollection<Beneficiario> Beneficiario { get; set; }
     }
 }

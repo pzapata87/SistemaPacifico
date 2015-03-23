@@ -12,16 +12,17 @@ namespace Pacifico.DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class TipoPlan
+    public partial class Beneficiario
     {
-        public TipoPlan()
-        {
-            this.Poliza = new HashSet<Poliza>();
-        }
+        public int Cod_Benef { get; set; }
+        public string Num_DNI { get; set; }
+        public string Txt_Ape_Pat { get; set; }
+        public string Txt_Nombre { get; set; }
+        public string Txt_Ape_Mat { get; set; }
+        public int Co_Poliza { get; set; }
+        public decimal Po_Cap_Aseg { get; set; }
+        public System.DateTime Fec_Nac { get; set; }
     
-        public int Cod_Plan { get; set; }
-        public string Nro_Plan { get; set; }
-    
-        public virtual ICollection<Poliza> Poliza { get; set; }
+        public virtual Poliza Poliza { get; set; }
     }
 }

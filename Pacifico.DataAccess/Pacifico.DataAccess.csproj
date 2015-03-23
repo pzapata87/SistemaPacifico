@@ -55,6 +55,9 @@
     <Compile Include="Area.cs">
       <DependentUpon>Pacifico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Beneficiario.cs">
+      <DependentUpon>Pacifico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Campania.cs">
       <DependentUpon>Pacifico.tt</DependentUpon>
     </Compile>

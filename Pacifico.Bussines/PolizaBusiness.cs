@@ -40,6 +40,11 @@ namespace Pacifico.Bussines
             return query.OrderByDescending(p => p.Co_Poliza).ToList();
         }
 
+        public IList<TipoPlan> TipoPlanAll()
+        {
+            return _db.TipoPlan.ToList();
+        }
+
         public Poliza Get(int id)
         {
             return _db.Poliza.Find(id);
