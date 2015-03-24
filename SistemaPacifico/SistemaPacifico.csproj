@@ -219,7 +219,6 @@
     <None Include="Properties\PublishProfiles\SistemaPacifico.pubxml" />
     <Content Include="Scripts\images\datatables\desktop.ini" />
     <Content Include="Scripts\images\datatables\Sorting icons.psd" />
-    <Content Include="Scripts\images\datatables\Thumbs.db" />
     <Content Include="Scripts\DataTable\dataTables.es.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTable\jquery.dataTables.min.js" />

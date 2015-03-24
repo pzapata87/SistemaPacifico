@@ -34,9 +34,10 @@ namespace SistemaPacifico.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(string fechaIni, string fechaFin, string dniProspecto, string nombreProspecto)
+        public ActionResult Index(string numSolicitud, string fechaIngreso, string monto)
         {
-            return View();
+            var list = new List<PolizaModel>();
+            return View(list);
         }
 
         public ActionResult CrearPoliza()
