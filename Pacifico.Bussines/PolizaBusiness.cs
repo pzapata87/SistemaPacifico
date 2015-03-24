@@ -45,6 +45,11 @@ namespace Pacifico.Bussines
             return _db.TipoPlan.ToList();
         }
 
+        public IList<TipoPoliza> TipoPolizaAll()
+        {
+            return _db.TipoPoliza.ToList();
+        }
+
         public Poliza Get(int id)
         {
             return _db.Poliza.Find(id);

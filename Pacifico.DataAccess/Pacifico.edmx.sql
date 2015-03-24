@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/23/2015 18:11:14
--- Generated from EDMX file: D:\Proyectos\Desarrollo - Aplicacion Academica\Desarrollo\SistemaPacifico\Pacifico.DataAccess\Pacifico.edmx
+-- Date Created: 03/24/2015 03:39:04
+-- Generated from EDMX file: D:\Proyectos\Academico - Servicio Web\SistemaPacifico(2)\SistemaPacifico\Pacifico.DataAccess\Pacifico.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -322,6 +322,9 @@ GO
 IF OBJECT_ID(N'[dbo].[BeneficiarioSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[BeneficiarioSet];
 GO
+IF OBJECT_ID(N'[dbo].[TipoPoliza]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TipoPoliza];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -368,16 +371,17 @@ CREATE TABLE [dbo].[Cliente] (
     [No_Cliente] varchar(80)  NULL,
     [No_ApePaterno] varchar(80)  NULL,
     [No_ApeMaterno] varchar(80)  NULL,
-    [Fi_Sexo] varchar(1)  NULL,
+    [Fi_Sexo] bit  NULL,
     [Nu_DNI] varchar(8)  NULL,
     [Fe_Nacimiento] datetime  NULL,
     [Nu_Telefono] varchar(20)  NULL,
     [Nu_Movil] varchar(20)  NULL,
     [Tx_Direccion] varchar(20)  NULL,
     [Tx_Correo] varchar(30)  NULL,
-    [Fi_Estado] varchar(1)  NULL,
+    [Fi_EstadoCivil] nvarchar(10)  NULL,
     [Tx_CentroTrabajo] varchar(80)  NULL,
-    [Tx_CargoTrabajo] varchar(80)  NULL
+    [Tx_CargoTrabajo] varchar(80)  NULL,
+    [Tx_LugarNacimiento] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -519,7 +523,6 @@ CREATE TABLE [dbo].[Poliza] (
     [Co_Poliza] int  NOT NULL,
     [Nu_Poliza] varchar(20)  NULL,
     [Co_Cliente] int  NULL,
-    [SS_Prima] decimal(12,2)  NULL,
     [Fe_Creacion] datetime  NULL,
     [Fe_Renovacion] datetime  NULL,
     [Fe_InicioVigencia] datetime  NULL,
@@ -528,7 +531,30 @@ CREATE TABLE [dbo].[Poliza] (
     [Tx_MarcaTarjeta] varchar(20)  NULL,
     [Nu_Tarjeta] varchar(20)  NULL,
     [Fl_Estado] varchar(1)  NULL,
-    [Cod_Plan] int  NOT NULL
+    [Cod_Plan] int  NOT NULL,
+    [Cap_Asegurado] decimal(8,2)  NOT NULL,
+    [Ocupacion] nvarchar(max)  NOT NULL,
+    [Actividad] nvarchar(max)  NOT NULL,
+    [LugarTrabajo] nvarchar(max)  NOT NULL,
+    [IngresoMensual] nvarchar(max)  NOT NULL,
+    [Horario] nvarchar(max)  NOT NULL,
+    [ExpuestoAPeligro] nvarchar(max)  NOT NULL,
+    [MedioTransporte] nvarchar(max)  NOT NULL,
+    [FrecuenciaViaje] nvarchar(max)  NOT NULL,
+    [DeporteAficion] nvarchar(max)  NOT NULL,
+    [RiesgoAccidente] nvarchar(max)  NOT NULL,
+    [CoberturaRiego] nvarchar(max)  NOT NULL,
+    [Estatura] nvarchar(max)  NOT NULL,
+    [Peso] nvarchar(max)  NOT NULL,
+    [ConsumeTabaco] bit  NOT NULL,
+    [ConsumeAlcohol] bit  NOT NULL,
+    [InsuficienciaRenal] bit  NOT NULL,
+    [Diabetes] bit  NOT NULL,
+    [Cancer] bit  NOT NULL,
+    [Epilepsia] bit  NOT NULL,
+    [AfeccionCardiaca] bit  NOT NULL,
+    [HipertensionArterial] bit  NOT NULL,
+    [TranstornoMental] bit  NOT NULL
 );
 GO
 
@@ -832,6 +858,13 @@ CREATE TABLE [dbo].[BeneficiarioSet] (
 );
 GO
 
+-- Creating table 'TipoPoliza'
+CREATE TABLE [dbo].[TipoPoliza] (
+    [Cod_Poliza] int IDENTITY(1,1) NOT NULL,
+    [Nro_Plan] nvarchar(50)  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -1086,6 +1119,12 @@ GO
 ALTER TABLE [dbo].[BeneficiarioSet]
 ADD CONSTRAINT [PK_BeneficiarioSet]
     PRIMARY KEY CLUSTERED ([Cod_Benef] ASC);
+GO
+
+-- Creating primary key on [Cod_Poliza] in table 'TipoPoliza'
+ALTER TABLE [dbo].[TipoPoliza]
+ADD CONSTRAINT [PK_TipoPoliza]
+    PRIMARY KEY CLUSTERED ([Cod_Poliza] ASC);
 GO
 
 -- --------------------------------------------------

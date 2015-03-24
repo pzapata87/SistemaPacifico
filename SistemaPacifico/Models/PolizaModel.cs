@@ -7,9 +7,8 @@ namespace SistemaPacifico.Models
     public class PolizaModel
     {
         public int CodPoliza { get; set; }
-        public int NumSolicitud { get; set; }
+        public string NumSolicitud { get; set; }
         public int CodCliente { get; set; }
-        public decimal Monto { get; set; }
         public string DniCliente { get; set; }
         public string NombreCliente { get; set; }
         public string ApellidoPaternoCliente { get; set; }
@@ -19,7 +18,7 @@ namespace SistemaPacifico.Models
         public string LugarNacimientoCliente { get; set; }
         public string DireccionCliente { get; set; }
         public bool SexoCliente { get; set; }
-        public bool EstadoCivilCliente { get; set; }
+        public string EstadoCivilCliente { get; set; }
         public string FechaIngreso { get; set; }
         public string InicioVigencia { get; set; }
         public decimal CapitalAsegurado { get; set; }
@@ -61,5 +60,6 @@ namespace SistemaPacifico.Models
         public string Accion { get; set; }
 
         public virtual List<Comun> TipoPlanList { get; set; }
+        public virtual List<Comun> TipoPolizaList { get; set; }
     }
 }

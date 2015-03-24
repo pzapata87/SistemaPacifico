@@ -67,5 +67,6 @@ namespace Pacifico.DataAccess
         public virtual DbSet<TipoVisita> TipoVisita { get; set; }
         public virtual DbSet<TipoPlan> TipoPlan { get; set; }
         public virtual DbSet<Beneficiario> BeneficiarioSet { get; set; }
+        public virtual DbSet<TipoPoliza> TipoPoliza { get; set; }
     }
 }

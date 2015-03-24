@@ -105,6 +105,7 @@
         <AssociationConnector Association="BDPacificoModel.TipoPlanPoliza" />
         <EntityTypeShape EntityType="BDPacificoModel.Beneficiario" Width="1.5" PointX="12.75" PointY="36.75" />
         <AssociationConnector Association="BDPacificoModel.PolizaBeneficiario" />
+        <EntityTypeShape EntityType="BDPacificoModel.TipoPoliza" Width="1.5" PointX="14.25" PointY="33.25" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
