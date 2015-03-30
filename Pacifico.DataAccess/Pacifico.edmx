@@ -1582,13 +1582,13 @@
           <Property Name="Fi_Sexo" Type="Boolean" />
           <Property Name="Nu_DNI" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="Fe_Nacimiento" Type="DateTime" Precision="3" />
-          <Property Name="Nu_Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Nu_Movil" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Nu_Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Name="Nu_Movil" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="true" />
           <Property Name="Tx_Direccion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Tx_Correo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Tx_Correo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="true" />
           <Property Name="Fi_EstadoCivil" Type="String" MaxLength="10" />
-          <Property Name="Tx_CentroTrabajo" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
-          <Property Name="Tx_CargoTrabajo" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Tx_CentroTrabajo" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Name="Tx_CargoTrabajo" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="true" />
           <NavigationProperty Name="Poliza" Relationship="Self.FK__Poliza__Co_Clien__245D67DE" FromRole="Cliente" ToRole="Poliza" />
           <NavigationProperty Name="Sugerencia" Relationship="Self.FK__Sugerenci__Co_Cl__2CF2ADDF" FromRole="Cliente" ToRole="Sugerencia" />
           <NavigationProperty Name="Sugerencia1" Relationship="Self.FK__Sugerenci__Co_Cl__6754599E" FromRole="Cliente" ToRole="Sugerencia" />

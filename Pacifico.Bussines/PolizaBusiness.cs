@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.Data.Entity.Validation;
 using System.Linq;
 using Pacifico.DataAccess;
 
@@ -64,6 +65,22 @@ namespace Pacifico.Bussines
                 _db.SaveChanges();
 
                 return poliza;
+            }
+            catch (DbEntityValidationException e)
+            {
+                string msg = string.Empty;
+
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    msg += string.Format("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        msg += string.Format("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw e;
             }
             catch (Exception ex)
             {

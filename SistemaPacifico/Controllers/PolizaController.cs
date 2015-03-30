@@ -42,9 +42,12 @@ namespace SistemaPacifico.Controllers
 
         public ActionResult CrearPoliza()
         {
+             var cont = _polizaBL.FindAll().Count() + 1;
+
             var model = new PolizaModel
             {
                 Accion = "CrearPoliza",
+                NumSolicitud = string.Format("{0} - {1:0000}", DateTime.Today.Year, cont),
                 TipoPlanList = GetTipoPlanList()
             };
 
@@ -82,11 +85,11 @@ namespace SistemaPacifico.Controllers
                     Fe_Nacimiento = Convert.ToDateTime(model.FechaNacimientoCliente),
                     Tx_LugarNacimiento = model.LugarNacimientoCliente,
                     Tx_Direccion = model.DireccionCliente,
-                    Fi_Sexo = model.SexoCliente,
                     Fi_EstadoCivil = model.EstadoCivilCliente,
+                    Fi_Sexo = model.SexoCliente
                 };
 
-                var beneficiario = new List<Beneficiario>()
+                var beneficiario = new List<Beneficiario>
                 {
                     new Beneficiario
                     {
@@ -102,7 +105,7 @@ namespace SistemaPacifico.Controllers
                 var poliza = new Poliza
                 {
                     Nu_Poliza = model.NumSolicitud,
-                    Fe_Creacion = Convert.ToDateTime(model.FechaIngreso),
+                    Fe_Creacion = DateTime.Now,
                     Fe_InicioVigencia = Convert.ToDateTime(model.InicioVigencia),
                     Cap_Asegurado = model.CapitalAsegurado,
                     Cod_Plan = model.CodTipoPlan,
