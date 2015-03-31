@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/24/2015 12:20:01
--- Generated from EDMX file: D:\Proyectos\Desarrollo - Aplicacion Academica\Desarrollo\SistemaPacifico\Pacifico.DataAccess\Pacifico.edmx
+-- Date Created: 03/31/2015 02:18:55
+-- Generated from EDMX file: D:\Proyectos\Academico - Servicio Web\SistemaPacifico(2)\SistemaPacifico\Pacifico.DataAccess\Pacifico.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -189,7 +189,7 @@ IF OBJECT_ID(N'[dbo].[FK_TipoPlanPoliza]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Poliza] DROP CONSTRAINT [FK_TipoPlanPoliza];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PolizaBeneficiario]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[BeneficiarioSet] DROP CONSTRAINT [FK_PolizaBeneficiario];
+    ALTER TABLE [dbo].[Beneficiario] DROP CONSTRAINT [FK_PolizaBeneficiario];
 GO
 
 -- --------------------------------------------------
@@ -319,8 +319,11 @@ GO
 IF OBJECT_ID(N'[dbo].[TipoPlan]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TipoPlan];
 GO
-IF OBJECT_ID(N'[dbo].[BeneficiarioSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[BeneficiarioSet];
+IF OBJECT_ID(N'[dbo].[Beneficiario]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Beneficiario];
+GO
+IF OBJECT_ID(N'[dbo].[TipoPoliza]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TipoPoliza];
 GO
 
 -- --------------------------------------------------
@@ -364,20 +367,21 @@ GO
 
 -- Creating table 'Cliente'
 CREATE TABLE [dbo].[Cliente] (
-    [Co_Cliente] int  NOT NULL,
+    [Co_Cliente] int IDENTITY(1,1) NOT NULL,
     [No_Cliente] varchar(80)  NULL,
     [No_ApePaterno] varchar(80)  NULL,
     [No_ApeMaterno] varchar(80)  NULL,
-    [Fi_Sexo] varchar(1)  NULL,
+    [Fi_Sexo] bit  NULL,
     [Nu_DNI] varchar(8)  NULL,
-    [Fe_Nacimiento] datetime  NULL,
+    [Fe_Nacimiento] datetime  NOT NULL,
     [Nu_Telefono] varchar(20)  NULL,
     [Nu_Movil] varchar(20)  NULL,
     [Tx_Direccion] varchar(20)  NULL,
     [Tx_Correo] varchar(30)  NULL,
-    [Fi_Estado] varchar(1)  NULL,
+    [Fi_EstadoCivil] nvarchar(10)  NOT NULL,
     [Tx_CentroTrabajo] varchar(80)  NULL,
-    [Tx_CargoTrabajo] varchar(80)  NULL
+    [Tx_CargoTrabajo] varchar(80)  NULL,
+    [Tx_LugarNacimiento] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -516,19 +520,41 @@ GO
 
 -- Creating table 'Poliza'
 CREATE TABLE [dbo].[Poliza] (
-    [Co_Poliza] int  NOT NULL,
+    [Co_Poliza] int IDENTITY(1,1) NOT NULL,
     [Nu_Poliza] varchar(20)  NULL,
     [Co_Cliente] int  NULL,
-    [SS_Prima] decimal(12,2)  NULL,
-    [Fe_Creacion] datetime  NULL,
+    [Fe_Creacion] datetime  NOT NULL,
     [Fe_Renovacion] datetime  NULL,
-    [Fe_InicioVigencia] datetime  NULL,
+    [Fe_InicioVigencia] datetime  NOT NULL,
     [Fe_Vencimiento] datetime  NULL,
     [Tx_TipoPago] varchar(20)  NULL,
     [Tx_MarcaTarjeta] varchar(20)  NULL,
     [Nu_Tarjeta] varchar(20)  NULL,
     [Fl_Estado] varchar(1)  NULL,
-    [Cod_Plan] int  NOT NULL
+    [Cod_Plan] int  NOT NULL,
+    [Cap_Asegurado] decimal(8,2)  NOT NULL,
+    [Ocupacion] nvarchar(max)  NOT NULL,
+    [Actividad] nvarchar(max)  NOT NULL,
+    [LugarTrabajo] nvarchar(max)  NOT NULL,
+    [IngresoMensual] nvarchar(max)  NOT NULL,
+    [Horario] nvarchar(max)  NOT NULL,
+    [ExpuestoAPeligro] nvarchar(max)  NOT NULL,
+    [MedioTransporte] nvarchar(max)  NOT NULL,
+    [FrecuenciaViaje] nvarchar(max)  NOT NULL,
+    [DeporteAficion] nvarchar(max)  NOT NULL,
+    [RiesgoAccidente] nvarchar(max)  NOT NULL,
+    [CoberturaRiego] nvarchar(max)  NOT NULL,
+    [Estatura] nvarchar(max)  NOT NULL,
+    [Peso] nvarchar(max)  NOT NULL,
+    [ConsumeTabaco] bit  NOT NULL,
+    [ConsumeAlcohol] bit  NOT NULL,
+    [InsuficienciaRenal] bit  NOT NULL,
+    [Diabetes] bit  NOT NULL,
+    [Cancer] bit  NOT NULL,
+    [Epilepsia] bit  NOT NULL,
+    [AfeccionCardiaca] bit  NOT NULL,
+    [HipertensionArterial] bit  NOT NULL,
+    [TranstornoMental] bit  NOT NULL
 );
 GO
 
@@ -819,8 +845,8 @@ CREATE TABLE [dbo].[TipoPlan] (
 );
 GO
 
--- Creating table 'BeneficiarioSet'
-CREATE TABLE [dbo].[BeneficiarioSet] (
+-- Creating table 'Beneficiario'
+CREATE TABLE [dbo].[Beneficiario] (
     [Cod_Benef] int IDENTITY(1,1) NOT NULL,
     [Num_DNI] nvarchar(8)  NOT NULL,
     [Txt_Ape_Pat] nvarchar(50)  NOT NULL,
@@ -829,6 +855,13 @@ CREATE TABLE [dbo].[BeneficiarioSet] (
     [Co_Poliza] int  NOT NULL,
     [Po_Cap_Aseg] decimal(6,2)  NOT NULL,
     [Fec_Nac] datetime  NOT NULL
+);
+GO
+
+-- Creating table 'TipoPoliza'
+CREATE TABLE [dbo].[TipoPoliza] (
+    [Cod_Poliza] int IDENTITY(1,1) NOT NULL,
+    [Nro_Plan] nvarchar(50)  NOT NULL
 );
 GO
 
@@ -1082,10 +1115,16 @@ ADD CONSTRAINT [PK_TipoPlan]
     PRIMARY KEY CLUSTERED ([Cod_Plan] ASC);
 GO
 
--- Creating primary key on [Cod_Benef] in table 'BeneficiarioSet'
-ALTER TABLE [dbo].[BeneficiarioSet]
-ADD CONSTRAINT [PK_BeneficiarioSet]
+-- Creating primary key on [Cod_Benef] in table 'Beneficiario'
+ALTER TABLE [dbo].[Beneficiario]
+ADD CONSTRAINT [PK_Beneficiario]
     PRIMARY KEY CLUSTERED ([Cod_Benef] ASC);
+GO
+
+-- Creating primary key on [Cod_Poliza] in table 'TipoPoliza'
+ALTER TABLE [dbo].[TipoPoliza]
+ADD CONSTRAINT [PK_TipoPoliza]
+    PRIMARY KEY CLUSTERED ([Cod_Poliza] ASC);
 GO
 
 -- --------------------------------------------------
@@ -1941,8 +1980,8 @@ ON [dbo].[Poliza]
     ([Cod_Plan]);
 GO
 
--- Creating foreign key on [Co_Poliza] in table 'BeneficiarioSet'
-ALTER TABLE [dbo].[BeneficiarioSet]
+-- Creating foreign key on [Co_Poliza] in table 'Beneficiario'
+ALTER TABLE [dbo].[Beneficiario]
 ADD CONSTRAINT [FK_PolizaBeneficiario]
     FOREIGN KEY ([Co_Poliza])
     REFERENCES [dbo].[Poliza]
@@ -1952,7 +1991,7 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PolizaBeneficiario'
 CREATE INDEX [IX_FK_PolizaBeneficiario]
-ON [dbo].[BeneficiarioSet]
+ON [dbo].[Beneficiario]
     ([Co_Poliza]);
 GO
 

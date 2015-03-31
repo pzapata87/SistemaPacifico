@@ -26,8 +26,8 @@
                     @Html.TextBoxFor(model => model.CodProspecto, new { @class = "hidden" })
                     @Html.TextBoxFor(model => model.CodVisita, new { @class = "hidden" })
                     @Html.TextBoxFor(model => model.DniProspecto, new { @class = "form-control :required :digits", @style="display: inline-block", @maxlength = 8 })
+                    <input id="btnBuscar" type="button" value="Buscar" class="btn btn-primary btn-sm" />
                 </td>
-                <td><input id="btnBuscar" type="button" value="Buscar" class="btn btn-primary btn-sm" /></td>
                 <td></td>
             </tr>
             <tr>
@@ -35,7 +35,7 @@
                     <label class="control-label col-md-4" for="NombreProspecto">Nombre Prospecto:</label>
                     @Html.TextBoxFor(model => model.NombreProspecto, new { @readonly = "readonly", @class = "form-control" })
                 </td>
-                <td colspan="2">
+                <td>
                     <label class="control-label col-md-4" for="ApellidoProspecto">Apellidos Prospecto:</label>
                     @Html.TextBoxFor(model => model.ApellidoProspecto, new { @readonly = "readonly", @class = "form-control" })
                 </td>
@@ -47,7 +47,7 @@
                         @Html.TextBoxFor(model => model.FechaInicial, new { @class = "form-control :required", @style = "display: inline-block", @maxlength = 16 })
                     </div>
                 </td>
-                <td colspan="2">
+                <td>
                     <label class="control-label col-md-4" for="FechaFinal">Fecha Final:</label>
                     @Html.TextBoxFor(model => model.FechaFinal, new { @class = "form-control :required", @style = "display: inline-block", @maxlength = 16 })
                 </td>
@@ -57,13 +57,13 @@
                     <label class="control-label col-md-4" for="CodTipoVisita">Tipo Visita:</label>
                     @Html.DropDownListFor(model => model.CodTipoVisita, new SelectList(Model.TipoVisitaList, "Valor", "Nombre"), new { @class = "form-control :required", @style = "display: inline-block" })
                 </td>
-                <td colspan="2">
+                <td>
                     <label class="control-label col-md-4" for="Comentario">Comentario:</label>
                     @Html.TextAreaFor(model => model.Comentario, new { @class = "form-control" })
                 </td>
             </tr>
             <tr>
-                <td colspan="3" align="center">
+                <td colspan="2" align="center">
                     <hr/>
                     <button id="btnGrabar" type="submit" class="btn btn-primary btn-sm">Grabar</button>
                     <input id="btnCancelar" type="button" value="Cancelar" class="btn btn-primary btn-sm" />

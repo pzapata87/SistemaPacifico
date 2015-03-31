@@ -17,27 +17,47 @@ namespace Pacifico.DataAccess
         public Poliza()
         {
             this.Reclamo_Poliza = new HashSet<Reclamo_Poliza>();
-            this.Reclamo_Poliza1 = new HashSet<Reclamo_Poliza>();
             this.Beneficiario = new HashSet<Beneficiario>();
         }
     
         public int Co_Poliza { get; set; }
         public string Nu_Poliza { get; set; }
         public Nullable<int> Co_Cliente { get; set; }
-        public Nullable<decimal> SS_Prima { get; set; }
-        public Nullable<System.DateTime> Fe_Creacion { get; set; }
+        public System.DateTime Fe_Creacion { get; set; }
         public Nullable<System.DateTime> Fe_Renovacion { get; set; }
-        public Nullable<System.DateTime> Fe_InicioVigencia { get; set; }
+        public System.DateTime Fe_InicioVigencia { get; set; }
         public Nullable<System.DateTime> Fe_Vencimiento { get; set; }
         public string Tx_TipoPago { get; set; }
         public string Tx_MarcaTarjeta { get; set; }
         public string Nu_Tarjeta { get; set; }
         public string Fl_Estado { get; set; }
         public int Cod_Plan { get; set; }
+        public decimal Cap_Asegurado { get; set; }
+        public string Ocupacion { get; set; }
+        public string Actividad { get; set; }
+        public string LugarTrabajo { get; set; }
+        public string IngresoMensual { get; set; }
+        public string Horario { get; set; }
+        public string ExpuestoAPeligro { get; set; }
+        public string MedioTransporte { get; set; }
+        public string FrecuenciaViaje { get; set; }
+        public string DeporteAficion { get; set; }
+        public string RiesgoAccidente { get; set; }
+        public string CoberturaRiego { get; set; }
+        public string Estatura { get; set; }
+        public string Peso { get; set; }
+        public bool ConsumeTabaco { get; set; }
+        public bool ConsumeAlcohol { get; set; }
+        public bool InsuficienciaRenal { get; set; }
+        public bool Diabetes { get; set; }
+        public bool Cancer { get; set; }
+        public bool Epilepsia { get; set; }
+        public bool AfeccionCardiaca { get; set; }
+        public bool HipertensionArterial { get; set; }
+        public bool TranstornoMental { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         public virtual ICollection<Reclamo_Poliza> Reclamo_Poliza { get; set; }
-        public virtual ICollection<Reclamo_Poliza> Reclamo_Poliza1 { get; set; }
         public virtual TipoPlan TipoPlan { get; set; }
         public virtual ICollection<Beneficiario> Beneficiario { get; set; }
     }

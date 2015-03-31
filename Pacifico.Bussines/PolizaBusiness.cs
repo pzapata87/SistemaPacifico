@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.Data.Entity.Validation;
 using System.Linq;
 using Pacifico.DataAccess;
 
@@ -21,7 +22,7 @@ namespace Pacifico.Bussines
             return _db.Poliza;
         }
 
-        public List<Poliza> FindAll(string numSolicitud, string fechaIngreso, decimal monto)
+        public List<Poliza> FindAll(string numSolicitud, string fechaIngreso, decimal? monto)
         {
             var query = _db.Poliza.AsQueryable();
 
@@ -35,6 +36,11 @@ namespace Pacifico.Bussines
 
                 if (esValida)
                     query = query.Where(p => DbFunctions.DiffDays(p.Fe_Creacion, value).Value == 0);
+            }
+
+            if (monto != null)
+            {
+                query = query.Where(p => p.Cap_Asegurado == monto);
             }
 
             return query.OrderByDescending(p => p.Co_Poliza).ToList();
@@ -59,6 +65,22 @@ namespace Pacifico.Bussines
                 _db.SaveChanges();
 
                 return poliza;
+            }
+            catch (DbEntityValidationException e)
+            {
+                string msg = string.Empty;
+
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    msg += string.Format("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        msg += string.Format("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw e;
             }
             catch (Exception ex)
             {

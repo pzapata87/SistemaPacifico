@@ -295,6 +295,7 @@
     <Content Include="Views\Visita\Ver.cshtml" />
     <Content Include="Views\Poliza\Index.cshtml" />
     <Content Include="Views\Poliza\Edit.cshtml" />
+    <Content Include="Views\Poliza\Ver.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
