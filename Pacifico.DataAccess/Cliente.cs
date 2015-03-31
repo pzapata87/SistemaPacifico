@@ -25,9 +25,9 @@ namespace Pacifico.DataAccess
         public string No_Cliente { get; set; }
         public string No_ApePaterno { get; set; }
         public string No_ApeMaterno { get; set; }
-        public Nullable<bool> Fi_Sexo { get; set; }
+        public bool Fi_Sexo { get; set; }
         public string Nu_DNI { get; set; }
-        public Nullable<System.DateTime> Fe_Nacimiento { get; set; }
+        public System.DateTime Fe_Nacimiento { get; set; }
         public string Nu_Telefono { get; set; }
         public string Nu_Movil { get; set; }
         public string Tx_Direccion { get; set; }

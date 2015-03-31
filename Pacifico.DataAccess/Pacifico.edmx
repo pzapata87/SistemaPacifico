@@ -47,7 +47,7 @@
     <EntitySet Name="Visita" EntityType="BDPacificoModel.Store.Visita" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TipoVisita" EntityType="BDPacificoModel.Store.TipoVisita" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TipoPlan" EntityType="BDPacificoModel.Store.TipoPlan" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="BeneficiarioSet" EntityType="BDPacificoModel.Store.BeneficiarioSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Beneficiario" EntityType="BDPacificoModel.Store.Beneficiario" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TipoPoliza" EntityType="BDPacificoModel.Store.TipoPoliza" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK__Sugerenci__Co_Ar__2BFE89A6" Association="BDPacificoModel.Store.FK__Sugerenci__Co_Ar__2BFE89A6">
       <End Role="Area" EntitySet="Area" />
@@ -279,7 +279,7 @@
     </AssociationSet>
     <AssociationSet Name="PolizaBeneficiario" Association="BDPacificoModel.Store.PolizaBeneficiario">
       <End Role="Poliza" EntitySet="Poliza" />
-      <End Role="Beneficiario" EntitySet="BeneficiarioSet" />
+      <End Role="Beneficiario" EntitySet="Beneficiario" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Area">
@@ -321,18 +321,18 @@
     <Key>
       <PropertyRef Name="Co_Cliente" />
     </Key>
-    <Property Name="Co_Cliente" Type="int" Nullable="false" />
+    <Property Name="Co_Cliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="No_Cliente" Type="varchar" Nullable="true" MaxLength="80" />
     <Property Name="No_ApePaterno" Type="varchar" Nullable="true" MaxLength="80" />
     <Property Name="No_ApeMaterno" Type="varchar" Nullable="true" MaxLength="80" />
     <Property Name="Fi_Sexo" Type="bit" Nullable="true" />
     <Property Name="Nu_DNI" Type="varchar" Nullable="true" MaxLength="8" />
-    <Property Name="Fe_Nacimiento" Type="datetime" Nullable="true" />
+    <Property Name="Fe_Nacimiento" Type="datetime" Nullable="false" />
     <Property Name="Nu_Telefono" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="Nu_Movil" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="Tx_Direccion" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="Tx_Correo" Type="varchar" Nullable="true" MaxLength="30" />
-    <Property Name="Fi_EstadoCivil" Type="nvarchar" Nullable="true" MaxLength="10" />
+    <Property Name="Fi_EstadoCivil" Type="nvarchar" Nullable="false" MaxLength="10" />
     <Property Name="Tx_CentroTrabajo" Type="varchar" Nullable="true" MaxLength="80" />
     <Property Name="Tx_CargoTrabajo" Type="varchar" Nullable="true" MaxLength="80" />
     <Property Name="Tx_LugarNacimiento" Type="nvarchar(max)" Nullable="false" />
@@ -477,12 +477,12 @@
     <Key>
       <PropertyRef Name="Co_Poliza" />
     </Key>
-    <Property Name="Co_Poliza" Type="int" Nullable="false" />
+    <Property Name="Co_Poliza" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nu_Poliza" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="Co_Cliente" Type="int" Nullable="true" />
-    <Property Name="Fe_Creacion" Type="datetime" Nullable="true" />
+    <Property Name="Fe_Creacion" Type="datetime" Nullable="false" />
     <Property Name="Fe_Renovacion" Type="datetime" Nullable="true" />
-    <Property Name="Fe_InicioVigencia" Type="datetime" Nullable="true" />
+    <Property Name="Fe_InicioVigencia" Type="datetime" Nullable="false" />
     <Property Name="Fe_Vencimiento" Type="datetime" Nullable="true" />
     <Property Name="Tx_TipoPago" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="Tx_MarcaTarjeta" Type="varchar" Nullable="true" MaxLength="20" />
@@ -805,7 +805,7 @@
     <Property Name="Cod_Plan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nro_Plan" Type="nvarchar" Nullable="false" MaxLength="50" />
   </EntityType>
-  <EntityType Name="BeneficiarioSet">
+  <EntityType Name="Beneficiario">
     <Key>
       <PropertyRef Name="Cod_Benef" />
     </Key>
@@ -1513,7 +1513,7 @@
   </Association>
   <Association Name="PolizaBeneficiario">
     <End Role="Poliza" Type="BDPacificoModel.Store.Poliza" Multiplicity="1" />
-    <End Role="Beneficiario" Type="BDPacificoModel.Store.BeneficiarioSet" Multiplicity="*" />
+    <End Role="Beneficiario" Type="BDPacificoModel.Store.Beneficiario" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Poliza">
         <PropertyRef Name="Co_Poliza" />
@@ -1575,18 +1575,18 @@
           <Key>
             <PropertyRef Name="Co_Cliente" />
           </Key>
-          <Property Name="Co_Cliente" Type="Int32" Nullable="false" />
+          <Property Name="Co_Cliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="No_Cliente" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
           <Property Name="No_ApePaterno" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
           <Property Name="No_ApeMaterno" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
-          <Property Name="Fi_Sexo" Type="Boolean" />
+          <Property Name="Fi_Sexo" Type="Boolean" Nullable="false" />
           <Property Name="Nu_DNI" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
-          <Property Name="Fe_Nacimiento" Type="DateTime" Precision="3" />
+          <Property Name="Fe_Nacimiento" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="Nu_Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="true" />
           <Property Name="Nu_Movil" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="true" />
           <Property Name="Tx_Direccion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Tx_Correo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="true" />
-          <Property Name="Fi_EstadoCivil" Type="String" MaxLength="10" />
+          <Property Name="Fi_EstadoCivil" Type="String" MaxLength="10" Nullable="false" />
           <Property Name="Tx_CentroTrabajo" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="true" />
           <Property Name="Tx_CargoTrabajo" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="true" />
           <NavigationProperty Name="Poliza" Relationship="Self.FK__Poliza__Co_Clien__245D67DE" FromRole="Cliente" ToRole="Poliza" />
@@ -1772,12 +1772,12 @@
           <Key>
             <PropertyRef Name="Co_Poliza" />
           </Key>
-          <Property Name="Co_Poliza" Type="Int32" Nullable="false" />
+          <Property Name="Co_Poliza" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nu_Poliza" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Co_Cliente" Type="Int32" />
-          <Property Name="Fe_Creacion" Type="DateTime" Precision="3" />
+          <Property Name="Fe_Creacion" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="Fe_Renovacion" Type="DateTime" Precision="3" />
-          <Property Name="Fe_InicioVigencia" Type="DateTime" Precision="3" />
+          <Property Name="Fe_InicioVigencia" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="Fe_Vencimiento" Type="DateTime" Precision="3" />
           <Property Name="Tx_TipoPago" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Tx_MarcaTarjeta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
@@ -2985,10 +2985,10 @@
             <End Role="TipoPlan" EntitySet="TipoPlan" />
             <End Role="Poliza" EntitySet="Poliza" />
           </AssociationSet>
-          <EntitySet Name="BeneficiarioSet" EntityType="BDPacificoModel.Beneficiario" />
+          <EntitySet Name="Beneficiario" EntityType="BDPacificoModel.Beneficiario" />
           <AssociationSet Name="PolizaBeneficiario" Association="BDPacificoModel.PolizaBeneficiario">
             <End Role="Poliza" EntitySet="Poliza" />
-            <End Role="Beneficiario" EntitySet="BeneficiarioSet" />
+            <End Role="Beneficiario" EntitySet="Beneficiario" />
           </AssociationSet>
           <EntitySet Name="TipoPoliza" EntityType="BDPacificoModel.TipoPoliza" />
         </EntityContainer>
@@ -3722,9 +3722,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="BeneficiarioSet">
+    <EntitySetMapping Name="Beneficiario">
       <EntityTypeMapping TypeName="IsTypeOf(BDPacificoModel.Beneficiario)">
-        <MappingFragment StoreEntitySet="BeneficiarioSet">
+        <MappingFragment StoreEntitySet="Beneficiario">
           <ScalarProperty Name="Cod_Benef" ColumnName="Cod_Benef" />
           <ScalarProperty Name="Num_DNI" ColumnName="Num_DNI" />
           <ScalarProperty Name="Txt_Ape_Pat" ColumnName="Txt_Ape_Pat" />

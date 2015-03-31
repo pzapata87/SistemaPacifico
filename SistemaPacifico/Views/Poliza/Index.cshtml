@@ -26,7 +26,7 @@
                 <td>Monto: </td>
                 <td><input type="text" class="form-control" id="txtMonto" value="@ViewBag.Monto" name="monto" maxlength="10" style="display: inline-block;" /></td>
                 <td>&nbsp;</td>
-                <td colspan="3" align="right"><button type="submit" class="btn btn-primary">Buscar</button></td>
+                <td colspan="2"><button type="submit" class="btn btn-primary">Buscar</button></td>
             </tr>
         </table>
         <br />
@@ -39,7 +39,7 @@
                     <th>Tipo Póliza</th>
                     <th>Monto</th>
                     <th>Fecha Ingreso</th>
-                    <th>Asesor</th>
+                    @*<th>Asesor</th>*@
                     <th>&nbsp;</th>
                     <th>&nbsp;</th>
                 </tr>
@@ -68,14 +68,14 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.FechaIngreso)
                             </td>
-                            <td>
+                            @*<td>
                                 @Html.DisplayFor(modelItem => item.Asesor)
+                            </td>*@
+                            <td>
+                                @Html.ActionLink("Ver", "VerPoliza", new { id = item.CodPoliza })
                             </td>
                             <td>
-                                @*@Html.ActionLink("Ver", "VerPoliza", new { id = item.CodPoliza })*@
-                            </td>
-                            <td>
-                                @*@Html.ActionLink("Editar", "EditarPoliza", new { id = item.CodPoliza })*@
+                                @Html.ActionLink("Editar", "EditarPoliza", new { id = item.CodPoliza })
                             </td>
                         </tr>
                     }
@@ -104,7 +104,7 @@
                         "url": "@Url.Content("~/Scripts/DataTable/dataTables.es.json")"
                     },
                     "aoColumnDefs": [
-                        { 'bSortable': false, 'aTargets': [1, 2, 3, 4, 5, 6,7,8] }
+                        { 'bSortable': false, 'aTargets': [1, 2, 3, 4, 5, 6,7] }
                     ],
                     "fnDrawCallback": function () {
                         $('#tblListado .dataTables_empty').text('No se encontraron Solicitudes de Póliza');

@@ -30,7 +30,7 @@ namespace SistemaPacifico.Models
         public string InicioVigencia { get; set; }
         [Required]
         public decimal CapitalAsegurado { get; set; }
-        public int NombreTipoPoliza { get; set; }
+        public string NombreTipoPoliza { get; set; }
         public int CodTipoPlan { get; set; }
         public string Asesor { get; set; }
 

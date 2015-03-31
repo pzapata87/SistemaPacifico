@@ -8,13 +8,7 @@
 
 <div class="container">
     <hr />
-    <div id="labelError" class="alert alert-danger" style="display: none">
-        @*<button type="button" class="close" data-dismiss="alert">×</button>*@
-        <strong>Error:</strong> <label id="lblMensaje" style="font-weight: normal"></label>
-    </div>
 
-@using (Html.BeginForm(Model.Accion, "Poliza", FormMethod.Post, new {id = "frmModel"}))
-{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     <div role="tabpanel">
@@ -40,21 +34,21 @@
                     <tr>
                         <td>
                             <label class="control-label col-md-4" for="DniCliente">Nº Documento:</label>
-                            @Html.TextBoxFor(model => model.DniCliente, new { @maxlength = 8, @class = ":required :digits form-control", @style = "display: inline-block;" })
+                            @Html.TextBoxFor(model => model.DniCliente, new { @maxlength = 8, @class = "form-control", @readonly = "readonly" })
                         </td>
                         <td>
                             <label class="control-label col-md-4" for="NombreCliente">Nombres:</label>
-                            @Html.TextBoxFor(model => model.NombreCliente, new {@maxlength = 25, @class = ":required :alpha form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.NombreCliente, new {@maxlength = 25, @class = "form-control", @readonly = "readonly"})
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label class="control-label col-md-4" for="ApellidoPaternoCliente">Apellido Paterno:</label>
-                            @Html.TextBoxFor(model => model.ApellidoPaternoCliente, new {@maxlength = 25, @class = ":required :alpha form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.ApellidoPaternoCliente, new {@maxlength = 25, @class = "form-control", @readonly = "readonly"})
                         </td>
                         <td>
                             <label class="control-label col-md-4" for="ApellidoMaternoCliente">Apellido Materno:</label>
-                            @Html.TextBoxFor(model => model.ApellidoMaternoCliente, new {@maxlength = 25, @class = ":required :alpha form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.ApellidoMaternoCliente, new {@maxlength = 25, @class = "form-control", @readonly = "readonly"})
                         </td>
                     </tr>
                     <tr>
@@ -73,23 +67,23 @@
                                     new Comun {Nombre = "Divorciado", Valor = "3"}
                                 };
                             }
-                            @Html.DropDownListFor(model => model.EstadoCivilCliente, new SelectList(estadoCivilList, "Valor", "Nombre"), new {@class = "form-control"})
+                            @Html.DropDownListFor(model => model.EstadoCivilCliente, new SelectList(estadoCivilList, "Valor", "Nombre"), new { @class = "form-control", @readonly = "readonly" })
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label class="control-label col-md-4" for="FechaNacimientoCliente">Fecha Nacimiento:</label>
-                            @Html.TextBoxFor(model => model.FechaNacimientoCliente, new {@maxlength = 10, @class = "form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.FechaNacimientoCliente, new {@maxlength = 10, @class = "form-control", @readonly = "readonly"})
                         </td>
                         <td>
                             <label class="control-label col-md-4" for="LugarNacimientoCliente">Lugar Nacimiento:</label>
-                            @Html.TextBoxFor(model => model.LugarNacimientoCliente, new {@maxlength = 25, @class = ":required form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.LugarNacimientoCliente, new {@maxlength = 25, @class = "form-control", @readonly = "readonly"})
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label class="control-label col-md-4" for="DireccionCliente">Direccion:</label>
-                            @Html.TextBoxFor(model => model.DireccionCliente, new {@maxlength = 25, @class = ":required form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.DireccionCliente, new {@maxlength = 25, @class = "form-control", @readonly = "readonly"})
                         </td>
                         <td>
                         </td>
@@ -102,17 +96,17 @@
                     <tr>
                         <td>
                             <label class="control-label col-md-4" for="CodTipoPlan">Tipo Plan:</label>
-                            @Html.DropDownListFor(model => model.CodTipoPlan, new SelectList(Model.TipoPlanList, "Valor", "Nombre"), new {@class = "form-control :required", @style = "display: inline-block"})
+                            @Html.DropDownListFor(model => model.CodTipoPlan, new SelectList(Model.TipoPlanList, "Valor", "Nombre"), new {@class = "form-control",  @readonly = "readonly"})
                         </td>
                         <td>
                             <label class="control-label col-md-4" for="InicioVigencia">Inicio Vigencia:</label>
-                            @Html.TextBoxFor(model => model.InicioVigencia, new {@maxlength = 10, @class = ":required form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.InicioVigencia, new {@maxlength = 10, @class = "form-control", @readonly = "readonly"})
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label class="control-label col-md-4" for="CapitalAsegurado">Capital por Asegurar:</label>
-                            @Html.TextBoxFor(model => model.CapitalAsegurado, new {@maxlength = 10, @class = ":required form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.CapitalAsegurado, new {@maxlength = 10, @class = "form-control", @readonly = "readonly"})
                         </td>
                         <td>
                         </td>
@@ -125,37 +119,37 @@
                     <tr>
                         <td>
                             <label class="control-label col-md-4" for="DniBeneficiario">Nº Documento:</label>
-                            @Html.TextBoxFor(model => model.DniBeneficiario, new { @maxlength = 8, @class = ":required :digits form-control", @style = "display: inline-block;" })
+                            @Html.TextBoxFor(model => model.DniBeneficiario, new { @maxlength = 8, @class = ":digits form-control", @readonly = "readonly" })
                         </td>
                         <td>
                             <label class="control-label col-md-4" for="NombreBeneficiario">Nombres:</label>
-                            @Html.TextBoxFor(model => model.NombreBeneficiario, new {@maxlength = 25, @class = ":required :alpha form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.NombreBeneficiario, new {@maxlength = 25, @class = "form-control", @readonly = "readonly"})
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label class="control-label col-md-4" for="ApellidoPaternoBeneficiario">Apellido Paterno:</label>
-                            @Html.TextBoxFor(model => model.ApellidoPaternoBeneficiario, new {@maxlength = 25, @class = ":required :alpha form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.ApellidoPaternoBeneficiario, new {@maxlength = 25, @class = "form-control", @readonly = "readonly"})
                         </td>
                         <td>
                             <label class="control-label col-md-4" for="ApellidoMaternoBeneficiario">Apellido Materno:</label>
-                            @Html.TextBoxFor(model => model.ApellidoMaternoBeneficiario, new {@maxlength = 25, @class = ":required :alpha form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.ApellidoMaternoBeneficiario, new {@maxlength = 25, @class = "form-control", @readonly = "readonly"})
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label class="control-label col-md-4" for="FechaNacimientoBeneficiario">Fecha Nacimiento:</label>
-                            @Html.TextBoxFor(model => model.FechaNacimientoBeneficiario, new {@maxlength = 10, @class = "form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.FechaNacimientoBeneficiario, new {@maxlength = 10, @class = "form-control", @readonly = "readonly"})
                         </td>
                         <td>
                             <label class="control-label col-md-4" for="LugarNacimientoCliente">Lugar Nacimiento:</label>
-                            @Html.TextBoxFor(model => model.LugarNacimientoCliente, new {@maxlength = 25, @class = ":required form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.LugarNacimientoCliente, new {@maxlength = 25, @class = "form-control", @readonly = "readonly"})
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label class="control-label col-md-4" for="PorcentajeCapitalAsegurado">% Capital Asegurado:</label>
-                            @Html.TextBoxFor(model => model.PorcentajeCapitalAsegurado, new {@maxlength = 3, @class = ":required form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.PorcentajeCapitalAsegurado, new {@maxlength = 3, @class = "form-control", @readonly = "readonly"})
                         </td>
                         <td></td>
                     </tr>
@@ -167,67 +161,67 @@
                     <tr>
                         <td>
                             <label class="control-label col-md-4" for="Ocupacion">Ocupacion:</label>
-                            @Html.TextBoxFor(model => model.Ocupacion, new {@maxlength = 50, @class = ":required form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.Ocupacion, new {@maxlength = 50, @class = "form-control", @readonly = "readonly"})
                         </td>
                         <td>
                             <label class="control-label col-md-4" for="Actividad">Actividad:</label>
-                            @Html.TextBoxFor(model => model.Actividad, new {@maxlength = 50, @class = ":required form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.Actividad, new {@maxlength = 50, @class = "form-control", @readonly = "readonly"})
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label class="control-label col-md-4" for="LugarTrabajo">Lugar de Trabajo:</label>
-                            @Html.TextBoxFor(model => model.LugarTrabajo, new {@maxlength = 50, @class = ":required form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.LugarTrabajo, new {@maxlength = 50, @class = "form-control", @readonly = "readonly"})
                         </td>
                         <td>
                             <label class="control-label col-md-4" for="IngresoMensual">Ingreso Mensual:</label>
-                            @Html.TextBoxFor(model => model.IngresoMensual, new {@maxlength = 50, @class = ":required form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.IngresoMensual, new {@maxlength = 50, @class = "form-control", @readonly = "readonly"})
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label class="control-label col-md-4" for="Horario">Horario:</label>
-                            @Html.TextBoxFor(model => model.Horario, new {@maxlength = 50, @class = ":required form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.Horario, new {@maxlength = 50, @class = "form-control", @readonly = "readonly"})
                         </td>
                         <td>
                             <label class="control-label col-md-4" for="ExpuestoAPeligro">Expuesto a Peligros:</label>
-                            @Html.TextBoxFor(model => model.ExpuestoAPeligro, new {@maxlength = 50, @class = ":required form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.ExpuestoAPeligro, new {@maxlength = 50, @class = "form-control", @readonly = "readonly"})
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label class="control-label col-md-4" for="MedioTransporte">Medio Transporte:</label>
-                            @Html.TextBoxFor(model => model.MedioTransporte, new {@maxlength = 50, @class = ":required form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.MedioTransporte, new {@maxlength = 50, @class = "form-control", @readonly = "readonly"})
                         </td>
                         <td>
                             <label class="control-label col-md-4" for="FrecuenciaViaje">Frecuencia de Viajes:</label>
-                            @Html.TextBoxFor(model => model.FrecuenciaViaje, new {@maxlength = 50, @class = ":required form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.FrecuenciaViaje, new {@maxlength = 50, @class = "form-control", @readonly = "readonly"})
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label class="control-label col-md-4" for="DeporteAficion">Deportes y Aficiones:</label>
-                            @Html.TextBoxFor(model => model.DeporteAficion, new {@maxlength = 50, @class = ":required form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.DeporteAficion, new {@maxlength = 50, @class = "form-control", @readonly = "readonly"})
                         </td>
                         <td>
                             <label class="control-label col-md-4" for="RiesgoAccidente">Riesgo de Accidentes:</label>
-                            @Html.TextBoxFor(model => model.RiesgoAccidente, new {@maxlength = 50, @class = ":required form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.RiesgoAccidente, new {@maxlength = 50, @class = "form-control", @readonly = "readonly"})
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label class="control-label col-md-4" for="CoberturaRiego">Cobertura de Riego:</label>
-                            @Html.TextBoxFor(model => model.CoberturaRiego, new {@maxlength = 50, @class = ":required form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.CoberturaRiego, new {@maxlength = 50, @class = "form-control", @readonly = "readonly"})
                         </td>
                         <td>
                             <label class="control-label col-md-4" for="Estatura">Estatura:</label>
-                            @Html.TextBoxFor(model => model.Estatura, new {@maxlength = 10, @class = ":required form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.Estatura, new {@maxlength = 10, @class = "form-control", @readonly = "readonly"})
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label class="control-label col-md-4" for="Peso">Peso:</label>
-                            @Html.TextBoxFor(model => model.Peso, new {@maxlength = 10, @class = ":required form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.Peso, new {@maxlength = 10, @class = "form-control", @readonly = "readonly"})
                         </td>
                         <td>
                             <label class="control-label col-md-4" for="ConsumeTabaco">Consume Tabaco:</label>
@@ -279,112 +273,18 @@
         </div>
         <hr />
         <div style="text-align: center">
-            <button id="btnGrabar" type="submit" class="btn btn-primary btn-sm">Grabar</button>
             <input id="btnCancelar" type="button" value="Cancelar" class="btn btn-primary btn-sm" />
         </div>
     </div>
-}
 </div>
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#FechaNacimientoCliente').datepicker({
-            option: $.datepicker.regional['es']
-        });
-
-        $('#FechaNacimientoBeneficiario').datepicker({
-            option: $.datepicker.regional['es']
-        });
-
-        $('#InicioVigencia').datepicker({
-            option: $.datepicker.regional['es']
-        });
-
-        $('#btnGrabar').click(function(e) {
-            Guardar();
-            e.preventDefault();
-        });
 
         $('#btnCancelar').click(function() {
             var url = '@Url.Action("Index", "Poliza")';
             window.location = url;
         });
     });
-
-    function Guardar() {
-        if ($("#frmModel").validate().form()) {
-
-            var poliza = {};
-            poliza.CodPoliza = '@Model.CodPoliza';
-            poliza.NumSolicitud = $('#NumSolicitud').val();
-            poliza.NumSolicitud = $('#NumSolicitud').val();
-            poliza.DniCliente = $('#DniCliente').val();
-            poliza.NombreCliente = $('#NombreCliente').val();
-            poliza.ApellidoPaternoCliente = $('#ApellidoPaternoCliente').val();
-            poliza.ApellidoMaternoCliente = $('#ApellidoMaternoCliente').val();
-            poliza.FechaNacimientoCliente = $('#FechaNacimientoCliente').val();
-            poliza.LugarNacimientoCliente = $('#LugarNacimientoCliente').val();
-            poliza.DireccionCliente = $('#DireccionCliente').val();
-            poliza.SexoCliente = $('#SexoCliente').val();
-            poliza.EstadoCivilCliente = $('#EstadoCivilCliente').val();
-            poliza.InicioVigencia = $('#InicioVigencia').val();
-            poliza.CapitalAsegurado = $('#CapitalAsegurado').val();
-            poliza.CodTipoPlan = $('#CodTipoPlan').val();
-            poliza.DniBeneficiario = $('#DniBeneficiario').val();
-            poliza.NombreBeneficiario = $('#NombreBeneficiario').val();
-            poliza.ApellidoPaternoBeneficiario = $('#ApellidoPaternoBeneficiario').val();
-            poliza.ApellidoMaternoBeneficiario = $('#ApellidoMaternoBeneficiario').val();
-            poliza.PorcentajeCapitalAsegurado = $('#PorcentajeCapitalAsegurado').val();
-            poliza.FechaNacimientoBeneficiario = $('#FechaNacimientoBeneficiario').val();
-            poliza.Ocupacion = $('#Ocupacion').val();
-            poliza.Actividad = $('#Actividad').val();
-            poliza.LugarTrabajo = $('#LugarTrabajo').val();
-            poliza.IngresoMensual = $('#IngresoMensual').val();
-            poliza.Horario = $('#Horario').val();
-            poliza.ExpuestoAPeligro = $('#ExpuestoAPeligro').val();
-            poliza.MedioTransporte = $('#MedioTransporte').val();
-            poliza.FrecuenciaViaje = $('#FrecuenciaViaje').val();
-            poliza.DeporteAficion = $('#DeporteAficion').val();
-            poliza.RiesgoAccidente = $('#RiesgoAccidente').val();
-            poliza.CoberturaRiego = $('#CoberturaRiego').val();
-            poliza.Estatura = $('#Estatura').val();
-            poliza.Peso = $('#Peso').val();
-            poliza.ConsumeTabaco = $('#ConsumeTabaco').is(':checked');
-            poliza.ConsumeAlcohol = $('#ConsumeAlcohol').is(':checked');
-            poliza.InsuficienciaRenal = $('#InsuficienciaRenal').is(':checked');
-            poliza.Diabetes = $('#Diabetes').is(':checked');
-            poliza.Cancer = $('#Cancer').is(':checked');
-            poliza.Epilepsia = $('#Epilepsia').is(':checked');
-            poliza.AfeccionCardiaca = $('#AfeccionCardiaca').is(':checked');
-            poliza.HipertensionArterial = $('#HipertensionArterial').is(':checked');
-            poliza.TranstornoMental = $('#TranstornoMental').is(':checked');
-
-
-            var opcionesAjax = {
-                url: '@Url.Action(Model.Accion, "Poliza", new {area = ""})',
-                parametros: {
-                    model: poliza
-                }
-            };
-
-            Utils.Ajax(opcionesAjax, function(response) {
-                if (response.Success == true) {
-                    alert('Póliza registrada');
-                    window.location.href = response.Data;
-                }
-                else
-                    alert('Ocurrió un error al registrar la poliza');
-            });
-        } else {
-            MostrarError('Por favor ingrese los datos requeridos');
-        }
-    }
     
-    function MostrarError(msg) {
-        $('#labelError').show();
-        $('#lblMensaje').text(msg);
-        setTimeout(function () {
-            $("#labelError").slideUp(400);
-        }, 5000);
-    }
 </script>

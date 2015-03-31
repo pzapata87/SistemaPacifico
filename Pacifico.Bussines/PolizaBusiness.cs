@@ -22,7 +22,7 @@ namespace Pacifico.Bussines
             return _db.Poliza;
         }
 
-        public List<Poliza> FindAll(string numSolicitud, string fechaIngreso, decimal monto)
+        public List<Poliza> FindAll(string numSolicitud, string fechaIngreso, decimal? monto)
         {
             var query = _db.Poliza.AsQueryable();
 
@@ -36,6 +36,11 @@ namespace Pacifico.Bussines
 
                 if (esValida)
                     query = query.Where(p => DbFunctions.DiffDays(p.Fe_Creacion, value).Value == 0);
+            }
+
+            if (monto != null)
+            {
+                query = query.Where(p => p.Cap_Asegurado == monto);
             }
 
             return query.OrderByDescending(p => p.Co_Poliza).ToList();

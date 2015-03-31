@@ -23,9 +23,9 @@ namespace Pacifico.DataAccess
         public int Co_Poliza { get; set; }
         public string Nu_Poliza { get; set; }
         public Nullable<int> Co_Cliente { get; set; }
-        public Nullable<System.DateTime> Fe_Creacion { get; set; }
+        public System.DateTime Fe_Creacion { get; set; }
         public Nullable<System.DateTime> Fe_Renovacion { get; set; }
-        public Nullable<System.DateTime> Fe_InicioVigencia { get; set; }
+        public System.DateTime Fe_InicioVigencia { get; set; }
         public Nullable<System.DateTime> Fe_Vencimiento { get; set; }
         public string Tx_TipoPago { get; set; }
         public string Tx_MarcaTarjeta { get; set; }
