@@ -112,7 +112,7 @@
                     <tr>
                         <td>
                             <label class="control-label col-md-4" for="CapitalAsegurado">Capital por Asegurar:</label>
-                            @Html.TextBoxFor(model => model.CapitalAsegurado, new {@maxlength = 10, @class = ":required form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.CapitalAsegurado, new {@type = "number", @min = "0", @maxlength = 10, @class = ":required form-control", @style = "display: inline-block;"})
                         </td>
                         <td>
                         </td>
@@ -155,7 +155,7 @@
                     <tr>
                         <td>
                             <label class="control-label col-md-4" for="PorcentajeCapitalAsegurado">% Capital Asegurado:</label>
-                            @Html.TextBoxFor(model => model.PorcentajeCapitalAsegurado, new {@maxlength = 3, @class = ":required form-control", @style = "display: inline-block;"})
+                            @Html.TextBoxFor(model => model.PorcentajeCapitalAsegurado, new {@type = "number", @min = "0", @maxlength = 3, @class = ":required form-control", @style = "display: inline-block;"})
                         </td>
                         <td></td>
                     </tr>
@@ -289,15 +289,24 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#FechaNacimientoCliente').datepicker({
-            option: $.datepicker.regional['es']
+            changeMonth: true,
+            changeYear: true,
+            option: $.datepicker.regional['es'],
+            yearRange: "1930:+0"
         });
-
+        
         $('#FechaNacimientoBeneficiario').datepicker({
-            option: $.datepicker.regional['es']
+            changeMonth: true,
+            changeYear: true,
+            option: $.datepicker.regional['es'],
+            yearRange: "1930:+0"
         });
-
+        
         $('#InicioVigencia').datepicker({
-            option: $.datepicker.regional['es']
+            changeMonth: true,
+            changeYear: true,
+            option: $.datepicker.regional['es'],
+            yearRange: "1930:+0"
         });
 
         $('#btnGrabar').click(function(e) {
